@@ -1,0 +1,37 @@
+name: Frontend CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    if: |
+      (github.repository == 'Nohgh/2025_SEASONTHON_TEAM_10_FE' ||
+       github.repository == 'kgs9843/2025_SEASONTHON_TEAM_10_FE')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Yarn install
+        run: yarn install --frozen-lockfile
+
+      - name: ESLint check
+        run: yarn lint
+
+      - name: Prettier check
+        run: yarn format:check
+
+      - name: TypeScript check
+        run: yarn type-check

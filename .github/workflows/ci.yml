@@ -14,7 +14,9 @@ jobs:
   checks:
     if: |
       (github.repository == 'Nohgh/2025_SEASONTHON_TEAM_10_FE' ||
-       github.repository == 'kgs9843/2025_SEASONTHON_TEAM_10_FE')
+       github.repository == 'kgs9843/2025_SEASONTHON_TEAM_10_FE'||
+       github.repository == 'kgs9843/ZIP_BOB'
+       )
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

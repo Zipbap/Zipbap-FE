@@ -5,7 +5,7 @@ import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactNative from 'eslint-plugin-react-native';
 import prettier from 'eslint-config-prettier';
-
+import globals from 'globals';
 export default [
   {
     ignores: ['node_modules', 'dist', 'build', 'android', 'ios', '.expo'],
@@ -19,6 +19,11 @@ export default [
         ecmaVersion: 'latest',
         sourceType: 'module',
         ecmaFeatures: { jsx: true },
+      },
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+        __DEV__: 'readonly',
       },
     },
     plugins: {
@@ -79,5 +84,14 @@ export default [
       'react/jsx-filename-extension': ['warn', { extensions: ['.tsx', '.jsx'] }],
     },
   },
+  {
+    files: ['**/*.cjs'],
+    languageOptions: { sourceType: 'commonjs' },
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+      '@typescript-eslint/no-var-requires': 'off',
+    },
+  },
+
   prettier,
 ];

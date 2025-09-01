@@ -6,8 +6,8 @@ export function App() {
   return (
     <SafeAreaProvider>
       <View className="flex-1 justify-center items-center bg-white">
-        <Text className="text-5xl font-bold text-slate-600">Hello World!</Text>
-        <Text className="text-lg text-slate-500 mt-4">FSD Architecture</Text>
+        <Text className="text-5xl font-bold text-primary">Hello World!</Text>
+        <Text className="text-lg text-g1 mt-4">FSD Architecture</Text>
       </View>
     </SafeAreaProvider>
   );

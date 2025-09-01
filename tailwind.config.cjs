@@ -3,7 +3,19 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}', './index.ts'],
   presets: [require('nativewind/preset')],
   theme: {
-    extend: {},
+    colors: {
+      primary: '#DA5534',
+      sub1: '#FF8A65',
+      sub2: '#FF8A65',
+      g1: '#60594E',
+      g2: '#847C70',
+      g3: '#F0EDE6',
+      g4: '#F7F6F2',
+      g5: '#AEA79C',
+      g6: '#E5E2DB',
+      black: '#343434',
+      white: '#FEFDFA',
+    },
   },
   plugins: [],
 };

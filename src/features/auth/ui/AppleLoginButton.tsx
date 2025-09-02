@@ -1,0 +1,16 @@
+import { Text } from 'react-native';
+import React, { useState } from 'react';
+import AppleSvg from '@/assets/img/auth/apple.svg';
+import Button from '@/shared/ui/Button';
+
+const AppleLoginButton: React.FC = () => {
+  const [isPressed, setIsPressed] = useState<boolean>(false);
+  return (
+    <Button isPressed={isPressed} setIsPressed={setIsPressed} color={'#343434'}>
+      <AppleSvg />
+      <Text className="text-white font-bold text-base">Apple로 계속하기</Text>
+    </Button>
+  );
+};
+
+export default AppleLoginButton;

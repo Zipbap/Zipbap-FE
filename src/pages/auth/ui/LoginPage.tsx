@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native';
 import Logo from '@/assets/img/logo.svg';
 import React from 'react';
-import LoginButton from '@/features/auth/ui/LoginButton';
-
+import KakaoLoginButton from '@/features/auth/ui/KakaoLoginButton';
+import AppleLoginButton from '@/features/auth/ui/AppleLoginButton';
 const LoginPage: React.FC = () => {
   return (
     <View className="flex-1 justify-center items-center bg-white px-6">
@@ -22,9 +22,9 @@ const LoginPage: React.FC = () => {
             <Text className="text-sub1 font-bold">회원가입</Text>
           </View>
           {/* 카카오 버튼 */}
-          <LoginButton type="kakao" />
+          <KakaoLoginButton />
           {/* 애플 버튼 */}
-          <LoginButton type="apple" />
+          <AppleLoginButton />
         </View>
       </View>
     </View>

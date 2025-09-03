@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const defualtShadow = StyleSheet.create({
+export const defaultShadow = StyleSheet.create({
   shadowContainer: {
     // iOS
     shadowColor: '#504b43',

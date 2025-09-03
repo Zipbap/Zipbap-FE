@@ -3,7 +3,7 @@ import HeaderLogo from '@/assets/img/header-logo.svg';
 import AlarmOn from '@/assets/img/alarm-on.svg';
 import AlarmOff from '@/assets/img/alarm-off.svg';
 import { useState } from 'react';
-import { defualtShadow } from './defaultShadow';
+import { defaultShadow } from './defaultShadow';
 
 interface Props {
   isShadow: boolean;
@@ -15,7 +15,7 @@ const DefaultHeader = ({ isShadow }: Props) => {
 
   return (
     <Header
-      style={isShadow ? [defualtShadow.shadowContainer, defualtShadow.roundedContainer] : undefined}
+      style={isShadow ? [defaultShadow.shadowContainer, defaultShadow.roundedContainer] : undefined}
       center={<HeaderLogo width={75} height={12} />}
       right={isPushEvent ? <AlarmOn width={24} height={24} /> : <AlarmOff width={24} height={24} />}
     />

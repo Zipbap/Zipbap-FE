@@ -18,7 +18,7 @@ const MyRecipeCatagory = () => {
     if (viewType === 'image') setViewType('article');
   };
 
-  const handleViewType = () => {
+  const handleViewType = (viewType: ViewType) => {
     switchViewType(viewType);
   };
 
@@ -61,9 +61,15 @@ const MyRecipeCatagory = () => {
       </View>
 
       <View className="w-[20%] items-end justify-center">
-        {viewType === 'article' && <ArticleView onPress={handleViewType} width={26} height={26} />}
-        {viewType === 'feed' && <FeedView onPress={handleViewType} width={26} height={26} />}
-        {viewType === 'image' && <ImageView onPress={handleViewType} width={26} height={26} />}
+        {viewType === 'article' && (
+          <ArticleView onPress={() => handleViewType(viewType)} width={26} height={26} />
+        )}
+        {viewType === 'feed' && (
+          <FeedView onPress={() => handleViewType(viewType)} width={26} height={26} />
+        )}
+        {viewType === 'image' && (
+          <ImageView onPress={() => handleViewType(viewType)} width={26} height={26} />
+        )}
       </View>
     </View>
   );

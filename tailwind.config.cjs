@@ -16,6 +16,11 @@ module.exports = {
       black: '#343434',
       white: '#FEFDFA',
     },
+    extend: {
+      boxShadow: {
+        header: '0px 8px 20px rgba(132, 124, 112, 0.1)',
+      },
+    },
   },
   plugins: [],
 };

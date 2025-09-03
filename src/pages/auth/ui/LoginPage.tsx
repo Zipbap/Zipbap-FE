@@ -3,23 +3,24 @@ import Logo from '@/assets/img/logo.svg';
 import React from 'react';
 import KakaoLoginButton from '@/features/auth/ui/KakaoLoginButton';
 import AppleLoginButton from '@/features/auth/ui/AppleLoginButton';
+
 const LoginPage: React.FC = () => {
   return (
-    <View className="flex-1 justify-center items-center bg-white px-6">
-      <View className="w-5/6 justify-center items-center">
+    <View className="flex-1 items-center justify-center bg-white px-6">
+      <View className="w-5/6 items-center justify-center">
         {/* 로고 */}
         <Logo width={150} height={150} />
         {/* 설명 */}
-        <Text className="text-center text-g2 mt-6 leading-6 mb-[150px]">
+        <Text className="mb-[150px] mt-6 text-center leading-6 text-g2">
           당신이 만든 요리와 가족의 손맛을{'\n'}
           영원히 기록하고 나눌 수 있게 해드릴게요.
         </Text>
 
-        <View className="w-full flex-col justify-center items-center flex gap-5">
+        <View className="flex w-full flex-col items-center justify-center gap-5">
           <View className="flex-row gap-2">
-            <Text className="text-sub1 font-bold ">로그인</Text>
-            <Text className="text-sub1 font-bold">&#183;</Text>
-            <Text className="text-sub1 font-bold">회원가입</Text>
+            <Text className="font-bold text-sub1">로그인</Text>
+            <Text className="font-bold text-sub1">&#183;</Text>
+            <Text className="font-bold text-sub1">회원가입</Text>
           </View>
           {/* 카카오 버튼 */}
           <KakaoLoginButton />

@@ -1,13 +1,11 @@
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-// import LoginPage from '@/pages/auth/ui/LoginPage';
 import '@/global.css';
-import MyRecipe from '../pages/recipe/ui/MyRecipe';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Navigation } from './Navigation';
 
 export function App() {
   return (
     <SafeAreaProvider>
-      {/* <LoginPage /> */}
-      <MyRecipe />
+      <Navigation />
     </SafeAreaProvider>
   );
 }

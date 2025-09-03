@@ -9,7 +9,18 @@ import PlusIcon from '@/assets/img/plus.svg';
 type ViewType = 'article' | 'feed' | 'image';
 
 const MyRecipeCatagory = () => {
+  // view type logic
   const [viewType, setViewType] = useState<ViewType>('article');
+
+  const switchViewType = (viewType: ViewType) => {
+    if (viewType === 'article') setViewType('feed');
+    if (viewType === 'feed') setViewType('image');
+    if (viewType === 'image') setViewType('article');
+  };
+
+  const handleViewType = () => {
+    switchViewType(viewType);
+  };
 
   // FIXME: api로 전환
   const defaultCatagory = ['점심', '저녁'];
@@ -50,9 +61,9 @@ const MyRecipeCatagory = () => {
       </View>
 
       <View className="w-[20%] items-end justify-center">
-        {viewType === 'article' && <ArticleView width={26} height={26} />}
-        {viewType === 'feed' && <FeedView width={26} height={26} />}
-        {viewType === 'image' && <ImageView width={26} height={26} />}
+        {viewType === 'article' && <ArticleView onPress={handleViewType} width={26} height={26} />}
+        {viewType === 'feed' && <FeedView onPress={handleViewType} width={26} height={26} />}
+        {viewType === 'image' && <ImageView onPress={handleViewType} width={26} height={26} />}
       </View>
     </View>
   );

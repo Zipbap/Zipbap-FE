@@ -29,11 +29,11 @@ const MyRecipeCatagory = () => {
   const handleCatagory = () => {};
 
   return (
-    <View className="flex-row w-full h-[50px] items-center justify-between px-1 mt-1">
-      <View className="flex-row w-[80%] items-center">
+    <View className="mt-1 h-[50px] w-full flex-row items-center justify-between px-1">
+      <View className="w-[80%] flex-row items-center">
         {/* 전체 버튼 */}
-        <View className="h-[26px] px-4 py-1 bg-sub1 rounded-xl justify-center items-center mr-2">
-          <Text className="text-center text-white text-xs font-bold leading-none">전체</Text>
+        <View className="mr-2 h-[26px] items-center justify-center rounded-xl bg-sub1 px-4 py-1">
+          <Text className="text-center text-xs font-bold leading-none text-white">전체</Text>
         </View>
 
         <View className="flex-1 flex-row items-center">
@@ -47,9 +47,9 @@ const MyRecipeCatagory = () => {
               {catagory.map((category, index) => (
                 <View
                   key={index}
-                  className="h-[26px] px-4 py-1 bg-g4 rounded-xl justify-center items-center"
+                  className="h-[26px] items-center justify-center rounded-xl bg-g4 px-4 py-1"
                 >
-                  <Text className="text-center text-g2 text-xs font-bold leading-none">
+                  <Text className="text-center text-xs font-bold leading-none text-g2">
                     {category}
                   </Text>
                 </View>

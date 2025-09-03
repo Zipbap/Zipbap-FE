@@ -3,12 +3,12 @@ import SearchIcon from '@/assets/img/search-icon.svg';
 
 const SearchBox = () => {
   return (
-    <View className="w-full px-5 py-3 bg-g4 rounded-tl-[20px] rounded-tr-3xl rounded-bl-[20px] rounded-br-3xl flex-row justify-start items-center gap-72">
-      <Text className="text-center justify-start text-g1 text-sm font-semibold font-['Pretendard'] leading-none">
+    <View className="w-full flex-row items-center justify-start gap-72 rounded-bl-[20px] rounded-br-3xl rounded-tl-[20px] rounded-tr-3xl bg-g4 px-5 py-3">
+      <Text className="justify-start text-center font-['Pretendard'] text-sm font-semibold leading-none text-g1">
         레시피 검색
       </Text>
-      <View className="p-1 flex-row justify-start items-center gap-2">
-        <View className="w-4 h-4 relative">
+      <View className="flex-row items-center justify-start gap-2 p-1">
+        <View className="relative h-4 w-4">
           <SearchIcon width={16} height={16} />
         </View>
       </View>

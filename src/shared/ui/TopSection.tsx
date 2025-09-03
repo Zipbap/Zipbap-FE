@@ -21,7 +21,7 @@ const Extension = TopExtensionDefault;
 const Root: React.FC<Props> = ({ children, className, style }) => {
   return (
     <View
-      className={['justify-start w-screen bg-white', className].filter(Boolean).join(' ')}
+      className={['w-screen justify-start bg-white', className].filter(Boolean).join(' ')}
       style={style}
     >
       {children}

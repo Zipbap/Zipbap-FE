@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     colors: {
       primary: '#DA5534',
-      sub1: '#FF8A65',
+      sub1: '#DC6E3F',
       sub2: '#FF8A65',
       g1: '#60594E',
       g2: '#847C70',
@@ -15,6 +15,11 @@ module.exports = {
       g6: '#E5E2DB',
       black: '#343434',
       white: '#FEFDFA',
+    },
+    extend: {
+      boxShadow: {
+        header: '0px 8px 20px rgba(132, 124, 112, 0.1)',
+      },
     },
   },
   plugins: [],

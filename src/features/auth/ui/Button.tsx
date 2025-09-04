@@ -25,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
       }}
       onPressOut={() => setIsPressed(false)}
       className={cn(
-        `w-full py-4 rounded-full flex-row gap-8 justify-center items-center`,
+        `w-full flex-row items-center justify-center gap-8 rounded-full py-4`,
         isPressed ? 'opacity-50' : 'opacity-100',
       )}
       style={{ backgroundColor: color }} // ✅ 동적 컬러

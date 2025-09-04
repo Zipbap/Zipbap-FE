@@ -8,7 +8,7 @@ const AppleLoginButton: React.FC = () => {
   return (
     <Button isPressed={isPressed} setIsPressed={setIsPressed} color={'#343434'}>
       <AppleSvg />
-      <Text className="text-white font-bold text-base">Apple로 계속하기</Text>
+      <Text className="text-base font-bold text-white">Apple로 계속하기</Text>
     </Button>
   );
 };

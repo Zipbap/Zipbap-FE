@@ -25,7 +25,7 @@ const KakaoLoginButton: React.FC = () => {
       color={'#FFE300'}
     >
       <KakaoSvg />
-      <Text className="font-bold text-base">카카오로 시작하기</Text>
+      <Text className="text-base font-bold">카카오로 시작하기</Text>
     </Button>
   );
 };

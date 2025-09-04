@@ -1,0 +1,14 @@
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\rnreanimated_autolinked_build\CMakeFiles\react_codegen_rnreanimated.dir\react\renderer\components\rnreanimated\ComponentDescriptors.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\rnreanimated_autolinked_build\CMakeFiles\react_codegen_rnreanimated.dir\react\renderer\components\rnreanimated\EventEmitters.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\rnreanimated_autolinked_build\CMakeFiles\react_codegen_rnreanimated.dir\react\renderer\components\rnreanimated\Props.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\rnreanimated_autolinked_build\CMakeFiles\react_codegen_rnreanimated.dir\react\renderer\components\rnreanimated\ShadowNodes.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\rnreanimated_autolinked_build\CMakeFiles\react_codegen_rnreanimated.dir\react\renderer\components\rnreanimated\States.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\rnreanimated_autolinked_build\CMakeFiles\react_codegen_rnreanimated.dir\react\renderer\components\rnreanimated\rnreanimatedJSI-generated.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\rnreanimated_autolinked_build\CMakeFiles\react_codegen_rnreanimated.dir\rnreanimated-generated.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\RNEdgeToEdge_autolinked_build\CMakeFiles\react_codegen_RNEdgeToEdge.dir\RNEdgeToEdge-generated.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\RNEdgeToEdge_autolinked_build\CMakeFiles\react_codegen_RNEdgeToEdge.dir\react\renderer\components\RNEdgeToEdge\ComponentDescriptors.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\RNEdgeToEdge_autolinked_build\CMakeFiles\react_codegen_RNEdgeToEdge.dir\react\renderer\components\RNEdgeToEdge\EventEmitters.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\RNEdgeToEdge_autolinked_build\CMakeFiles\react_codegen_RNEdgeToEdge.dir\react\renderer\components\RNEdgeToEdge\Props.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\RNEdgeToEdge_autolinked_build\CMakeFiles\react_codegen_RNEdgeToEdge.dir\react\renderer\components\RNEdgeToEdge\RNEdgeToEdgeJSI-generated.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\RNEdgeToEdge_autolinked_build\CMakeFiles\react_codegen_RNEdgeToEdge.dir\react\renderer\components\RNEdgeToEdge\ShadowNodes.cpp.o
+C:\Users\rlarl\OneDrive\Desktop\ZIP_BOB\android\app\.cxx\Debug\4g2b2qe2\x86_64\RNEdgeToEdge_autolinked_build\CMakeFiles\react_codegen_RNEdgeToEdge.dir\react\renderer\components\RNEdgeToEdge\States.cpp.o

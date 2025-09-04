@@ -4,7 +4,9 @@ import React from 'react';
 import KakaoLoginButton from '@/features/auth/ui/KakaoLoginButton';
 import AppleLoginButton from '@/features/auth/ui/AppleLoginButton';
 
-const LoginPage: React.FC = () => {
+import type { LoginPropsWithoutRoute } from '@/src/shared/types/rootStackParamList';
+
+const LoginPage: React.FC<LoginPropsWithoutRoute> = ({ navigation }) => {
   return (
     <View className="flex-1 items-center justify-center bg-white px-6">
       <View className="w-5/6 items-center justify-center">
@@ -23,7 +25,7 @@ const LoginPage: React.FC = () => {
             <Text className="font-bold text-sub1">회원가입</Text>
           </View>
           {/* 카카오 버튼 */}
-          <KakaoLoginButton />
+          <KakaoLoginButton navigation={navigation} />
           {/* 애플 버튼 */}
           <AppleLoginButton />
         </View>

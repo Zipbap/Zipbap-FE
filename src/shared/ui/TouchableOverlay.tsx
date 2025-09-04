@@ -21,12 +21,7 @@ const TouchableOverlay = ({ children, onOutsidePress }: Props) => {
 
   return (
     <TouchableWithoutFeedback onPress={handlePress} accessible={false}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      >
-        <View style={{ flex: 1 }}>{children}</View>
-      </KeyboardAvoidingView>
+      <View style={{ flex: 1 }}>{children}</View>
     </TouchableWithoutFeedback>
   );
 };

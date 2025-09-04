@@ -1,0 +1,15 @@
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/CMakeFiles/appmodules.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/CMakeFiles/rebuild_cache.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/rnreanimated_autolinked_build/CMakeFiles/react_codegen_rnreanimated.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/rnreanimated_autolinked_build/CMakeFiles/edit_cache.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/rnreanimated_autolinked_build/CMakeFiles/rebuild_cache.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/safeareacontext_autolinked_build/CMakeFiles/edit_cache.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/safeareacontext_autolinked_build/CMakeFiles/rebuild_cache.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/rnsvg_autolinked_build/CMakeFiles/react_codegen_rnsvg.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/rnsvg_autolinked_build/CMakeFiles/edit_cache.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/rnsvg_autolinked_build/CMakeFiles/rebuild_cache.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/RNEdgeToEdge_autolinked_build/CMakeFiles/react_codegen_RNEdgeToEdge.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/RNEdgeToEdge_autolinked_build/CMakeFiles/edit_cache.dir
+C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/android/app/.cxx/Debug/4g2b2qe2/x86_64/RNEdgeToEdge_autolinked_build/CMakeFiles/rebuild_cache.dir

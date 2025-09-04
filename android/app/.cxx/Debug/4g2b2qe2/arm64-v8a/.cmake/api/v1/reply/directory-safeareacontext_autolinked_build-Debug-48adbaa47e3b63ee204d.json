@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "safeareacontext_autolinked_build",
+		"source" : "C:/Users/rlarl/OneDrive/Desktop/ZIP_BOB/node_modules/react-native-safe-area-context/android/src/main/jni"
+	}
+}

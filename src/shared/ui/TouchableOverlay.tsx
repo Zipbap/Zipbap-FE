@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 
 interface Props {
   children: React.ReactNode;

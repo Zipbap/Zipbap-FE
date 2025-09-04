@@ -1,7 +1,7 @@
 import { Text } from 'react-native';
 import React, { useState } from 'react';
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
-import Button from '@/features/auth/ui/Button';
+import Button from '@/src/entities/auth/ui/Button';
 import { kakaoLogin } from '@/features/auth/api/login';
 import type { LoginPropsWithoutRoute } from '@/src/shared/types/rootStackParamList';
 

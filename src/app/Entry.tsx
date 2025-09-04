@@ -1,10 +1,11 @@
+import 'react-native-reanimated';
 import '@/global.css';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Navigation } from './Navigation';
 import TouchableOverlay from '@/shared/ui/TouchableOverlay';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 
-export function App() {
+export function Entry() {
   return (
     <SafeAreaProvider>
       <KeyboardAvoidingView

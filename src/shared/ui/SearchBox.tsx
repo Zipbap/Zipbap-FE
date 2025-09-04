@@ -6,37 +6,53 @@ import {
   Keyboard,
   TouchableOpacity,
 } from 'react-native';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import SearchIcon from '@/assets/img/search-icon.svg';
+
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  Easing,
+} from 'react-native-reanimated';
 
 interface Props {
   searchTitle: string;
 }
 
-// TODO: 검색 기능 구현
+const activeShadowStyle = {
+  shadowColor: 'rgba(132, 124, 112, 1)',
+  shadowOffset: { width: 0, height: 10 },
+  shadowOpacity: 0.1,
+  shadowRadius: 10,
+  elevation: 10,
+};
+
+const serarchReultMockData = ['닭도리탕', '계란찜', '탕수육 대자', '짱뽕!'];
+
 const SearchBox = ({ searchTitle }: Props) => {
   const searchRef = useRef<TextInput>(null);
 
   const [searchText, setSearchText] = useState('');
-
   const [isSearchBarOn, setIsSearchBarOn] = useState(false);
 
-  const handleFocus = () => {
-    setIsSearchBarOn(true);
-  };
+  const panelHeight = useSharedValue(0);
 
-  const handleBlur = () => {
-    setIsSearchBarOn(false);
-  };
+  useEffect(() => {
+    panelHeight.value = withTiming(isSearchBarOn ? 200 : 0, {
+      duration: 300,
+      easing: Easing.out(Easing.ease),
+    });
+  }, [isSearchBarOn]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    height: panelHeight.value,
+    opacity: withTiming(isSearchBarOn ? 1 : 0, { duration: 200 }),
+  }));
 
   const handleOutsidePress = () => {
     Keyboard.dismiss();
     setIsSearchBarOn(false);
-  };
-
-  const handleSearchBarPress = () => {
-    searchRef.current?.focus();
-    setIsSearchBarOn(true);
   };
 
   return (
@@ -44,18 +60,22 @@ const SearchBox = ({ searchTitle }: Props) => {
       <View className="w-full">
         {/* search bar */}
         <TouchableOpacity
-          onPress={handleSearchBarPress}
-          className="w-full flex-row items-center justify-start gap-72 rounded-bl-[20px] rounded-br-3xl rounded-tl-[20px] rounded-tr-3xl bg-g4 px-5 py-3"
+          onPress={() => {
+            searchRef.current?.focus();
+            setIsSearchBarOn(true);
+          }}
+          className="h-12 w-full flex-row items-center justify-start rounded-[20px] bg-g4 px-5 py-3"
           activeOpacity={0.8}
+          style={[isSearchBarOn ? activeShadowStyle : null, { position: 'relative', zIndex: 10 }]}
         >
           <TextInput
             ref={searchRef}
             placeholder={searchTitle}
             value={searchText}
             onChangeText={setSearchText}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            className="flex-1 justify-start text-left font-['Pretendard'] text-sm font-semibold leading-none text-g1"
+            onFocus={() => setIsSearchBarOn(true)}
+            onBlur={() => setIsSearchBarOn(false)}
+            className="h-full w-full flex-1 text-[14px] font-semibold text-g1"
             placeholderTextColor="#60594E"
           />
           <View className="flex-row items-center justify-start gap-2 p-1">
@@ -63,12 +83,20 @@ const SearchBox = ({ searchTitle }: Props) => {
           </View>
         </TouchableOpacity>
 
-        {/* search result */}
-        {isSearchBarOn && (
-          <View className="w-full">
-            <Text>search result</Text>
-          </View>
-        )}
+        {/* animated search result panel */}
+        <Animated.View
+          style={[animatedStyle]}
+          className="w-full overflow-hidden rounded-b-[20px] bg-g4"
+        >
+          {serarchReultMockData.map((item, index) => (
+            <View
+              key={index}
+              className="flex-row items-center justify-start gap-2 border-b-[0.50px] border-g6 p-1 py-2 pl-5"
+            >
+              <Text className="text-[14px] font-semibold leading-none text-g1">{item}</Text>
+            </View>
+          ))}
+        </Animated.View>
       </View>
     </TouchableWithoutFeedback>
   );

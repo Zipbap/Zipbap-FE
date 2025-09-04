@@ -19,9 +19,14 @@
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
-        <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
-        <data android:host="oauth"
-          android:scheme="kakao585d33485c28f8d38c53a6d68d5907f9" />
+        <data android:host="oauth" android:scheme="kakao585d33485c28f8d38c53a6d68d5907f9"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <data android:scheme="zipbap"/>
+        <data android:scheme="exp+zipbap"/>
       </intent-filter>
     </activity>
   </application>

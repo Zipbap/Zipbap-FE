@@ -24,7 +24,13 @@ const MainTabNavigator: React.FC = () => {
         }}
       />
       <Tab.Screen name="RecipeCreate" component={RecipeCreate} />
-      <Tab.Screen name="Feed" component={Feed} />
+      <Tab.Screen
+        name="Feed"
+        component={Feed}
+        options={{
+          header: () => <MyRecipeTopSection />,
+        }}
+      />
       <Tab.Screen name="Mypage" component={Mypage} />
     </Tab.Navigator>
   );

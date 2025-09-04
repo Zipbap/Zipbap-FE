@@ -2,16 +2,19 @@ import '@/global.css';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Navigation } from './Navigation';
 import TouchableOverlay from '@/shared/ui/TouchableOverlay';
-import GlobalKeyboardWrapper from '@/shared/ui/GlobalKeyboardWrapper';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 
 export function App() {
   return (
     <SafeAreaProvider>
-      <GlobalKeyboardWrapper>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
         <TouchableOverlay>
           <Navigation />
         </TouchableOverlay>
-      </GlobalKeyboardWrapper>
+      </KeyboardAvoidingView>
     </SafeAreaProvider>
   );
 }

@@ -5,6 +5,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import { useRef, useState, useEffect } from 'react';
 import SearchIcon from '@/assets/img/search-icon.svg';
@@ -39,10 +40,11 @@ const SearchBox = ({ searchTitle }: Props) => {
   const panelHeight = useSharedValue(0);
 
   useEffect(() => {
-    panelHeight.value = withTiming(isSearchBarOn ? 200 : 0, {
+    panelHeight.value = withTiming(isSearchBarOn ? 144 : 0, {
       duration: 300,
       easing: Easing.out(Easing.ease),
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSearchBarOn]);
 
   const animatedStyle = useAnimatedStyle(() => ({
@@ -75,7 +77,7 @@ const SearchBox = ({ searchTitle }: Props) => {
             onChangeText={setSearchText}
             onFocus={() => setIsSearchBarOn(true)}
             onBlur={() => setIsSearchBarOn(false)}
-            className="h-full w-full flex-1 text-[14px] font-semibold text-g1"
+            className="h-10 w-full flex-1 text-[14px] font-semibold text-g1"
             placeholderTextColor="#60594E"
           />
           <View className="flex-row items-center justify-start gap-2 p-1">
@@ -85,17 +87,21 @@ const SearchBox = ({ searchTitle }: Props) => {
 
         {/* animated search result panel */}
         <Animated.View
-          style={[animatedStyle]}
-          className="w-full overflow-hidden rounded-b-[20px] bg-g4"
+          style={[animatedStyle, { marginTop: -13, paddingTop: 13 }]}
+          className="h-36 w-full overflow-hidden rounded-b-[20px] bg-g4"
         >
-          {serarchReultMockData.map((item, index) => (
-            <View
-              key={index}
-              className="flex-row items-center justify-start gap-2 border-b-[0.50px] border-g6 p-1 py-2 pl-5"
-            >
-              <Text className="text-[14px] font-semibold leading-none text-g1">{item}</Text>
-            </View>
-          ))}
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+            {serarchReultMockData.map((item, index) => (
+              <View
+                key={index}
+                className="h-[34px] flex-row items-center justify-start gap-2 border-b-[0.50px] border-g6 p-1 py-2 pl-5"
+              >
+                <Text className="h-[34px] text-center text-[14px] font-semibold leading-[34px] text-g1">
+                  {item}
+                </Text>
+              </View>
+            ))}
+          </ScrollView>
         </Animated.View>
       </View>
     </TouchableWithoutFeedback>

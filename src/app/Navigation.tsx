@@ -5,6 +5,7 @@ import MainTabNavigator from './TabNavigation';
 import LoginPage from '../pages/auth/ui/LoginPage';
 
 const Stack = createNativeStackNavigator();
+
 export function Navigation() {
   return (
     <NavigationContainer>

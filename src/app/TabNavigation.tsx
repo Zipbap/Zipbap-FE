@@ -7,6 +7,7 @@ import MyRecipe from '@/pages/recipe/ui/MyRecipe';
 import RecipeCreate from '@/pages/recipe/ui/RecipeCreate';
 import Feed from '@/src/pages/feed/ui/Feed';
 import Mypage from '@/pages/user/ui/Mypage';
+import RecipeCreateTopsection from '@/src/widgets/recipe/ui/RecipeCreateTopSection';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +24,13 @@ const MainTabNavigator: React.FC = () => {
           header: () => <MyRecipeTopSection />,
         }}
       />
-      <Tab.Screen name="RecipeCreate" component={RecipeCreate} />
+      <Tab.Screen
+        name="RecipeCreate"
+        component={RecipeCreate}
+        options={{
+          header: () => <RecipeCreateTopsection />,
+        }}
+      />
       <Tab.Screen
         name="Feed"
         component={Feed}

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { Modal, TouchableOpacity } from 'react-native';
 
 interface BottomSheetModalProps {
@@ -9,10 +9,20 @@ interface BottomSheetModalProps {
 }
 
 const BottomSheetModal = ({ visible, onClose, children, height = 500 }: BottomSheetModalProps) => {
+  const handleOutsidePress = useCallback(() => {
+    onClose();
+  }, [onClose]);
+
   return (
-    <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={onClose}>
-      <TouchableOpacity className="flex-1 justify-end" activeOpacity={1} onPress={onClose}>
+    <Modal animationType="slide" transparent visible={visible} onRequestClose={onClose}>
+      <TouchableOpacity
+        className="flex-1 justify-end"
+        activeOpacity={1}
+        onPress={handleOutsidePress}
+      >
         <TouchableOpacity
+          activeOpacity={1}
+          onPress={e => e.stopPropagation()}
           className="relative self-stretch rounded-tl-[20px] rounded-tr-[20px] bg-white px-6 py-6"
           style={{
             height,
@@ -22,8 +32,6 @@ const BottomSheetModal = ({ visible, onClose, children, height = 500 }: BottomSh
             shadowRadius: 20,
             elevation: 15,
           }}
-          activeOpacity={1}
-          onPress={e => e.stopPropagation()}
         >
           {children}
         </TouchableOpacity>

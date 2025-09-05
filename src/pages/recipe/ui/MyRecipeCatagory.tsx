@@ -5,6 +5,7 @@ import FeedView from '@/assets/img/feed-view.svg';
 import ImageView from '@/assets/img/image-view.svg';
 import PlusIcon from '@/assets/img/plus.svg';
 import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
+import { useBottomSheetModal } from '@/shared/ui/useBottomSheetModal';
 
 type ViewType = 'article' | 'feed' | 'image';
 
@@ -13,7 +14,7 @@ const MyRecipeCatagory = () => {
   const [catagory] = useState(['점심', '저녁']);
 
   // Modal state
-  const [modalVisible, setModalVisible] = useState(false);
+  const { bottomSheetVisible, bottomSheetOpen, bottomSheetClose } = useBottomSheetModal();
 
   return (
     <>
@@ -41,7 +42,7 @@ const MyRecipeCatagory = () => {
                   </Text>
                 </View>
               ))}
-              <PlusIcon onPress={() => setModalVisible(true)} width={26} height={26} />
+              <PlusIcon onPress={bottomSheetOpen} width={26} height={26} />
             </View>
           </ScrollView>
         </View>
@@ -60,7 +61,10 @@ const MyRecipeCatagory = () => {
         </View>
       </View>
 
-      <MyRecipeCatagoryBottomSheet modalVisible={modalVisible} setModalVisible={setModalVisible} />
+      <MyRecipeCatagoryBottomSheet
+        bottomSheetVisible={bottomSheetVisible}
+        bottomSheetClose={bottomSheetClose}
+      />
     </>
   );
 };

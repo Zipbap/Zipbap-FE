@@ -5,11 +5,11 @@ import EditIcon from '@/assets/img/catagory/edit.svg';
 import TrashIcon from '@/assets/img/catagory/trash.svg';
 
 interface Props {
-  modalVisible: boolean;
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  bottomSheetVisible: boolean;
+  bottomSheetClose: () => void;
 }
 
-const MyRecipeCatagoryBottomSheet = ({ modalVisible, setModalVisible }: Props) => {
+const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: Props) => {
   // FIXME: api로 카테고리 가져오기
   const [originalCategory] = useState(['점심', '저녁']);
   const [newCategory, setNewCategory] = useState('');
@@ -18,13 +18,17 @@ const MyRecipeCatagoryBottomSheet = ({ modalVisible, setModalVisible }: Props) =
     // 카테고리 추가 로직
   };
 
+  const handleModalClose = () => {
+    bottomSheetClose();
+  };
+
   const handleCatagorySave = () => {
-    // 카테고리 저장 로직le
-    setModalVisible(false);
+    // 카테고리 저장 로직
+    handleModalClose();
   };
 
   return (
-    <BottomSheetModal visible={modalVisible} onClose={() => setModalVisible(false)} height={554}>
+    <BottomSheetModal visible={bottomSheetVisible} onClose={handleModalClose} height={554}>
       <Text className="mt-[40px] text-center text-[20px] font-bold text-black">카테고리 관리</Text>
 
       {/* 기존 카테고리 */}

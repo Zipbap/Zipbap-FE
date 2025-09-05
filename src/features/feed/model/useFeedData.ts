@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { apiGetData } from '../api/getFeedData';
 import type { FeedItem } from '@/entities/feed/model/feedTypes';
-
 export const useFeedData = () => {
   const page = useRef(0);
   const isLoading = useRef(false);
@@ -9,6 +8,7 @@ export const useFeedData = () => {
   const [dataList, setDataList] = useState<FeedItem[]>([]);
   const limit = 10; //페이지 불러올 개수
 
+  //피드들 FETCH
   const fetchData = async (pageNum: number) => {
     try {
       const data = await apiGetData(pageNum, limit);
@@ -27,6 +27,7 @@ export const useFeedData = () => {
     fetchData(0);
   }, []);
 
+  //피드 초기화
   const onRefresh = useCallback(async () => {
     setIsRefreshing(true);
     page.current = 0; // 페이지 번호 초기화
@@ -34,6 +35,7 @@ export const useFeedData = () => {
     setIsRefreshing(false);
   }, []);
 
+  //무한 스크롤
   const onEndReached = () => {
     if (10 <= dataList.length && isLoading.current === false) {
       isLoading.current = true;

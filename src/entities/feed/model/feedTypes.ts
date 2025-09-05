@@ -12,7 +12,7 @@ export type FeedItem = {
   likes: number; // 좋아요 수
   bookmarks: number; // 북마크 수
   comments: number; // 댓글 수
-  isLiked: boolean;
-  isBookmarked: boolean;
-  isCommented: boolean;
+  isLiked: boolean; //좋아요 여부
+  isBookmarked: boolean; //북마크 여부
+  isCommented: boolean; //댓글 여부
 };

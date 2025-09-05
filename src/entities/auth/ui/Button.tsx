@@ -1,14 +1,7 @@
 import { Pressable } from 'react-native';
 import React from 'react';
 import { cn } from '@/shared/lib/cn';
-
-interface ButtonProps {
-  children: React.ReactNode;
-  isPressed: boolean;
-  setIsPressed: React.Dispatch<React.SetStateAction<boolean>>;
-  color?: string;
-  isPressedFunc?: () => void;
-}
+import { ButtonProps } from '@/entities/auth/model/buttonTypes';
 
 const Button: React.FC<ButtonProps> = ({
   children,

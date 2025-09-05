@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 import BottomSheetModal from '@/shared/ui/BottomSheetModal';
-import {
-  Text,
-  View,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import { Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import EditIcon from '@/assets/img/catagory/edit.svg';
 import TrashIcon from '@/assets/img/catagory/trash.svg';
 
@@ -27,7 +19,7 @@ const MyRecipeCatagoryBottomSheet = ({ modalVisible, setModalVisible }: Props) =
   };
 
   const handleCatagorySave = () => {
-    // 카테고리 저장 로직
+    // 카테고리 저장 로직le
     setModalVisible(false);
   };
 

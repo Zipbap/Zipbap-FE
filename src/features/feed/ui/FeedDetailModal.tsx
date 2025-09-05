@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Pressable, ScrollView } from 'react-native';
+import { Platform, View, Text, Image, Pressable, ScrollView } from 'react-native';
 import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
 import ShareSvg from '@/assets/img/feed/share-icon.svg';
@@ -68,7 +68,10 @@ const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
 
   return (
     <DetailModal visible={visible} onClose={onClose}>
-      <View className="h-[100%] overflow-hidden bg-white">
+      <View
+        className="h-[100%] overflow-hidden bg-white"
+        style={{ marginTop: Platform.OS === 'ios' ? 20 : 0 }}
+      >
         {/* 헤더 */}
         <DetailModalHeader
           title="레시피 상세"

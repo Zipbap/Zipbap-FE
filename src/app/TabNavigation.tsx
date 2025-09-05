@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
 import MyRecipeTopSection from '@/widgets/recipe/ui/MyRecipeTopSection';
-import MyFeedTopSection from '../widgets/feed/ui/MyFeedTopSection';
 import CustomTabBar from '@/shared/ui/Tab';
 import MyRecipe from '@/pages/recipe/ui/MyRecipe';
 import RecipeCreate from '@/pages/recipe/ui/RecipeCreate';

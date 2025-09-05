@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
-import { FeedCard } from '@/entities/feed/ui/FeedCard';
+import { FeedCard } from '@/src/features/feed/ui/FeedCard';
 import { useFeedData } from '@/features/feed/model/useFeedData';
 import FeedDetailModal from '@/src/features/feed/ui/FeedDetailModal';
 import type { FeedItem } from '@/entities/feed/model/feedTypes';
@@ -10,7 +10,12 @@ const Feed = () => {
   const [selectedFeed, setSelectedFeed] = useState<FeedItem | null>(null);
 
   const renderItem = ({ item }: { item: FeedItem }) => (
-    <FeedCard feed={item} onPress={() => setSelectedFeed(item)} />
+    <FeedCard
+      feed={item}
+      onPress={() => {
+        setSelectedFeed(item);
+      }}
+    />
   );
 
   return (
@@ -28,7 +33,7 @@ const Feed = () => {
       </View>
       <FeedDetailModal
         visible={!!selectedFeed}
-        feed={selectedFeed}
+        feedId={selectedFeed?.id}
         onClose={() => setSelectedFeed(null)}
       />
     </View>

@@ -18,8 +18,8 @@ public class AppDelegate: ExpoAppDelegate {
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
   ) -> Bool {
 
-    // ✅ 반드시 super 호출 전에 Kakao SDK 초기화
-    KakaoSDK.initSDK(appKey: "여기에_네이티브앱키_붙여넣기")
+    // TODO: 네이티브 앱키를 넣어주세요
+    KakaoSDK.initSDK(appKey: "")
 
     let delegate = ReactNativeDelegate()
     let factory = ExpoReactNativeFactory(delegate: delegate)
@@ -38,7 +38,7 @@ public class AppDelegate: ExpoAppDelegate {
     )
 #endif
 
-    // ✅ 마지막에 super 호출
+    // TODO: 마지막에 super 호출
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 

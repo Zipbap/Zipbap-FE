@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BottomSheetModal from '@/shared/ui/BottomSheetModal';
+import BottomSheetModal from '@/src/shared/ui/modal/bottomSheet/BottomSheetModal';
 import { Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import EditIcon from '@/assets/img/catagory/edit.svg';
 import TrashIcon from '@/assets/img/catagory/trash.svg';

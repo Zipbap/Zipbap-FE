@@ -3,8 +3,8 @@ import { mockRecipes } from '@/src/entities/recipe/model/mockRecipe';
 import { useEffect, useState } from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import ArticleView from '@/src/entities/recipe/ui/ArticleView';
-// import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-// import DetailDeleteComponent from '@/src/entities/recipe/ui/DetailDeleteComponent';
+import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
+import DetailDeleteComponent from '@/src/entities/recipe/ui/DetailDeleteComponent';
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/app/Navigation';
@@ -31,12 +31,9 @@ const RecipeCreate = () => {
           contentContainerStyle={{ paddingTop: 12, paddingBottom: 100 }}
           numColumns={1}
           renderItem={({ item }) => (
-            // <ReanimatedSwipeable
-            //   renderRightActions={() => <DetailDeleteComponent targetId={item.id} />}
-            // >
-            //   <ArticleView item={item} />
-            // </ReanimatedSwipeable>
-            <ArticleView item={item} />
+            <Swipeable renderRightActions={() => <DetailDeleteComponent targetId={item.id} />}>
+              <ArticleView item={item} />
+            </Swipeable>
           )}
         />
       </View>

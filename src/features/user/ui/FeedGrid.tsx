@@ -13,7 +13,7 @@ const FeedGrid: React.FC<Props> = ({ data, type }) => {
   if (data.length === 0) {
     return (
       <EmptyState
-        video={null}
+        video={'null'}
         title={type === 'feeds' ? '레시피를 공유해 보세요' : '마음에 드는 레시피를 저장해 보세요'}
         subtitle={
           type === 'feeds'

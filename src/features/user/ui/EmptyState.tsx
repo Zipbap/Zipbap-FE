@@ -21,7 +21,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({ video, title, subtitle, buttonT
       <Text className="mt-1 text-center text-sm color-g2">{subtitle}</Text>
       <BasicButton
         buttonText={buttonText}
-        onPress={() => console.log('공유')}
+        onPress={onPress}
         width={113}
         textColor="white"
         fontSize={16}

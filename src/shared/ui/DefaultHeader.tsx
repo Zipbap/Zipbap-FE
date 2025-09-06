@@ -6,10 +6,10 @@ import { useState } from 'react';
 import { defaultShadow } from './defaultShadow';
 
 interface Props {
-  hasShadow: boolean;
+  hasShadow?: boolean;
 }
 
-const DefaultHeader = ({ hasShadow }: Props) => {
+const DefaultHeader = ({ hasShadow = false }: Props) => {
   // FIXME: 알림에 대한 전역 상태로 교체
   const [isPushEvent] = useState(false);
 

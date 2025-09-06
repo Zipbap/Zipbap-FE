@@ -3,8 +3,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import MainTabNavigator from './TabNavigation';
 import LoginPage from '../pages/auth/ui/LoginPage';
+import RecipeCreateForm from '../features/recipe/ui/RecipeCreateForm';
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  Main: undefined;
+  Login: undefined;
+  RecipeCreateForm: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function Navigation() {
   return (
@@ -12,6 +19,7 @@ export function Navigation() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Main" component={MainTabNavigator} />
         <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name="RecipeCreateForm" component={RecipeCreateForm} />
       </Stack.Navigator>
     </NavigationContainer>
   );

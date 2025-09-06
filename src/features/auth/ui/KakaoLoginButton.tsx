@@ -11,8 +11,9 @@ const KakaoLoginButton: React.FC<LoginPropsWithoutRoute> = ({ navigation }) => {
   const signInWithKakao = async (): Promise<void> => {
     try {
       const token = await kakaoLogin();
+      //console.log('login success ', token);
       setResult(JSON.stringify(token));
-      console.log('login success ', token.accessToken);
+      // console.log('login success ', token);
       // navigation.replace('Main');
     } catch (err) {
       console.error('login err', err);

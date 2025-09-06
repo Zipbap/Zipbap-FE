@@ -1,7 +1,13 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-const FormMediaUpload = ({ uploadType }: { uploadType: 'image' | 'video' }) => {
+const FormMediaUpload = ({
+  uploadType,
+  isThumbnail,
+}: {
+  uploadType: 'image' | 'video';
+  isThumbnail?: boolean;
+}) => {
   const imageUpload = () => {
     console.log('이미지 업로드');
   };
@@ -22,7 +28,7 @@ const FormMediaUpload = ({ uploadType }: { uploadType: 'image' | 'video' }) => {
     >
       <View className="flex flex-col items-center justify-center">
         <Text className="text-center text-[18px] font-bold text-[#171212]">
-          {uploadType === 'image' ? '요리 사진' : '요리 영상'}
+          {uploadType === 'image' ? (isThumbnail ? '대표 사진' : '요리 사진') : '요리 영상'}
         </Text>
         <Text className="mt-[8px] text-center text-[14px] font-normal text-[#171212]">
           {uploadType === 'image'

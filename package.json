@@ -36,6 +36,7 @@
     "expo": "~53.0.22",
     "expo-dev-client": "~5.2.4",
     "expo-status-bar": "~2.2.3",
+    "expo-video": "~2.2.2",
     "nativewind": "^4.1.23",
     "orval": "^7.11.2",
     "react": "19.0.0",

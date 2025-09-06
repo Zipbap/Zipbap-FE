@@ -7,7 +7,7 @@ interface HeaderProps {
   title: string;
   onBackPress?: () => void;
   rightContent?: React.ReactNode;
-  style?: ViewStyle;
+  style?: object;
   titleStyle?: TextStyle;
 }
 
@@ -29,7 +29,7 @@ export const DetailModalHeader = ({
         <BackSvg />
       </Pressable>
       <Text className={cn('text-[20px] font-bold text-black', titleStyle)}>{title}</Text>
-      <View className="w-20 flex-row items-center justify-center gap-5">{rightContent}</View>
+      <View className="w-20 flex-row items-center justify-end gap-5">{rightContent}</View>
     </View>
   );
 };

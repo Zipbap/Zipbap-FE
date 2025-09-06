@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import Setting from '../pages/setting/ui/Setting';
 import MainTabNavigator from './TabNavigation';
 import LoginPage from '../pages/auth/ui/LoginPage';
 
@@ -11,6 +11,7 @@ export function Navigation() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
+        <Stack.Screen name="Setting" component={Setting} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -3,6 +3,8 @@ import { mockRecipes } from '@/src/entities/recipe/model/mockRecipe';
 import { useEffect, useState } from 'react';
 import { View, FlatList } from 'react-native';
 import ArticleView from '@/src/entities/recipe/ui/ArticleView';
+import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
+import DetailDeleteComponent from '@/src/entities/recipe/ui/DetailDeleteComponent';
 
 const RecipeCreate = () => {
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
@@ -21,7 +23,13 @@ const RecipeCreate = () => {
           contentContainerStyle={{ paddingTop: 12 }}
           numColumns={1}
           renderItem={({ item }) => {
-            return <ArticleView item={item} />;
+            return (
+              <ReanimatedSwipeable
+                renderRightActions={() => <DetailDeleteComponent targetId={item.id} />}
+              >
+                <ArticleView item={item} />
+              </ReanimatedSwipeable>
+            );
           }}
         />
       </View>

@@ -28,7 +28,7 @@ const RecipeCreate = () => {
           key={'article'}
           data={recipeList}
           keyExtractor={item => item.id}
-          contentContainerStyle={{ paddingTop: 12, paddingBottom: 100 }} // 버튼 안 가리도록 여백 추가
+          contentContainerStyle={{ paddingTop: 12, paddingBottom: 100 }}
           numColumns={1}
           renderItem={({ item }) => (
             <ReanimatedSwipeable

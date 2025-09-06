@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Modal, View, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import Header from '@/shared/ui/Header';
 import { defaultShadow } from '@/shared/ui/defaultShadow';
 import BackIcon from '@/assets/img/back-icon.svg';

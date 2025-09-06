@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Pressable, ViewStyle, TextStyle } from 'react-native';
+import { View, Text, Pressable, TextStyle } from 'react-native';
 import { cn } from '@/shared/lib/cn';
 import BackSvg from '@/assets/img/back-icon.svg';
 

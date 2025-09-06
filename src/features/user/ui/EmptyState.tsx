@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import BasicButton from '@/src/shared/ui/user/BasicButton';
 
 interface EmptyStateProps {
-  video: any;
+  video: 'video/mp4' | string;
   title: string;
   subtitle: string;
   buttonText: string;
@@ -11,11 +11,12 @@ interface EmptyStateProps {
 }
 
 const EmptyState: React.FC<EmptyStateProps> = ({ video, title, subtitle, buttonText, onPress }) => {
+  console.log(video);
   return (
     <View className="flex-1 items-center justify-center px-6">
       <View className="h-[180px]" />
       {/* 비디오로 추후 교체 */}
-      <Image source={video} className="mb-8 h-24 w-24 bg-g5" />
+      <View className="mb-8 h-24 w-24 bg-g5" />
       <Text className="text-lg font-bold color-black">{title}</Text>
       <Text className="mt-1 text-center text-sm color-g2">{subtitle}</Text>
       <BasicButton

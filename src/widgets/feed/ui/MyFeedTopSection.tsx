@@ -10,7 +10,7 @@ const MyFeedTopSection = () => {
     <View style={defaultShadow.shadowContainer}>
       <View style={defaultShadow.shadowWithRounded}>
         <TopSection style={defaultShadow.roundedContainer}>
-          <DefaultHeader isShadow={false} />
+          <DefaultHeader hasShadow={false} />
           <MyFeedExtension />
         </TopSection>
       </View>

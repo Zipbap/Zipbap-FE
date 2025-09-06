@@ -9,9 +9,9 @@ export function Navigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
         <Stack.Screen name="Setting" component={Setting} />
+        <Stack.Screen name="Login" component={LoginPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

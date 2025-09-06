@@ -10,13 +10,16 @@ import Feed from '@/src/pages/feed/ui/Feed';
 import Mypage from '@/pages/user/ui/Mypage';
 import UserHeader from '../shared/ui/UserHeader';
 import { MainPropsWithoutRoute } from '../shared/types/rootStackParamList';
+import RecipeCreateTopsection from '@/src/widgets/recipe/ui/RecipeCreateTopSection';
 
 const Tab = createBottomTabNavigator();
 
 const MainTabNavigator: React.FC<MainPropsWithoutRoute> = ({ navigation }) => {
   return (
     <Tab.Navigator
-      screenOptions={{ headerShown: true }}
+      screenOptions={{
+        headerShown: true,
+      }}
       tabBar={props => <CustomTabBar {...props} />}
     >
       <Tab.Screen
@@ -26,7 +29,13 @@ const MainTabNavigator: React.FC<MainPropsWithoutRoute> = ({ navigation }) => {
           header: () => <MyRecipeTopSection />,
         }}
       />
-      <Tab.Screen name="RecipeCreate" component={RecipeCreate} />
+      <Tab.Screen
+        name="RecipeCreate"
+        component={RecipeCreate}
+        options={{
+          header: () => <RecipeCreateTopsection />,
+        }}
+      />
       <Tab.Screen
         name="Feed"
         component={Feed}

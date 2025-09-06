@@ -4,6 +4,12 @@ import Setting from '../pages/setting/ui/Setting';
 import MainTabNavigator from './TabNavigation';
 import LoginPage from '../pages/auth/ui/LoginPage';
 
+export type RootStackParamList = {
+  Main: undefined;
+  Login: undefined;
+  RecipeCreateForm: undefined;
+};
+
 const Stack = createNativeStackNavigator();
 export function Navigation() {
   return (

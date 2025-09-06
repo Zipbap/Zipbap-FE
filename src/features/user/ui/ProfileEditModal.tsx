@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Image, Pressable, Text, TextInput, View, Switch } from 'react-native';
+import { Image, Pressable, Text, TextInput, View, Switch, Platform } from 'react-native';
 import { DetailModal } from '@/src/shared/ui/modal/DetailModal';
 import { DetailModalHeader } from '@/src/shared/ui/modal/DetailModalHeader';
 import { defaultShadow } from '@/src/shared/ui/defaultShadow';
@@ -48,7 +48,10 @@ const ProfileEditModal: React.FC<Props> = ({
 
   return (
     <DetailModal visible={isVisible} onClose={onClose}>
-      <View className="h-[100%] overflow-hidden bg-white">
+      <View
+        className="h-[100%] overflow-hidden bg-white"
+        style={{ marginTop: Platform.OS === 'ios' ? 25 : 0 }}
+      >
         <View className="h-[80px]" />
         <DetailModalHeader
           style={[defaultShadow.shadowContainer, defaultShadow.roundedContainer]}

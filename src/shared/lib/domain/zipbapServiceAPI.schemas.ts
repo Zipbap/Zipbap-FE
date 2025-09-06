@@ -5,6 +5,28 @@
  * 집밥 서비스 전용 Swagger 문서
  * OpenAPI spec version: 1.0.1
  */
+export interface UserUpdateDto {
+  nickname: string;
+  isPrivate: boolean;
+  profileImage?: string;
+  statusMessage?: string;
+}
+
+export interface ApiResponseUserProfileDto {
+  isSuccess: boolean;
+  code?: string;
+  message?: string;
+  result?: UserProfileDto;
+}
+
+export interface UserProfileDto {
+  id: number;
+  nickname: string;
+  isPrivate: boolean;
+  statusMessage?: string;
+  profileImage?: string;
+}
+
 export interface CookingOrderRequest {
   /** 순서 */
   turn?: number;
@@ -15,6 +37,8 @@ export interface CookingOrderRequest {
 }
 
 export interface UpdateTempRecipeRequestDto {
+  /** 대표 썸네일 URL */
+  thumbnail: string;
   /** 레시피 제목 */
   title?: string;
   /** 레시피 소제목 */
@@ -61,6 +85,8 @@ export interface CookingOrderResponse {
 export interface TempRecipeDetailResponseDto {
   /** 레시피 ID */
   id: string;
+  /** 대표 썸네일 URL */
+  thumbnail?: string;
   /** 레시피 제목 */
   title?: string;
   /** 레시피 소제목 */
@@ -89,6 +115,10 @@ export interface TempRecipeDetailResponseDto {
   kick?: string;
   /** 비공개 여부 */
   isPrivate?: boolean;
+  /** 생성 시각 */
+  createdAt?: string;
+  /** 수정 시각 */
+  updatedAt?: string;
   /** 조리 순서 목록 */
   cookingOrders: CookingOrderResponse[];
   /** 영상 URL */
@@ -96,6 +126,8 @@ export interface TempRecipeDetailResponseDto {
 }
 
 export interface FinalizeRecipeRequestDto {
+  /** 대표 썸네일 URL */
+  thumbnail: string;
   /** 레시피 제목 */
   title: string;
   /** 레시피 소제목 */
@@ -134,33 +166,39 @@ export interface RecipeDetailResponseDto {
   /** 레시피 ID */
   id: string;
   /** 레시피 제목 */
-  title: string;
+  title?: string;
+  /** 대표 썸네일 URL */
+  thumbnail?: string;
   /** 레시피 소제목 */
-  subtitle: string;
+  subtitle?: string;
   /** 레시피 소개 */
-  introduction: string;
+  introduction?: string;
   /** 내 레시피(해당 사용자 전용) */
   myCategoryId?: string;
   /** 요리종류 ID */
-  cookingTypeId: number;
+  cookingTypeId?: number;
   /** 상황 카테고리 ID */
-  situationId: number;
+  situationId?: number;
   /** 주재료 카테고리 ID */
-  mainIngredientId: number;
+  mainIngredientId?: number;
   /** 조리방법 카테고리 ID */
-  methodId: number;
+  methodId?: number;
   /** 인분(인원수) 카테고리 ID */
-  headcountId: number;
+  headcountId?: number;
   /** 요리 시간 카테고리 ID */
-  cookingTimeId: number;
+  cookingTimeId?: number;
   /** 난이도 카테고리 ID */
-  levelId: number;
+  levelId?: number;
   /** 재료 정보 */
-  ingredientInfo: string;
+  ingredientInfo?: string;
   /** 요리 킥 */
   kick?: string;
   /** 비공개 여부 */
   isPrivate: boolean;
+  /** 생성 시각 */
+  createdAt?: string;
+  /** 수정 시각 */
+  updatedAt?: string;
   /** 조리 순서 목록 */
   cookingOrders: CookingOrderResponse[];
   /** 영상 URL */
@@ -196,6 +234,24 @@ export interface MyCategoryResponseDto {
   name: string;
 }
 
+export interface UpdateCommentRequestDto {
+  /** 댓글 내용 */
+  content: string;
+}
+
+export interface ApiResponseUnit {
+  isSuccess: boolean;
+  code?: string;
+  message?: string;
+}
+
+export interface LikeResponseDto {
+  /** 레시피 ID */
+  recipeId: string;
+  /** 좋아요 수 */
+  likeCount: number;
+}
+
 /**
  * 내 카테고리 생성 요청 DTO
  */
@@ -208,6 +264,20 @@ export interface CreateMyCategoryDto {
   name: string;
 }
 
+export interface ApiResponseFollowCountDto {
+  isSuccess: boolean;
+  code?: string;
+  message?: string;
+  result?: FollowCountDto;
+}
+
+export interface FollowCountDto {
+  userId: number;
+  followingCount: number;
+  followerCount: number;
+  isFollow: boolean;
+}
+
 export interface PresignedUrlRequest {
   /** 파일명 */
   fileName: string;
@@ -218,6 +288,144 @@ export interface PresignedUrlResponse {
   uploadUrl: string;
   /** 업로드된 파일 접근 URL */
   fileUrl: string;
+}
+
+export interface CreateCommentRequestDto {
+  /** 레시피 ID */
+  recipeId: string;
+  /** 댓글 내용 */
+  content: string;
+  /** 부모 댓글 ID (대댓글인 경우) */
+  parentId?: number;
+}
+
+export interface CommentDetailResponseDto {
+  /** 댓글 ID */
+  id: number;
+  /** 작성자 닉네임 */
+  nickname: string;
+  /** 작성자 프로필 이미지 */
+  profileImage?: string;
+  /** 댓글 내용 */
+  content: string;
+  /** 작성 시각 */
+  createdAt: string;
+  /** 수정 시각 */
+  updatedAt: string;
+  /** 대댓글 리스트 */
+  children: CommentDetailResponseDto[];
+}
+
+export interface ApiResponseBookmarkSimpleResponseDto {
+  isSuccess: boolean;
+  code?: string;
+  message?: string;
+  result?: BookmarkSimpleResponseDto;
+}
+
+export interface BookmarkSimpleResponseDto {
+  /** 레시피 ID */
+  recipeId: string;
+  /** 북마크 수 */
+  bookmarkCount: number;
+}
+
+export interface MyRecipeListItemResponseDto {
+  /** 레시피 ID */
+  id: string;
+  /** 대표 썸네일 URL */
+  thumbnail?: string;
+  /** 레시피 제목 */
+  title?: string;
+  /** 레시피 소제목 */
+  subtitle?: string;
+  /** 레시피 소개 */
+  introduction?: string;
+  /** 내 레시피 카테고리 ID */
+  myCategoryId?: string;
+  /** 생성 시각 */
+  createdAt?: string;
+  /** 수정 시각 */
+  updatedAt?: string;
+}
+
+export interface ApiResponseListMyCategoryResponseDto {
+  isSuccess: boolean;
+  code?: string;
+  message?: string;
+  result?: MyCategoryResponseDto[];
+}
+
+export interface ApiResponseListFollowUserDto {
+  isSuccess: boolean;
+  code?: string;
+  message?: string;
+  result?: FollowUserDto[];
+}
+
+export interface FollowUserDto {
+  userId: number;
+  nickname: string;
+  profileImage?: string;
+  statusMessage?: string;
+  isFollow: boolean;
+}
+
+export interface ApiResponse {
+  isSuccess: boolean;
+  code?: string;
+  message?: string;
+  result?: unknown;
+}
+
+export interface FeedItemResponseDto {
+  nickname: string;
+  profileImage?: string;
+  userIsPrivate: boolean;
+  recipeId: string;
+  title?: string;
+  thumbnail?: string;
+  introduction?: string;
+  cookingTime?: string;
+  level?: string;
+  createdAt: string;
+  updatedAt: string;
+  isLiked: boolean;
+  isBookmarked: boolean;
+  likeCount: number;
+  bookmarkCount: number;
+  commentCount: number;
+}
+
+export interface FeedDetailResponseDto {
+  nickname: string;
+  profileImage?: string;
+  statusMessage?: string;
+  isFollowing: boolean;
+  recipeId: string;
+  title?: string;
+  subtitle?: string;
+  introduction?: string;
+  thumbnail?: string;
+  video?: string;
+  ingredientInfo?: string;
+  kick?: string;
+  recipeIsPrivate: boolean;
+  recipeStatus: string;
+  cookingType?: string;
+  situation?: string;
+  mainIngredient?: string;
+  method?: string;
+  headcount?: string;
+  cookingTime?: string;
+  level?: string;
+  createdAt: string;
+  updatedAt: string;
+  likeCount: number;
+  isLiked: boolean;
+  bookmarkCount: number;
+  isBookmarked: boolean;
+  commentCount: number;
 }
 
 /**
@@ -259,11 +467,18 @@ export interface MyCategoryItemDto {
   name: string;
 }
 
-export interface ApiResponseListMyCategoryResponseDto {
+export interface ApiResponseListBookmarkRecipeResponseDto {
   isSuccess: boolean;
   code?: string;
   message?: string;
-  result?: MyCategoryResponseDto[];
+  result?: BookmarkRecipeResponseDto[];
+}
+
+export interface BookmarkRecipeResponseDto {
+  /** 레시피 ID */
+  recipeId: string;
+  /** 썸네일 이미지 */
+  thumbnailImage?: string;
 }
 
 export interface ApiResponseObject {
@@ -273,51 +488,52 @@ export interface ApiResponseObject {
   result?: unknown;
 }
 
-export interface ApiResponseUnit {
-  isSuccess: boolean;
-  code?: string;
-  message?: string;
-}
-
-export type UpdateTempRecipeParams = {
-  userId: number;
+export type UpdateProfileParams = {
+  dto: UserUpdateDto;
 };
 
-export type FinalizeRecipeParams = {
-  userId: number;
+export type GetCommentsParams = {
+  recipeId: string;
 };
 
-export type UpdateMyCategoryParams = {
-  userId: number;
+export type GetMyActiveRecipesFilteredParams = {
+  myCategoryId?: string[];
 };
 
-export type DeleteMyCategoryParams = {
-  userId: number;
+export type GetFollowingListParams = {
+  condition?: string;
 };
 
-export type GetMyTempRecipesParams = {
-  userId: number;
+export type GetFollowerListParams = {
+  condition?: string;
 };
 
-export type CreateTempRecipeParams = {
-  userId: number;
-};
-
-export type GetMyCategoriesParams = {
-  userId: number;
-};
-
-export type CreateMyCategoryParams = {
-  userId: number;
-};
-
-export type GetAllCategoriesParams = {
+export type GetFeedParams = {
   /**
-   * 사용자 ID
+   * 필터 조건 (ALL/TODAY/HOT/RECOMMEND/FOLLOWING)
    */
-  userId: number;
+  filter?: GetFeedFilter;
+  /**
+   * Zero-based page index (0..N)
+   */
+  page?: unknown;
+  /**
+   * The size of the page to be returned
+   */
+  size?: unknown;
+  /**
+   * Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+   */
+  sort?: unknown[];
 };
 
-export type GetMyRecipesParams = {
-  userId: number;
-};
+export type GetFeedFilter = (typeof GetFeedFilter)[keyof typeof GetFeedFilter];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare, no-redeclare
+export const GetFeedFilter = {
+  ALL: 'ALL',
+  TODAY: 'TODAY',
+  HOT: 'HOT',
+  RECOMMEND: 'RECOMMEND',
+  FOLLOWING: 'FOLLOWING',
+} as const;

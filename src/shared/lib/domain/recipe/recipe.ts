@@ -9,99 +9,115 @@ import axios from 'axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  CreateTempRecipeParams,
-  FinalizeRecipeParams,
   FinalizeRecipeRequestDto,
-  GetMyRecipesParams,
-  GetMyTempRecipesParams,
+  GetMyActiveRecipesFilteredParams,
+  MyRecipeListItemResponseDto,
   RecipeDetailResponseDto,
   TempRecipeDetailResponseDto,
-  UpdateTempRecipeParams,
   UpdateTempRecipeRequestDto,
 } from '../zipbapServiceAPI.schemas';
 
 export const getRecipe = () => {
   /**
-   * 임시 저장된 레시피를 수정합니다. 조리 순서를 null로 보내면 기존 순서를 유지하고, []로 보내면 전체 삭제 후 교체합니다. 최종 저장은 /{recipeId}/finalize 사용. (JWT 적용 전까지는 userId 파라미터 사용)
+   * 임시 저장된 레시피를 수정합니다. 최종 저장은 /{recipeId}/finalize 사용.
    * @summary 임시 레시피 업데이트
    */
   const updateTempRecipe = <TData = AxiosResponse<TempRecipeDetailResponseDto>>(
     recipeId: string,
     updateTempRecipeRequestDto: UpdateTempRecipeRequestDto,
-    params: UpdateTempRecipeParams,
     options?: AxiosRequestConfig,
   ): Promise<TData> => {
     return axios.put(
       `https://zipbap.store/api/recipes/${recipeId}/temp`,
       updateTempRecipeRequestDto,
-      {
-        ...options,
-        params: { ...params, ...options?.params },
-      },
+      options,
     );
   };
   /**
-   * 임시 레시피를 최종 저장(활성화)합니다. 모든 필드가 필수이며 카테고리 유효성 검증을 통과해야 합니다. (JWT 적용 전까지는 userId 파라미터 사용)
+   * 임시 레시피를 최종 저장합니다. 모든 필드가 필수.
    * @summary 레시피 작성(최종 저장)
    */
   const finalizeRecipe = <TData = AxiosResponse<RecipeDetailResponseDto>>(
     recipeId: string,
     finalizeRecipeRequestDto: FinalizeRecipeRequestDto,
-    params: FinalizeRecipeParams,
     options?: AxiosRequestConfig,
   ): Promise<TData> => {
     return axios.put(
       `https://zipbap.store/api/recipes/${recipeId}/finalize`,
       finalizeRecipeRequestDto,
-      {
-        ...options,
-        params: { ...params, ...options?.params },
-      },
+      options,
     );
   };
   /**
-   * 사용자의 모든 임시 저장 레시피를 조회합니다. (JWT 적용 전까지는 userId 파라미터 사용)
+   * 사용자의 모든 임시 저장 레시피를 조회합니다.
    * @summary 내 임시 레시피 전체 조회
    */
   const getMyTempRecipes = <TData = AxiosResponse<TempRecipeDetailResponseDto>>(
-    params: GetMyTempRecipesParams,
     options?: AxiosRequestConfig,
   ): Promise<TData> => {
-    return axios.get(`https://zipbap.store/api/recipes/temp`, {
-      ...options,
-      params: { ...params, ...options?.params },
-    });
+    return axios.get(`https://zipbap.store/api/recipes/temp`, options);
   };
   /**
-   * 사용자가 임시 저장용 레시피를 생성합니다. 필수값만 채워지고 나머지는 null 처리됩니다. (JWT 적용 전까지는 userId 파라미터 사용)
+   * 사용자가 임시 저장용 레시피를 생성합니다.
    * @summary 임시 레시피 생성
    */
   const createTempRecipe = <TData = AxiosResponse<TempRecipeDetailResponseDto>>(
-    params: CreateTempRecipeParams,
     options?: AxiosRequestConfig,
   ): Promise<TData> => {
-    return axios.post(`https://zipbap.store/api/recipes/temp`, undefined, {
-      ...options,
-      params: { ...params, ...options?.params },
-    });
+    return axios.post(`https://zipbap.store/api/recipes/temp`, undefined, options);
   };
   /**
-   * 사용자의 모든 최종 저장(완성) 레시피를 조회합니다. (JWT 적용 전까지는 userId 파라미터 사용)
+   * 사용자의 모든 완성 레시피를 조회합니다.
    * @summary 내 완성된 레시피 전체 조회
    */
   const getMyRecipes = <TData = AxiosResponse<RecipeDetailResponseDto>>(
-    params: GetMyRecipesParams,
     options?: AxiosRequestConfig,
   ): Promise<TData> => {
-    return axios.get(`https://zipbap.store/api/recipes`, {
+    return axios.get(`https://zipbap.store/api/recipes`, options);
+  };
+  /**
+   * 레시피 ID로 단일 상세 정보를 조회합니다. (본인 소유 & ACTIVE 상태만 접근 가능)
+   * @summary 레시피 단일 조회
+   */
+  const getRecipeDetail = <TData = AxiosResponse<RecipeDetailResponseDto>>(
+    recipeId: string,
+    options?: AxiosRequestConfig,
+  ): Promise<TData> => {
+    return axios.get(`https://zipbap.store/api/recipes/${recipeId}`, options);
+  };
+  /**
+ * 
+        로그인 사용자의 ACTIVE 레시피를 배열 형태로 조회합니다.
+        쿼리 파라미터로 myCategoryId를 0개 이상 전달할 수 있습니다.
+        - 예: /api/recipes/me?myCategoryId=MC-1-00001&myCategoryId=MC-1-00002
+        - 아무 값도 전달하지 않으면 사용자의 모든 ACTIVE 레시피를 반환합니다.
+        반환 필드는 목록/카드 뷰에 필요한 최소 필드만 제공합니다.
+        
+ * @summary 내 레시피 목록 조회(다중 myCategory 필터)
+ */
+  const getMyActiveRecipesFiltered = <TData = AxiosResponse<MyRecipeListItemResponseDto>>(
+    params?: GetMyActiveRecipesFilteredParams,
+    options?: AxiosRequestConfig,
+  ): Promise<TData> => {
+    return axios.get(`https://zipbap.store/api/recipes/me`, {
       ...options,
       params: { ...params, ...options?.params },
     });
   };
-  return { updateTempRecipe, finalizeRecipe, getMyTempRecipes, createTempRecipe, getMyRecipes };
+  return {
+    updateTempRecipe,
+    finalizeRecipe,
+    getMyTempRecipes,
+    createTempRecipe,
+    getMyRecipes,
+    getRecipeDetail,
+    getMyActiveRecipesFiltered,
+  };
 };
 export type UpdateTempRecipeResult = AxiosResponse<TempRecipeDetailResponseDto>;
 export type FinalizeRecipeResult = AxiosResponse<RecipeDetailResponseDto>;
 export type GetMyTempRecipesResult = AxiosResponse<TempRecipeDetailResponseDto>;
 export type CreateTempRecipeResult = AxiosResponse<TempRecipeDetailResponseDto>;
 export type GetMyRecipesResult = AxiosResponse<RecipeDetailResponseDto>;
+export type GetRecipeDetailResult = AxiosResponse<RecipeDetailResponseDto>;
+export type GetMyActiveRecipesFilteredResult = AxiosResponse<MyRecipeListItemResponseDto>;

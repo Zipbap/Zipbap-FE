@@ -13,53 +13,33 @@ import type {
   ApiResponseMyCategoryResponseDto,
   ApiResponseUnit,
   CreateMyCategoryDto,
-  CreateMyCategoryParams,
-  DeleteMyCategoryParams,
-  GetMyCategoriesParams,
   UpdateMyCategoryDto,
-  UpdateMyCategoryParams,
 } from '../zipbapServiceAPI.schemas';
 
 export const getMyCategories = () => {
   const updateMyCategory = <TData = AxiosResponse<ApiResponseMyCategoryResponseDto>>(
     id: string,
     updateMyCategoryDto: UpdateMyCategoryDto,
-    params: UpdateMyCategoryParams,
     options?: AxiosRequestConfig,
   ): Promise<TData> => {
-    return axios.put(`https://zipbap.store/api/my-categories/${id}`, updateMyCategoryDto, {
-      ...options,
-      params: { ...params, ...options?.params },
-    });
+    return axios.put(`https://zipbap.store/api/my-categories/${id}`, updateMyCategoryDto, options);
   };
   const deleteMyCategory = <TData = AxiosResponse<ApiResponseUnit>>(
     id: string,
-    params: DeleteMyCategoryParams,
     options?: AxiosRequestConfig,
   ): Promise<TData> => {
-    return axios.delete(`https://zipbap.store/api/my-categories/${id}`, {
-      ...options,
-      params: { ...params, ...options?.params },
-    });
+    return axios.delete(`https://zipbap.store/api/my-categories/${id}`, options);
   };
   const getMyCategories = <TData = AxiosResponse<ApiResponseListMyCategoryResponseDto>>(
-    params: GetMyCategoriesParams,
     options?: AxiosRequestConfig,
   ): Promise<TData> => {
-    return axios.get(`https://zipbap.store/api/my-categories`, {
-      ...options,
-      params: { ...params, ...options?.params },
-    });
+    return axios.get(`https://zipbap.store/api/my-categories`, options);
   };
   const createMyCategory = <TData = AxiosResponse<ApiResponseMyCategoryResponseDto>>(
     createMyCategoryDto: CreateMyCategoryDto,
-    params: CreateMyCategoryParams,
     options?: AxiosRequestConfig,
   ): Promise<TData> => {
-    return axios.post(`https://zipbap.store/api/my-categories`, createMyCategoryDto, {
-      ...options,
-      params: { ...params, ...options?.params },
-    });
+    return axios.post(`https://zipbap.store/api/my-categories`, createMyCategoryDto, options);
   };
   return { updateMyCategory, deleteMyCategory, getMyCategories, createMyCategory };
 };

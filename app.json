@@ -13,7 +13,8 @@
       "backgroundColor": "#DA5534"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kgs9843.zipbap"
     },
     "android": {
       "adaptiveIcon": {

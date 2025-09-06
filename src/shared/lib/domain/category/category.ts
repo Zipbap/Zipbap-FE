@@ -8,21 +8,17 @@
 import axios from 'axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import type { CategoryListResponseDto, GetAllCategoriesParams } from '../zipbapServiceAPI.schemas';
+import type { CategoryListResponseDto } from '../zipbapServiceAPI.schemas';
 
 export const getCategory = () => {
   /**
-   * 모든 카테고리 정보를 조회합니다. (내 카테고리는 userId 기준)
+   * 모든 카테고리 정보를 조회합니다. (내 카테고리는 JWT userId 기준)
    * @summary 모든 카테고리 조회
    */
   const getAllCategories = <TData = AxiosResponse<CategoryListResponseDto>>(
-    params: GetAllCategoriesParams,
     options?: AxiosRequestConfig,
   ): Promise<TData> => {
-    return axios.get(`https://zipbap.store/categories`, {
-      ...options,
-      params: { ...params, ...options?.params },
-    });
+    return axios.get(`https://zipbap.store/api/categories`, options);
   };
   return { getAllCategories };
 };

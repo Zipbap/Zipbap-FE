@@ -1,7 +1,9 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
-# dependencies
+# Dependencies
 node_modules/
+package-lock.json
+yarn.lock
 
 # Expo
 .expo/
@@ -9,32 +11,54 @@ dist/
 web-build/
 expo-env.d.ts
 
-# Native
-.kotlin/
+# Native (common)
 *.orig.*
 *.jks
 *.p8
 *.p12
 *.key
 *.mobileprovision
+*.pem
 
-# Metro
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+android/*.lock
+android/*.bin
+android/*.probe
+android/*.sha
+android/*.html
+android/autolinking.json
+android/build/autolinking.json
+
+# iOS
+ios/build/
+ios/DerivedData/
+ios/Pods/
+ios/Podfile.lock
+ios/*.xcworkspace
+ios/*.xcuserdatad
+ios/*.xcuserstate
+ios/*.pbxuser
+ios/*.mode1v3
+ios/*.mode2v3
+ios/*.perspectivev3
+
+# Metro bundler
 .metro-health-check*
 
-# debug
+# Debug / Logs
 npm-debug.*
 yarn-debug.*
 yarn-error.*
-
-# macOS
-.DS_Store
-*.pem
-
-# local env files
-.env*.local
-
-# typescript
 *.tsbuildinfo
+problems-report.html
 
-# env
+# macOS / OS-specific
+.DS_Store
+Thumbs.db
+
+# Env files
 .env
+.env*.local

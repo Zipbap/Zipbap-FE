@@ -14,8 +14,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "type-check": "tsc --noEmit",
-    "orval:generate": "orval --config orval.config.cjs"
+    "type-check": "tsc --noEmit"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md,css,scss}": "prettier --write"
@@ -32,7 +31,6 @@
     "expo-image-picker": "^16.1.4",
     "expo-status-bar": "~2.2.3",
     "nativewind": "^4.1.23",
-    "orval": "^7.11.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.5",

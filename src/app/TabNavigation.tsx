@@ -5,12 +5,12 @@ import Feed from '@pages/feed/ui/Feed';
 import MyRecipe from '@pages/recipe/ui/MyRecipe';
 import RecipeCreate from '@pages/recipe/ui/RecipeCreate';
 import Mypage from '@pages/user/ui/Mypage';
-import { MainPropsWithoutRoute } from '@shared/types/rootStackParamList';
-import CustomTabBar from '@shared/ui/Tab';
-import UserHeader from '@shared/ui/UserHeader';
 import MyFeedTopSection from '@widgets/feed/ui/MyFeedTopSection';
 import MyRecipeTopSection from '@widgets/recipe/ui/MyRecipeTopSection';
 import RecipeCreateTopsection from '@widgets/recipe/ui/RecipeCreateTopSection';
+import { MainPropsWithoutRoute } from '@shared/types/rootStackParamList';
+import CustomTabBar from '@shared/ui/Tab';
+import UserHeader from '@shared/ui/UserHeader';
 
 const Tab = createBottomTabNavigator();
 

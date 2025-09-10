@@ -36,7 +36,19 @@ export default {
           // 타입 import
           'type',
         ],
-        'newlines-between': 'always',
+        // NOTE: FSD의 단방향 의존성을 유지하기 위한 설정
+        pathGroups: [
+          // another alias
+          { pattern: '@/**', group: 'internal', position: 'before' },
+          // FSD Layer
+          { pattern: '@app/**', group: 'internal', position: 'after' },
+          { pattern: '@pages/**', group: 'internal', position: 'after' },
+          { pattern: '@widgets/**', group: 'internal', position: 'after' },
+          { pattern: '@features/**', group: 'internal', position: 'after' },
+          { pattern: '@entities/**', group: 'internal', position: 'after' },
+          { pattern: '@shared/**', group: 'internal', position: 'after' },
+        ],
+        pathGroupsExcludedImportTypes: ['builtin'],
         alphabetize: { order: 'asc' },
       },
     ],

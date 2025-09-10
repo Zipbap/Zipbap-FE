@@ -1,8 +1,7 @@
 import { useState, useCallback } from 'react';
 
-import { apiGetDetailData } from '../api/getDetailFeedData';
-
 import type { FeedDetailItem } from '@entities/feed/model/feedDetailTypes';
+import { apiGetDetailData } from '../api/getDetailFeedData';
 
 export const useDetailFeedData = () => {
   const [detailFeed, setDetailFeed] = useState<FeedDetailItem>();

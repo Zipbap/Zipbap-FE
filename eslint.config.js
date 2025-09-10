@@ -1,11 +1,14 @@
 import js from '@eslint/js';
 import typescript from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
+import prettier from 'eslint-config-prettier';
+import importPlugin from 'eslint-plugin-import';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactNative from 'eslint-plugin-react-native';
-import prettier from 'eslint-config-prettier';
 import globals from 'globals';
+
+import importConfig from './eslint.config.import.js';
 
 export default [
   {
@@ -32,6 +35,7 @@ export default [
       react,
       'react-hooks': reactHooks,
       'react-native': reactNative,
+      import: importPlugin,
     },
     settings: {
       react: { version: 'detect' },
@@ -79,6 +83,7 @@ export default [
       'object-property-newline': ['warn', { allowAllPropertiesOnSameLine: false }],
     },
   },
+  importConfig,
   {
     files: ['**/*.cjs'],
     languageOptions: { sourceType: 'commonjs' },

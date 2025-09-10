@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import { mockUser } from '@/entities/user/api/mockUser';
-import { User } from '@/entities/user/model/userType';
-import FeedGrid from '@/features/user/ui/FeedGrid';
-import UserHeaderSection from '@/src/features/user/ui/UserHeaderSection';
+import { mockUser } from '@entities/user/api/mockUser';
+import { User } from '@entities/user/model/userType';
+import FeedGrid from '@features/user/ui/FeedGrid';
+import UserHeaderSection from '@features/user/ui/UserHeaderSection';
 
 const Mypage: React.FC = () => {
   const [user] = useState<User>(mockUser);

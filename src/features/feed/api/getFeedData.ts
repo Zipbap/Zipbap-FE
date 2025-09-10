@@ -1,6 +1,6 @@
 import { dummyFeeds } from './dummyFeeds';
 
-import type { FeedItem } from '@/entities/feed/model/feedTypes';
+import type { FeedItem } from '@entities/feed/model/feedTypes';
 
 export const apiGetData = async (page: number, limit: number): Promise<FeedItem[]> => {
   // 실제 API라면 fetch 호출

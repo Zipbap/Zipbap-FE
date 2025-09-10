@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import BasicButton from '@/src/shared/ui/user/BasicButton';
+import BasicButton from '@shared/ui/user/BasicButton';
 
 interface Props {
   onPress: () => void;

@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
-import { RootStackParamList } from '@/app/Navigation';
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
-import { Recipe } from '@/src/entities/recipe/model';
-import { mockRecipes } from '@/src/entities/recipe/model/mockRecipe';
-import ArticleView from '@/src/entities/recipe/ui/ArticleView';
-import DetailDeleteComponent from '@/src/entities/recipe/ui/DetailDeleteComponent';
+import { RootStackParamList } from '@app/Navigation';
+import { Recipe } from '@entities/recipe/model';
+import { mockRecipes } from '@entities/recipe/model/mockRecipe';
+import ArticleView from '@entities/recipe/ui/ArticleView';
+import DetailDeleteComponent from '@entities/recipe/ui/DetailDeleteComponent';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'RecipeCreateForm'>;
 

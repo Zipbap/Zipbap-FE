@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, Text, View, StyleSheet, Platform } from 'react-native';
 
-import { cn } from '@/src/shared/lib/cn';
+import { cn } from '@shared/lib/cn';
 
 const FormRecipeVisibilityToggle = ({
   selectedToggle,

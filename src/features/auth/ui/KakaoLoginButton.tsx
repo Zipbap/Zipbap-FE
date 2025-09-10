@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Text } from 'react-native';
 
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
-import { kakaoLogin } from '@/features/auth/api/login';
-import Button from '@/src/entities/auth/ui/Button';
+import Button from '@entities/auth/ui/Button';
+import { kakaoLogin } from '@features/auth/api/login';
 
-import type { LoginPropsWithoutRoute } from '@/src/shared/types/rootStackParamList';
+import type { LoginPropsWithoutRoute } from '@shared/types/rootStackParamList';
 
 const KakaoLoginButton: React.FC<LoginPropsWithoutRoute> = ({ navigation }) => {
   const [isPressed, setIsPressed] = useState<boolean>(false);

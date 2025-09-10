@@ -3,7 +3,7 @@ import { Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-nativ
 
 import EditIcon from '@/assets/img/catagory/edit.svg';
 import TrashIcon from '@/assets/img/catagory/trash.svg';
-import BottomSheetModal from '@/src/shared/ui/modal/bottomSheet/BottomSheetModal';
+import BottomSheetModal from '@shared/ui/modal/bottomSheet/BottomSheetModal';
 
 interface Props {
   bottomSheetVisible: boolean;

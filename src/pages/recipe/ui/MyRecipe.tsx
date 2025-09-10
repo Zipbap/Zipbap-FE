@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { View, FlatList, Text, Pressable } from 'react-native';
 
-import { Recipe } from '@/entities/recipe/model';
-import { mockRecipes } from '@/entities/recipe/model/mockRecipe';
-import ArticleView from '@/src/entities/recipe/ui/ArticleView';
-import FeedView from '@/src/entities/recipe/ui/FeedView';
-import ImageView from '@/src/entities/recipe/ui/ImageView';
-import { useViewTypeStore } from '@/src/shared/store/useViewTypeStore';
-import WebViewAutoVideoPlayer from '@/src/shared/ui/modal/WebViewAutoVideoPlayer';
+import { Recipe } from '@entities/recipe/model';
+import { mockRecipes } from '@entities/recipe/model/mockRecipe';
+import ArticleView from '@entities/recipe/ui/ArticleView';
+import FeedView from '@entities/recipe/ui/FeedView';
+import ImageView from '@entities/recipe/ui/ImageView';
+import { useViewTypeStore } from '@shared/store/useViewTypeStore';
+import WebViewAutoVideoPlayer from '@shared/ui/modal/WebViewAutoVideoPlayer';
 
 import RecipeDetailModal from './RecipeDetailModal';
 

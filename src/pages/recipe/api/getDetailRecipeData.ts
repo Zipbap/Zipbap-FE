@@ -1,6 +1,6 @@
 import { dummyRecipeDetail } from './DummyRecipeDetail';
 
-import type { RecipeDetailItem } from '@/entities/recipe/model/RecipeDetailTypes';
+import type { RecipeDetailItem } from '@entities/recipe/model/RecipeDetailTypes';
 
 export const apiGetDetailData = async (id: string): Promise<RecipeDetailItem> => {
   // 실제 API라면 fetch 호출

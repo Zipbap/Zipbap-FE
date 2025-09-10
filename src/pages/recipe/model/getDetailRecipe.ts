@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 
 import { apiGetDetailData } from '../api/getDetailRecipeData';
 
-import type { RecipeDetailItem } from '@/src/entities/recipe/model/RecipeDetailTypes';
+import type { RecipeDetailItem } from '@entities/recipe/model/RecipeDetailTypes';
 
 export const useDetailRecipeData = () => {
   const [detailRecipe, setDetailRecipe] = useState<RecipeDetailItem>();

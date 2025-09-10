@@ -5,8 +5,8 @@ import ArticleView from '@/assets/img/article-view.svg';
 import FeedView from '@/assets/img/feed-view.svg';
 import ImageView from '@/assets/img/image-view.svg';
 import PlusIcon from '@/assets/img/plus.svg';
-import { useViewTypeStore } from '@/src/shared/store/useViewTypeStore';
-import { useBottomSheetModal } from '@/src/shared/ui/modal/bottomSheet/useBottomSheetModal';
+import { useViewTypeStore } from '@shared/store/useViewTypeStore';
+import { useBottomSheetModal } from '@shared/ui/modal/bottomSheet/useBottomSheetModal';
 
 import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
 

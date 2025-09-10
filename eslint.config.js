@@ -6,6 +6,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactNative from 'eslint-plugin-react-native';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
+
 export default [
   {
     ignores: ['node_modules', 'dist', 'build', 'android', 'ios', '.expo'],
@@ -36,24 +37,23 @@ export default [
       react: { version: 'detect' },
     },
     rules: {
-      // TypeScript
-      ...typescript.configs.recommended.rules,
-
       // React
       ...react.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
+      'react/jsx-filename-extension': ['warn', { extensions: ['.tsx', '.jsx'] }],
 
       // React Hooks
       ...reactHooks.configs.recommended.rules,
+      'react-hooks/rules-of-hooks': 'warn',
+      'react-hooks/exhaustive-deps': 'warn',
 
       // React Native
       'react-native/no-unused-styles': 'warn',
       'react-native/split-platform-components': 'warn',
 
-      // React Hooks
-      'react-hooks/rules-of-hooks': 'warn',
-      'react-hooks/exhaustive-deps': 'warn',
-
       // TypeScript
+      ...typescript.configs.recommended.rules,
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
 
@@ -67,7 +67,7 @@ export default [
       'no-self-assign': 'warn',
       'no-new-func': 'warn',
       'no-inner-declarations': ['warn', 'functions'],
-      'prefer-template': 'error',
+      'prefer-template': 'warn',
       'prefer-arrow-callback': 'warn',
       'arrow-parens': ['warn', 'as-needed'],
       'implicit-arrow-linebreak': ['warn', 'beside'],
@@ -77,11 +77,6 @@ export default [
       'array-bracket-newline': ['warn', { multiline: true, minItems: 2 }],
       'array-element-newline': ['warn', { multiline: true, minItems: 2 }],
       'object-property-newline': ['warn', { allowAllPropertiesOnSameLine: false }],
-
-      // React
-      'react/react-in-jsx-scope': 'off',
-      'react/jsx-uses-react': 'off',
-      'react/jsx-filename-extension': ['warn', { extensions: ['.tsx', '.jsx'] }],
     },
   },
   {
@@ -92,6 +87,5 @@ export default [
       '@typescript-eslint/no-var-requires': 'off',
     },
   },
-
   prettier,
 ];

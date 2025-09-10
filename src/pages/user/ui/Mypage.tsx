@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+
 import { mockUser } from '@/entities/user/api/mockUser';
 import { User } from '@/entities/user/model/userType';
 import FeedGrid from '@/features/user/ui/FeedGrid';

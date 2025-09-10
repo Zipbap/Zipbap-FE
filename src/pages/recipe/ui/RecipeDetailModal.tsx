@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
 import { View, Text, Image, Pressable, ScrollView } from 'react-native';
+
 import ShareSvg from '@/assets/img/feed/share-icon.svg';
 import { defaultShadow } from '@/shared/ui/defaultShadow';
-import { useDetailRecipeData } from '../model/getDetailRecipe';
 import { DetailModal } from '@/src/shared/ui/modal/DetailModal';
 import { DetailModalHeader } from '@/src/shared/ui/modal/DetailModalHeader';
-import RecipeVideo from '@/src/shared/ui/modal/RecipeVideo';
+import RecipeDescription from '@/src/shared/ui/modal/RecipeDescription';
+import RecipeDetails from '@/src/shared/ui/modal/RecipeDetails';
+import RecipeInfoChips from '@/src/shared/ui/modal/RecipeInfoChips';
+import RecipeIngredient from '@/src/shared/ui/modal/RecipeIngredient';
 import RecipeSteps from '@/src/shared/ui/modal/RecipeSteps';
 import RecipeTip from '@/src/shared/ui/modal/RecipeTip';
-import RecipeIngredient from '@/src/shared/ui/modal/RecipeIngredient';
-import RecipeDescription from '@/src/shared/ui/modal/RecipeDescription';
-import RecipeInfoChips from '@/src/shared/ui/modal/RecipeInfoChips';
-import RecipeDetails from '@/src/shared/ui/modal/RecipeDetails';
+import RecipeVideo from '@/src/shared/ui/modal/RecipeVideo';
 import BasicButton from '@/src/shared/ui/user/BasicButton';
+
+import { useDetailRecipeData } from '../model/getDetailRecipe';
+
 interface Props {
   visible: boolean;
   onClose: () => void;

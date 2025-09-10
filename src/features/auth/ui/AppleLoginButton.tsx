@@ -1,5 +1,6 @@
-import { Text } from 'react-native';
 import React, { useState } from 'react';
+import { Text } from 'react-native';
+
 import AppleSvg from '@/assets/img/auth/apple.svg';
 import Button from '@/src/entities/auth/ui/Button';
 

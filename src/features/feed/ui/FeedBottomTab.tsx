@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
-import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
-import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
+
 import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
-import ChatOnSvg from '@/assets/img/feed/chat-on-icon.svg';
+import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import ChatOffSvg from '@/assets/img/feed/chat-off-icon.svg';
+import ChatOnSvg from '@/assets/img/feed/chat-on-icon.svg';
+import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
+import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 import { toggleLike, toggleBookmark } from '@/features/feed/api/feedBottomTabActionsApi';
 
 interface FeedBottomTabProps {

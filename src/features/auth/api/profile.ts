@@ -1,4 +1,5 @@
 import { getProfile as getKakaoProfile } from '@react-native-seoul/kakao-login';
+
 export const kakaoGetProfile = async () => {
   try {
     const profile = await getKakaoProfile();

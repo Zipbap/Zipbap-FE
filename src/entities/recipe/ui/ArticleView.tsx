@@ -1,6 +1,8 @@
 import { View, Image, Text } from 'react-native';
-import { Recipe } from '../model';
+
 import TimerIcon from '@/assets/img/recipe/timeer.svg';
+
+import { Recipe } from '../model';
 
 const ArticleView = ({ item }: { item: Recipe }) => {
   return (

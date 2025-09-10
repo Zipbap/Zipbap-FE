@@ -1,8 +1,9 @@
-import { View, Text } from 'react-native';
-import Logo from '@/assets/img/logo.svg';
 import React from 'react';
-import KakaoLoginButton from '@/src/features/auth/ui/KakaoLoginButton';
+import { View, Text } from 'react-native';
+
+import Logo from '@/assets/img/logo.svg';
 import AppleLoginButton from '@/src/features/auth/ui/AppleLoginButton';
+import KakaoLoginButton from '@/src/features/auth/ui/KakaoLoginButton';
 
 import type { LoginPropsWithoutRoute } from '@/src/shared/types/rootStackParamList';
 

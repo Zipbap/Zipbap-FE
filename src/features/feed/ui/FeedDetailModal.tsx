@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Pressable, ScrollView, Platform } from 'react-native';
-import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
+
 import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
-import ShareSvg from '@/assets/img/feed/share-icon.svg';
-import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
+import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
+import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
+import ShareSvg from '@/assets/img/feed/share-icon.svg';
 import { cn } from '@/shared/lib/cn';
 import { defaultShadow } from '@/shared/ui/defaultShadow';
-import { useDetailFeedData } from '../model/useDetailFeedData';
 import { DetailModal } from '@/src/shared/ui/modal/DetailModal';
 import { DetailModalHeader } from '@/src/shared/ui/modal/DetailModalHeader';
-import RecipeVideo from '@/src/shared/ui/modal/RecipeVideo';
+import RecipeDescription from '@/src/shared/ui/modal/RecipeDescription';
+import RecipeDetails from '@/src/shared/ui/modal/RecipeDetails';
+import RecipeInfoChips from '@/src/shared/ui/modal/RecipeInfoChips';
+import RecipeIngredient from '@/src/shared/ui/modal/RecipeIngredient';
 import RecipeSteps from '@/src/shared/ui/modal/RecipeSteps';
 import RecipeTip from '@/src/shared/ui/modal/RecipeTip';
-import RecipeIngredient from '@/src/shared/ui/modal/RecipeIngredient';
-import RecipeDescription from '@/src/shared/ui/modal/RecipeDescription';
-import RecipeInfoChips from '@/src/shared/ui/modal/RecipeInfoChips';
-import RecipeDetails from '@/src/shared/ui/modal/RecipeDetails';
+import RecipeVideo from '@/src/shared/ui/modal/RecipeVideo';
+
+import { useDetailFeedData } from '../model/useDetailFeedData';
+
 import FeedBottomTab from './FeedBottomTab';
 
 interface Props {

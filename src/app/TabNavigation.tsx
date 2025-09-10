@@ -1,16 +1,17 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
-import MyRecipeTopSection from '@/widgets/recipe/ui/MyRecipeTopSection';
-import MyFeedTopSection from '../widgets/feed/ui/MyFeedTopSection';
-import CustomTabBar from '@/shared/ui/Tab';
 import MyRecipe from '@/pages/recipe/ui/MyRecipe';
 import RecipeCreate from '@/pages/recipe/ui/RecipeCreate';
-import Feed from '@/src/pages/feed/ui/Feed';
 import Mypage from '@/pages/user/ui/Mypage';
-import UserHeader from '../shared/ui/UserHeader';
-import { MainPropsWithoutRoute } from '../shared/types/rootStackParamList';
+import CustomTabBar from '@/shared/ui/Tab';
+import Feed from '@/src/pages/feed/ui/Feed';
 import RecipeCreateTopsection from '@/src/widgets/recipe/ui/RecipeCreateTopSection';
+import MyRecipeTopSection from '@/widgets/recipe/ui/MyRecipeTopSection';
+
+import { MainPropsWithoutRoute } from '../shared/types/rootStackParamList';
+import UserHeader from '../shared/ui/UserHeader';
+import MyFeedTopSection from '../widgets/feed/ui/MyFeedTopSection';
 
 const Tab = createBottomTabNavigator();
 

@@ -1,8 +1,10 @@
-import { Text } from 'react-native';
 import React, { useState } from 'react';
+import { Text } from 'react-native';
+
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
-import Button from '@/src/entities/auth/ui/Button';
 import { kakaoLogin } from '@/features/auth/api/login';
+import Button from '@/src/entities/auth/ui/Button';
+
 import type { LoginPropsWithoutRoute } from '@/src/shared/types/rootStackParamList';
 
 const KakaoLoginButton: React.FC<LoginPropsWithoutRoute> = ({ navigation }) => {

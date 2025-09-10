@@ -1,16 +1,16 @@
-import { View, Text, TouchableOpacity } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { cn } from '@/src/shared/lib/cn';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 // 아이콘 import
-import RecipeMakeOff from '@/assets/img/tab/make-recipe-off.svg';
-import RecipeMakeOn from '@/assets/img/tab/make-recipe-on.svg';
 import FeedOff from '@/assets/img/tab/feed-off.svg';
 import FeedOn from '@/assets/img/tab/feed-on.svg';
+import RecipeMakeOff from '@/assets/img/tab/make-recipe-off.svg';
+import RecipeMakeOn from '@/assets/img/tab/make-recipe-on.svg';
 import MypageOff from '@/assets/img/tab/mypage-off.svg';
 import MypageOn from '@/assets/img/tab/mypage-on.svg';
 import MyRecipeOff from '@/assets/img/tab/myrecipe-off.svg';
 import MyRecipeOn from '@/assets/img/tab/myrecipe-on.svg';
+import { cn } from '@/src/shared/lib/cn';
 
 const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
   const currentRoute = state.routes[state.index].name;

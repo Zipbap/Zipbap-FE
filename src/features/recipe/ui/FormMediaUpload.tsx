@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, Image } from 'react-native';
+
 import { pickImageFromLibrary } from '@/src/shared/lib/image-picker';
 import { pickVideoFromLibrary } from '@/src/shared/lib/video-picker';
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import PersonGraySvg from '@/assets/img/feed/person-icon.svg';
+
 import ClockGraySvg from '@/assets/img/feed/clock-gray-icon.svg';
+import PersonGraySvg from '@/assets/img/feed/person-icon.svg';
 import StarGraySvg from '@/assets/img/feed/star-gray-icon.svg';
 
 interface RecipeDetailsProps {

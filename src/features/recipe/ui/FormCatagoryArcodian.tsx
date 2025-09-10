@@ -1,5 +1,6 @@
-import { Text, View, Pressable } from 'react-native';
 import { useState } from 'react';
+import { Text, View, Pressable } from 'react-native';
+
 import DownIcon from '@/assets/img/recipe/down.svg';
 import { cn } from '@/src/shared/lib/cn';
 

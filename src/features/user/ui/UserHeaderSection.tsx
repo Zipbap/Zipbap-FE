@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image } from 'react-native';
+
 import { User } from '@/src/entities/user/model/userType';
 import EditProfileButton from '@/src/features/user/ui/EditProfileButton';
 import UserTabs from '@/src/features/user/ui/UserTabs';
 import { defaultShadow } from '@/src/shared/ui/defaultShadow';
+
 import ProfileEditModal from './ProfileEditModal';
 
 type Props = {

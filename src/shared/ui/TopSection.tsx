@@ -1,6 +1,7 @@
 // TopSection.tsx
 import React from 'react';
 import { View } from 'react-native';
+
 import HeaderDefault from './Header';
 import TopExtensionDefault from './TopExtension';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import TouchableOverlay from '@/shared/ui/TouchableOverlay';
 
 type OverlayProps = {

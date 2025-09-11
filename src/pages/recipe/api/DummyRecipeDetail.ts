@@ -1,4 +1,5 @@
 import type { RecipeDetailItem } from '@/src/entities/recipe/model/RecipeDetailTypes';
+
 export const dummyRecipeDetail: RecipeDetailItem = {
   id: '2',
   nickname: '요리왕 키키',

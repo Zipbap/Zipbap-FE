@@ -1,13 +1,16 @@
-import { View, FlatList, Text, Pressable } from 'react-native';
 import { useEffect, useState } from 'react';
-import { mockRecipes } from '@/entities/recipe/model/mockRecipe';
-import { Recipe } from '@/entities/recipe/model';
-import ArticleView from '@/src/entities/recipe/ui/ArticleView';
-import FeedView from '@/src/entities/recipe/ui/FeedView';
-import ImageView from '@/src/entities/recipe/ui/ImageView';
-import { useViewTypeStore } from '@/src/shared/store/useViewTypeStore';
-import WebViewAutoVideoPlayer from '@/src/shared/ui/modal/WebViewAutoVideoPlayer';
+import { View, FlatList, Text, Pressable } from 'react-native';
+
+import { Recipe } from '@entities/recipe/model';
+import { mockRecipes } from '@entities/recipe/model/mockRecipe';
+import ArticleView from '@entities/recipe/ui/ArticleView';
+import FeedView from '@entities/recipe/ui/FeedView';
+import ImageView from '@entities/recipe/ui/ImageView';
+import { useViewTypeStore } from '@shared/store/useViewTypeStore';
+import WebViewAutoVideoPlayer from '@shared/ui/modal/WebViewAutoVideoPlayer';
+
 import RecipeDetailModal from './RecipeDetailModal';
+
 const MyRecipe = () => {
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
   const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);

@@ -1,5 +1,6 @@
-import TopSection from '@/src/shared/ui/TopSection';
-import SearchBox from '@/src/shared/ui/SearchBox';
+import SearchBox from '@shared/ui/SearchBox';
+import TopSection from '@shared/ui/TopSection';
+
 import MyRecipeCatagory from './MyRecipeCatagory';
 
 const MyRecipeExtension = () => {

@@ -1,4 +1,5 @@
 import type { FeedDetailItem } from '@/src/entities/feed/model/feedDetailTypes';
+
 export const dummyFeedDetail: FeedDetailItem = {
   id: '2',
   profileImage: 'https://placehold.co/100x100?text=Profile',

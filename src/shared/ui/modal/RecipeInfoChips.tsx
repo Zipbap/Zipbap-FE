@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import CategoryChip from '@/shared/ui/modal/CategoryChip';
+
+import CategoryChip from '@shared/ui/modal/CategoryChip';
 
 interface RecipeInfoChipsProps {
   categories?: string[];

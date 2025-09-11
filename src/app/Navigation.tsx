@@ -1,9 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Setting from '../pages/setting/ui/Setting';
+
+import LoginPage from '@pages/auth/ui/LoginPage';
+import Setting from '@pages/setting/ui/Setting';
+
+import RecipeCreateForm from '@features/recipe/ui/RecipeCreateForm';
+
 import MainTabNavigator from './TabNavigation';
-import LoginPage from '../pages/auth/ui/LoginPage';
-import RecipeCreateForm from '../features/recipe/ui/RecipeCreateForm';
 
 export type RootStackParamList = {
   Main: undefined;

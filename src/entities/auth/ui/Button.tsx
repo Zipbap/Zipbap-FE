@@ -1,7 +1,8 @@
-import { Pressable } from 'react-native';
 import React from 'react';
-import { cn } from '@/shared/lib/cn';
-import { ButtonProps } from '@/entities/auth/model/buttonTypes';
+import { Pressable } from 'react-native';
+
+import { ButtonProps } from '@entities/auth/model/buttonTypes';
+import { cn } from '@shared/lib/cn';
 
 const Button: React.FC<ButtonProps> = ({
   children,

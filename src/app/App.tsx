@@ -1,8 +1,10 @@
 import '@/global.css';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Navigation } from './Navigation';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardAvoidingView, Platform } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import { Navigation } from './Navigation';
+
 export function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

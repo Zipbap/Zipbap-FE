@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from 'react';
 import {
   View,
   TextInput,
@@ -7,15 +8,14 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import { useRef, useState, useEffect } from 'react';
-import SearchIcon from '@/assets/img/search-icon.svg';
-
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
   Easing,
 } from 'react-native-reanimated';
+
+import SearchIcon from '@/assets/img/search-icon.svg';
 
 interface Props {
   searchTitle: string;

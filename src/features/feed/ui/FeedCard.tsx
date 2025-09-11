@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
 
-import type { FeedItem } from '@/entities/feed/model/feedTypes';
+import BellSvg from '@/assets/img/feed/bell-icon.svg';
 import ClockSvg from '@/assets/img/feed/clock-icon.svg';
 import StarSvg from '@/assets/img/feed/star-icon.svg';
-import BellSvg from '@/assets/img/feed/bell-icon.svg';
-import FeedBottomTab from '@/features/feed/ui/FeedBottomTab';
+import FeedBottomTab from '@features/feed/ui/FeedBottomTab';
+
+import type { FeedItem } from '@entities/feed/model/feedTypes';
 
 interface Props {
   feed: FeedItem;

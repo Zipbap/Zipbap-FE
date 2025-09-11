@@ -1,8 +1,10 @@
-import Header from './Header';
-import HeaderLogo from '@/assets/img/header-logo.svg';
-import AlarmOn from '@/assets/img/alarm-on.svg';
-import AlarmOff from '@/assets/img/alarm-off.svg';
 import { useState } from 'react';
+
+import AlarmOff from '@/assets/img/alarm-off.svg';
+import AlarmOn from '@/assets/img/alarm-on.svg';
+import HeaderLogo from '@/assets/img/header-logo.svg';
+
+import Header from './Header';
 import { defaultShadow } from './defaultShadow';
 
 interface Props {

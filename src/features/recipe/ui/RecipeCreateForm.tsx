@@ -7,20 +7,44 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import RecipeCreateHeader from './RecipeCreateHeader';
-import FormTitle from './FormTitle';
-import FormMediaUpload from './FormMediaUpload';
-import FormTextInput from './FormTextInput';
-import FormLongTextInput from './FormLongTextInput';
+
 import FormAddRecipeOrder from './FormAddRecipeOrder';
+import FormLongTextInput from './FormLongTextInput';
+import FormMediaUpload from './FormMediaUpload';
 import FormRecipeVisibilityToggle from './FormRecipeVisibilityToggle';
-import {
-  CookingOrderResponse,
-  RecipeDetailResponseDto,
-} from '@/src/shared/lib/domain/zipbapServiceAPI.schemas';
+import FormTextInput from './FormTextInput';
+import FormTitle from './FormTitle';
+import RecipeCreateHeader from './RecipeCreateHeader';
+
+// FIXME: 추후 타입 실제 api에 맞게 변경
+interface CookingOrder {
+  image?: string;
+  description?: string;
+}
+
+interface RecipeDetail {
+  id: string;
+  title?: string;
+  thumbnail?: string;
+  subtitle?: string;
+  introduction?: string;
+  myCategoryId?: string;
+  cookingTypeId?: number;
+  situationId?: number;
+  mainIngredientId?: number;
+  methodId?: number;
+  headcountId?: number;
+  cookingTimeId?: number;
+  levelId?: number;
+  ingredientInfo?: string;
+  kick?: string;
+  isPrivate: boolean;
+  cookingOrders: CookingOrder[];
+  video?: string;
+}
 
 const RecipeCreateForm = () => {
-  const [recipe, setRecipe] = useState<RecipeDetailResponseDto>({
+  const [recipe, setRecipe] = useState<RecipeDetail>({
     id: '',
     title: '',
     thumbnail: '',
@@ -41,14 +65,11 @@ const RecipeCreateForm = () => {
     video: '',
   });
 
-  const updateField = <K extends keyof RecipeDetailResponseDto>(
-    key: K,
-    value: RecipeDetailResponseDto[K],
-  ) => {
+  const updateField = <K extends keyof RecipeDetail>(key: K, value: RecipeDetail[K]) => {
     setRecipe(prev => ({ ...prev, [key]: value }));
   };
 
-  const updateCookingOrder = (index: number, field: keyof CookingOrderResponse, value: unknown) => {
+  const updateCookingOrder = (index: number, field: keyof CookingOrder, value: unknown) => {
     setRecipe(prev => {
       const updated = [...prev.cookingOrders];
       updated[index] = { ...updated[index], [field]: value };

@@ -1,9 +1,9 @@
-import TopSection from '@/src/shared/ui/TopSection';
-import DefaultHeader from '@/src/shared/ui/DefaultHeader';
-// TODO: FSD 의존성 규칙에 어긋난 파일 위치 재조정 필요
-import MyFeedExtension from '@/pages/feed/ui/MyFeedExtension';
-import { defaultShadow } from '@/shared/ui/defaultShadow';
 import { View } from 'react-native';
+
+import MyFeedExtension from '@pages/feed/ui/MyFeedExtension';
+import DefaultHeader from '@shared/ui/DefaultHeader';
+import TopSection from '@shared/ui/TopSection';
+import { defaultShadow } from '@shared/ui/defaultShadow';
 
 const MyFeedTopSection = () => {
   return (

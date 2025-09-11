@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image } from 'react-native';
-import ViewTypeSwitcher from './ViewTypeSwitcher';
-import { ViewType } from './ViewTypeSwitcher';
+
+import ViewTypeSwitcher, { ViewType } from './ViewTypeSwitcher';
 
 interface Step {
   step: number;

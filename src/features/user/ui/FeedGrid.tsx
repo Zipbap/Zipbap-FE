@@ -1,8 +1,9 @@
 import React from 'react';
 import { FlatList, Image, View } from 'react-native';
-import { Feed } from '@/entities/user/model/userType';
+
 import FeedsSvg from '@/assets/img/feeds-icon.svg';
-import EmptyState from '@/features/user/ui/EmptyState';
+import EmptyState from '@features/user/ui/EmptyState';
+import { Feed } from '@entities/user/model/userType';
 
 interface Props {
   data: Feed[];

@@ -1,10 +1,11 @@
-import { View, Text } from 'react-native';
-import Logo from '@/assets/img/logo.svg';
 import React from 'react';
-import KakaoLoginButton from '@/src/features/auth/ui/KakaoLoginButton';
-import AppleLoginButton from '@/src/features/auth/ui/AppleLoginButton';
+import { View, Text } from 'react-native';
 
-import type { LoginPropsWithoutRoute } from '@/src/shared/types/rootStackParamList';
+import Logo from '@/assets/img/logo.svg';
+import AppleLoginButton from '@features/auth/ui/AppleLoginButton';
+import KakaoLoginButton from '@features/auth/ui/KakaoLoginButton';
+
+import type { LoginPropsWithoutRoute } from '@shared/types/rootStackParamList';
 
 const LoginPage: React.FC<LoginPropsWithoutRoute> = ({ navigation }) => {
   return (

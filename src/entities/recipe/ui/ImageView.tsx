@@ -1,4 +1,5 @@
 import { View, Image, Text } from 'react-native';
+
 import { Recipe } from '../model';
 
 const ImageView = ({ item }: { item: Recipe }) => {

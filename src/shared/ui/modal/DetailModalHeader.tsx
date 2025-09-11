@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, Pressable, TextStyle } from 'react-native';
-import { cn } from '@/shared/lib/cn';
+
 import BackSvg from '@/assets/img/back-icon.svg';
+import { cn } from '@shared/lib/cn';
 
 interface HeaderProps {
   title: string;

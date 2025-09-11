@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
-import { FeedCard } from '@/src/features/feed/ui/FeedCard';
-import { useFeedData } from '@/features/feed/model/useFeedData';
-import FeedDetailModal from '@/src/features/feed/ui/FeedDetailModal';
-import type { FeedItem } from '@/entities/feed/model/feedTypes';
+
+import { useFeedData } from '@features/feed/model/useFeedData';
+import { FeedCard } from '@features/feed/ui/FeedCard';
+import FeedDetailModal from '@features/feed/ui/FeedDetailModal';
+import { FeedItem } from '@entities/feed/model/feedTypes';
 
 const Feed = () => {
   const { dataList, onEndReached, onRefresh, isRefreshing } = useFeedData();

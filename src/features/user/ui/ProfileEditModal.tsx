@@ -1,10 +1,11 @@
 import React, { memo } from 'react';
 import { Image, Pressable, Text, TextInput, View, Switch, Platform } from 'react-native';
-import { DetailModal } from '@/src/shared/ui/modal/DetailModal';
-import { DetailModalHeader } from '@/src/shared/ui/modal/DetailModalHeader';
-import { defaultShadow } from '@/src/shared/ui/defaultShadow';
-import BasicButton from '@/src/shared/ui/user/BasicButton';
-import { pickImageFromLibrary } from '@/src/shared/lib/image-picker';
+
+import { pickImageFromLibrary } from '@shared/lib/image-picker';
+import { defaultShadow } from '@shared/ui/defaultShadow';
+import { DetailModal } from '@shared/ui/modal/DetailModal';
+import { DetailModalHeader } from '@shared/ui/modal/DetailModalHeader';
+import BasicButton from '@shared/ui/user/BasicButton';
 
 interface Props {
   isVisible: boolean;

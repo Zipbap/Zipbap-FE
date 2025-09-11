@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { cn } from '@/shared/lib/cn';
+
+import { cn } from '@shared/lib/cn';
 
 const RecipeCreateExtension = () => {
   const [activeTab, setActiveTab] = useState<'done' | 'progress'>('done');

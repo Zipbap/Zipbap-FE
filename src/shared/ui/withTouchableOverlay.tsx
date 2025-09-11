@@ -1,5 +1,6 @@
 import React from 'react';
-import TouchableOverlay from '@/shared/ui/TouchableOverlay';
+
+import TouchableOverlay from './TouchableOverlay';
 
 type OverlayProps = {
   onOutsidePress?: () => void;

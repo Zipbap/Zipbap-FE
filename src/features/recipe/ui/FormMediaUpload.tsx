@@ -1,13 +1,14 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, Image } from 'react-native';
+
 import { pickImageFromLibrary } from '@/src/shared/lib/image-picker';
 import { pickVideoFromLibrary } from '@/src/shared/lib/video-picker';
 
 interface Props {
   uploadType: 'image' | 'video';
   isThumbnail?: boolean;
-  value?: string | null; // 부모에서 관리하는 값
-  onUpload: (uri: string) => void; // 업로드 결과를 부모로 전달
+  value?: string | null;
+  onUpload: (uri: string) => void;
 }
 
 const FormMediaUpload = ({ uploadType, isThumbnail, value, onUpload }: Props) => {

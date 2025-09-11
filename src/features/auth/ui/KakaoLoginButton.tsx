@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Text } from 'react-native';
 
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
-import { kakaoLogin } from '@features/auth/api/login';
 import Button from '@entities/auth/ui/Button';
+import { kakaoLogin } from '@features/auth/api/login';
 
 import type { LoginPropsWithoutRoute } from '@shared/types/rootStackParamList';
 
@@ -15,7 +15,7 @@ const KakaoLoginButton: React.FC<LoginPropsWithoutRoute> = ({ navigation }) => {
       const token = await kakaoLogin();
       //console.log('login success ', token);
       setResult(JSON.stringify(token));
-      // console.log('login success ', token);
+      console.log('login success ', token);
       // navigation.replace('Main');
     } catch (err) {
       console.error('login err', err);

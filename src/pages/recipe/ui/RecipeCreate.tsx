@@ -1,20 +1,19 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
-import { RootStackParamList } from '@app/Navigation';
 import { Recipe } from '@entities/recipe/model';
 import { mockRecipes } from '@entities/recipe/model/mockRecipe';
 import ArticleView from '@entities/recipe/ui/ArticleView';
 import DetailDeleteComponent from '@entities/recipe/ui/DetailDeleteComponent';
+import { RecipeCreateFormProps } from '@shared/types/rootStackParamList';
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'RecipeCreateForm'>;
+interface RecipeCreateFormPageProps {
+  navigation: RecipeCreateFormProps;
+}
 
-const RecipeCreate = () => {
-  const navigation = useNavigation<NavigationProp>();
+const RecipeCreate: React.FC<RecipeCreateFormPageProps> = ({ navigation }) => {
   const navigateToRecipeCreateForm = () => navigation.navigate('RecipeCreateForm');
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
 

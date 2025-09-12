@@ -5,9 +5,13 @@ import HeaderLogo from '@/assets/img/header-logo.svg';
 import SettingSvg from '@/assets/img/setting-icon.svg';
 import Header from '@/src/shared/ui/Header';
 
-import { MainPropsWithoutRoute } from '../types/rootStackParamList';
+import { MainProps } from '../types/rootStackParamList';
 
-const UserHeader: React.FC<MainPropsWithoutRoute> = ({ navigation }) => {
+interface MainPageProps {
+  navigation: MainProps;
+}
+
+const UserHeader: React.FC<MainPageProps> = ({ navigation }) => {
   return (
     <Header
       style={undefined}

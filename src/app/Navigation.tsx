@@ -8,12 +8,6 @@ import RecipeCreateForm from '@features/recipe/ui/RecipeCreateForm';
 
 import MainTabNavigator from './TabNavigation';
 
-export type RootStackParamList = {
-  Main: undefined;
-  Login: undefined;
-  RecipeCreateForm: undefined;
-};
-
 const Stack = createNativeStackNavigator();
 export function Navigation() {
   return (

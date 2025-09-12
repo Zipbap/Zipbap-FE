@@ -1,14 +1,19 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+# NOTE: https://github.com/facebook/react-native/blob/main/.gitignore
 
 # Dependencies
 node_modules/
 package-lock.json
+.vscode/
+.idea/
 
 # Expo
 .expo/
 dist/
 web-build/
 expo-env.d.ts
+.expo-shared/
+*.jsbundle
 
 # Native (common)
 *.orig.*
@@ -18,6 +23,10 @@ expo-env.d.ts
 *.key
 *.mobileprovision
 *.pem
+*.swp
+*.swo
+*.iml
+*.hprof
 
 # Android
 android/.gradle/
@@ -30,6 +39,12 @@ android/*.sha
 android/*.html
 android/autolinking.json
 android/build/autolinking.json
+android/app/.cxx/
+*.apk
+
+# NOTE: 개인 소장이 필요하다고 한다(일단 주석)
+# *.keystore
+# *.jks
 
 # iOS
 ios/build/

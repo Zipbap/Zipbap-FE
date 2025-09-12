@@ -7,6 +7,7 @@ type RootStackParamList = {
 };
 
 export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
+
 export type LoginPropsWithoutRoute = Omit<
   NativeStackScreenProps<RootStackParamList, 'Login'>,
   'route'

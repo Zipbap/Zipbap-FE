@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+
 const {
   getCurrentLayer,
   getImportLayer,
@@ -8,6 +9,7 @@ const {
   isFSDLayer,
 } = require('./utils.cjs');
 
+// constant
 const LAYER = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
 
 // NOTE: not to be reported again (publicAPI report)
@@ -16,66 +18,70 @@ const reportedSlices = new Set();
 // cache
 const publicAPICache = new Map();
 
-// core functions
-function checkAllowImport(filePath, importPath, currentLayer, importLayer) {
-  if (isAllowImport(LAYER, currentLayer, importLayer)) return null;
-  return getNotAllowImportMessage(filePath, importPath);
-}
-
-function getSlicePath(importPath) {
-  const parts = importPath.replace(/^@/, '').split('/');
-  return parts.slice(0, 2).join(path.sep);
+function getSlicePathFromFile(filePath) {
+  const relativePath = filePath.split(`src${path.sep}`)[1];
+  return relativePath.split(path.sep).slice(0, 2).join(path.sep);
 }
 
 function hasPublicAPI(slicePath) {
   // cache hit
-  if (publicAPICache.has(slicePath)) {
-    return publicAPICache.get(slicePath);
-  }
+  if (publicAPICache.has(slicePath)) return publicAPICache.get(slicePath);
 
   // cache miss
   const indexPath = path.join('src', slicePath, 'index.ts');
-  const hasPublicAPI = fs.existsSync(indexPath);
 
-  publicAPICache.set(slicePath, hasPublicAPI);
+  const exists = fs.existsSync(indexPath);
+  publicAPICache.set(slicePath, exists);
 
-  return hasPublicAPI;
+  return exists;
 }
 
-// NOTE: app layer에서 segment를 도입할지를 결정 후
-function checkPublicAPI(filePath, importPath) {
-  const slicePath = getSlicePath(importPath);
+function checkPublicAPI(filePath) {
+  const slicePath = getSlicePathFromFile(filePath);
 
-  if (!hasPublicAPI(slicePath) && !reportedSlices.has(slicePath)) {
-    reportedSlices.add(slicePath);
-    return (
-      `⚠️ ${filePath} - ${importPath}\n` +
-      `slice "${slicePath}" 에 public API(index.ts)가 존재하지 않습니다.\n`
-    );
-  }
+  if (hasPublicAPI(slicePath) || reportedSlices.has(slicePath)) return null;
 
-  return null;
+  reportedSlices.add(slicePath);
+
+  const errorMessage = `⚠️ ${filePath}\nslice "${slicePath}" 에 public API(index.ts)가 존재하지 않습니다.\n`;
+
+  return errorMessage;
 }
 
-// main
+function checkInvalidAlias(filePath, importPath) {
+  const invalidPrefixes = LAYER.map(layer => `@/src/${layer}`);
+
+  if (!invalidPrefixes.some(prefix => importPath.startsWith(prefix))) return null;
+
+  const errorMessage =
+    `❌ ${filePath} - ${importPath}\n` +
+    `"@/src" 형태의 import는 허용되지 않습니다. 올바른 alias를 사용하세요.\n`;
+
+  return errorMessage;
+}
+
+function checkAllowImport(filePath, importPath, currentLayer, importLayer) {
+  if (isAllowImport(LAYER, currentLayer, importLayer)) return null;
+
+  const errorMessage = getNotAllowImportMessage(filePath, importPath);
+
+  return errorMessage;
+}
+
 function checkFSDRules(filePath, imports) {
-  let errorMessages = [];
   const currentLayer = getCurrentLayer(filePath);
+  const checkMessageStack = [checkPublicAPI(filePath)];
 
-  imports.forEach(importPath => {
-    if (!isFSDLayer(importPath)) return;
+  for (const importPath of imports) {
+    checkMessageStack.push(checkInvalidAlias(filePath, importPath));
+
+    if (!isFSDLayer(importPath)) continue;
 
     const importLayer = getImportLayer(importPath);
+    checkMessageStack.push(checkAllowImport(filePath, importPath, currentLayer, importLayer));
+  }
 
-    const checks = [
-      checkAllowImport(filePath, importPath, currentLayer, importLayer),
-      checkPublicAPI(filePath, importPath),
-    ];
-
-    errorMessages.push(...checks.filter(Boolean));
-  });
-
-  return errorMessages;
+  return checkMessageStack.filter(Boolean);
 }
 
 module.exports = { checkFSDRules };

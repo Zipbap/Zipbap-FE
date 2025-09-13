@@ -12,7 +12,7 @@ import importConfig from './eslint.config.import.js';
 
 export default [
   {
-    ignores: ['node_modules', 'dist', 'build', 'android', 'ios', '.expo'],
+    ignores: ['node_modules', 'dist', 'build', 'android', 'ios', '.expo', '__tools__'],
   },
   js.configs.recommended,
   {

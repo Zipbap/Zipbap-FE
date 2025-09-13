@@ -51,6 +51,10 @@ function getNotAllowImportMessage(filePath, importPath) {
   );
 }
 
+function hasErrorMessages(errorMessages) {
+  return errorMessages.length > 0;
+}
+
 module.exports = {
   getTypeScriptFiles,
   getImportsFromFile,
@@ -59,4 +63,5 @@ module.exports = {
   isFSDLayer,
   isAllowImport,
   getNotAllowImportMessage,
+  hasErrorMessages,
 };

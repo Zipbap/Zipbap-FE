@@ -16,6 +16,7 @@ const reportedSlices = new Set();
 // cache
 const publicAPICache = new Map();
 
+// core functions
 function checkAllowImport(filePath, importPath, currentLayer, importLayer) {
   if (isAllowImport(LAYER, currentLayer, importLayer)) return null;
   return getNotAllowImportMessage(filePath, importPath);
@@ -41,6 +42,7 @@ function hasPublicAPI(slicePath) {
   return hasPublicAPI;
 }
 
+// NOTE: app layer에서 segment를 도입할지를 결정 후
 function checkPublicAPI(filePath, importPath) {
   const slicePath = getSlicePath(importPath);
 
@@ -55,8 +57,9 @@ function checkPublicAPI(filePath, importPath) {
   return null;
 }
 
-function checkFSDRule(filePath, imports) {
-  let messages = [];
+// main
+function checkFSDRules(filePath, imports) {
+  let errorMessages = [];
   const currentLayer = getCurrentLayer(filePath);
 
   imports.forEach(importPath => {
@@ -69,10 +72,10 @@ function checkFSDRule(filePath, imports) {
       checkPublicAPI(filePath, importPath),
     ];
 
-    messages.push(...checks.filter(Boolean));
+    errorMessages.push(...checks.filter(Boolean));
   });
 
-  return messages;
+  return errorMessages;
 }
 
-module.exports = { checkFSDRule };
+module.exports = { checkFSDRules };

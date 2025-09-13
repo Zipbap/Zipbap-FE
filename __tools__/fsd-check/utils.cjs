@@ -8,6 +8,7 @@ function getTypeScriptFiles() {
 
 function getImportsFromFile(filePath) {
   const code = fs.readFileSync(filePath, 'utf-8');
+
   const ast = parser.parse(code, {
     sourceType: 'module',
     ecmaVersion: 'latest',

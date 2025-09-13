@@ -55,7 +55,7 @@ function checkPublicAPI(filePath, importPath) {
   return null;
 }
 
-function fsdRuleCheck(filePath, imports) {
+function checkFSDRule(filePath, imports) {
   let messages = [];
   const currentLayer = getCurrentLayer(filePath);
 
@@ -75,4 +75,4 @@ function fsdRuleCheck(filePath, imports) {
   return messages;
 }
 
-module.exports = { fsdRuleCheck };
+module.exports = { checkFSDRule };

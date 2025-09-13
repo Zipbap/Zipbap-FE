@@ -1,5 +1,5 @@
 const { getTypeScriptFiles, getImportsFromFile } = require('./utils.cjs');
-const { fsdRuleCheck } = require('./fsdRuleCheck.cjs');
+const { checkFSDRule } = require('./fsdRuleCheck.cjs');
 
 async function main() {
   const files = await getTypeScriptFiles();
@@ -8,7 +8,7 @@ async function main() {
     const imports = getImportsFromFile(file);
 
     // rule check
-    const messages = fsdRuleCheck(file, imports);
+    const messages = checkFSDRule(file, imports);
     if (messages.length > 0) console.log(messages.join('\n'));
   }
 }

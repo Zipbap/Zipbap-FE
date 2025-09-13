@@ -1,4 +1,4 @@
-export type FeedDetailItem = {
+export interface FeedDetailItem {
   id: string;
   profileImage: string; // 프로필 사진
   nickname: string; // 닉네임
@@ -12,7 +12,7 @@ export type FeedDetailItem = {
   mainImage: string; // 피드 대표 사진
   content: string; // 내용
   cookingTime: number; // 요리 시간 (분 단위)
-  difficulty: '쉬움' | '보통' | '어려움'; // 난이도
+  difficulty: string; // 난이도
   ingredientsCount: number; // 재료 개수
   likes: number; // 좋아요 수
   bookmarks: number; // 북마크 수
@@ -33,4 +33,4 @@ export type FeedDetailItem = {
     image: string;
   }[];
   tip: string; // 레시피 팁 (추가)
-};
+}

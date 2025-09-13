@@ -5,9 +5,13 @@ import KakaoSvg from '@/assets/img/auth/kakao.svg';
 import { kakaoLogin } from '@features/auth/api/login';
 import Button from '@entities/auth/ui/Button';
 
-import type { LoginPropsWithoutRoute } from '@shared/types/rootStackParamList';
+import type { LoginProps } from '@shared/types/rootStackParamList';
 
-const KakaoLoginButton: React.FC<LoginPropsWithoutRoute> = ({ navigation }) => {
+interface LoginPageProps {
+  navigation: LoginProps;
+}
+
+const KakaoLoginButton: React.FC<LoginPageProps> = ({ navigation }) => {
   const [isPressed, setIsPressed] = useState<boolean>(false);
   const [result, setResult] = useState<string>('');
   const signInWithKakao = async (): Promise<void> => {
@@ -20,7 +24,7 @@ const KakaoLoginButton: React.FC<LoginPropsWithoutRoute> = ({ navigation }) => {
     } catch (err) {
       console.error('login err', err);
     }
-    //추후 수정
+    // FIXME: 추후 수정
     navigation.replace('Main');
   };
   console.log(result);

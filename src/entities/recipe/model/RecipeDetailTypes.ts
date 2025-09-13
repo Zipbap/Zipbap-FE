@@ -1,4 +1,4 @@
-export type RecipeDetailItem = {
+export interface RecipeDetailItem {
   id: string;
   nickname: string; // 닉네임
   title: string; // 피드 제목
@@ -7,7 +7,7 @@ export type RecipeDetailItem = {
   mainImage: string; // 피드 대표 사진
   content: string; // 내용
   cookingTime: number; // 요리 시간 (분 단위)
-  difficulty: '쉬움' | '보통' | '어려움'; // 난이도
+  difficulty: string; // 난이도
   recipeIntroduce: string; // 레시피 소개 (추가)
   categories: string[]; // 해당 레시피 카테고리 (배열) (추가)
   serving: string; // 인분 (추가)
@@ -21,4 +21,4 @@ export type RecipeDetailItem = {
     image: string;
   }[];
   tip: string; // 레시피 팁 (추가)
-};
+}

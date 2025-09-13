@@ -1,23 +1,19 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type RootStackParamList = {
   Login: undefined;
   Main: undefined;
   Setting: undefined;
+  RecipeCreateForm: undefined;
 };
 
-export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
+export type LoginProps = NativeStackNavigationProp<RootStackParamList, 'Login'>;
 
-export type LoginPropsWithoutRoute = Omit<
-  NativeStackScreenProps<RootStackParamList, 'Login'>,
-  'route'
->;
-export type MainProps = NativeStackScreenProps<RootStackParamList, 'Main'>;
-export type MainPropsWithoutRoute = Omit<
-  NativeStackScreenProps<RootStackParamList, 'Main'>,
-  'route'
->;
+export type MainProps = NativeStackNavigationProp<RootStackParamList, 'Main'>;
 
-// Setting 스크린 타입
-export type SettingProps = NativeStackScreenProps<RootStackParamList, 'Setting'>;
-export type SettingPropsWithoutRoute = Omit<SettingProps, 'route'>;
+export type SettingProps = NativeStackNavigationProp<RootStackParamList, 'Setting'>;
+
+export type RecipeCreateFormProps = NativeStackNavigationProp<
+  RootStackParamList,
+  'RecipeCreateForm'
+>;

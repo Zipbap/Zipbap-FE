@@ -8,13 +8,17 @@ import Mypage from '@pages/user/ui/Mypage';
 import MyFeedTopSection from '@widgets/feed/ui/MyFeedTopSection';
 import MyRecipeTopSection from '@widgets/recipe/ui/MyRecipeTopSection';
 import RecipeCreateTopsection from '@widgets/recipe/ui/RecipeCreateTopSection';
-import { MainPropsWithoutRoute } from '@shared/types/rootStackParamList';
+import { MainProps } from '@shared/types/rootStackParamList';
 import CustomTabBar from '@shared/ui/Tab';
 import UserHeader from '@shared/ui/UserHeader';
 
+interface MainPageProps {
+  navigation: MainProps;
+}
+
 const Tab = createBottomTabNavigator();
 
-const MainTabNavigator: React.FC<MainPropsWithoutRoute> = ({ navigation }) => {
+const MainTabNavigator: React.FC<MainPageProps> = ({ navigation }) => {
   return (
     <Tab.Navigator
       screenOptions={{

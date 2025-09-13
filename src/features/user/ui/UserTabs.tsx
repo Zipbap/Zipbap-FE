@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
-interface Props {
+type Props = {
   active: 'feeds' | 'bookmarks';
   feedCount: number;
   bookmarkCount: number;
   onChange: (tab: 'feeds' | 'bookmarks') => void;
-}
+};
 
 const UserTabs: React.FC<Props> = ({ active, feedCount, bookmarkCount, onChange }) => {
   return (

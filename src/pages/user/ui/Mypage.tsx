@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 
 import FeedGrid from '@features/user/ui/FeedGrid';
-import UserHeaderSection from '@features/user/ui/UserHeaderSection';
+import UserHeaderSection from '@features/user/ui/header/UserHeaderSection';
 import { mockUser } from '@entities/user/api/mockUser';
 import { User } from '@entities/user/model/userType';
 

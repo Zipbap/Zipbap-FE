@@ -55,7 +55,7 @@ export const FeedCard: React.FC<Props> = ({ feed, onPress }) => {
           </View>
         </Pressable>
       </View>
-      {/* ✅ 하단 아이콘 (좋아요, 북마크, 댓글) */}
+      {/* 하단 아이콘 (좋아요, 북마크, 댓글) */}
       <FeedBottomTab
         initialLikes={feed.likes}
         initialBookmarks={feed.bookmarks}

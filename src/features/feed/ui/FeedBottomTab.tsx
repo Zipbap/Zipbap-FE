@@ -38,13 +38,15 @@ const FeedBottomTab: React.FC<FeedBottomTabProps> = ({
   const handleLikePress = async () => {
     setLiked(prev => !prev);
     setLikeCount(prev => (liked ? prev - 1 : prev + 1));
-    await toggleLike(feedId, liked); // API 함수 호출
+    // FIXME: API 함수 호출
+    await toggleLike(feedId, liked);
   };
 
   const handleBookmarkPress = async () => {
     setBookmarked(prev => !prev);
     setBookmarkCount(prev => (bookmarked ? prev - 1 : prev + 1));
-    await toggleBookmark(feedId, bookmarked); // API 함수 호출
+    // FIXME: API 함수 호출
+    await toggleBookmark(feedId, bookmarked);
   };
 
   const handleCommentPress = () => {
@@ -54,13 +56,14 @@ const FeedBottomTab: React.FC<FeedBottomTabProps> = ({
   return (
     <View className="flex-row items-center justify-between px-8">
       <View className="flex-row gap-10">
+        {/* 하트 */}
         <Pressable className="flex-row items-center gap-1" onPress={handleLikePress}>
           <View className="flex h-6 w-6 items-center justify-center">
             {liked ? <HeartOnSvg /> : <HeartOffSvg />}
           </View>
           <Text className="font-bold text-g2">{likeCount}</Text>
         </Pressable>
-
+        {/* 북마크 */}
         <Pressable className="flex-row items-center gap-1" onPress={handleBookmarkPress}>
           <View className="flex h-6 w-6 items-center justify-center">
             {bookmarked ? <BookmarkOnSvg /> : <BookmarkOffSvg />}
@@ -68,6 +71,7 @@ const FeedBottomTab: React.FC<FeedBottomTabProps> = ({
           <Text className="font-bold text-g2">{bookmarkCount}</Text>
         </Pressable>
       </View>
+      {/* 채팅 */}
       <Pressable className="flex-row items-center gap-1" onPress={handleCommentPress}>
         <View className="flex h-6 w-6 items-center justify-center">
           {commented ? <ChatOnSvg /> : <ChatOffSvg />}

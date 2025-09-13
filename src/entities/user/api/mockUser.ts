@@ -1,5 +1,5 @@
 import { User } from '../model/userType';
-// 목데이터
+// NOTE: 목데이터
 export const mockUser: User = {
   id: '1',
   profileImage: 'https://i.pravatar.cc/150?img=12',

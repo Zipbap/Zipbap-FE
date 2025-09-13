@@ -24,7 +24,7 @@ const KakaoLoginButton: React.FC<LoginPageProps> = ({ navigation }) => {
     } catch (err) {
       console.error('login err', err);
     }
-    //추후 수정
+    // FIXME: 추후 수정
     navigation.replace('Main');
   };
   console.log(result);

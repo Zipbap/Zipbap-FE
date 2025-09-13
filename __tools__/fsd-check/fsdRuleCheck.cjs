@@ -16,7 +16,7 @@ const reportedSlices = new Set();
 // cache
 const publicAPICache = new Map();
 
-function checkAllowImport(filePath, currentLayer, importPath, importLayer) {
+function checkAllowImport(filePath, importPath, currentLayer, importLayer) {
   if (isAllowImport(LAYER, currentLayer, importLayer)) return null;
   return getNotAllowImportMessage(filePath, importPath);
 }
@@ -57,7 +57,6 @@ function checkPublicAPI(filePath, importPath) {
 
 function fsdRuleCheck(filePath, imports) {
   let messages = [];
-
   const currentLayer = getCurrentLayer(filePath);
 
   imports.forEach(importPath => {
@@ -65,11 +64,12 @@ function fsdRuleCheck(filePath, imports) {
 
     const importLayer = getImportLayer(importPath);
 
-    const allowImportMessage = checkAllowImport(filePath, currentLayer, importPath, importLayer);
-    if (allowImportMessage) messages.push(allowImportMessage);
+    const checks = [
+      checkAllowImport(filePath, importPath, currentLayer, importLayer),
+      checkPublicAPI(filePath, importPath),
+    ];
 
-    const publicAPIMessage = checkPublicAPI(filePath, importPath);
-    if (publicAPIMessage) messages.push(publicAPIMessage);
+    messages.push(...checks.filter(Boolean));
   });
 
   return messages;

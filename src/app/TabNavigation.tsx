@@ -8,12 +8,12 @@ import Mypage from '@pages/user/ui/Mypage';
 import MyFeedTopSection from '@widgets/feed/ui/MyFeedTopSection';
 import MyRecipeTopSection from '@widgets/recipe/ui/MyRecipeTopSection';
 import RecipeCreateTopsection from '@widgets/recipe/ui/RecipeCreateTopSection';
-import { MainProps } from '@shared/types/rootStackParamList';
+import { RootNavigationProp } from '@shared/types/navigation';
 import CustomTabBar from '@shared/ui/Tab';
 import UserHeader from '@shared/ui/UserHeader';
 
 interface MainPageProps {
-  navigation: MainProps;
+  navigation: RootNavigationProp<'Main'>;
 }
 
 const Tab = createBottomTabNavigator();

@@ -2,6 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Modal, View, Text, TouchableOpacity } from 'react-native';
 
+import { RootNavigationProp } from '@shared/types/navigation';
+
 const RecipeCreateConfirmModal = ({
   modalVisible,
   setModalVisible,
@@ -9,7 +11,7 @@ const RecipeCreateConfirmModal = ({
   modalVisible: boolean;
   setModalVisible: (visible: boolean) => void;
 }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootNavigationProp<'Main'>>();
 
   const handleAction = (type: 'tempSave' | 'save' | 'delete') => {
     switch (type) {

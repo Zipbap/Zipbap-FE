@@ -5,10 +5,10 @@ import HeaderLogo from '@/assets/img/header-logo.svg';
 import SettingSvg from '@/assets/img/setting-icon.svg';
 import Header from '@/src/shared/ui/Header';
 
-import { MainProps } from '../types/rootStackParamList';
+import { RootNavigationProp } from '../types/navigation';
 
 interface MainPageProps {
-  navigation: MainProps;
+  navigation: RootNavigationProp<'Main'>;
 }
 
 const UserHeader: React.FC<MainPageProps> = ({ navigation }) => {

@@ -4,11 +4,10 @@ import { View, Text } from 'react-native';
 import Logo from '@/assets/img/logo.svg';
 import AppleLoginButton from '@features/auth/ui/AppleLoginButton';
 import KakaoLoginButton from '@features/auth/ui/KakaoLoginButton';
-
-import type { LoginProps } from '@shared/types/rootStackParamList';
+import type { RootNavigationProp } from '@shared/types/navigation';
 
 interface LoginPageProps {
-  navigation: LoginProps;
+  navigation: RootNavigationProp<'Login'>;
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ navigation }) => {

@@ -4,11 +4,10 @@ import { Text } from 'react-native';
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
 import { kakaoLogin } from '@features/auth/api/login';
 import Button from '@entities/auth/ui/Button';
-
-import type { LoginProps } from '@shared/types/rootStackParamList';
+import type { RootNavigationProp } from '@shared/types/navigation';
 
 interface LoginPageProps {
-  navigation: LoginProps;
+  navigation: RootNavigationProp<'Login'>;
 }
 
 const KakaoLoginButton: React.FC<LoginPageProps> = ({ navigation }) => {

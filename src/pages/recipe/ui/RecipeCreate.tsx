@@ -7,13 +7,13 @@ import { Recipe } from '@entities/recipe/model';
 import { mockRecipes } from '@entities/recipe/model/mockRecipe';
 import ArticleView from '@entities/recipe/ui/ArticleView';
 import DetailDeleteComponent from '@entities/recipe/ui/DetailDeleteComponent';
-import { RecipeCreateFormProps } from '@shared/types/rootStackParamList';
+import { RootNavigationProp } from '@shared/types/navigation';
 
-interface RecipeCreateFormPageProps {
-  navigation: RecipeCreateFormProps;
+interface MainPageProps {
+  navigation: RootNavigationProp<'Main'>;
 }
 
-const RecipeCreate: React.FC<RecipeCreateFormPageProps> = ({ navigation }) => {
+const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
   const navigateToRecipeCreateForm = () => navigation.navigate('RecipeCreateForm');
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
 

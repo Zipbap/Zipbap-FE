@@ -1,5 +1,5 @@
-const { getTypeScriptFiles, getImportsFromFile, hasErrorMessages } = require('./utils.cjs');
-const { checkFSDRules } = require('./fsd-check.cjs');
+import { getTypeScriptFiles, getImportsFromFile, hasErrorMessages } from './utils.js';
+import { checkFSDRules } from './fsd-check.js';
 
 async function main() {
   const targetFolder = process.argv[2].trim();

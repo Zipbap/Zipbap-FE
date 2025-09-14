@@ -15,7 +15,7 @@
     "format:check": "prettier --check .",
     "prepare": "husky",
     "type-check": "tsc --noEmit",
-    "fsd": "node __tools__/fsd-check/index.cjs src"
+    "fsd": "node __tools__/fsd-check/index.js src"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md,css,scss}": "prettier --write"

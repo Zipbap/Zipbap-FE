@@ -1,13 +1,13 @@
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
 
-const {
+import {
   getCurrentLayer,
   getImportLayer,
   getNotAllowImportMessage,
   isAllowImport,
   isFSDLayer,
-} = require('./utils.cjs');
+} from './utils.js';
 
 // constant
 const LAYER = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
@@ -119,7 +119,7 @@ function checkSlicePublicAPIImport(filePath, importPath, importLayer) {
 }
 
 // core
-function checkFSDRules(targetFolder, filePath, imports) {
+export function checkFSDRules(targetFolder, filePath, imports) {
   const currentLayer = getCurrentLayer(targetFolder, filePath);
 
   const errorMessageStack = [];
@@ -143,5 +143,3 @@ function checkFSDRules(targetFolder, filePath, imports) {
 
   return errorMessageStack.filter(Boolean);
 }
-
-module.exports = { checkFSDRules };

@@ -28,7 +28,7 @@ interface Props {
   feedId?: string;
 }
 
-const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
+const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId = '1' }) => {
   const { getDetailFeed, detailFeed } = useDetailFeedData();
   const [bookmarked, setBookmarked] = useState(detailFeed?.isBookmarked);
   const [liked, setLiked] = useState(detailFeed?.isLiked);
@@ -36,6 +36,7 @@ const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
   const [bookmarkCount, setBookmarkCount] = useState(detailFeed?.bookmarks);
   const [follow, setFollow] = useState<boolean | undefined>(detailFeed?.isFollowing);
 
+  // NOTE: feed의 ID를 통해 feed를 받아오는 작업
   useEffect(() => {
     getDetailFeed(feedId ? feedId : '1');
   }, [feedId, getDetailFeed]);
@@ -51,7 +52,16 @@ const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
   }, [detailFeed]);
 
   if (!feedId) return null;
-  // 헤더에 들어갈 오른쪽 버튼들을 JSX 변수로 정의
+  else if (!detailFeed) {
+    // FIXME: 로딩 인디케이터로 바꿔야함
+    return (
+      <View className="flex flex-1">
+        <Text> 로딩 중 </Text>
+      </View>
+    );
+  }
+
+  // NOTE: 헤더에 들어갈 오른쪽 버튼
   const headerRightContent = (
     <>
       <Pressable
@@ -84,7 +94,7 @@ const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
 
         {/* 스크롤 영역 */}
         <ScrollView>
-          <Image source={{ uri: detailFeed?.mainImage }} className="h-[300px] w-full bg-sub1" />
+          <Image source={{ uri: detailFeed.mainImage }} className="h-[300px] w-full bg-sub1" />
 
           <View
             className="-mt-6 rounded-t-3xl bg-white px-4 pb-6 pt-10"
@@ -93,25 +103,25 @@ const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
             <View className="w-full flex-col">
               {/* 작성일 */}
               <View className="mb-5 w-full flex-row justify-end">
-                <Text className="text-[12px] color-g5">작성일 {detailFeed?.createdAt}</Text>
+                <Text className="text-[12px] color-g5">작성일 {detailFeed.createdAt}</Text>
               </View>
               {/* 작성자, 팔로워, subtitle */}
               <View className="mb-4 flex-row items-center justify-between">
                 <View className="flex-row items-center">
                   <Image
-                    source={{ uri: detailFeed?.profileImage }}
+                    source={{ uri: detailFeed.profileImage }}
                     className="mr-2 h-12 w-12 rounded-2xl bg-primary"
                   />
                   <View>
                     <Text className="flex-1 text-sm font-bold color-g1">
-                      <Text className="text-lg">{detailFeed?.nickname}</Text>
+                      <Text className="text-lg">{detailFeed.nickname}</Text>
                       {'   '}셰프
                     </Text>
                     <View className="max-w-44 flex-row">
                       <Text className="text-sm font-semibold color-g2">
-                        팔로워 {detailFeed?.followers} |{' '}
+                        팔로워 {detailFeed.followers} |{' '}
                       </Text>
-                      <Text className="text-sm font-medium color-g2">{detailFeed?.introduce}</Text>
+                      <Text className="text-sm font-medium color-g2">{detailFeed.introduce}</Text>
                     </View>
                   </View>
                 </View>
@@ -134,12 +144,12 @@ const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
             </View>
 
             {/* 제목 */}
-            <Text className="text-md mb-1 mt-3 font-bold color-sub1">{detailFeed?.subTitle}</Text>
-            <Text className="mb-2 text-2xl font-bold color-black">{detailFeed?.title}</Text>
+            <Text className="text-md mb-1 mt-3 font-bold color-sub1">{detailFeed.subTitle}</Text>
+            <Text className="mb-2 text-2xl font-bold color-black">{detailFeed.title}</Text>
 
             {/* 통계 */}
             <View className="mb-4 h-5 flex-row items-center gap-4">
-              <Text className="text-xs color-g2">조회 {detailFeed?.views}</Text>
+              <Text className="text-xs color-g2">조회 {detailFeed.views}</Text>
               <View className="flex-row items-center gap-0">
                 <Pressable
                   className="flex-row items-center gap-1"
@@ -181,33 +191,34 @@ const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
           <View className="flex-col items-start">
             <View className="w-full flex-col items-start px-4">
               {/* 본문 */}
-              <RecipeDescription content={detailFeed?.content} />
+              <RecipeDescription content={detailFeed.content} />
               {/* 카테고리 */}
-              <RecipeInfoChips categories={detailFeed?.categories} />
+              <RecipeInfoChips categories={detailFeed.categories} />
               {/* 인원/요리시간/ 난이도 */}
               <RecipeDetails
-                serving={detailFeed?.serving}
-                cookingTime={detailFeed?.cookingTime}
-                difficulty={detailFeed?.difficulty}
+                serving={detailFeed.serving}
+                cookingTime={detailFeed.cookingTime}
+                difficulty={detailFeed.difficulty}
               />
               {/* 재료 */}
-              <RecipeIngredient ingredient={detailFeed?.ingredients} />
+              <RecipeIngredient ingredient={detailFeed.ingredients} />
               {/* 레시피 영상 */}
-              <RecipeVideo videoUrl={detailFeed?.video} />
+              <RecipeVideo videoUrl={detailFeed.video} />
               {/* 레시피 순서 */}
-              <RecipeSteps steps={detailFeed?.steps} />
+              <RecipeSteps steps={detailFeed.steps} />
               {/* 레시피 Kick */}
-              <RecipeTip tip={detailFeed?.tip} />
+              <RecipeTip tip={detailFeed.tip} />
             </View>
             <View className="h-[40px]" />
+            {/* 바텀 tab */}
             <View className="relative h-[60px] w-full flex-col justify-center bg-g4">
               <FeedBottomTab
-                initialLikes={detailFeed?.likes}
-                initialBookmarks={detailFeed?.bookmarks}
-                initialComments={detailFeed?.comments}
-                isLiked={detailFeed?.isLiked}
-                isBookmarked={detailFeed?.isBookmarked}
-                isCommented={detailFeed?.isCommented}
+                initialLikes={detailFeed.likes}
+                initialBookmarks={detailFeed.bookmarks}
+                initialComments={detailFeed.comments}
+                isLiked={detailFeed.isLiked}
+                isBookmarked={detailFeed.isBookmarked}
+                isCommented={detailFeed.isCommented}
               />
             </View>
           </View>

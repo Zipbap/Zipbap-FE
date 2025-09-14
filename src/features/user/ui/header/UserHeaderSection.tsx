@@ -6,7 +6,7 @@ import UserTabs from '@features/user/ui/UserTabs';
 import { User } from '@entities/user/model/userType';
 import { defaultShadow } from '@shared/ui/defaultShadow';
 
-import ProfileEditModal from './ProfileEditModal';
+import ProfileEditModal from '../ProfileEditModal';
 
 type Props = {
   user: User;
@@ -39,7 +39,7 @@ const UserHeaderSection: React.FC<Props> = ({ user, tab, setTab }) => {
   };
 
   const handleSave = () => {
-    // TODO: 여기에서 API 호출을 수행하여 변경된 정보 저장
+    // FIXME: 여기에서 API 호출을 수행하여 변경된 정보 저장
     // console.log('최종 저장 닉네임:', nickname);
     // console.log('최종 저장 상태 메시지:', statusMessage);
     // console.log('최종 저장 프로필 이미지:', profileImage);

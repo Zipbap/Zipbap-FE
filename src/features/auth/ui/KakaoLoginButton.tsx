@@ -4,10 +4,13 @@ import { Text } from 'react-native';
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
 import { kakaoLogin } from '@features/auth/api/login';
 import Button from '@entities/auth/ui/Button';
+import type { RootNavigationProp } from '@shared/types/navigation';
 
-import type { LoginPropsWithoutRoute } from '@shared/types/rootStackParamList';
+interface LoginPageProps {
+  navigation: RootNavigationProp<'Login'>;
+}
 
-const KakaoLoginButton: React.FC<LoginPropsWithoutRoute> = ({ navigation }) => {
+const KakaoLoginButton: React.FC<LoginPageProps> = ({ navigation }) => {
   const [isPressed, setIsPressed] = useState<boolean>(false);
   const [result, setResult] = useState<string>('');
   const signInWithKakao = async (): Promise<void> => {
@@ -20,7 +23,7 @@ const KakaoLoginButton: React.FC<LoginPropsWithoutRoute> = ({ navigation }) => {
     } catch (err) {
       console.error('login err', err);
     }
-    //추후 수정
+    // FIXME: 추후 수정
     navigation.replace('Main');
   };
   console.log(result);

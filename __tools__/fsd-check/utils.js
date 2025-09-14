@@ -10,11 +10,16 @@ const SLASH = path.sep;
 
 /** 타입스크립트 기반의 파일을 가져옵니다. */
 export function getTypeScriptFiles(targetFolder) {
-  return fg([`${targetFolder}/**/*.{ts,tsx}`], { absolute: true });
+  return fg([`${targetFolder}/**/*.{ts,tsx}`], {
+    absolute: true,
+    ignore: ['**/node_modules/**'],
+  });
 }
 
+const astCache = new Map();
 /** 파일의 import 구문을 가져옵니다. */
 export function getImportsFromFile(filePath) {
+  if (astCache.has(filePath)) return astCache.get(filePath);
   const code = fs.readFileSync(filePath, 'utf-8');
 
   const ast = parser.parse(code, {
@@ -24,13 +29,14 @@ export function getImportsFromFile(filePath) {
     range: true,
     tokens: true,
   });
-
   const imports = [];
   for (const node of ast.body) {
     if (node.type === 'ImportDeclaration') {
       imports.push(node.source.value);
     }
   }
+
+  astCache.set(filePath, imports);
   return imports;
 }
 

@@ -2,12 +2,16 @@ const { getTypeScriptFiles, getImportsFromFile, hasErrorMessages } = require('./
 const { checkFSDRules } = require('./fsd-check.cjs');
 
 async function main() {
-  const files = await getTypeScriptFiles();
+  const targetFolder = process.argv[2].trim();
+
+  console.log(`${targetFolder}에서 fsd rule 검사를 실행합니다.`);
+
+  const files = await getTypeScriptFiles(targetFolder);
 
   files
     .map(file => {
       const imports = getImportsFromFile(file);
-      return checkFSDRules(file, imports);
+      return checkFSDRules(targetFolder, file, imports);
     })
     .filter(hasErrorMessages)
     .forEach(errorMessages => {

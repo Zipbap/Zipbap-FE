@@ -19,17 +19,17 @@ const reportedSlices = new Set();
 // cache
 const publicAPICache = new Map();
 
-function getSlicePathFromFile(filePath) {
-  const relativePath = filePath.split(`src${path.sep}`)[1];
+function getSlicePathFromFile(targetFolder, filePath) {
+  const relativePath = filePath.split(`${targetFolder}${path.sep}`)[1];
   return relativePath.split(path.sep).slice(0, 2).join(path.sep);
 }
 
-function hasPublicAPI(slicePath) {
+function hasPublicAPI(targetFolder, slicePath) {
   // cache hit
   if (publicAPICache.has(slicePath)) return publicAPICache.get(slicePath);
 
   // cache miss
-  const indexPath = path.join('src', slicePath, 'index.ts');
+  const indexPath = path.join(`${targetFolder}`, slicePath, 'index.ts');
 
   const exists = fs.existsSync(indexPath);
   publicAPICache.set(slicePath, exists);
@@ -37,9 +37,9 @@ function hasPublicAPI(slicePath) {
   return exists;
 }
 
-function checkPublicAPI(filePath) {
-  const slicePath = getSlicePathFromFile(filePath);
-  if (hasPublicAPI(slicePath) || reportedSlices.has(slicePath)) return null;
+function checkPublicAPI(targetFolder, filePath) {
+  const slicePath = getSlicePathFromFile(targetFolder, filePath);
+  if (hasPublicAPI(targetFolder, slicePath) || reportedSlices.has(slicePath)) return null;
 
   reportedSlices.add(slicePath);
 
@@ -49,26 +49,26 @@ function checkPublicAPI(filePath) {
 }
 
 const CROSS_API_LAYER = 'entities';
-function checkCrossAPI(filePath) {
+function checkCrossAPI(targetFolder, filePath) {
   // NOTE: cross api 방식이 아닌 경우
   if (!filePath.includes(`@${CROSS_API_SYMBOL}/`)) return null;
 
   // NOTE: cross api 레이어인 경우
-  if (getCurrentLayer(filePath) === CROSS_API_LAYER) return null;
+  if (getCurrentLayer(targetFolder, filePath) === CROSS_API_LAYER) return null;
 
   const errorMessage = `🔵 ${filePath}\ncross API(@${CROSS_API_SYMBOL}) 방식은 ${CROSS_API_LAYER} 레이어에서만 허용됩니다.\n`;
 
   return errorMessage;
 }
 
-function checkInvalidAlias(filePath, importPath) {
-  const invalidPrefixes = LAYER.map(layer => `@/src/${layer}`);
+function checkInvalidAlias(targetFolder, filePath, importPath) {
+  const invalidPrefixes = LAYER.map(layer => `@/${targetFolder}/${layer}`);
 
   if (!invalidPrefixes.some(prefix => importPath.startsWith(prefix))) return null;
 
   const errorMessage =
     `❌ ${filePath} - ${importPath}\n` +
-    `"@/src" 형태의 import는 허용되지 않습니다. 올바른 alias를 사용하세요.\n`;
+    `"@/${targetFolder}" 형태의 import는 허용되지 않습니다. 올바른 alias를 사용하세요.\n`;
 
   return errorMessage;
 }
@@ -106,12 +106,15 @@ function checkSlicePublicAPIImport(filePath, importPath, importLayer) {
   return errorMessage;
 }
 
-function checkFSDRules(filePath, imports) {
-  const currentLayer = getCurrentLayer(filePath);
-  const checkMessageStack = [checkPublicAPI(filePath), checkCrossAPI(filePath)];
+function checkFSDRules(targetFolder, filePath, imports) {
+  const currentLayer = getCurrentLayer(targetFolder, filePath);
+  const checkMessageStack = [
+    checkPublicAPI(targetFolder, filePath),
+    checkCrossAPI(targetFolder, filePath),
+  ];
 
   for (const importPath of imports) {
-    checkMessageStack.push(checkInvalidAlias(filePath, importPath));
+    checkMessageStack.push(checkInvalidAlias(targetFolder, filePath, importPath));
 
     if (!isFSDLayer(importPath)) continue;
 

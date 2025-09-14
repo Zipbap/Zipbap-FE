@@ -62,7 +62,7 @@ function checkInvalidAlias(targetFolder, filePath, importPath) {
 function checkAllowImport(filePath, importPath, currentLayer, importLayer) {
   if (isAllowImport(LAYER, currentLayer, importLayer)) return null;
 
-  const errorMessage = getNotAllowImportMessage(filePath, importPath);
+  const errorMessage = getNotAllowImportMessage(currentLayer, filePath, importPath);
 
   return errorMessage;
 }

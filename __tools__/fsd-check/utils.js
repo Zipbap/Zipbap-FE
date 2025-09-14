@@ -57,8 +57,8 @@ export function isAllowImport(LAYER, currentLayer, importLayer) {
 }
 
 /** import 구문이 FSD Layer 규칙을 준수하지 않는 경우의 메시지를 가져옵니다. */
-export function getNotAllowImportMessage(filePath, importPath) {
-  return errorMessages.notAllowImport(filePath, importPath);
+export function getNotAllowImportMessage(currentLayer, filePath, importPath) {
+  return errorMessages.notAllowImport(currentLayer, filePath, importPath);
 }
 
 /** 에러 메시지가 있는지 확인합니다. */

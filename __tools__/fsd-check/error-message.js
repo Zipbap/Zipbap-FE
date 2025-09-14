@@ -15,7 +15,7 @@ export const errorMessages = {
     `${pathColor(filePath)} - ${pathColor(importPath)}\n` +
     `${yellow(importLayer, '레이어의 slice는 public API(index.ts)를 통해서만 import 가능합니다.')}\n`,
 
-  notAllowImport: (filePath, importPath) =>
-    `${pathColor(filePath)} - ${pathColor(importPath, '를 import 할 수 없습니다.')}\n` +
-    `${red('fsd에서는 자신보다 하위의 레이어에서만 import 할 수 있습니다.')}\n`,
+  notAllowImport: (currentLayer, filePath, importPath) =>
+    `${pathColor(filePath)} - ${pathColor(importPath)}\n` +
+    `${red(`${currentLayer} 레이어에서 ${importPath}를 import 할 수 없습니다.\n\nfsd에서는 자신보다 하위의 레이어에서만 import 할 수 있습니다.`)}\n`,
 };

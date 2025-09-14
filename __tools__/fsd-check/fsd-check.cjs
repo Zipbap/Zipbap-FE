@@ -68,6 +68,31 @@ function checkAllowImport(filePath, importPath, currentLayer, importLayer) {
   return errorMessage;
 }
 
+function checkSlicePublicAPI(filePath, importPath, importLayer) {
+  // NOTE: app, shared 레이어 제외
+  if (!['pages', 'widgets', 'features', 'entities'].includes(importLayer)) return null;
+
+  // NOTE: "@/pages/auth/ui/LoginPage" → ["@pages","auth","ui","LoginPage"]
+  const splitedPath = importPath.split('/');
+
+  // NOTE: @pages/{domain}
+  if (splitedPath.length === 2) return null;
+
+  // NOTE: allow @pages/{domain}/index, @pages/{domain}/index.ts, @pages/{domain}/index.tsx
+  if (splitedPath.length === 3) {
+    const last = splitedPath[2];
+    if (last === 'index' || last === 'index.ts' || last === 'index.tsx') {
+      return null;
+    }
+  }
+
+  const errorMessage =
+    `🟪 ${filePath} - ${importPath}\n` +
+    `${importLayer}레이어의 slice는 public API(index.ts)를 통해서만 import 가능합니다.\n`;
+
+  return errorMessage;
+}
+
 function checkFSDRules(filePath, imports) {
   const currentLayer = getCurrentLayer(filePath);
   const checkMessageStack = [checkPublicAPI(filePath)];
@@ -78,7 +103,10 @@ function checkFSDRules(filePath, imports) {
     if (!isFSDLayer(importPath)) continue;
 
     const importLayer = getImportLayer(importPath);
-    checkMessageStack.push(checkAllowImport(filePath, importPath, currentLayer, importLayer));
+    checkMessageStack.push(
+      checkAllowImport(filePath, importPath, currentLayer, importLayer),
+      checkSlicePublicAPI(filePath, importPath, importLayer),
+    );
   }
 
   return checkMessageStack.filter(Boolean);

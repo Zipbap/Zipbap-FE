@@ -10,7 +10,7 @@ async function main() {
       return checkFSDRules(file, imports);
     })
     .filter(hasErrorMessages)
-    ?.forEach(errorMessages => {
+    .forEach(errorMessages => {
       console.log(errorMessages.join('\n'));
     });
 }

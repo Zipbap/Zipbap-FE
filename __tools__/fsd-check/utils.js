@@ -2,6 +2,7 @@ import fg from 'fast-glob';
 import fs from 'fs';
 import parser from '@typescript-eslint/parser';
 import path from 'path';
+import { errorMessages } from './error-message.js';
 
 // constants
 const SLASH = path.sep;
@@ -56,13 +57,33 @@ export function isAllowImport(LAYER, currentLayer, importLayer) {
 
 /** import 구문이 FSD Layer 규칙을 준수하지 않는 경우의 메시지를 가져옵니다. */
 export function getNotAllowImportMessage(filePath, importPath) {
-  return (
-    `🔴 ${filePath} - ${importPath}를 import 할 수 없습니다.\n` +
-    `fsd에서는 자신보다 하위의 레이어에서만 import 할 수 있습니다.\n`
-  );
+  return errorMessages.notAllowImport(filePath, importPath);
 }
 
 /** 에러 메시지가 있는지 확인합니다. */
 export function hasErrorMessages(errorMessages) {
   return errorMessages.length > 0;
+}
+
+/** Layer/Slice를 가져옵니다.
+ *
+ * 예: pages/auth
+ */
+export function getLayerSlice(targetFolder, filePath) {
+  const relativePath = filePath.split(`${targetFolder}${SLASH}`)[1];
+  return relativePath.split(SLASH).slice(0, 2).join(SLASH);
+}
+
+/** Layer/Slice 경로에 Public API가 존재하는지 확인 */
+export function hasPublicAPI(publicAPICache, targetFolder, slicePath) {
+  // cache hit
+  if (publicAPICache.has(slicePath)) return publicAPICache.get(slicePath);
+
+  // cache miss
+  const PUBLIC_API = 'index.ts';
+  const indexPath = path.join(`${targetFolder}`, slicePath, PUBLIC_API);
+  const exists = fs.existsSync(indexPath);
+  publicAPICache.set(slicePath, exists);
+
+  return exists;
 }

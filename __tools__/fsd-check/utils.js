@@ -3,6 +3,7 @@ import fs from 'fs';
 import parser from '@typescript-eslint/parser';
 import path from 'path';
 import { errorMessages } from './error-message.js';
+import { bgBlack, bgGreen } from './cli-color.js';
 
 // constants
 const SLASH = path.sep;
@@ -86,4 +87,15 @@ export function hasPublicAPI(publicAPICache, targetFolder, slicePath) {
   publicAPICache.set(slicePath, exists);
 
   return exists;
+}
+
+/** 전체 에러 메시지를 출력합니다. */
+export function printErrorMessages(errorMessages) {
+  if (errorMessages.length === 0) {
+    console.log(`${bgGreen('모든 FSD 규칙을 준수했습니다.')}`);
+    return;
+  }
+
+  console.log(errorMessages.join('\n'));
+  console.log(`${bgBlack(`\n아직 해결하지 못한 총 ${errorMessages.length}개의 에러가 있습니다.`)}`);
 }

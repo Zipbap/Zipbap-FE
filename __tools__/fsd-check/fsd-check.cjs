@@ -12,6 +12,7 @@ const {
 // constant
 const LAYER = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
 const CROSS_API_SYMBOL = 'x';
+const SLASH = path.sep;
 
 // NOTE: not to be reported again (publicAPI report)
 const reportedSlices = new Set();
@@ -20,8 +21,8 @@ const reportedSlices = new Set();
 const publicAPICache = new Map();
 
 function getSlicePathFromFile(targetFolder, filePath) {
-  const relativePath = filePath.split(`${targetFolder}${path.sep}`)[1];
-  return relativePath.split(path.sep).slice(0, 2).join(path.sep);
+  const relativePath = filePath.split(`${targetFolder}${SLASH}`)[1];
+  return relativePath.split(SLASH).slice(0, 2).join(SLASH);
 }
 
 function hasPublicAPI(targetFolder, slicePath) {
@@ -51,7 +52,7 @@ function checkPublicAPI(targetFolder, filePath) {
 const CROSS_API_LAYER = 'entities';
 function checkCrossAPI(targetFolder, filePath) {
   // NOTE: cross api 방식이 아닌 경우
-  if (!filePath.includes(`@${CROSS_API_SYMBOL}/`)) return null;
+  if (!filePath.includes(`@${CROSS_API_SYMBOL}${SLASH}`)) return null;
 
   // NOTE: cross api 레이어인 경우
   if (getCurrentLayer(targetFolder, filePath) === CROSS_API_LAYER) return null;

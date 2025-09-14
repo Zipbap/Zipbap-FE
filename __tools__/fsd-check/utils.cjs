@@ -1,6 +1,7 @@
 const fg = require('fast-glob');
 const fs = require('fs');
 const parser = require('@typescript-eslint/parser');
+const path = require('path');
 
 function getTypeScriptFiles(targetFolder) {
   return fg([`${targetFolder}/**/*.{ts,tsx}`], { absolute: true });
@@ -26,8 +27,10 @@ function getImportsFromFile(filePath) {
   return imports;
 }
 
+const SLASH = path.sep;
+
 function getCurrentLayer(targetFolder, filePath) {
-  return filePath.split(`${targetFolder}/`)[1].split('/')[0];
+  return filePath.split(`${targetFolder}${SLASH}`)[1].split(SLASH)[0];
 }
 
 function getImportLayer(importPath) {

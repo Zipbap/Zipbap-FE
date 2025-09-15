@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useFeedData } from '@features/feed/model/useFeedData';
 import { FeedCard } from '@features/feed/ui/FeedCard';
@@ -20,24 +21,26 @@ const Feed = () => {
   );
 
   return (
-    <View className="flex-1 items-center justify-start bg-g4">
-      <View className="h-full w-full px-[8px] pt-6">
-        <FlatList
-          data={dataList}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          ListFooterComponent={() => <View style={{ height: 50 }} />}
-          onEndReached={onEndReached}
-          onEndReachedThreshold={0.6}
-          refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
+    <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
+      <View className="flex-1 items-center justify-start bg-g4">
+        <View className="h-full w-full px-[8px] pt-6">
+          <FlatList
+            data={dataList}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            ListFooterComponent={() => <View style={{ height: 50 }} />}
+            onEndReached={onEndReached}
+            onEndReachedThreshold={0.6}
+            refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
+          />
+        </View>
+        <FeedDetailModal
+          visible={!!selectedFeed}
+          feedId={selectedFeed?.id}
+          onClose={() => setSelectedFeed(null)}
         />
       </View>
-      <FeedDetailModal
-        visible={!!selectedFeed}
-        feedId={selectedFeed?.id}
-        onClose={() => setSelectedFeed(null)}
-      />
-    </View>
+    </SafeAreaView>
   );
 };
 

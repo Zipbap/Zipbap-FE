@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 import { Image, Pressable, Text, TextInput, View, Switch, Platform } from 'react-native';
 
+import ModalContainer from '@/src/shared/ui/modal/fullScreen/ModalContainer';
+import ModalHeader from '@/src/shared/ui/modal/fullScreen/ModalHeader';
 import { pickImageFromLibrary } from '@shared/lib/image-picker';
 import { defaultShadow } from '@shared/ui/defaultShadow';
-import { DetailModal } from '@shared/ui/modal/DetailModal';
-import { DetailModalHeader } from '@shared/ui/modal/DetailModalHeader';
 import BasicButton from '@shared/ui/user/BasicButton';
 
 interface Props {
@@ -48,13 +48,13 @@ const ProfileEditModal: React.FC<Props> = ({
   );
 
   return (
-    <DetailModal visible={isVisible} onClose={onClose}>
+    <ModalContainer visible={isVisible} onClose={onClose}>
       <View
         className="h-[100%] overflow-hidden bg-white"
         style={{ marginTop: Platform.OS === 'ios' ? 25 : 0 }}
       >
         <View className="h-[80px]" />
-        <DetailModalHeader
+        <ModalHeader
           style={[defaultShadow.shadowContainer, defaultShadow.roundedContainer]}
           title="프로필 편집"
           onBackPress={onClose}
@@ -145,7 +145,7 @@ const ProfileEditModal: React.FC<Props> = ({
           />
         </View>
       </View>
-    </DetailModal>
+    </ModalContainer>
   );
 };
 

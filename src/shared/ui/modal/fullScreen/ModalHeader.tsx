@@ -12,13 +12,13 @@ interface HeaderProps {
   titleStyle?: TextStyle;
 }
 
-export const DetailModalHeader = ({
+const ModalHeader: React.FC<HeaderProps> = ({
   title,
   onBackPress,
   rightContent,
   style,
   titleStyle,
-}: HeaderProps) => {
+}) => {
   return (
     <View
       className={cn(
@@ -34,3 +34,5 @@ export const DetailModalHeader = ({
     </View>
   );
 };
+
+export default ModalHeader;

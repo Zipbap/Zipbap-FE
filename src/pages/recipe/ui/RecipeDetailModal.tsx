@@ -1,19 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, Pressable, ScrollView } from 'react-native';
 
 import ShareSvg from '@/assets/img/feed/share-icon.svg';
-import { defaultShadow } from '@shared/ui/defaultShadow';
-import { DetailModal } from '@shared/ui/modal/DetailModal';
-import { DetailModalHeader } from '@shared/ui/modal/DetailModalHeader';
-import RecipeDescription from '@shared/ui/modal/RecipeDescription';
-import RecipeDetails from '@shared/ui/modal/RecipeDetails';
-import RecipeInfoChips from '@shared/ui/modal/RecipeInfoChips';
-import RecipeIngredient from '@shared/ui/modal/RecipeIngredient';
-import RecipeSteps from '@shared/ui/modal/RecipeSteps';
-import RecipeTip from '@shared/ui/modal/RecipeTip';
-import RecipeVideo from '@shared/ui/modal/RecipeVideo';
-import BasicButton from '@shared/ui/user/BasicButton';
 
+import ModalCategoriesSection from '@/src/shared/ui/modal/fullScreen/ModalCategoriesSection';
+import ModalContainer from '@/src/shared/ui/modal/fullScreen/ModalContainer';
+import ModalHeader from '@/src/shared/ui/modal/fullScreen/ModalHeader';
+
+// FIXME: 추후 경로 수정
+import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
+import RecipeSteps from '@features/feed/ui/RecipeSteps';
+
+import type { ViewType } from '@shared/store/useViewTypeStore';
+import ViewTypeSwitcher from '@shared/ui/ViewTypeSwitcher';
+import WebViewVideo from '@shared/ui/WebViewVideo';
+import { defaultShadow } from '@shared/ui/defaultShadow';
+import ModalContentSection from '@shared/ui/modal/ModalContentSection';
+import BasicButton from '@shared/ui/user/BasicButton';
 import { useDetailRecipeData } from '../model/getDetailRecipe';
 
 interface Props {
@@ -24,11 +27,16 @@ interface Props {
 
 const RecipeDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
   const { getDetailRecipe, detailRecipe } = useDetailRecipeData();
+  const [viewType, setViewType] = useState<ViewType>('article');
   useEffect(() => {
     getDetailRecipe(feedId ? feedId : '1');
   }, [feedId, getDetailRecipe]);
 
-  if (!feedId) return null;
+  const switchViewType = (viewType: ViewType) => {
+    if (viewType === 'article') setViewType('feed');
+    if (viewType === 'feed') setViewType('image');
+    if (viewType === 'image') setViewType('article');
+  };
   // 헤더에 들어갈 오른쪽 버튼들을 JSX 변수로 정의
   const headerRightContent = (
     <>
@@ -37,20 +45,25 @@ const RecipeDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
       </Pressable>
     </>
   );
+  if (!feedId) return null;
+  else if (!detailRecipe) {
+    // FIXME: 로딩 인디케이터로 바꿔야함
+    return (
+      <View className="flex flex-1">
+        <Text> 로딩 중 </Text>
+      </View>
+    );
+  }
 
   return (
-    <DetailModal visible={visible} onClose={onClose}>
+    <ModalContainer visible={visible} onClose={onClose}>
       <View className="h-[100%] overflow-hidden bg-white">
         {/* 헤더 */}
-        <DetailModalHeader
-          title="레시피 상세"
-          onBackPress={onClose}
-          rightContent={headerRightContent}
-        />
+        <ModalHeader title="레시피 상세" onBackPress={onClose} rightContent={headerRightContent} />
 
         {/* 스크롤 영역 */}
         <ScrollView>
-          <Image source={{ uri: detailRecipe?.mainImage }} className="h-[300px] w-full bg-sub1" />
+          <Image source={{ uri: detailRecipe.mainImage }} className="h-[300px] w-full bg-sub1" />
 
           <View
             className="-mt-6 rounded-t-3xl bg-white px-4 pb-6 pt-10"
@@ -59,34 +72,57 @@ const RecipeDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
             <View className="w-full flex-col">
               {/* 작성일 */}
               <View className="mb-5 w-full flex-row justify-end">
-                <Text className="text-[12px] color-g5">작성일 {detailRecipe?.createdAt}</Text>
+                <Text className="text-[12px] color-g5">작성일 {detailRecipe.createdAt}</Text>
               </View>
             </View>
 
             {/* 제목 */}
-            <Text className="text-md mb-1 mt-3 font-bold color-sub1">{detailRecipe?.subTitle}</Text>
-            <Text className="mb-2 text-2xl font-bold color-black">{detailRecipe?.title}</Text>
+            <Text className="text-md mb-1 mt-3 font-bold color-sub1">{detailRecipe.subTitle}</Text>
+            <Text className="mb-2 text-2xl font-bold color-black">{detailRecipe.title}</Text>
           </View>
           <View className="flex-col items-start">
             <View className="w-full flex-col items-start px-4">
-              {/* 본문 */}
-              <RecipeDescription content={detailRecipe?.content} />
+              {/* 레시피 소개 */}
+              <ModalContentSection
+                content={
+                  <Text className="text-base leading-6 text-g1">{detailRecipe.content}</Text>
+                }
+                subTitle="레시피 소개"
+              />
               {/* 카테고리 */}
-              <RecipeInfoChips categories={detailRecipe?.categories} />
+              <ModalContentSection
+                subTitle="카테고리 및 요리 정보"
+                content={<ModalCategoriesSection categories={detailRecipe.categories} />}
+              />
               {/* 인원/요리시간/ 난이도 */}
-              <RecipeDetails
-                serving={detailRecipe?.serving}
-                cookingTime={detailRecipe?.cookingTime}
-                difficulty={detailRecipe?.difficulty}
+              <RecipeDetailSection
+                serving={detailRecipe.serving}
+                cookingTime={detailRecipe.cookingTime}
+                difficulty={detailRecipe.difficulty}
               />
               {/* 재료 */}
-              <RecipeIngredient ingredient={detailRecipe?.ingredients} />
+              <ModalContentSection
+                content={
+                  <Text className="text-base leading-6 text-g1">{detailRecipe.ingredients}</Text>
+                }
+                subTitle="레시피 소개"
+              />
               {/* 레시피 영상 */}
-              <RecipeVideo videoUrl={detailRecipe?.video} />
+              <ModalContentSection
+                subTitle="레시피 영상"
+                content={<WebViewVideo videoUrl={detailRecipe.video} />}
+              />
               {/* 레시피 순서 */}
-              <RecipeSteps steps={detailRecipe?.steps} />
+              <ModalContentSection
+                subTitle="레시피 순서"
+                content={<RecipeSteps steps={detailRecipe.steps} />}
+                subTitleOption={<ViewTypeSwitcher viewType={viewType} onSwitch={switchViewType} />}
+              />
               {/* 레시피 Kick */}
-              <RecipeTip tip={detailRecipe?.tip} />
+              <ModalContentSection
+                content={<Text className="text-base leading-6 text-g1">{detailRecipe.tip}</Text>}
+                subTitle="레시피 Kick"
+              />
               <View className="h-6" />
               {/* 수정하기 버튼 */}
               <BasicButton
@@ -114,7 +150,7 @@ const RecipeDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
           </View>
         </ScrollView>
       </View>
-    </DetailModal>
+    </ModalContainer>
   );
 };
 

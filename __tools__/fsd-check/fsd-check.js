@@ -21,13 +21,16 @@ const CROSS_API_LAYER = 'entities';
 export const alreadyReportedSlices = new Set();
 
 // cache
-const publicAPICache = new Map();
+export const publicAPICache = new Map();
 
 /** Layer/Slice 경로에 Public API가 존재하는지 확인 및 에러 메시지 반환 */
 function checkPublicAPI(targetFolder, filePath) {
   const layerSlice = getLayerSlice(targetFolder, filePath);
 
-  if (hasPublicAPI(publicAPICache, targetFolder, layerSlice)) {
+  if (
+    hasPublicAPI(publicAPICache, targetFolder, layerSlice) ||
+    getCurrentLayer(targetFolder, filePath) === LAYER[0]
+  ) {
     return null;
   }
 

@@ -5,12 +5,13 @@ import {
   hasErrorMessages,
   printErrorMessages,
   beforeRunCheck,
+  validateTargetFolder,
 } from './utils.js';
 import { checkFSDRules } from './fsd-check.js';
-import { red } from './cli-color.js';
 
-async function runCheck(targetFolder, isWatchMode = false) {
+async function runFSDCheck(targetFolder, isWatchMode = false) {
   const files = await getTypeScriptFiles(targetFolder);
+
   const errorMessages = files
     .flatMap(file => {
       const imports = getImportsFromFile(file);
@@ -21,28 +22,38 @@ async function runCheck(targetFolder, isWatchMode = false) {
   printErrorMessages(errorMessages, isWatchMode);
 }
 
+function watchFSDCheck(isWatchMode, targetFolder) {
+  if (!isWatchMode) return;
+
+  const watcher = chokidar.watch(targetFolder, {
+    ignored: /node_modules/,
+  });
+
+  let isReady = false;
+
+  watcher
+    .on('ready', () => {
+      isReady = true;
+    })
+    .on('all', async () => {
+      if (!isReady) return;
+
+      beforeRunCheck();
+
+      await runFSDCheck(targetFolder, isWatchMode);
+    });
+}
+
 async function main() {
   const targetFolder = process.argv[2].trim();
 
   const isWatchMode = process.argv.includes('--watch');
 
-  if (!targetFolder) {
-    console.log(red('targetFolder is required'));
-    process.exit(1);
-  }
+  validateTargetFolder(targetFolder);
 
-  await runCheck(targetFolder, isWatchMode);
+  await runFSDCheck(targetFolder, isWatchMode);
 
-  if (isWatchMode) {
-    chokidar
-      .watch(`${targetFolder}`, {
-        ignored: /node_modules/,
-      })
-      .on('change', async () => {
-        beforeRunCheck();
-        await runCheck(targetFolder, isWatchMode);
-      });
-  }
+  watchFSDCheck(isWatchMode, targetFolder);
 }
 
 main();

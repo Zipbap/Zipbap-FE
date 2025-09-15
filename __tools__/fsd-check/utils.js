@@ -4,8 +4,8 @@ import path from 'path';
 import parser from '@typescript-eslint/parser';
 
 import { errorMessages } from './error-message.js';
-import { bgBlack, bgGreen, gray } from './cli-color.js';
-import { alreadyReportedSlices } from './fsd-check.js';
+import { bgBlack, bgGreen, gray, red } from './cli-color.js';
+import { alreadyReportedSlices, publicAPICache } from './fsd-check.js';
 
 // constants
 const SLASH = path.sep;
@@ -18,10 +18,8 @@ export function getTypeScriptFiles(targetFolder) {
   });
 }
 
-const astCache = new Map();
 /** 파일의 import 구문을 가져옵니다. */
 export function getImportsFromFile(filePath) {
-  if (astCache.has(filePath)) return astCache.get(filePath);
   const code = fs.readFileSync(filePath, 'utf-8');
 
   const ast = parser.parse(code, {
@@ -31,6 +29,7 @@ export function getImportsFromFile(filePath) {
     range: true,
     tokens: true,
   });
+
   const imports = [];
   for (const node of ast.body) {
     if (node.type === 'ImportDeclaration') {
@@ -38,7 +37,6 @@ export function getImportsFromFile(filePath) {
     }
   }
 
-  astCache.set(filePath, imports);
   return imports;
 }
 
@@ -112,5 +110,13 @@ export function printErrorMessages(errorMessages, isWatchMode) {
 
 /** runCheck 이전에 실행되는 함수 */
 export function beforeRunCheck() {
+  publicAPICache.clear();
   alreadyReportedSlices.clear();
+}
+
+export function validateTargetFolder(targetFolder) {
+  if (!targetFolder) {
+    console.log(red('targetFolder is required'));
+    process.exit(1);
+  }
 }

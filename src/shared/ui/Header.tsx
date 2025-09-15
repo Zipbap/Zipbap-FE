@@ -9,7 +9,7 @@ type Props = {
   style?: object;
 };
 
-const Header: React.FC<Props> = ({ left, center, right, className, style }) => {
+const Header = ({ left, center, right, className, style }: Props) => {
   return (
     <View
       className={['h-[120px] w-full bg-white pt-[54px]', className].filter(Boolean).join(' ')}

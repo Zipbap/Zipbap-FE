@@ -4,7 +4,7 @@ import { View, Text, Pressable, TextStyle } from 'react-native';
 import BackSvg from '@/assets/img/back-icon.svg';
 import { cn } from '@shared/lib/cn';
 
-interface HeaderProps {
+interface Props {
   title: string;
   onBackPress?: () => void;
   rightContent?: React.ReactNode;
@@ -12,13 +12,7 @@ interface HeaderProps {
   titleStyle?: TextStyle;
 }
 
-const ModalHeader: React.FC<HeaderProps> = ({
-  title,
-  onBackPress,
-  rightContent,
-  style,
-  titleStyle,
-}) => {
+const ModalHeader = ({ title, onBackPress, rightContent, style, titleStyle }: Props) => {
   return (
     <View
       className={cn(

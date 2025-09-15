@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 import BasicButton from '@shared/ui/user/BasicButton';
 
-interface EmptyStateProps {
+interface Props {
   video: 'video/mp4' | string;
   title: string;
   subtitle: string;
@@ -11,7 +11,7 @@ interface EmptyStateProps {
   onPress: () => void;
 }
 
-const EmptyState: React.FC<EmptyStateProps> = ({ video, title, subtitle, buttonText, onPress }) => {
+const EmptyState = ({ video, title, subtitle, buttonText, onPress }: Props) => {
   console.log(video);
   return (
     <View className="flex-1 items-center justify-center px-6">

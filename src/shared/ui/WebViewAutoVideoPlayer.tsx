@@ -2,17 +2,13 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-interface RecipeVideoProps {
+interface Props {
   videoUrl?: string;
   title?: string;
   height?: number;
 }
 
-const WebViewAutoVideoPlayer: React.FC<RecipeVideoProps> = ({
-  videoUrl,
-  title = '레시피 영상',
-  height = 200,
-}) => {
+const WebViewAutoVideoPlayer = ({ videoUrl, title = '레시피 영상', height = 200 }: Props) => {
   if (!videoUrl) return null;
 
   const htmlContent = `

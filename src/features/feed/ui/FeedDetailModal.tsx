@@ -28,7 +28,7 @@ interface Props {
   feedId?: string;
 }
 
-const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId = '1' }) => {
+const FeedDetailModal = ({ visible, onClose, feedId = '1' }: Props) => {
   const { getDetailFeed, detailFeed } = useDetailFeedData();
   const [bookmarked, setBookmarked] = useState<boolean | undefined>(detailFeed?.isBookmarked);
   const [liked, setLiked] = useState<boolean | undefined>(detailFeed?.isLiked);

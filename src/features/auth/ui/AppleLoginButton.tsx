@@ -4,7 +4,7 @@ import { Text } from 'react-native';
 import AppleSvg from '@/assets/img/auth/apple.svg';
 import Button from '@entities/auth/ui/Button';
 
-const AppleLoginButton: React.FC = () => {
+const AppleLoginButton = () => {
   const [isPressed, setIsPressed] = useState<boolean>(false);
   return (
     <Button isPressed={isPressed} setIsPressed={setIsPressed} color={'#343434'}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, TextStyle, DimensionValue } from 'react-native';
 
-interface ButtonProps {
+interface Props {
   buttonText: string;
   onPress: () => void;
   width?: DimensionValue; // React Native 맞춤 타입
@@ -14,7 +14,7 @@ interface ButtonProps {
   fontWeight?: TextStyle['fontWeight'];
 }
 
-const BasicButton: React.FC<ButtonProps> = ({
+const BasicButton = ({
   buttonText,
   onPress,
   width = '100%', // 기본값
@@ -25,7 +25,7 @@ const BasicButton: React.FC<ButtonProps> = ({
   paddingY = 10,
   fontSize = 16,
   fontWeight = 'bold',
-}) => {
+}: Props) => {
   return (
     <TouchableOpacity
       onPress={onPress}

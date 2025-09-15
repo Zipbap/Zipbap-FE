@@ -8,12 +8,12 @@ interface Step {
   image: string;
 }
 
-interface RecipeStepsProps {
+interface Props {
   steps?: Step[];
 }
 
 // FIXME: 추후 뷰타입에 맞춰 수정이 필요!
-const RecipeSteps: React.FC<RecipeStepsProps> = ({ steps }) => {
+const RecipeSteps = ({ steps }: Props) => {
   if (!steps || steps.length === 0) return null;
 
   return (

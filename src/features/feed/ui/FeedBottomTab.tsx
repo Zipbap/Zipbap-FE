@@ -9,7 +9,7 @@ import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 import { toggleLike, toggleBookmark } from '@features/feed/api/feedBottomTabActionsApi';
 
-interface FeedBottomTabProps {
+interface Props {
   initialLikes?: number;
   initialBookmarks?: number;
   initialComments?: number;
@@ -19,7 +19,7 @@ interface FeedBottomTabProps {
   feedId?: string;
 }
 
-const FeedBottomTab: React.FC<FeedBottomTabProps> = ({
+const FeedBottomTab = ({
   initialLikes = 0,
   initialBookmarks = 0,
   initialComments = 0,
@@ -27,7 +27,7 @@ const FeedBottomTab: React.FC<FeedBottomTabProps> = ({
   isBookmarked = false,
   isCommented = false,
   feedId = '1',
-}) => {
+}: Props) => {
   const [liked, setLiked] = useState(isLiked);
   const [bookmarked, setBookmarked] = useState(isBookmarked);
   const [commented, setCommented] = useState(isCommented);

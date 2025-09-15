@@ -10,7 +10,7 @@ interface Props {
   type: 'feeds' | 'bookmarks';
 }
 
-const FeedGrid: React.FC<Props> = ({ data, type }) => {
+const FeedGrid = ({ data, type }: Props) => {
   if (data.length === 0) {
     return (
       <EmptyState

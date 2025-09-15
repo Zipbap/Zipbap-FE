@@ -13,7 +13,7 @@ interface Props {
   onPress: () => void;
 }
 
-export const FeedCard: React.FC<Props> = ({ feed, onPress }) => {
+export const FeedCard = ({ feed, onPress }: Props) => {
   return (
     <View className="mb-8 flex-col">
       <View className="mb-4 rounded-[20px] bg-white p-4">

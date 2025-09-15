@@ -7,7 +7,7 @@ interface Props {
   onPress: () => void;
 }
 
-const EditProfileButton: React.FC<Props> = ({ onPress }) => {
+const EditProfileButton = ({ onPress }: Props) => {
   return (
     <>
       <View className="mt-7" />

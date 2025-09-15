@@ -12,13 +12,12 @@ import { RootNavigationProp } from '@shared/types/navigation';
 import CustomTabBar from '@shared/ui/Tab';
 import UserHeader from '@shared/ui/UserHeader';
 
-interface MainPageProps {
+interface Props {
   navigation: RootNavigationProp<'Main'>;
 }
 
 const Tab = createBottomTabNavigator();
-
-const MainTabNavigator: React.FC<MainPageProps> = ({ navigation }) => {
+const MainTabNavigator = ({ navigation }: Props) => {
   return (
     <Tab.Navigator
       screenOptions={{

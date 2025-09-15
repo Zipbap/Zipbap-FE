@@ -8,7 +8,7 @@ type Props = {
   onChange: (tab: 'feeds' | 'bookmarks') => void;
 };
 
-const UserTabs: React.FC<Props> = ({ active, feedCount, bookmarkCount, onChange }) => {
+const UserTabs = ({ active, feedCount, bookmarkCount, onChange }: Props) => {
   return (
     <View className={`mt-4 flex-row`}>
       <TouchableOpacity

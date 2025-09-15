@@ -7,7 +7,7 @@ import UserHeaderSection from '@features/user/ui/header/UserHeaderSection';
 import { mockUser } from '@entities/user/api/mockUser';
 import { User } from '@entities/user/model/userType';
 
-const Mypage: React.FC = () => {
+const Mypage = () => {
   const [user] = useState<User>(mockUser);
   const [tab, setTab] = useState<'feeds' | 'bookmarks'>('feeds');
 

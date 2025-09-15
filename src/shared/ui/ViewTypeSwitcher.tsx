@@ -12,7 +12,7 @@ interface Props {
   onSwitch: (viewType: ViewType) => void;
 }
 
-const ViewTypeSwitcher: React.FC<Props> = ({ viewType, onSwitch }) => {
+const ViewTypeSwitcher = ({ viewType, onSwitch }: Props) => {
   if (viewType === 'article') {
     return <ArticleView onPress={() => onSwitch('feed')} width={26} height={26} />;
   }

@@ -7,11 +7,11 @@ import AppleLoginButton from '@features/auth/ui/AppleLoginButton';
 import KakaoLoginButton from '@features/auth/ui/KakaoLoginButton';
 import type { RootNavigationProp } from '@shared/types/navigation';
 
-interface LoginPageProps {
+interface Props {
   navigation: RootNavigationProp<'Login'>;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ navigation }) => {
+const LoginPage = ({ navigation }: Props) => {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
       <View className="flex-1 items-center justify-center bg-white px-6">

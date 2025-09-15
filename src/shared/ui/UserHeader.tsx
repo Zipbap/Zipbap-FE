@@ -7,11 +7,11 @@ import Header from '@/src/shared/ui/Header';
 
 import { RootNavigationProp } from '../types/navigation';
 
-interface MainPageProps {
+interface Props {
   navigation: RootNavigationProp<'Main'>;
 }
 
-const UserHeader: React.FC<MainPageProps> = ({ navigation }) => {
+const UserHeader = ({ navigation }: Props) => {
   return (
     <Header
       style={undefined}

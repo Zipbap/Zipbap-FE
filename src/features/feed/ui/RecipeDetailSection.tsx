@@ -5,17 +5,13 @@ import ClockGraySvg from '@/assets/img/feed/clock-gray-icon.svg';
 import PersonGraySvg from '@/assets/img/feed/person-icon.svg';
 import StarGraySvg from '@/assets/img/feed/star-gray-icon.svg';
 
-interface RecipeDetailSectionProps {
+interface Props {
   serving?: string;
   cookingTime?: number;
   difficulty?: string;
 }
 
-const RecipeDetailSection: React.FC<RecipeDetailSectionProps> = ({
-  serving,
-  cookingTime,
-  difficulty,
-}) => {
+const RecipeDetailSection = ({ serving, cookingTime, difficulty }: Props) => {
   if (!serving || !cookingTime || !difficulty) {
     return null;
   }

@@ -2,11 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-interface WebViewVideoProps {
+interface Props {
   videoUrl?: string;
 }
 
-const WebViewVideo: React.FC<WebViewVideoProps> = ({ videoUrl }) => {
+const WebViewVideo = ({ videoUrl }: Props) => {
   if (!videoUrl) return null;
 
   return (

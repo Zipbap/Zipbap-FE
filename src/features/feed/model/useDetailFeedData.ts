@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-import type { FeedDetailItem } from '@entities/feed/model/feedDetailTypes';
+import { FeedDetailItem } from '@entities/feed/model/feedDetailTypes';
 import { apiGetDetailData } from '../api/getDetailFeedData';
 
 // NOTE: 디테일 피드 불러오는 훅

@@ -1,4 +1,4 @@
-import type { RecipeDetailItem } from '@/src/entities/recipe/model/RecipeDetailTypes';
+import { RecipeDetailItem } from '@/src/entities/recipe/model/RecipeDetailTypes';
 
 export const dummyRecipeDetail: RecipeDetailItem = {
   id: '2',

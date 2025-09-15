@@ -18,7 +18,7 @@ const SLASH = path.sep;
 const CROSS_API_LAYER = 'entities';
 
 // NOTE: not to be reported again (publicAPI report)
-const alreadyReportedSlices = new Set();
+export const alreadyReportedSlices = new Set();
 
 // cache
 const publicAPICache = new Map();
@@ -27,11 +27,13 @@ const publicAPICache = new Map();
 function checkPublicAPI(targetFolder, filePath) {
   const layerSlice = getLayerSlice(targetFolder, filePath);
 
-  if (
-    hasPublicAPI(publicAPICache, targetFolder, layerSlice) ||
-    alreadyReportedSlices.has(layerSlice)
-  )
+  if (hasPublicAPI(publicAPICache, targetFolder, layerSlice)) {
     return null;
+  }
+
+  if (alreadyReportedSlices.has(layerSlice)) {
+    return null;
+  }
 
   alreadyReportedSlices.add(layerSlice);
 

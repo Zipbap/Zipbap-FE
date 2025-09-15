@@ -5,8 +5,9 @@ import {
   getImportsFromFile,
   hasErrorMessages,
   printErrorMessages,
+  beforeRunCheck,
 } from './utils.js';
-import { checkFSDRules } from './fsd-check.js';
+import { alreadyReportedSlices, checkFSDRules } from './fsd-check.js';
 import { red } from './cli-color.js';
 
 async function runCheck(targetFolder) {
@@ -20,6 +21,7 @@ async function runCheck(targetFolder) {
 
   printErrorMessages(errorMessages);
 }
+
 async function main() {
   const targetFolder = process.argv[2].trim();
 
@@ -37,8 +39,8 @@ async function main() {
       .watch(`${targetFolder}`, {
         ignored: /node_modules/,
       })
-      .on('all', async (event, changedPath) => {
-        console.log(`\n파일 변경 감지: [${event}] ${path.relative(process.cwd(), changedPath)}`);
+      .on('change', async () => {
+        beforeRunCheck();
         await runCheck(targetFolder);
       });
   }

@@ -1,9 +1,11 @@
 import fg from 'fast-glob';
 import fs from 'fs';
-import parser from '@typescript-eslint/parser';
 import path from 'path';
+import parser from '@typescript-eslint/parser';
+
 import { errorMessages } from './error-message.js';
 import { bgBlack, bgGreen } from './cli-color.js';
+import { alreadyReportedSlices } from './fsd-check.js';
 
 // constants
 const SLASH = path.sep;
@@ -104,4 +106,9 @@ export function printErrorMessages(errorMessages) {
 
   console.log(errorMessages.join('\n'));
   console.log(`${bgBlack(`\n아직 해결하지 못한 총 ${errorMessages.length}개의 에러가 있습니다.`)}`);
+}
+
+/** runCheck 이전에 실행되는 함수 */
+export function beforeRunCheck() {
+  alreadyReportedSlices.clear();
 }

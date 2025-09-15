@@ -14,7 +14,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "fsd": "node __tools__/fsd-check/index.js src",
+    "fsd:watch": "node __tools__/fsd-check/index.js src --watch"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md,css,scss}": "prettier --write"
@@ -52,7 +54,9 @@
     "@eslint/js": "^9.34.0",
     "@types/react": "~19.0.10",
     "@typescript-eslint/eslint-plugin": "^8.41.0",
-    "@typescript-eslint/parser": "^8.41.0",
+    "@typescript-eslint/parser": "^8.43.0",
+    "chalk": "^5.6.2",
+    "chokidar": "^4.0.3",
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
@@ -61,6 +65,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-native": "^5.0.0",
+    "fast-glob": "^3.3.3",
     "globals": "^16.3.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.5",

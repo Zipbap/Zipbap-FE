@@ -1,5 +1,4 @@
 import chokidar from 'chokidar';
-import path from 'path';
 import {
   getTypeScriptFiles,
   getImportsFromFile,
@@ -7,10 +6,10 @@ import {
   printErrorMessages,
   beforeRunCheck,
 } from './utils.js';
-import { alreadyReportedSlices, checkFSDRules } from './fsd-check.js';
+import { checkFSDRules } from './fsd-check.js';
 import { red } from './cli-color.js';
 
-async function runCheck(targetFolder) {
+async function runCheck(targetFolder, isWatchMode = false) {
   const files = await getTypeScriptFiles(targetFolder);
   const errorMessages = files
     .flatMap(file => {
@@ -19,7 +18,7 @@ async function runCheck(targetFolder) {
     })
     .filter(hasErrorMessages);
 
-  printErrorMessages(errorMessages);
+  printErrorMessages(errorMessages, isWatchMode);
 }
 
 async function main() {
@@ -32,7 +31,7 @@ async function main() {
     process.exit(1);
   }
 
-  await runCheck(targetFolder);
+  await runCheck(targetFolder, isWatchMode);
 
   if (isWatchMode) {
     chokidar
@@ -41,7 +40,7 @@ async function main() {
       })
       .on('change', async () => {
         beforeRunCheck();
-        await runCheck(targetFolder);
+        await runCheck(targetFolder, isWatchMode);
       });
   }
 }

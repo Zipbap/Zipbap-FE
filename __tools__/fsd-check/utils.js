@@ -4,7 +4,7 @@ import path from 'path';
 import parser from '@typescript-eslint/parser';
 
 import { errorMessages } from './error-message.js';
-import { bgBlack, bgGreen } from './cli-color.js';
+import { bgBlack, bgGreen, gray } from './cli-color.js';
 import { alreadyReportedSlices } from './fsd-check.js';
 
 // constants
@@ -98,14 +98,16 @@ export function hasPublicAPI(publicAPICache, targetFolder, slicePath) {
 }
 
 /** 전체 에러 메시지를 출력합니다. */
-export function printErrorMessages(errorMessages) {
+export function printErrorMessages(errorMessages, isWatchMode) {
   if (errorMessages.length === 0) {
     console.log(`${bgGreen('모든 FSD 규칙을 준수했습니다.')}`);
     return;
   }
 
   console.log(errorMessages.join('\n'));
-  console.log(`${bgBlack(`\n아직 해결하지 못한 총 ${errorMessages.length}개의 에러가 있습니다.`)}`);
+  console.log(bgBlack(`\n아직 해결하지 못한 총 ${errorMessages.length}개의 에러가 있습니다.`));
+
+  if (isWatchMode) console.log(gray('\nctrl + c를 눌러서 종료할 수 있습니다.'));
 }
 
 /** runCheck 이전에 실행되는 함수 */

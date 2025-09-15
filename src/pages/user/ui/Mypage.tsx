@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import FeedGrid from '@features/user/ui/FeedGrid';
 import UserHeaderSection from '@features/user/ui/header/UserHeaderSection';
@@ -11,13 +12,15 @@ const Mypage: React.FC = () => {
   const [tab, setTab] = useState<'feeds' | 'bookmarks'>('feeds');
 
   return (
-    <View className="relative flex-1 bg-white">
-      {/*유저 헤더 섹션*/}
-      <UserHeaderSection user={mockUser} tab={tab} setTab={setTab} />
+    <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
+      <View className="relative flex-1 bg-white">
+        {/*유저 헤더 섹션*/}
+        <UserHeaderSection user={mockUser} tab={tab} setTab={setTab} />
 
-      {/* 피드/북마크 */}
-      <FeedGrid data={tab === 'feeds' ? user.feeds : user.bookmarks} type={tab} />
-    </View>
+        {/* 피드/북마크 */}
+        <FeedGrid data={tab === 'feeds' ? user.feeds : user.bookmarks} type={tab} />
+      </View>
+    </SafeAreaView>
   );
 };
 

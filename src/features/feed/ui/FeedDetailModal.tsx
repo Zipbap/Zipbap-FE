@@ -5,22 +5,22 @@ import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
 import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
-import ShareSvg from '@/assets/img/feed/share-icon.svg';
-import { DetailModal } from '@/src/shared/ui/modal/DetailModal';
-import { DetailModalHeader } from '@/src/shared/ui/modal/DetailModalHeader';
-import RecipeDescription from '@/src/shared/ui/modal/RecipeDescription';
-import RecipeDetails from '@/src/shared/ui/modal/RecipeDetails';
-import RecipeInfoChips from '@/src/shared/ui/modal/RecipeInfoChips';
-import RecipeIngredient from '@/src/shared/ui/modal/RecipeIngredient';
-import RecipeSteps from '@/src/shared/ui/modal/RecipeSteps';
-import RecipeTip from '@/src/shared/ui/modal/RecipeTip';
-import RecipeVideo from '@/src/shared/ui/modal/RecipeVideo';
+
+import ModalCategoriesSection from '@/src/shared/ui/modal/fullScreen/ModalCategoriesSection';
+import ModalContainer from '@/src/shared/ui/modal/fullScreen/ModalContainer';
+import ModalHeader from '@/src/shared/ui/modal/fullScreen/ModalHeader';
+import { useDetailFeedData } from '@features/feed/model/useDetailFeedData';
+import FeedBottomTab from '@features/feed/ui/FeedBottomTab';
+import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
+import RecipeSteps from '@features/feed/ui/RecipeSteps';
+import HeaderRightContent from '@features/feed/ui/header/HeaderRightContent';
 import { cn } from '@shared/lib/cn';
+import type { ViewType } from '@shared/store/useViewTypeStore';
+import { useViewTypeStore } from '@shared/store/useViewTypeStore';
+import ViewTypeSwitcher from '@shared/ui/ViewTypeSwitcher';
+import WebViewVideo from '@shared/ui/WebViewVideo';
 import { defaultShadow } from '@shared/ui/defaultShadow';
-
-import { useDetailFeedData } from '../model/useDetailFeedData';
-
-import FeedBottomTab from './FeedBottomTab';
+import ModalContentSection from '@shared/ui/modal/ModalContentSection';
 
 interface Props {
   visible: boolean;
@@ -30,11 +30,19 @@ interface Props {
 
 const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId = '1' }) => {
   const { getDetailFeed, detailFeed } = useDetailFeedData();
-  const [bookmarked, setBookmarked] = useState(detailFeed?.isBookmarked);
-  const [liked, setLiked] = useState(detailFeed?.isLiked);
+  const [bookmarked, setBookmarked] = useState<boolean | undefined>(detailFeed?.isBookmarked);
+  const [liked, setLiked] = useState<boolean | undefined>(detailFeed?.isLiked);
   const [likeCount, setLikeCount] = useState<number | undefined>(detailFeed?.likes);
-  const [bookmarkCount, setBookmarkCount] = useState(detailFeed?.bookmarks);
+  const [bookmarkCount, setBookmarkCount] = useState<number | undefined>(detailFeed?.bookmarks);
   const [follow, setFollow] = useState<boolean | undefined>(detailFeed?.isFollowing);
+
+  // FIXME: 메인이랑 연동
+  const { viewType, setViewType } = useViewTypeStore();
+  const switchViewType = (viewType: ViewType) => {
+    if (viewType === 'article') setViewType('feed');
+    if (viewType === 'feed') setViewType('image');
+    if (viewType === 'image') setViewType('article');
+  };
 
   // NOTE: feed의 ID를 통해 feed를 받아오는 작업
   useEffect(() => {
@@ -61,35 +69,19 @@ const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId = '1' }) =>
     );
   }
 
-  // NOTE: 헤더에 들어갈 오른쪽 버튼
-  const headerRightContent = (
-    <>
-      <Pressable
-        onPress={() => {
-          setBookmarked(!bookmarked);
-        }}
-      >
-        <View className="flex h-6 w-6 items-center justify-center">
-          {bookmarked ? <BookmarkOnSvg /> : <BookmarkOffSvg />}
-        </View>
-      </Pressable>
-      <Pressable>
-        <ShareSvg />
-      </Pressable>
-    </>
-  );
-
   return (
-    <DetailModal visible={visible} onClose={onClose}>
+    <ModalContainer visible={visible} onClose={onClose}>
       <View
         className="h-[100%] overflow-hidden bg-white"
         style={{ marginTop: Platform.OS === 'ios' ? 25 : 0 }}
       >
         {/* 헤더 */}
-        <DetailModalHeader
+        <ModalHeader
           title="레시피 상세"
           onBackPress={onClose}
-          rightContent={headerRightContent}
+          rightContent={
+            <HeaderRightContent bookmarked={bookmarked} setBookmarked={setBookmarked} />
+          }
         />
 
         {/* 스크롤 영역 */}
@@ -190,24 +182,46 @@ const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId = '1' }) =>
           </View>
           <View className="flex-col items-start">
             <View className="w-full flex-col items-start px-4">
-              {/* 본문 */}
-              <RecipeDescription content={detailFeed.content} />
+              {/* 레시피 소개 */}
+              <ModalContentSection
+                subTitle="레시피 소개"
+                content={<Text className="text-base leading-6 text-g1">{detailFeed.content}</Text>}
+              />
               {/* 카테고리 */}
-              <RecipeInfoChips categories={detailFeed.categories} />
+              <ModalContentSection
+                subTitle="카테고리 및 요리 정보"
+                content={<ModalCategoriesSection categories={detailFeed.categories} />}
+              />
               {/* 인원/요리시간/ 난이도 */}
-              <RecipeDetails
+              <RecipeDetailSection
                 serving={detailFeed.serving}
                 cookingTime={detailFeed.cookingTime}
                 difficulty={detailFeed.difficulty}
               />
               {/* 재료 */}
-              <RecipeIngredient ingredient={detailFeed.ingredients} />
+              <ModalContentSection
+                subTitle="재료"
+                content={
+                  <Text className="text-base leading-6 text-g1">{detailFeed.ingredients}</Text>
+                }
+              />
               {/* 레시피 영상 */}
-              <RecipeVideo videoUrl={detailFeed.video} />
+              <ModalContentSection
+                subTitle="레시피 영상"
+                content={<WebViewVideo videoUrl={detailFeed.video} />}
+              />
               {/* 레시피 순서 */}
-              <RecipeSteps steps={detailFeed.steps} />
+              <ModalContentSection
+                subTitle="레시피 순서"
+                content={<RecipeSteps steps={detailFeed.steps} />}
+                subTitleOption={<ViewTypeSwitcher viewType={viewType} onSwitch={switchViewType} />}
+              />
+
               {/* 레시피 Kick */}
-              <RecipeTip tip={detailFeed.tip} />
+              <ModalContentSection
+                content={<Text className="text-base leading-6 text-g1">{detailFeed.tip}</Text>}
+                subTitle="레시피 Kick"
+              />
             </View>
             <View className="h-[40px]" />
             {/* 바텀 tab */}
@@ -224,7 +238,7 @@ const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId = '1' }) =>
           </View>
         </ScrollView>
       </View>
-    </DetailModal>
+    </ModalContainer>
   );
 };
 

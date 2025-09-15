@@ -7,11 +7,12 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-export const DetailModal = ({ visible, onClose, children }: ModalProps) => {
+const ModalContainer: React.FC<ModalProps> = ({ visible, onClose, children }) => {
   return (
     <Modal
       isVisible={visible}
       onSwipeComplete={onClose}
+      onBackButtonPress={onClose}
       //swipeDirection="down"
       style={{ margin: 0, justifyContent: 'flex-start' }}
       hasBackdrop={false}
@@ -22,3 +23,5 @@ export const DetailModal = ({ visible, onClose, children }: ModalProps) => {
     </Modal>
   );
 };
+
+export default ModalContainer;

@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { Text, View, ScrollView } from 'react-native';
 
-import ArticleView from '@/assets/img/article-view.svg';
-import FeedView from '@/assets/img/feed-view.svg';
-import ImageView from '@/assets/img/image-view.svg';
 import PlusIcon from '@/assets/img/plus.svg';
+import { useBottomSheetModal } from '@pages/recipe/model/useBottomSheetModal';
 import { useViewTypeStore } from '@shared/store/useViewTypeStore';
-import { useBottomSheetModal } from '@shared/ui/modal/bottomSheet/useBottomSheetModal';
+import ViewTypeSwitcher from '@shared/ui/ViewTypeSwitcher';
 
 import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
 
@@ -50,15 +48,7 @@ const MyRecipeCatagory = () => {
 
         {/* 뷰타입 전환 아이콘 */}
         <View className="w-[20%] items-end justify-center">
-          {viewType === 'article' && (
-            <ArticleView onPress={() => setViewType('feed')} width={26} height={26} />
-          )}
-          {viewType === 'feed' && (
-            <FeedView onPress={() => setViewType('image')} width={26} height={26} />
-          )}
-          {viewType === 'image' && (
-            <ImageView onPress={() => setViewType('article')} width={26} height={26} />
-          )}
+          <ViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />
         </View>
       </View>
 

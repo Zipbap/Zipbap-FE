@@ -36,7 +36,6 @@ const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId = '1' }) =>
   const [bookmarkCount, setBookmarkCount] = useState<number | undefined>(detailFeed?.bookmarks);
   const [follow, setFollow] = useState<boolean | undefined>(detailFeed?.isFollowing);
 
-  // FIXME: 메인이랑 연동
   const { viewType, setViewType } = useViewTypeStore();
   const switchViewType = (viewType: ViewType) => {
     if (viewType === 'article') setViewType('feed');

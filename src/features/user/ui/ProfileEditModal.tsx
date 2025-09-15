@@ -21,7 +21,7 @@ interface Props {
   onSave: () => void;
 }
 
-const ProfileEditModal: React.FC<Props> = ({
+const ProfileEditModal = ({
   isVisible,
   onClose,
   nickname,
@@ -33,7 +33,7 @@ const ProfileEditModal: React.FC<Props> = ({
   isProfilePublic,
   setIsProfilePublic,
   onSave,
-}) => {
+}: Props) => {
   const handleChangeImage = async () => {
     const newImageUri = await pickImageFromLibrary();
     if (newImageUri) {

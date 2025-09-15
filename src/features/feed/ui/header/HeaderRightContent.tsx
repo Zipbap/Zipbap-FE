@@ -5,14 +5,11 @@ import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
 import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import ShareSvg from '@/assets/img/feed/share-icon.svg';
 
-interface HeaderRightContentProps {
+interface Props {
   bookmarked?: boolean;
   setBookmarked: React.Dispatch<React.SetStateAction<boolean | undefined>>;
 }
-const HeaderRightContent: React.FC<HeaderRightContentProps> = ({
-  bookmarked = false,
-  setBookmarked,
-}) => {
+const HeaderRightContent = ({ bookmarked = false, setBookmarked }: Props) => {
   return (
     <>
       <Pressable

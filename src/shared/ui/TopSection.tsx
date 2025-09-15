@@ -19,7 +19,7 @@ type Compound = React.FC<Props> & {
 const Header = HeaderDefault;
 const Extension = TopExtensionDefault;
 
-const Root: React.FC<Props> = ({ children, className, style }) => {
+const Root = ({ children, className, style }: Props) => {
   return (
     <View
       className={['w-screen justify-start bg-white', className].filter(Boolean).join(' ')}

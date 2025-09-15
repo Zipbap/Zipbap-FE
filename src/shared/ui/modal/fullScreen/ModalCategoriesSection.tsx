@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, ScrollView, View, Pressable } from 'react-native';
 
-interface RecipeInfoChipsProps {
+interface Props {
   categories?: string[];
 }
 
-const DetailModalCategoriesSection: React.FC<RecipeInfoChipsProps> = ({ categories }) => {
+const DetailModalCategoriesSection = ({ categories }: Props) => {
   if (!categories || categories.length === 0) {
     return null;
   }

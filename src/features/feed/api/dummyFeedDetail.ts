@@ -1,4 +1,4 @@
-import type { FeedDetailItem } from '@entities/feed/model/feedDetailTypes';
+import { FeedDetailItem } from '@entities/feed/model/feedDetailTypes';
 
 export const dummyFeedDetail: FeedDetailItem = {
   id: '2',

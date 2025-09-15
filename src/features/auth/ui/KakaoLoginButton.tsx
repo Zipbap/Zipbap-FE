@@ -4,13 +4,13 @@ import { Text } from 'react-native';
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
 import { kakaoLogin } from '@features/auth/api/login';
 import Button from '@entities/auth/ui/Button';
-import type { RootNavigationProp } from '@shared/types/navigation';
+import { RootNavigationProp } from '@shared/types/navigation';
 
-interface LoginPageProps {
+interface Props {
   navigation: RootNavigationProp<'Login'>;
 }
 
-const KakaoLoginButton: React.FC<LoginPageProps> = ({ navigation }) => {
+const KakaoLoginButton = ({ navigation }: Props) => {
   const [isPressed, setIsPressed] = useState<boolean>(false);
   const [result, setResult] = useState<string>('');
   const signInWithKakao = async (): Promise<void> => {

@@ -14,7 +14,7 @@ type Props = {
   setTab: (tab: 'feeds' | 'bookmarks') => void;
 };
 
-const UserHeaderSection: React.FC<Props> = ({ user, tab, setTab }) => {
+const UserHeaderSection = ({ user, tab, setTab }: Props) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   // 모달 상태를 부모 컴포넌트에서 정의

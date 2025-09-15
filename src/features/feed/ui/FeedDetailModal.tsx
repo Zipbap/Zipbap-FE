@@ -15,8 +15,7 @@ import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
 import RecipeSteps from '@features/feed/ui/RecipeSteps';
 import HeaderRightContent from '@features/feed/ui/header/HeaderRightContent';
 import { cn } from '@shared/lib/cn';
-import type { ViewType } from '@shared/store/useViewTypeStore';
-import { useViewTypeStore } from '@shared/store/useViewTypeStore';
+import { ViewType, useViewTypeStore } from '@shared/store/useViewTypeStore';
 import ViewTypeSwitcher from '@shared/ui/ViewTypeSwitcher';
 import WebViewVideo from '@shared/ui/WebViewVideo';
 import { defaultShadow } from '@shared/ui/defaultShadow';
@@ -28,7 +27,7 @@ interface Props {
   feedId?: string;
 }
 
-const FeedDetailModal: React.FC<Props> = ({ visible, onClose, feedId = '1' }) => {
+const FeedDetailModal = ({ visible, onClose, feedId = '1' }: Props) => {
   const { getDetailFeed, detailFeed } = useDetailFeedData();
   const [bookmarked, setBookmarked] = useState<boolean | undefined>(detailFeed?.isBookmarked);
   const [liked, setLiked] = useState<boolean | undefined>(detailFeed?.isLiked);

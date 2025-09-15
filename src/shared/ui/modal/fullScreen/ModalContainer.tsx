@@ -1,13 +1,13 @@
 import React from 'react';
 import Modal from 'react-native-modal';
 
-interface ModalProps {
+interface Props {
   visible: boolean;
   onClose: () => void;
   children: React.ReactNode;
 }
 
-const ModalContainer: React.FC<ModalProps> = ({ visible, onClose, children }) => {
+const ModalContainer = ({ visible, onClose, children }: Props) => {
   return (
     <Modal
       isVisible={visible}

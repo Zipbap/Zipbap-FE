@@ -2,18 +2,17 @@ import { ReactNode, useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 
-interface BottomSheetModalProps {
+interface Props {
   visible: boolean;
   onClose: () => void;
   children: ReactNode;
   height?: number | 'auto';
 }
 
-const BottomSheetModal = ({ visible, onClose, children, height = 500 }: BottomSheetModalProps) => {
+const BottomSheetModal = ({ visible, onClose, children, height = 500 }: Props) => {
   const handleOutsidePress = useCallback(() => {
     onClose();
   }, [onClose]);
-
   return (
     <Modal
       isVisible={visible}

@@ -1,17 +1,13 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-interface RecipeDescriptionProps {
+interface Props {
   subTitle: string;
   content: React.ReactNode;
   subTitleOption?: React.ReactNode;
 }
 
-const ModalContentSection: React.FC<RecipeDescriptionProps> = ({
-  subTitle,
-  content,
-  subTitleOption = null,
-}) => {
+const ModalContentSection = ({ subTitle, content, subTitleOption = null }: Props) => {
   if (!content || !subTitle) {
     return null;
   }

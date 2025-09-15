@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 
-import type { FeedItem } from '@entities/feed/model/feedTypes';
+import { FeedItem } from '@entities/feed/model/feedTypes';
 import { apiGetData } from '../api/getFeedData';
 
 export const useFeedData = () => {

@@ -1,4 +1,4 @@
-import type { FeedDetailItem } from '@entities/feed/model/feedDetailTypes';
+import { FeedDetailItem } from '@entities/feed/model/feedDetailTypes';
 import { dummyFeedDetail } from './dummyFeedDetail';
 
 export const apiGetDetailData = async (id: string): Promise<FeedDetailItem> => {

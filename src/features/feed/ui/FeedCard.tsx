@@ -6,14 +6,14 @@ import ClockSvg from '@/assets/img/feed/clock-icon.svg';
 import StarSvg from '@/assets/img/feed/star-icon.svg';
 import FeedBottomTab from '@features/feed/ui/FeedBottomTab';
 
-import type { FeedItem } from '@entities/feed/model/feedTypes';
+import { FeedItem } from '@entities/feed/model/feedTypes';
 
 interface Props {
   feed: FeedItem;
   onPress: () => void;
 }
 
-export const FeedCard: React.FC<Props> = ({ feed, onPress }) => {
+export const FeedCard = ({ feed, onPress }: Props) => {
   return (
     <View className="mb-8 flex-col">
       <View className="mb-4 rounded-[20px] bg-white p-4">

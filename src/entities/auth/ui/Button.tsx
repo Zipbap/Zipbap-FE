@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable } from 'react-native';
 import { cn } from '@shared/lib/cn';
 
-interface ButtonProps {
+interface Props {
   children: React.ReactNode;
   isPressed: boolean;
   setIsPressed: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,13 +10,13 @@ interface ButtonProps {
   isPressedFunc?: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   children,
   isPressedFunc = () => {},
   isPressed,
   setIsPressed,
   color = '#FFE300',
-}) => {
+}: Props) => {
   return (
     <Pressable
       onPressIn={() => {

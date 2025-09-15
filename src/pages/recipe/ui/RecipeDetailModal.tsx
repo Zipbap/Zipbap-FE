@@ -11,7 +11,7 @@ import ModalHeader from '@/src/shared/ui/modal/fullScreen/ModalHeader';
 import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
 import RecipeSteps from '@features/feed/ui/RecipeSteps';
 
-import type { ViewType } from '@shared/store/useViewTypeStore';
+import { ViewType } from '@shared/store/useViewTypeStore';
 import ViewTypeSwitcher from '@shared/ui/ViewTypeSwitcher';
 import WebViewVideo from '@shared/ui/WebViewVideo';
 import { defaultShadow } from '@shared/ui/defaultShadow';
@@ -25,7 +25,7 @@ interface Props {
   feedId?: string | null;
 }
 
-const RecipeDetailModal: React.FC<Props> = ({ visible, onClose, feedId }) => {
+const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
   const { getDetailRecipe, detailRecipe } = useDetailRecipeData();
   const [viewType, setViewType] = useState<ViewType>('article');
   useEffect(() => {

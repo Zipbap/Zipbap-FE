@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, ScrollView, View, Pressable } from 'react-native';
+import { Text, ScrollView, View } from 'react-native';
 
 interface Props {
   categories?: string[];

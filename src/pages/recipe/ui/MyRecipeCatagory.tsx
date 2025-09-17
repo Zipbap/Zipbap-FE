@@ -5,7 +5,7 @@ import PlusIcon from '@/assets/img/plus.svg';
 import { useBottomSheetModal } from '@pages/recipe/model/useBottomSheetModal';
 import { useViewTypeStore } from '@shared/store/useViewTypeStore';
 import Chip from '@shared/ui/Chip';
-import ViewTypeSwitcher from '@shared/ui/ViewTypeSwitcher';
+import ViewTypeSwitcher from '@shared/ui/viewType/ViewTypeSwitcher';
 
 import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
 

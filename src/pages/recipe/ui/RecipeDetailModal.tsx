@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, Pressable, ScrollView } from 'react-native';
 
 import ShareSvg from '@/assets/img/feed/share-icon.svg';
@@ -8,12 +8,12 @@ import ModalContainer from '@/src/shared/ui/modal/fullScreen/ModalContainer';
 import ModalHeader from '@/src/shared/ui/modal/fullScreen/ModalHeader';
 
 // FIXME: 추후 경로 수정
+import TwoViewTypeSwitcher from '@/src/shared/ui/viewType/TwoViewTypeSwitcher';
 import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
 import RecipeSteps from '@features/feed/ui/RecipeSteps';
 
-import { ViewType } from '@shared/store/useViewTypeStore';
+import { useTwoViewTypeStore } from '@shared/store/useTwoViewTypeStore';
 import FullWidthButton from '@shared/ui/FullWidthButton';
-import ViewTypeSwitcher from '@shared/ui/ViewTypeSwitcher';
 import WebViewVideo from '@shared/ui/WebViewVideo';
 import { defaultShadow } from '@shared/ui/defaultShadow';
 import ModalContentSection from '@shared/ui/modal/ModalContentSection';
@@ -27,16 +27,11 @@ interface Props {
 
 const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
   const { getDetailRecipe, detailRecipe } = useDetailRecipeData();
-  const [viewType, setViewType] = useState<ViewType>('article');
+  const { viewType, setViewType } = useTwoViewTypeStore();
   useEffect(() => {
     getDetailRecipe(feedId ? feedId : '1');
   }, [feedId, getDetailRecipe]);
 
-  const switchViewType = (viewType: ViewType) => {
-    if (viewType === 'article') setViewType('feed');
-    if (viewType === 'feed') setViewType('image');
-    if (viewType === 'image') setViewType('article');
-  };
   // 헤더에 들어갈 오른쪽 버튼들을 JSX 변수로 정의
   const headerRightContent = (
     <>
@@ -116,7 +111,7 @@ const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
               <ModalContentSection
                 subTitle="레시피 순서"
                 content={<RecipeSteps steps={detailRecipe.steps} />}
-                subTitleOption={<ViewTypeSwitcher viewType={viewType} onSwitch={switchViewType} />}
+                subTitleOption={<TwoViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />}
               />
               {/* 레시피 Kick */}
               <ModalContentSection

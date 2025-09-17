@@ -8,18 +8,18 @@ import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 
 import ModalCategoriesSection from '@/src/shared/ui/modal/fullScreen/ModalCategoriesSection';
 import ModalContainer from '@/src/shared/ui/modal/fullScreen/ModalContainer';
-import ModalHeader from '@/src/shared/ui/modal/fullScreen/ModalHeader';
+import TwoViewTypeSwitcher from '@/src/shared/ui/viewType/TwoViewTypeSwitcher';
 import { useDetailFeedData } from '@features/feed/model/useDetailFeedData';
 import FeedBottomTab from '@features/feed/ui/FeedBottomTab';
 import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
 import RecipeSteps from '@features/feed/ui/RecipeSteps';
 import HeaderRightContent from '@features/feed/ui/header/HeaderRightContent';
 import { cn } from '@shared/lib/cn';
-import { ViewType, useViewTypeStore } from '@shared/store/useViewTypeStore';
-import ViewTypeSwitcher from '@shared/ui/ViewTypeSwitcher';
+import { useTwoViewTypeStore } from '@shared/store/useTwoViewTypeStore';
 import WebViewVideo from '@shared/ui/WebViewVideo';
 import { defaultShadow } from '@shared/ui/defaultShadow';
 import ModalContentSection from '@shared/ui/modal/ModalContentSection';
+import ModalHeader from '@shared/ui/modal/fullScreen/ModalHeader';
 
 interface Props {
   visible: boolean;
@@ -35,13 +35,7 @@ const FeedDetailModal = ({ visible, onClose, feedId = '1' }: Props) => {
   const [bookmarkCount, setBookmarkCount] = useState<number | undefined>(detailFeed?.bookmarks);
   const [follow, setFollow] = useState<boolean | undefined>(detailFeed?.isFollowing);
 
-  const { viewType, setViewType } = useViewTypeStore();
-  const switchViewType = (viewType: ViewType) => {
-    if (viewType === 'article') setViewType('feed');
-    if (viewType === 'feed') setViewType('image');
-    if (viewType === 'image') setViewType('article');
-  };
-
+  const { viewType, setViewType } = useTwoViewTypeStore();
   // NOTE: feed의 ID를 통해 feed를 받아오는 작업
   useEffect(() => {
     getDetailFeed(feedId ? feedId : '1');
@@ -212,7 +206,7 @@ const FeedDetailModal = ({ visible, onClose, feedId = '1' }: Props) => {
               <ModalContentSection
                 subTitle="레시피 순서"
                 content={<RecipeSteps steps={detailFeed.steps} />}
-                subTitleOption={<ViewTypeSwitcher viewType={viewType} onSwitch={switchViewType} />}
+                subTitleOption={<TwoViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />}
               />
 
               {/* 레시피 Kick */}

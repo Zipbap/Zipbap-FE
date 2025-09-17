@@ -20,15 +20,12 @@ const DetailModalCategoriesSection = ({ categories }: Props) => {
       >
         <View className="flex-row items-center gap-2">
           {categories.map((item, index) => (
-            // FIXME: 추후에 컴포넌트 교체할 예정
-            <Pressable
+            <View
               key={index}
-              className={`h-[26px] items-center justify-center rounded-xl bg-sub2 px-4 py-1`}
+              className={`items-center justify-center rounded-2xl bg-sub2 px-[16px] py-[8px]`}
             >
-              <Text className={`text-center text-xs font-bold leading-none text-white`}>
-                {item}
-              </Text>
-            </Pressable>
+              <Text className={`text-center text-[14px] font-semibold text-white`}>{item}</Text>
+            </View>
           ))}
         </View>
       </ScrollView>

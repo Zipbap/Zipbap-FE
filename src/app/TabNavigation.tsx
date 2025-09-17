@@ -8,9 +8,9 @@ import Mypage from '@pages/user/ui/Mypage';
 import MyFeedTopSection from '@widgets/feed/ui/MyFeedTopSection';
 import MyRecipeTopSection from '@widgets/recipe/ui/MyRecipeTopSection';
 import RecipeCreateTopsection from '@widgets/recipe/ui/RecipeCreateTopSection';
+import UserHeader from '@entities/user/ui/UserHeader';
 import { RootNavigationProp } from '@shared/types/navigation';
 import CustomTabBar from '@shared/ui/Tab';
-import UserHeader from '@shared/ui/UserHeader';
 
 interface Props {
   navigation: RootNavigationProp<'Main'>;

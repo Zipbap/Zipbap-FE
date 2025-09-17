@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import PlusIcon from '@/assets/img/plus.svg';
 import { useBottomSheetModal } from '@pages/recipe/model/useBottomSheetModal';
 import { useViewTypeStore } from '@shared/store/useViewTypeStore';
+import Chip from '@shared/ui/Chip';
 import ViewTypeSwitcher from '@shared/ui/ViewTypeSwitcher';
 
 import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
@@ -11,6 +12,7 @@ import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
 const MyRecipeCatagory = () => {
   const { viewType, setViewType } = useViewTypeStore();
   const [catagory] = useState(['점심', '저녁']);
+  const [selected, setSelected] = useState<string>('전체');
 
   // Modal state
   const { bottomSheetVisible, bottomSheetOpen, bottomSheetClose } = useBottomSheetModal();
@@ -20,9 +22,7 @@ const MyRecipeCatagory = () => {
       {/* 카테고리 UI */}
       <View className="mt-1 h-[50px] w-full flex-row items-center justify-between px-1">
         <View className="w-[80%] flex-row items-center">
-          <View className="mr-2 h-[26px] items-center justify-center rounded-xl bg-sub1 px-4 py-1">
-            <Text className="text-center text-xs font-bold leading-none text-white">전체</Text>
-          </View>
+          <Chip label={'전체'} selected={selected === '전체'} onPress={() => setSelected('전체')} />
 
           <ScrollView
             horizontal
@@ -32,14 +32,12 @@ const MyRecipeCatagory = () => {
           >
             <View className="flex-row items-center gap-2">
               {catagory.map((category, index) => (
-                <View
+                <Chip
                   key={index}
-                  className="h-[26px] items-center justify-center rounded-xl bg-g4 px-4 py-1"
-                >
-                  <Text className="text-center text-xs font-bold leading-none text-g2">
-                    {category}
-                  </Text>
-                </View>
+                  label={category}
+                  selected={selected === category}
+                  onPress={() => setSelected(category)}
+                />
               ))}
               <PlusIcon onPress={bottomSheetOpen} width={26} height={26} />
             </View>

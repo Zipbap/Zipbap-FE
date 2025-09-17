@@ -12,11 +12,11 @@ import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
 import RecipeSteps from '@features/feed/ui/RecipeSteps';
 
 import { ViewType } from '@shared/store/useViewTypeStore';
+import FullWidthButton from '@shared/ui/FullWidthButton';
 import ViewTypeSwitcher from '@shared/ui/ViewTypeSwitcher';
 import WebViewVideo from '@shared/ui/WebViewVideo';
 import { defaultShadow } from '@shared/ui/defaultShadow';
 import ModalContentSection from '@shared/ui/modal/ModalContentSection';
-import BasicButton from '@shared/ui/user/BasicButton';
 import { useDetailRecipeData } from '../model/getDetailRecipe';
 
 interface Props {
@@ -125,25 +125,18 @@ const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
               />
               <View className="h-6" />
               {/* 수정하기 버튼 */}
-              <BasicButton
+              <FullWidthButton
                 buttonText="수정하기"
                 onPress={onClose}
                 backgroundColor="#F0EDE6"
-                fontWeight="bold"
-                fontSize={16}
-                rounded="rounded-2xl"
-                paddingY={16}
+                textColor="#60594E"
               />
               {/* 삭제하기 버튼 */}
-              <BasicButton
+              <FullWidthButton
                 buttonText="삭제하기"
                 onPress={onClose}
                 backgroundColor="#DC6E3F"
                 textColor="white"
-                fontWeight="bold"
-                fontSize={16}
-                rounded="rounded-2xl"
-                paddingY={16}
               />
             </View>
             <View className="h-[40px]" />

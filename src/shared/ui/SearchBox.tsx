@@ -77,7 +77,7 @@ const SearchBox = ({ searchTitle }: Props) => {
             onChangeText={setSearchText}
             onFocus={() => setIsSearchBarOn(true)}
             onBlur={() => setIsSearchBarOn(false)}
-            className="h-10 w-full flex-1 text-[14px] font-semibold text-g1"
+            className="h-12 w-full flex-1 text-[14px] font-semibold text-g1"
             placeholderTextColor="#60594E"
           />
           <View className="flex-row items-center justify-start gap-2 p-1">

@@ -6,9 +6,6 @@ import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 
-import ModalCategoriesSection from '@/src/shared/ui/modal/fullScreen/ModalCategoriesSection';
-import ModalContainer from '@/src/shared/ui/modal/fullScreen/ModalContainer';
-import TwoViewTypeSwitcher from '@/src/shared/ui/viewType/TwoViewTypeSwitcher';
 import { useDetailFeedData } from '@features/feed/model/useDetailFeedData';
 import FeedBottomTab from '@features/feed/ui/FeedBottomTab';
 import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
@@ -19,7 +16,10 @@ import { useTwoViewTypeStore } from '@shared/store/useTwoViewTypeStore';
 import WebViewVideo from '@shared/ui/WebViewVideo';
 import { defaultShadow } from '@shared/ui/defaultShadow';
 import ModalContentSection from '@shared/ui/modal/ModalContentSection';
+import ModalCategoriesSection from '@shared/ui/modal/fullScreen/ModalCategoriesSection';
+import ModalContainer from '@shared/ui/modal/fullScreen/ModalContainer';
 import ModalHeader from '@shared/ui/modal/fullScreen/ModalHeader';
+import TwoViewTypeSwitcher from '@shared/ui/viewType/TwoViewTypeSwitcher';
 
 interface Props {
   visible: boolean;

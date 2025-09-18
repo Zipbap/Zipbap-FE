@@ -13,11 +13,15 @@ const ModalContainer = ({ visible, onClose, children }: Props) => {
       isVisible={visible}
       onSwipeComplete={onClose}
       onBackButtonPress={onClose}
-      //swipeDirection="down"
       style={{ margin: 0, justifyContent: 'flex-start' }}
       hasBackdrop={false}
-      swipeThreshold={180}
+      animationIn="slideInUp"
+      animationOut="slideOutDown"
+      animationInTiming={400}
+      animationOutTiming={400}
       propagateSwipe={true}
+      backdropTransitionOutTiming={0}
+      hideModalContentWhileAnimating
     >
       {children}
     </Modal>

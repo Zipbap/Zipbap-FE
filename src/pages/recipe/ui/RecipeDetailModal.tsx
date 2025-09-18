@@ -142,4 +142,4 @@ const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
   );
 };
 
-export default React.memo(RecipeDetailModal);
+export default RecipeDetailModal;

@@ -28,4 +28,4 @@ const ModalContainer = ({ visible, onClose, children }: Props) => {
   );
 };
 
-export default ModalContainer;
+export default React.memo(ModalContainer);

@@ -234,4 +234,4 @@ const FeedDetailModal = ({ visible, onClose, feedId = '1' }: Props) => {
   );
 };
 
-export default React.memo(FeedDetailModal);
+export default FeedDetailModal;

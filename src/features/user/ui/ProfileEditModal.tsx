@@ -1,17 +1,9 @@
 import React, { memo } from 'react';
-import {
-  Image,
-  Pressable,
-  Text,
-  TextInput,
-  View,
-  Switch,
-  Platform,
-  TouchableOpacity,
-} from 'react-native';
+import { Image, Pressable, Text, TextInput, View, Platform, TouchableOpacity } from 'react-native';
 
 import { pickImageFromLibrary } from '@shared/lib/image-picker';
 import FullWidthButton from '@shared/ui/FullWidthButton';
+import ToggleSwitch from '@shared/ui/ToggleSwitch';
 import { defaultShadow } from '@shared/ui/defaultShadow';
 import ModalContainer from '@shared/ui/modal/fullScreen/ModalContainer';
 import ModalHeader from '@shared/ui/modal/fullScreen/ModalHeader';
@@ -116,13 +108,7 @@ const ProfileEditModal = ({
                 ON으로 설정되어있으면 이 프로필을 볼 수 있습니다.
               </Text>
             </View>
-            <Switch
-              trackColor={{ false: '#F0EDE6', true: '#DC6E3F' }}
-              thumbColor={isProfilePublic ? '#FFF' : '#FFF'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={setIsProfilePublic}
-              value={isProfilePublic}
-            />
+            <ToggleSwitch isOn={isProfilePublic} onToggle={setIsProfilePublic} />
           </View>
 
           {/* 저장하기 버튼 */}

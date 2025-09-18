@@ -28,7 +28,7 @@ const Button = ({
         `w-full flex-row items-center justify-center gap-8 rounded-full py-4`,
         isPressed ? 'opacity-50' : 'opacity-100',
       )}
-      style={{ backgroundColor: color }} // ✅ 동적 컬러
+      style={{ backgroundColor: color }}
     >
       {children}
     </Pressable>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text } from 'react-native';
 
 import AppleSvg from '@/assets/img/auth/apple.svg';
-import Button from '@entities/auth/ui/Button';
+import Button from '@entities/user/ui/Button';
 
 const AppleLoginButton = () => {
   const [isPressed, setIsPressed] = useState<boolean>(false);

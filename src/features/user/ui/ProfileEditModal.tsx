@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
-import { Image, Pressable, Text, TextInput, View, Switch, Platform } from 'react-native';
+import { Image, Pressable, Text, TextInput, View, Platform, TouchableOpacity } from 'react-native';
 
-import ModalContainer from '@/src/shared/ui/modal/fullScreen/ModalContainer';
-import ModalHeader from '@/src/shared/ui/modal/fullScreen/ModalHeader';
 import { pickImageFromLibrary } from '@shared/lib/image-picker';
+import FullWidthButton from '@shared/ui/FullWidthButton';
+import ToggleSwitch from '@shared/ui/ToggleSwitch';
 import { defaultShadow } from '@shared/ui/defaultShadow';
-import BasicButton from '@shared/ui/user/BasicButton';
+import ModalContainer from '@shared/ui/modal/fullScreen/ModalContainer';
+import ModalHeader from '@shared/ui/modal/fullScreen/ModalHeader';
 
 interface Props {
   isVisible: boolean;
@@ -65,17 +66,12 @@ const ProfileEditModal = ({
           <Image source={{ uri: profileImage }} className="h-[128px] w-[128px] rounded-full" />
 
           {/* 프로필 사진 변경 버튼 */}
-          <BasicButton
-            buttonText="프로필 사진 변경"
+          <TouchableOpacity
             onPress={handleChangeImage}
-            backgroundColor="#AEA79C"
-            textColor="white"
-            width={124}
-            fontWeight="bold"
-            fontSize={14}
-            rounded="rounded-2xl"
-            paddingY={14}
-          />
+            className={`mt-4 flex h-[40px] w-[124px] items-center justify-center rounded-2xl bg-g5`}
+          >
+            <Text className="text-center text-[14px] font-bold text-white">프로필 사진 변경</Text>
+          </TouchableOpacity>
 
           {/* 닉네임 입력 */}
           <View className="mb-6 w-full">
@@ -112,36 +108,23 @@ const ProfileEditModal = ({
                 ON으로 설정되어있으면 이 프로필을 볼 수 있습니다.
               </Text>
             </View>
-            <Switch
-              trackColor={{ false: '#F0EDE6', true: '#DC6E3F' }}
-              thumbColor={isProfilePublic ? '#FFF' : '#FFF'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={setIsProfilePublic}
-              value={isProfilePublic}
-            />
+            <ToggleSwitch isOn={isProfilePublic} onToggle={setIsProfilePublic} />
           </View>
 
           {/* 저장하기 버튼 */}
-          <BasicButton
+          <FullWidthButton
             buttonText="저장하기"
             onPress={onSave}
             backgroundColor="#DC6E3F"
             textColor="white"
-            fontWeight="bold"
-            fontSize={16}
-            rounded="rounded-2xl"
-            paddingY={16}
           />
 
           {/* 취소 버튼 */}
-          <BasicButton
+          <FullWidthButton
             buttonText="취소"
             onPress={onClose}
             backgroundColor="#F0EDE6"
-            fontWeight="bold"
-            fontSize={16}
-            rounded="rounded-2xl"
-            paddingY={16}
+            textColor="#847C70"
           />
         </View>
       </View>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, TextInput } from 'react-native';
 
 import EditIcon from '@/assets/img/catagory/edit.svg';
 import TrashIcon from '@/assets/img/catagory/trash.svg';
+import FullWidthButton from '@shared/ui/FullWidthButton';
 import ModalContentSection from '@shared/ui/modal/ModalContentSection';
 import BottomSheetModal from '@shared/ui/modal/bottomSheet/BottomSheetModal';
 
@@ -76,24 +77,19 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
       />
       {/* 버튼 그룹 */}
       <View className="mt-12 flex-col items-center">
-        <TouchableOpacity
+        <FullWidthButton
+          buttonText="추가하기"
           onPress={handleCatagoryAdd}
-          className="h-[50px] w-96 flex-row items-center justify-center gap-2 rounded-2xl bg-g5 px-5 py-4"
-          activeOpacity={0.8}
-        >
-          <Text className="font-['Pretendard'] text-base font-bold leading-none text-white">
-            추가하기
-          </Text>
-        </TouchableOpacity>
+          backgroundColor="#AEA79C"
+          textColor="white"
+        />
 
-        <TouchableOpacity
+        <FullWidthButton
+          buttonText="저장하기"
           onPress={handleCatagorySave}
-          className="mt-5 h-[50px] w-96 flex-row items-center justify-center gap-2 rounded-2xl bg-sub1 px-5 py-4"
-        >
-          <Text className="font-['Pretendard'] text-base font-bold leading-none text-white">
-            저장하기
-          </Text>
-        </TouchableOpacity>
+          backgroundColor="#DC6E3F"
+          textColor="white"
+        />
       </View>
     </BottomSheetModal>
   );

@@ -8,7 +8,7 @@ interface Props {
   onPress: () => void;
 }
 
-const Chip = ({ label, selected, onPress }: Props) => {
+const CategoryChipButton = ({ label, selected, onPress }: Props) => {
   return (
     <Pressable
       onPress={onPress}
@@ -29,4 +29,4 @@ const Chip = ({ label, selected, onPress }: Props) => {
   );
 };
 
-export default Chip;
+export default CategoryChipButton;

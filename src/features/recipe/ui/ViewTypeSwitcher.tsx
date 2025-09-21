@@ -5,7 +5,7 @@ import ArticleView from '@/assets/img/article-view.svg';
 import FeedView from '@/assets/img/feed-view.svg';
 import ImageView from '@/assets/img/image-view.svg';
 
-export type ViewType = 'article' | 'feed' | 'image';
+import { ViewType } from '@shared/types/view';
 
 interface Props {
   viewType: ViewType;

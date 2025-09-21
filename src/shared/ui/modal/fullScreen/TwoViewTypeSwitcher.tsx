@@ -4,7 +4,7 @@ import React from 'react';
 import ArticleView from '@/assets/img/article-view.svg';
 import FeedView from '@/assets/img/feed-view.svg';
 
-export type ViewType = 'article' | 'feed';
+import { ViewType } from '@shared/types/view';
 
 interface Props {
   viewType: ViewType;

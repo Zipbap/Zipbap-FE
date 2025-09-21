@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-import EmptyStateButton from '@shared/ui/EmptyStateButton';
+import EmptyScreenActionButton from '@/src/shared/ui/EmptyScreenActionButton';
 
 interface Props {
   video: 'video/mp4' | string;
@@ -20,7 +20,7 @@ const EmptyState = ({ video, title, subtitle, buttonText, onPress }: Props) => {
       <View className="mb-8 h-24 w-24 bg-g5" />
       <Text className="text-lg font-bold color-black">{title}</Text>
       <Text className="mt-1 text-center text-sm color-g2">{subtitle}</Text>
-      <EmptyStateButton buttonText={buttonText} onPress={onPress} />
+      <EmptyScreenActionButton buttonText={buttonText} onPress={onPress} />
     </View>
   );
 };

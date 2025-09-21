@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-
-export type ViewType = 'article' | 'feed' | 'image';
+import { ViewType } from '../types/view';
 
 interface ViewTypeState {
   viewType: ViewType;

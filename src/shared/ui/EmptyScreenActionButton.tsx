@@ -6,7 +6,7 @@ interface Props {
   onPress: () => void;
 }
 
-const EmptyStateButton = ({ buttonText, onPress }: Props) => {
+const EmptyScreenActionButton = ({ buttonText, onPress }: Props) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -17,4 +17,4 @@ const EmptyStateButton = ({ buttonText, onPress }: Props) => {
   );
 };
 
-export default EmptyStateButton;
+export default EmptyScreenActionButton;

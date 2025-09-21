@@ -8,7 +8,6 @@ import ModalContainer from '@/src/shared/ui/modal/fullScreen/ModalContainer';
 import ModalHeader from '@/src/shared/ui/modal/fullScreen/ModalHeader';
 
 // FIXME: 추후 경로 수정
-import TwoViewTypeSwitcher from '@/src/shared/ui/viewType/TwoViewTypeSwitcher';
 import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
 import RecipeSteps from '@features/feed/ui/RecipeSteps';
 
@@ -17,6 +16,7 @@ import FullWidthButton from '@shared/ui/FullWidthButton';
 import WebViewVideo from '@shared/ui/WebViewVideo';
 import { defaultShadow } from '@shared/ui/defaultShadow';
 import ModalContentSection from '@shared/ui/modal/ModalContentSection';
+import TwoViewTypeSwitcher from '@shared/ui/modal/fullScreen/TwoViewTypeSwitcher';
 import { useDetailRecipeData } from '../model/getDetailRecipe';
 
 interface Props {

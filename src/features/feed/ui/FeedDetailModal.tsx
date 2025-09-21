@@ -19,7 +19,7 @@ import ModalContentSection from '@shared/ui/modal/ModalContentSection';
 import ModalCategoriesSection from '@shared/ui/modal/fullScreen/ModalCategoriesSection';
 import ModalContainer from '@shared/ui/modal/fullScreen/ModalContainer';
 import ModalHeader from '@shared/ui/modal/fullScreen/ModalHeader';
-import TwoViewTypeSwitcher from '@shared/ui/viewType/TwoViewTypeSwitcher';
+import TwoViewTypeSwitcher from '@shared/ui/modal/fullScreen/TwoViewTypeSwitcher';
 
 interface Props {
   visible: boolean;

@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
-import {
-  ScrollView,
-  View,
-  KeyboardAvoidingView,
-  Platform,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { ScrollView, View, KeyboardAvoidingView, Platform, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import FullWidthButton from '@shared/ui/FullWidthButton';
 import FormAddRecipeOrder from './FormAddRecipeOrder';
 import FormLongTextInput from './FormLongTextInput';
 import FormMediaUpload from './FormMediaUpload';
@@ -183,22 +177,20 @@ const RecipeCreateForm = () => {
               selectedToggle={recipe.isPrivate ? 'private' : 'public'}
               setSelectedToggle={toggle => updateField('isPrivate', toggle === 'private')}
             />
-            <TouchableOpacity
+
+            <FullWidthButton
+              buttonText="임시저장"
               onPress={handleTempSave}
-              className="my-[12px] h-[48px] items-center justify-center rounded-xl bg-[#F5F2F0]"
-            >
-              <View>
-                <Text className="text-[16px] font-bold">임시저장</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
+              backgroundColor="#F0EDE6"
+              textColor="#60594E"
+            />
+
+            <FullWidthButton
+              buttonText="추가하기"
               onPress={handleFinalizeSave}
-              className="mb-[12px] h-[48px] items-center justify-center rounded-xl bg-[#E37036]"
-            >
-              <View>
-                <Text className="text-[16px] font-bold text-white">저장하기</Text>
-              </View>
-            </TouchableOpacity>
+              backgroundColor="#DC6E3F"
+              textColor="white"
+            />
           </ScrollView>
         </KeyboardAvoidingView>
       </View>

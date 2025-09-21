@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, Pressable, ScrollView } from 'react-native';
 
 import ShareSvg from '@/assets/img/feed/share-icon.svg';
@@ -11,12 +11,12 @@ import ModalHeader from '@/src/shared/ui/modal/fullScreen/ModalHeader';
 import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
 import RecipeSteps from '@features/feed/ui/RecipeSteps';
 
-import { ViewType } from '@shared/store/useViewTypeStore';
-import ViewTypeSwitcher from '@shared/ui/ViewTypeSwitcher';
+import { useTwoViewTypeStore } from '@shared/store/useTwoViewTypeStore';
+import FullWidthButton from '@shared/ui/FullWidthButton';
 import WebViewVideo from '@shared/ui/WebViewVideo';
 import { defaultShadow } from '@shared/ui/defaultShadow';
 import ModalContentSection from '@shared/ui/modal/ModalContentSection';
-import BasicButton from '@shared/ui/user/BasicButton';
+import TwoViewTypeSwitcher from '@shared/ui/modal/fullScreen/TwoViewTypeSwitcher';
 import { useDetailRecipeData } from '../model/getDetailRecipe';
 
 interface Props {
@@ -27,16 +27,11 @@ interface Props {
 
 const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
   const { getDetailRecipe, detailRecipe } = useDetailRecipeData();
-  const [viewType, setViewType] = useState<ViewType>('article');
+  const { viewType, setViewType } = useTwoViewTypeStore();
   useEffect(() => {
     getDetailRecipe(feedId ? feedId : '1');
   }, [feedId, getDetailRecipe]);
 
-  const switchViewType = (viewType: ViewType) => {
-    if (viewType === 'article') setViewType('feed');
-    if (viewType === 'feed') setViewType('image');
-    if (viewType === 'image') setViewType('article');
-  };
   // 헤더에 들어갈 오른쪽 버튼들을 JSX 변수로 정의
   const headerRightContent = (
     <>
@@ -116,7 +111,7 @@ const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
               <ModalContentSection
                 subTitle="레시피 순서"
                 content={<RecipeSteps steps={detailRecipe.steps} />}
-                subTitleOption={<ViewTypeSwitcher viewType={viewType} onSwitch={switchViewType} />}
+                subTitleOption={<TwoViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />}
               />
               {/* 레시피 Kick */}
               <ModalContentSection
@@ -125,25 +120,18 @@ const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
               />
               <View className="h-6" />
               {/* 수정하기 버튼 */}
-              <BasicButton
+              <FullWidthButton
                 buttonText="수정하기"
                 onPress={onClose}
                 backgroundColor="#F0EDE6"
-                fontWeight="bold"
-                fontSize={16}
-                rounded="rounded-2xl"
-                paddingY={16}
+                textColor="#60594E"
               />
               {/* 삭제하기 버튼 */}
-              <BasicButton
+              <FullWidthButton
                 buttonText="삭제하기"
                 onPress={onClose}
                 backgroundColor="#DC6E3F"
                 textColor="white"
-                fontWeight="bold"
-                fontSize={16}
-                rounded="rounded-2xl"
-                paddingY={16}
               />
             </View>
             <View className="h-[40px]" />
@@ -154,4 +142,4 @@ const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
   );
 };
 
-export default React.memo(RecipeDetailModal);
+export default RecipeDetailModal;

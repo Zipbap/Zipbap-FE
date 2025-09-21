@@ -5,7 +5,7 @@ import HeaderLogo from '@/assets/img/header-logo.svg';
 import SettingSvg from '@/assets/img/setting-icon.svg';
 import Header from '@/src/shared/ui/Header';
 
-import { RootNavigationProp } from '../types/navigation';
+import { RootNavigationProp } from '@shared/types/navigation';
 
 interface Props {
   navigation: RootNavigationProp<'Main'>;

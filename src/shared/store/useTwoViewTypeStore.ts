@@ -6,7 +6,7 @@ interface ViewTypeState {
   setViewType: (viewType: ViewType) => void;
 }
 
-export const useViewTypeStore = create<ViewTypeState>(set => ({
+export const useTwoViewTypeStore = create<ViewTypeState>(set => ({
   viewType: 'article',
   setViewType: viewType => set({ viewType }),
 }));

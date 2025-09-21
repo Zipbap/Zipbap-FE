@@ -26,6 +26,12 @@ const BottomSheetModal = ({ visible, onClose, children, height = 500 }: Props) =
       swipeThreshold={100}
       // NOTE: 안에 scrollView, flatList 불가! 모달창 터치 인식을 하기 때문!
       propagateSwipe={false}
+      animationIn="slideInUp"
+      animationOut="slideOutDown"
+      animationInTiming={400}
+      animationOutTiming={400}
+      backdropTransitionOutTiming={0}
+      hideModalContentWhileAnimating
     >
       <TouchableOpacity
         className="flex-1 justify-end"

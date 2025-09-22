@@ -10,6 +10,10 @@ import { alreadyReportedSlices, publicAPICache } from './fsd-check.js';
 // constants
 const SLASH = path.sep;
 
+export function normalizePath(path) {
+  return path.replace(/\\/g, '/');
+}
+
 /** 타입스크립트 기반의 파일을 가져옵니다. */
 export function getTypeScriptFiles(targetFolder) {
   return fg([`${targetFolder}/**/*.{ts,tsx}`], {
@@ -42,18 +46,22 @@ export function getImportsFromFile(filePath) {
 
 /** 파일의 현재 레이어를 가져옵니다. */
 export function getCurrentLayer(targetFolder, filePath) {
-  return filePath.split(`${targetFolder}${SLASH}`)[1].split(SLASH)[0];
+  const relative = path.relative(targetFolder, filePath);
+  const normalized = normalizePath(relative);
+  return normalized.split(SLASH)[0];
 }
 
 /** import 구문의 레이어를 가져옵니다. */
 export function getImportLayer(importPath) {
-  return importPath.split('/')[0].split('@')[1];
+  const normalized = normalizePath(importPath);
+  return normalized.split('/')[0].replace(/^@/, '');
 }
 
 /** FSD 레이어인지 확인합니다. */
 export function isFSDLayer(importPath) {
+  const normalized = normalizePath(importPath);
   return ['@app', '@pages', '@widgets', '@features', '@entities', '@shared'].some(p =>
-    importPath.startsWith(p),
+    normalized.startsWith(p),
   );
 }
 
@@ -77,8 +85,9 @@ export function hasErrorMessages(errorMessages) {
  * 예: pages/auth
  */
 export function getLayerSlice(targetFolder, filePath) {
-  const relativePath = filePath.split(`${targetFolder}${SLASH}`)[1];
-  return relativePath.split(SLASH).slice(0, 2).join(SLASH);
+  const relative = path.relative(targetFolder, filePath);
+  const normalized = normalizePath(relative);
+  return normalized.split('/').slice(0, 2).join('/');
 }
 
 /** Layer/Slice 경로에 Public API가 존재하는지 확인 */

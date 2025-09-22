@@ -8,6 +8,7 @@ import {
   hasPublicAPI,
   isAllowImport,
   isFSDLayer,
+  normalizePath,
 } from './utils.js';
 import { errorMessages } from './error-message.js';
 
@@ -46,7 +47,7 @@ function checkPublicAPI(targetFolder, filePath) {
 /** cross API 방식이 아닌 경우의 에러 메시지 반환 */
 function checkCrossAPI(targetFolder, filePath) {
   // NOTE: cross api 방식이 아닌 경우
-  if (!filePath.includes(`@${CROSS_API_SYMBOL}${SLASH}`)) return null;
+  if (!normalizePath(filePath).includes(`@${CROSS_API_SYMBOL}/`)) return null;
 
   // NOTE: cross api 레이어인 경우
   if (getCurrentLayer(targetFolder, filePath) === CROSS_API_LAYER) return null;
@@ -57,8 +58,8 @@ function checkCrossAPI(targetFolder, filePath) {
 /** invalid alias 사용 경우의 에러 메시지 반환 */
 function checkInvalidAlias(targetFolder, filePath, importPath) {
   const invalidPrefixes = LAYER.map(layer => `@/${targetFolder}/${layer}`);
-
-  if (!invalidPrefixes.some(prefix => importPath.startsWith(prefix))) return null;
+  const normalized = normalizePath(importPath);
+  if (!invalidPrefixes.some(prefix => normalized.startsWith(prefix))) return null;
 
   return errorMessages.invalidAlias(filePath, importPath, targetFolder);
 }
@@ -78,7 +79,7 @@ function checkSlicePublicAPIImport(filePath, importPath, importLayer) {
   if (!['pages', 'widgets', 'features', 'entities'].includes(importLayer)) return null;
 
   // NOTE: "@pages/auth/ui/LoginPage" → ["@pages","auth","ui","LoginPage"]
-  const splitedPath = importPath.split('/');
+  const splitedPath = normalizePath(importPath).split('/');
 
   // NOTE: @pages/{domain}
   if (splitedPath.length === 2) return null;

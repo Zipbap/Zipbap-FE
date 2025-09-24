@@ -6,9 +6,10 @@ import FeedView from '@/assets/img/feed-view.svg';
 
 import { ViewType } from '@shared/types/view';
 
-// FIXME: viewtype omit으로 하나 빼서 수정
+type TwoViewType = Exclude<ViewType, 'image'>;
+
 interface Props {
-  viewType: ViewType;
+  viewType: TwoViewType;
   onSwitch: (viewType: ViewType) => void;
 }
 

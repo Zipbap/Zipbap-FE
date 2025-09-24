@@ -1,4 +1,4 @@
-import { FeedItem } from '@entities/feed/model/feedTypes';
+import { FeedItem } from '@entities/feed';
 
 export const dummyFeeds: FeedItem[] = [
   {

@@ -1,4 +1,4 @@
-import { RecipeDetailItem } from '@entities/recipe/model/RecipeDetailTypes';
+import { RecipeDetailItem } from '@entities/recipe';
 import { dummyRecipeDetail } from './DummyRecipeDetail';
 
 export const apiGetDetailData = async (id: string): Promise<RecipeDetailItem> => {

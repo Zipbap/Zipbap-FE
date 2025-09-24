@@ -8,7 +8,7 @@ import Mypage from '@pages/user/ui/Mypage';
 import MyFeedTopSection from '@widgets/feed/ui/MyFeedTopSection';
 import MyRecipeTopSection from '@widgets/recipe/ui/MyRecipeTopSection';
 import RecipeCreateTopsection from '@widgets/recipe/ui/RecipeCreateTopSection';
-import UserHeader from '@entities/user/ui/UserHeader';
+import { UserHeader } from '@entities/user';
 import { RootNavigationProp } from '@shared/types/navigation';
 import CustomTabBar from '@shared/ui/Tab';
 

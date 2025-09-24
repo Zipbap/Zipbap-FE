@@ -2,11 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, FlatList, Text, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Recipe } from '@entities/recipe/model';
-import { mockRecipes } from '@entities/recipe/model/mockRecipe';
-import ArticleView from '@entities/recipe/ui/ArticleView';
-import FeedView from '@entities/recipe/ui/FeedView';
-import ImageView from '@entities/recipe/ui/ImageView';
+import { ArticleView, mockRecipes, Recipe, FeedView, ImageView } from '@entities/recipe';
 import { useViewTypeStore } from '@shared/store/useViewTypeStore';
 import WebViewAutoVideoPlayer from '@shared/ui/WebViewAutoVideoPlayer';
 

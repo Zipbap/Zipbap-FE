@@ -4,8 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import FeedGrid from '@features/user/ui/FeedGrid';
 import UserHeaderSection from '@features/user/ui/header/UserHeaderSection';
-import { mockUser } from '@entities/user/api/mockUser';
-import { User } from '@entities/user/model/userType';
+import { mockUser, User } from '@entities/user';
 
 const Mypage = () => {
   const [user] = useState<User>(mockUser);

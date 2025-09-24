@@ -6,7 +6,7 @@ import ClockSvg from '@/assets/img/feed/clock-icon.svg';
 import StarSvg from '@/assets/img/feed/star-icon.svg';
 import FeedBottomTab from '@features/feed/ui/FeedBottomTab';
 
-import { FeedItem } from '@entities/feed/model/feedTypes';
+import { FeedItem } from '@entities/feed';
 
 interface Props {
   feed: FeedItem;

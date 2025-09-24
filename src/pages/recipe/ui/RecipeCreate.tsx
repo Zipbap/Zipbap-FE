@@ -4,10 +4,8 @@ import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
-import { Recipe } from '@entities/recipe/model';
-import { mockRecipes } from '@entities/recipe/model/mockRecipe';
-import ArticleView from '@entities/recipe/ui/ArticleView';
-import DetailDeleteComponent from '@entities/recipe/ui/DetailDeleteComponent';
+
+import { mockRecipes, Recipe, ArticleView, DetailDeleteComponent } from '@entities/recipe';
 import { RootNavigationProp } from '@shared/types/navigation';
 
 interface MainPageProps {

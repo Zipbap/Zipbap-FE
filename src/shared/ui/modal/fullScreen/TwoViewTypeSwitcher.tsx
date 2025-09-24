@@ -4,13 +4,11 @@ import React from 'react';
 import ArticleView from '@/assets/img/article-view.svg';
 import FeedView from '@/assets/img/feed-view.svg';
 
-import { ViewType } from '@shared/types/view';
-
-type TwoViewType = Exclude<ViewType, 'image'>;
+import { TwoViewType } from '@shared/types/view';
 
 interface Props {
   viewType: TwoViewType;
-  onSwitch: (viewType: ViewType) => void;
+  onSwitch: (viewType: TwoViewType) => void;
 }
 
 const TwoViewTypeSwitcher = ({ viewType, onSwitch }: Props) => {

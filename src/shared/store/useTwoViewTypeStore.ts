@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import { ViewType } from '../types/view';
+import { TwoViewType } from '../types/view';
 
 interface ViewTypeState {
-  viewType: ViewType;
-  setViewType: (viewType: ViewType) => void;
+  viewType: TwoViewType;
+  setViewType: (viewType: TwoViewType) => void;
 }
 
 export const useTwoViewTypeStore = create<ViewTypeState>(set => ({

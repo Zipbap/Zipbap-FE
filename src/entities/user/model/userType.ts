@@ -1,4 +1,4 @@
-interface Feed {
+export interface Feed {
   id: string;
   imageUrl: string;
 }

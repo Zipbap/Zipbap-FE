@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-import EmptyScreenActionButton from '@/src/shared/ui/EmptyScreenActionButton';
+import EmptyScreenActionButton from '@shared/ui/EmptyScreenActionButton';
 
 interface Props {
   video: 'video/mp4' | string;

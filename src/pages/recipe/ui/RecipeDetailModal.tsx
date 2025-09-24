@@ -3,10 +3,6 @@ import { View, Text, Image, Pressable, ScrollView } from 'react-native';
 
 import ShareSvg from '@/assets/img/feed/share-icon.svg';
 
-import ModalCategoriesSection from '@/src/shared/ui/modal/fullScreen/ModalCategoriesSection';
-import ModalContainer from '@/src/shared/ui/modal/fullScreen/ModalContainer';
-import ModalHeader from '@/src/shared/ui/modal/fullScreen/ModalHeader';
-
 // FIXME: 추후 경로 수정
 import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
 import RecipeSteps from '@features/feed/ui/RecipeSteps';
@@ -16,6 +12,9 @@ import FullWidthButton from '@shared/ui/FullWidthButton';
 import WebViewVideo from '@shared/ui/WebViewVideo';
 import { defaultShadow } from '@shared/ui/defaultShadow';
 import ModalContentSection from '@shared/ui/modal/ModalContentSection';
+import ModalCategoriesSection from '@shared/ui/modal/fullScreen/ModalCategoriesSection';
+import ModalContainer from '@shared/ui/modal/fullScreen/ModalContainer';
+import ModalHeader from '@shared/ui/modal/fullScreen/ModalHeader';
 import TwoViewTypeSwitcher from '@shared/ui/modal/fullScreen/TwoViewTypeSwitcher';
 import { useDetailRecipeData } from '../model/getDetailRecipe';
 

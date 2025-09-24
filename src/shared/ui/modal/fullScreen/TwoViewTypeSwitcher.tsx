@@ -6,6 +6,7 @@ import FeedView from '@/assets/img/feed-view.svg';
 
 import { ViewType } from '@shared/types/view';
 
+// FIXME: viewtype omit으로 하나 빼서 수정
 interface Props {
   viewType: ViewType;
   onSwitch: (viewType: ViewType) => void;

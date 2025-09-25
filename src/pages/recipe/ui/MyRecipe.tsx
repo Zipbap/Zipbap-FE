@@ -3,8 +3,8 @@ import { View, FlatList, Text, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ArticleView, mockRecipes, Recipe, FeedView, ImageView } from '@entities/recipe';
-import { useViewTypeStore } from '@shared/store/useViewTypeStore';
-import WebViewAutoVideoPlayer from '@shared/ui/WebViewAutoVideoPlayer';
+import { useViewTypeStore } from '@shared/store';
+import { WebViewAutoVideoPlayer } from '@shared/ui';
 
 import RecipeDetailModal from './RecipeDetailModal';
 

@@ -1,4 +1,5 @@
 import { FeedItem } from '@entities/feed';
+
 import { dummyFeeds } from './dummyFeeds';
 
 export const apiGetData = async (page: number, limit: number): Promise<FeedItem[]> => {

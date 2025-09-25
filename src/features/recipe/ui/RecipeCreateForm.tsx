@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { ScrollView, View, KeyboardAvoidingView, Platform, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import FullWidthButton from '@shared/ui/FullWidthButton';
+import { FullWidthButton } from '@shared/ui';
+
 import FormAddRecipeOrder from './FormAddRecipeOrder';
 import FormLongTextInput from './FormLongTextInput';
 import FormMediaUpload from './FormMediaUpload';

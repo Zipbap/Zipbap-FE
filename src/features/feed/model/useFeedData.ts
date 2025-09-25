@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 
 import { FeedItem } from '@entities/feed';
+
 import { apiGetData } from '../api/getFeedData';
 
 export const useFeedData = () => {

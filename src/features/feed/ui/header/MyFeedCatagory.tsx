@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View } from 'react-native';
-import CategoryChipButton from '@shared/ui/CategoryChipButton';
+
+import { CategoryChipButton } from '@shared/ui';
 
 const MyFeedCatagory = () => {
   // FIXME: api로 전환

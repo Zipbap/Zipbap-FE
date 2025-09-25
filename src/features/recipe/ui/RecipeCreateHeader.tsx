@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
 import BackIcon from '@/assets/img/back-icon.svg';
-import Header from '@shared/ui/Header';
-import { defaultShadow } from '@shared/ui/defaultShadow';
+import { Header, defaultShadow } from '@shared/ui';
 
 import RecipeCreateConfirmModal from './RecipeCreateConfirmModal';
 

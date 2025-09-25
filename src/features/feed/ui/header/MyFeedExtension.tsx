@@ -1,5 +1,4 @@
-import SearchBox from '@shared/ui/SearchBox';
-import TopSection from '@shared/ui/TopSection';
+import { SearchBox, TopSection } from '@shared/ui';
 
 import MyFeedCatagory from './MyFeedCatagory';
 

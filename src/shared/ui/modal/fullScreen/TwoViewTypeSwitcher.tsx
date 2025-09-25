@@ -1,6 +1,5 @@
 import React from 'react';
 
-// icons
 import ArticleView from '@/assets/img/article-view.svg';
 import FeedView from '@/assets/img/feed-view.svg';
 

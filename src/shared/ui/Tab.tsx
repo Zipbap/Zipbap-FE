@@ -10,7 +10,7 @@ import MypageOn from '@/assets/img/tab/mypage-on.svg';
 import MyRecipeOff from '@/assets/img/tab/myrecipe-off.svg';
 import MyRecipeOn from '@/assets/img/tab/myrecipe-on.svg';
 
-import { cn } from '../lib/cn';
+import { cn } from '../lib';
 
 const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
   const currentRoute = state.routes[state.index].name;

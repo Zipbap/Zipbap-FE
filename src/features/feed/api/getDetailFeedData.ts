@@ -1,4 +1,5 @@
 import { FeedDetailItem } from '@entities/feed';
+
 import { dummyFeedDetail } from './dummyFeedDetail';
 
 export const apiGetDetailData = async (id: string): Promise<FeedDetailItem> => {

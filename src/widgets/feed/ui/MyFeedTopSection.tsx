@@ -1,9 +1,7 @@
 import { View } from 'react-native';
 
-import MyFeedExtension from '@features/feed/ui/header/MyFeedExtension';
-import DefaultHeader from '@shared/ui/DefaultHeader';
-import TopSection from '@shared/ui/TopSection';
-import { defaultShadow } from '@shared/ui/defaultShadow';
+import { MyFeedExtension } from '@features/feed';
+import { DefaultHeader, TopSection, defaultShadow } from '@shared/ui';
 
 const MyFeedTopSection = () => {
   return (

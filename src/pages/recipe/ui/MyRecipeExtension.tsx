@@ -1,4 +1,4 @@
-import SearchBox from '@shared/ui/SearchBox';
+import { SearchBox } from '@shared/ui';
 import TopSection from '@shared/ui/TopSection';
 
 import MyRecipeCatagory from './MyRecipeCatagory';

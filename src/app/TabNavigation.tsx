@@ -1,15 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
-import Feed from '@pages/feed/ui/Feed';
-import MyRecipe from '@pages/recipe/ui/MyRecipe';
-import RecipeCreate from '@pages/recipe/ui/RecipeCreate';
-import Mypage from '@pages/user/ui/Mypage';
-import MyFeedTopSection from '@widgets/feed/ui/MyFeedTopSection';
-import MyRecipeTopSection from '@widgets/recipe/ui/MyRecipeTopSection';
-import RecipeCreateTopsection from '@widgets/recipe/ui/RecipeCreateTopSection';
+import { Feed } from '@pages/feed';
+import { MyRecipe, RecipeCreate } from '@pages/recipe';
+import { Mypage } from '@pages/user';
+import { MyFeedTopSection } from '@widgets/feed';
+import { MyRecipeTopSection, RecipeCreateTopSection } from '@widgets/recipe';
 import { UserHeader } from '@entities/user';
-import { RootNavigationProp } from '@shared/types/navigation';
+import { RootNavigationProp } from '@shared/types';
 import CustomTabBar from '@shared/ui/Tab';
 
 interface Props {
@@ -36,7 +34,7 @@ const MainTabNavigator = ({ navigation }: Props) => {
         name="RecipeCreate"
         component={RecipeCreate}
         options={{
-          header: () => <RecipeCreateTopsection />,
+          header: () => <RecipeCreateTopSection />,
         }}
       />
       <Tab.Screen

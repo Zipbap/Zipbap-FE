@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
 
 import { mockRecipes, Recipe, ArticleView, DetailDeleteComponent } from '@entities/recipe';
-import { RootNavigationProp } from '@shared/types/navigation';
+import { RootNavigationProp } from '@shared/types';
 
 interface MainPageProps {
   navigation: RootNavigationProp<'Main'>;

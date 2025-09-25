@@ -1,8 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, Image } from 'react-native';
 
-import { pickImageFromLibrary } from '@shared/lib/image-picker';
-import { pickVideoFromLibrary } from '@shared/lib/video-picker';
+import { pickImageFromLibrary, pickVideoFromLibrary } from '@shared/lib';
 
 interface Props {
   uploadType: 'image' | 'video';

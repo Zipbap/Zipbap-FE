@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import FeedGrid from '@features/user/ui/FeedGrid';
-import UserHeaderSection from '@features/user/ui/header/UserHeaderSection';
+import { UserHeaderSection, FeedGrid } from '@features/user';
 import { mockUser, User } from '@entities/user';
 
 const Mypage = () => {

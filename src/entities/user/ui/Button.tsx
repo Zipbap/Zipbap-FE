@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable } from 'react-native';
-import { cn } from '@shared/lib/cn';
+
+import { cn } from '@shared/lib';
 
 interface Props {
   children: React.ReactNode;

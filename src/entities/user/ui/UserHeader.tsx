@@ -3,8 +3,8 @@ import { TouchableOpacity } from 'react-native';
 
 import HeaderLogo from '@/assets/img/header-logo.svg';
 import SettingSvg from '@/assets/img/setting-icon.svg';
-import { RootNavigationProp } from '@shared/types/navigation';
-import Header from '@shared/ui/Header';
+import { RootNavigationProp } from '@shared/types';
+import { Header } from '@shared/ui';
 
 interface Props {
   navigation: RootNavigationProp<'Main'>;

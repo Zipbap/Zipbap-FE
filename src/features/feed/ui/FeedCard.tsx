@@ -4,16 +4,16 @@ import { View, Text, Image, Pressable } from 'react-native';
 import BellSvg from '@/assets/img/feed/bell-icon.svg';
 import ClockSvg from '@/assets/img/feed/clock-icon.svg';
 import StarSvg from '@/assets/img/feed/star-icon.svg';
-import FeedBottomTab from '@features/feed/ui/FeedBottomTab';
+import { FeedItem } from '@entities/feed';
 
-import { FeedItem } from '@entities/feed/model/feedTypes';
+import FeedBottomTab from './FeedBottomTab';
 
 interface Props {
   feed: FeedItem;
   onPress: () => void;
 }
 
-export const FeedCard = ({ feed, onPress }: Props) => {
+const FeedCard = ({ feed, onPress }: Props) => {
   return (
     <View className="mb-8 flex-col">
       <View className="mb-4 rounded-[20px] bg-white p-4">
@@ -67,3 +67,5 @@ export const FeedCard = ({ feed, onPress }: Props) => {
     </View>
   );
 };
+
+export default FeedCard;

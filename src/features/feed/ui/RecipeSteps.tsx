@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import { useTwoViewTypeStore } from '@shared/store/useTwoViewTypeStore';
+
+import { useTwoViewTypeStore } from '@shared/store';
 
 interface Step {
   step: number;

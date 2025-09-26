@@ -6,7 +6,7 @@ type OverlayProps = {
   onOutsidePress?: () => void;
 };
 
-export function withTouchableOverlay<P>(WrappedComponent: React.ComponentType<P>) {
+const withTouchableOverlay = <P,>(WrappedComponent: React.ComponentType<P>) => {
   return function OverlayedComponent(props: P & OverlayProps) {
     return (
       <TouchableOverlay onOutsidePress={props.onOutsidePress}>
@@ -14,4 +14,6 @@ export function withTouchableOverlay<P>(WrappedComponent: React.ComponentType<P>
       </TouchableOverlay>
     );
   };
-}
+};
+
+export default withTouchableOverlay;

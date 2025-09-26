@@ -3,9 +3,8 @@ import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Logo from '@/assets/img/logo.svg';
-import AppleLoginButton from '@features/auth/ui/AppleLoginButton';
-import KakaoLoginButton from '@features/auth/ui/KakaoLoginButton';
-import { RootNavigationProp } from '@shared/types/navigation';
+import { AppleLoginButton, KakaoLoginButton } from '@features/auth';
+import { RootNavigationProp } from '@shared/types';
 
 interface Props {
   navigation: RootNavigationProp<'Login'>;

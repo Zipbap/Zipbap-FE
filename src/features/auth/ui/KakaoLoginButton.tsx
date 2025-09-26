@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Text } from 'react-native';
 
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
-import { kakaoLogin } from '@features/auth/api/login';
-import Button from '@entities/user/ui/Button';
-import { RootNavigationProp } from '@shared/types/navigation';
+import { Button } from '@entities/user';
+import { RootNavigationProp } from '@shared/types';
+
+import { kakaoLogin } from '../api/login';
 
 interface Props {
   navigation: RootNavigationProp<'Login'>;

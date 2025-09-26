@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image } from 'react-native';
 
-import EditProfileButton from '@features/user/ui/EditProfileButton';
-import UserTabs from '@features/user/ui/UserTabs';
-import { User } from '@entities/user/model/userType';
-import { defaultShadow } from '@shared/ui/defaultShadow';
+import { User } from '@entities/user';
+import { defaultShadow } from '@shared/ui';
 
+import EditProfileButton from '../EditProfileButton';
 import ProfileEditModal from '../ProfileEditModal';
+import UserTabs from '../UserTabs';
 
 type Props = {
   user: User;

@@ -4,18 +4,20 @@ import { View, Text, Image, Pressable, ScrollView } from 'react-native';
 import ShareSvg from '@/assets/img/feed/share-icon.svg';
 
 // FIXME: 추후 경로 수정
-import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
-import RecipeSteps from '@features/feed/ui/RecipeSteps';
+import { RecipeDetailSection, RecipeSteps } from '@features/feed';
 
-import { useTwoViewTypeStore } from '@shared/store/useTwoViewTypeStore';
-import FullWidthButton from '@shared/ui/FullWidthButton';
-import WebViewVideo from '@shared/ui/WebViewVideo';
-import { defaultShadow } from '@shared/ui/defaultShadow';
-import ModalContentSection from '@shared/ui/modal/ModalContentSection';
-import ModalCategoriesSection from '@shared/ui/modal/fullScreen/ModalCategoriesSection';
-import ModalContainer from '@shared/ui/modal/fullScreen/ModalContainer';
-import ModalHeader from '@shared/ui/modal/fullScreen/ModalHeader';
-import TwoViewTypeSwitcher from '@shared/ui/modal/fullScreen/TwoViewTypeSwitcher';
+import { useTwoViewTypeStore } from '@shared/store';
+import {
+  FullWidthButton,
+  WebViewVideo,
+  defaultShadow,
+  ModalContentSection,
+  ModalCategoriesSection,
+  ModalContainer,
+  ModalHeader,
+  TwoViewTypeSwitcher,
+} from '@shared/ui';
+
 import { useDetailRecipeData } from '../model/getDetailRecipe';
 
 interface Props {

@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-import { RootNavigationProp } from '@shared/types/navigation';
-import ConfirmModal from '@shared/ui/modal/Confirm/ConfirmModal';
+import { RootNavigationProp } from '@shared/types';
+import { ConfirmModal } from '@shared/ui';
 
 const RecipeCreateConfirmModal = ({
   modalVisible,

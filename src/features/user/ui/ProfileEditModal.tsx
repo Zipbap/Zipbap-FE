@@ -1,12 +1,14 @@
 import React, { memo } from 'react';
 import { Image, Pressable, Text, TextInput, View, Platform, TouchableOpacity } from 'react-native';
 
-import { pickImageFromLibrary } from '@shared/lib/image-picker';
-import FullWidthButton from '@shared/ui/FullWidthButton';
-import ToggleSwitch from '@shared/ui/ToggleSwitch';
-import { defaultShadow } from '@shared/ui/defaultShadow';
-import ModalContainer from '@shared/ui/modal/fullScreen/ModalContainer';
-import ModalHeader from '@shared/ui/modal/fullScreen/ModalHeader';
+import { pickImageFromLibrary } from '@shared/lib';
+import {
+  FullWidthButton,
+  ToggleSwitch,
+  ModalContainer,
+  ModalHeader,
+  defaultShadow,
+} from '@shared/ui';
 
 interface Props {
   isVisible: boolean;

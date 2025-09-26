@@ -1,9 +1,7 @@
 import { View } from 'react-native';
 
-import MyRecipeExtension from '@pages/recipe/ui/MyRecipeExtension';
-import DefaultHeader from '@shared/ui/DefaultHeader';
-import TopSection from '@shared/ui/TopSection';
-import { defaultShadow } from '@shared/ui/defaultShadow';
+import { MyRecipeExtension } from '@pages/recipe';
+import { DefaultHeader, TopSection, defaultShadow } from '@shared/ui';
 
 const MyRecipeTopSection = () => {
   return (

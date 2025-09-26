@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { View, ScrollView } from 'react-native';
 
 import PlusIcon from '@/assets/img/plus.svg';
-import { useBottomSheetModal } from '@pages/recipe/model/useBottomSheetModal';
-import ViewTypeSwitcher from '@features/recipe/ui/ViewTypeSwitcher';
-import { useViewTypeStore } from '@shared/store/useViewTypeStore';
-import CategoryChipButton from '@shared/ui/CategoryChipButton';
+import { ViewTypeSwitcher } from '@features/recipe';
+import { useViewTypeStore } from '@shared/store';
+import { CategoryChipButton } from '@shared/ui';
 
+import { useBottomSheetModal } from '../model/useBottomSheetModal';
 import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
 
 const MyRecipeCatagory = () => {

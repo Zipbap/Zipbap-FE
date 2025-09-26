@@ -1,15 +1,13 @@
 import React from 'react';
 
-// icons
 import ArticleView from '@/assets/img/article-view.svg';
 import FeedView from '@/assets/img/feed-view.svg';
 
-import { ViewType } from '@shared/types/view';
+import { TwoViewType } from '@shared/types/view';
 
-// FIXME: viewtype omit으로 하나 빼서 수정
 interface Props {
-  viewType: ViewType;
-  onSwitch: (viewType: ViewType) => void;
+  viewType: TwoViewType;
+  onSwitch: (viewType: TwoViewType) => void;
 }
 
 const TwoViewTypeSwitcher = ({ viewType, onSwitch }: Props) => {

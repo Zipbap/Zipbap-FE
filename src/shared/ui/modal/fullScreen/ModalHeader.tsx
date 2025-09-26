@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Pressable, TextStyle } from 'react-native';
 
 import BackSvg from '@/assets/img/back-icon.svg';
-import { cn } from '@shared/lib/cn';
+import { cn } from '@shared/lib';
 
 interface Props {
   title: string;

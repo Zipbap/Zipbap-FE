@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Text, View, Pressable } from 'react-native';
 
 import DownIcon from '@/assets/img/recipe/down.svg';
-import { cn } from '@shared/lib/cn';
+import { cn } from '@shared/lib';
 
 interface Props {
   title: string;

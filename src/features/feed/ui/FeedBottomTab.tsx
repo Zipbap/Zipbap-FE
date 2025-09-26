@@ -7,7 +7,8 @@ import ChatOffSvg from '@/assets/img/feed/chat-off-icon.svg';
 import ChatOnSvg from '@/assets/img/feed/chat-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
-import { toggleLike, toggleBookmark } from '@features/feed/api/feedBottomTabActionsApi';
+
+import { toggleLike, toggleBookmark } from '../api/feedBottomTabActionsApi';
 
 interface Props {
   initialLikes?: number;

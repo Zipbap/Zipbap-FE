@@ -3,9 +3,7 @@ import { Text, View, ScrollView, TextInput } from 'react-native';
 
 import EditIcon from '@/assets/img/catagory/edit.svg';
 import TrashIcon from '@/assets/img/catagory/trash.svg';
-import FullWidthButton from '@shared/ui/FullWidthButton';
-import ModalContentSection from '@shared/ui/modal/ModalContentSection';
-import BottomSheetModal from '@shared/ui/modal/bottomSheet/BottomSheetModal';
+import { FullWidthButton, ModalContentSection, BottomSheetModal } from '@shared/ui';
 
 interface Props {
   bottomSheetVisible: boolean;

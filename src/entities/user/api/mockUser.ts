@@ -1,4 +1,4 @@
-import { User } from '../model/userType';
+import { User } from '..';
 // NOTE: 목데이터
 export const mockUser: User = {
   id: '1',

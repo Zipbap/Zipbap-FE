@@ -6,20 +6,22 @@ import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 
-import { useDetailFeedData } from '@features/feed/model/useDetailFeedData';
-import FeedBottomTab from '@features/feed/ui/FeedBottomTab';
-import RecipeDetailSection from '@features/feed/ui/RecipeDetailSection';
-import RecipeSteps from '@features/feed/ui/RecipeSteps';
-import HeaderRightContent from '@features/feed/ui/header/HeaderRightContent';
-import { cn } from '@shared/lib/cn';
-import { useTwoViewTypeStore } from '@shared/store/useTwoViewTypeStore';
-import WebViewVideo from '@shared/ui/WebViewVideo';
-import { defaultShadow } from '@shared/ui/defaultShadow';
-import ModalContentSection from '@shared/ui/modal/ModalContentSection';
-import ModalCategoriesSection from '@shared/ui/modal/fullScreen/ModalCategoriesSection';
-import ModalContainer from '@shared/ui/modal/fullScreen/ModalContainer';
-import ModalHeader from '@shared/ui/modal/fullScreen/ModalHeader';
-import TwoViewTypeSwitcher from '@shared/ui/modal/fullScreen/TwoViewTypeSwitcher';
+import { cn } from '@shared/lib';
+import { useTwoViewTypeStore } from '@shared/store';
+import {
+  WebViewVideo,
+  defaultShadow,
+  ModalContentSection,
+  ModalCategoriesSection,
+  ModalContainer,
+  ModalHeader,
+  TwoViewTypeSwitcher,
+} from '@shared/ui';
+
+import { RecipeSteps, RecipeDetailSection } from '..';
+import { useDetailFeedData } from '../model/useDetailFeedData';
+import FeedBottomTab from './FeedBottomTab';
+import HeaderRightContent from './header/HeaderRightContent';
 
 interface Props {
   visible: boolean;

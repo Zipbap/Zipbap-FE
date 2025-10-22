@@ -2,6 +2,11 @@
 # NOTE: https://github.com/facebook/react-native/blob/main/.gitignore
 
 # Dependencies
+*.ipa
+*.xcarchive
+*.dSYM.zip
+*.dSYM
+
 node_modules/
 package-lock.json
 .vscode/
@@ -76,3 +81,4 @@ Thumbs.db
 # Env files
 .env
 .env*.local
+credentials.json

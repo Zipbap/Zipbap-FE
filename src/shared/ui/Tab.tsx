@@ -24,7 +24,7 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
 
   return (
     <View
-      className="absolute bottom-[33px] m-[16px] h-[68px] w-[90%] flex-row justify-around self-center rounded-full bg-white py-1.5 pl-8 pr-9"
+      className="absolute bottom-3 m-[16px] h-[68px] w-[90%] flex-row justify-around self-center rounded-full bg-white py-1.5 pl-8 pr-9"
       style={{
         shadowColor: '#847C70',
         shadowOffset: { width: 0, height: 0 },

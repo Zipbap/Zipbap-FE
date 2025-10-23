@@ -65,10 +65,7 @@ const FeedDetailModal = ({ visible, onClose, feedId = '1' }: Props) => {
 
   return (
     <ModalContainer visible={visible} onClose={onClose}>
-      <View
-        className="h-[100%] overflow-hidden bg-white"
-        style={{ marginTop: Platform.OS === 'ios' ? 25 : 0 }}
-      >
+      <View className="h-[100%] overflow-hidden bg-white">
         {/* 헤더 */}
         <ModalHeader
           title="레시피 상세"

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, Image, Pressable, ScrollView } from 'react-native';
 
+import { SafeAreaView } from 'react-native-safe-area-context';
 import ShareSvg from '@/assets/img/feed/share-icon.svg';
 
 // FIXME: 추후 경로 수정
@@ -53,7 +54,7 @@ const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
 
   return (
     <ModalContainer visible={visible} onClose={onClose}>
-      <View className="h-[100%] overflow-hidden bg-white">
+      <SafeAreaView className="flex-1 bg-white">
         {/* 헤더 */}
         <ModalHeader title="레시피 상세" onBackPress={onClose} rightContent={headerRightContent} />
 
@@ -138,7 +139,7 @@ const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
             <View className="h-[40px]" />
           </View>
         </ScrollView>
-      </View>
+      </SafeAreaView>
     </ModalContainer>
   );
 };

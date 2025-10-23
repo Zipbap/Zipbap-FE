@@ -11,7 +11,7 @@ export interface User {
   following: number; //팔로잉
   feedCount: number; //피드 수
   bookmarkCount: number; //북마크 수
-  feeds: Feed[]; //피드 배열
+  feeds: UserFeed[]; //피드 배열
   bookmarks: Feed[]; // 북마크 배열
   isPublic: boolean;
 }

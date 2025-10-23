@@ -2,6 +2,10 @@
 # NOTE: https://github.com/facebook/react-native/blob/main/.gitignore
 
 # Dependencies
+Payload/
+Symbols/
+Zipbap_extracted/
+*.app/
 *.ipa
 *.xcarchive
 *.dSYM.zip

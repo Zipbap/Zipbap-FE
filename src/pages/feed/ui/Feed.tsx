@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FeedDetailModal, FeedCard, useFeedData } from '@features/feed';
 import { FeedItem } from '@entities/feed';
@@ -19,7 +18,7 @@ const Feed = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
+    <View style={{ flex: 1 }}>
       <View className="flex-1 items-center justify-start bg-g4">
         <View className="h-full w-full px-[8px] pt-6">
           <FlatList
@@ -38,7 +37,7 @@ const Feed = () => {
           onClose={() => setSelectedFeed(null)}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

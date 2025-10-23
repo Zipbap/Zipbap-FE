@@ -1,4 +1,4 @@
-// NOTE: shared/ui
+// shared/ui
 export { default as CategoryChipButton } from './CategoryChipButton';
 export { default as DefaultHeader } from './DefaultHeader';
 export { default as EmptyScreenActionButton } from './EmptyScreenActionButton';

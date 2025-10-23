@@ -1,3 +1,3 @@
 export { cn } from './cn';
-export { pickImageFromLibrary } from './image-picker';
-export { pickVideoFromLibrary } from './video-picker';
+export { pickImageFromLibrary } from './media-picker';
+export { pickVideoFromLibrary } from './media-picker';

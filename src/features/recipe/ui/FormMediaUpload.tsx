@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, Image } from 'react-native';
-
-import { pickImageFromLibrary, pickVideoFromLibrary } from '@shared/lib';
+import { getUploadText } from '../lib/getUploadText';
+import { useMediaUpload } from '../lib/useMediaUpload';
 
 interface Props {
   uploadType: 'image' | 'video';
@@ -11,20 +11,10 @@ interface Props {
 }
 
 const FormMediaUpload = ({ uploadType, isThumbnail, value, onUpload }: Props) => {
-  const imageUpload = async () => {
-    const uri = await pickImageFromLibrary();
-    if (uri) onUpload(uri);
-  };
+  const { upload } = useMediaUpload(onUpload);
+  const handleUpload = () => upload(uploadType);
 
-  const videoUpload = async () => {
-    const uri = await pickVideoFromLibrary();
-    if (uri) onUpload(uri);
-  };
-
-  const handleUpload = () => {
-    if (uploadType === 'image') imageUpload();
-    if (uploadType === 'video') videoUpload();
-  };
+  const { title, description, buttonText } = getUploadText({ uploadType, isThumbnail, value });
 
   return (
     <View
@@ -40,13 +30,9 @@ const FormMediaUpload = ({ uploadType, isThumbnail, value, onUpload }: Props) =>
           />
         ) : (
           <>
-            <Text className="text-center text-[18px] font-bold text-[#171212]">
-              {uploadType === 'image' ? (isThumbnail ? '대표 사진' : '요리 사진') : '요리 영상'}
-            </Text>
+            <Text className="text-center text-[18px] font-bold text-[#171212]">{title}</Text>
             <Text className="mt-[8px] text-center text-[14px] font-normal text-[#171212]">
-              {uploadType === 'image'
-                ? '요리 사진을 업로드 해주세요'
-                : '요리 제작 영상을 업로드해주세요'}
+              {description}
             </Text>
           </>
         )}
@@ -55,15 +41,7 @@ const FormMediaUpload = ({ uploadType, isThumbnail, value, onUpload }: Props) =>
           className="mt-[24px] h-10 min-w-20 max-w-[480px] items-center justify-center rounded-xl bg-[#F5F2F0] px-4"
           onPress={handleUpload}
         >
-          <Text className="text-center font-bold text-[#171212]">
-            {uploadType === 'image'
-              ? value
-                ? '사진 다시 업로드'
-                : '사진 업로드'
-              : value
-                ? '영상 다시 업로드'
-                : '영상 업로드'}
-          </Text>
+          <Text className="text-center font-bold text-[#171212]">{buttonText}</Text>
         </TouchableOpacity>
       </View>
     </View>

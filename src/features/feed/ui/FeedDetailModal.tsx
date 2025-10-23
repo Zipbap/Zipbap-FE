@@ -18,9 +18,10 @@ import {
   TwoViewTypeSwitcher,
 } from '@shared/ui';
 
-import { RecipeSteps, RecipeDetailSection } from '..';
 import { useDetailFeedData } from '../model/useDetailFeedData';
 import FeedBottomTab from './FeedBottomTab';
+import RecipeDetailSection from './RecipeDetailSection';
+import RecipeSteps from './RecipeSteps';
 import HeaderRightContent from './header/HeaderRightContent';
 
 interface Props {

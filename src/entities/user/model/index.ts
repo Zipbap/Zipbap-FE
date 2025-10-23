@@ -1,7 +1,6 @@
-export interface Feed {
-  id: string;
-  imageUrl: string;
-}
+import { Feed } from '@entities/feed';
+
+export type UserFeed = Pick<Feed, 'id' | 'mainImage'>;
 
 export interface User {
   id: string;

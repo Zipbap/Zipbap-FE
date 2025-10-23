@@ -1,1 +1,8 @@
-export { MyRecipe, RecipeCreate, MyRecipeExtension, RecipeCreateExtension } from './ui';
+export {
+  MyRecipe,
+  RecipeCreate,
+  MyRecipeExtension,
+  RecipeCreateExtension,
+  MyRecipeTopSection,
+  RecipeCreateTopSection,
+} from './ui';

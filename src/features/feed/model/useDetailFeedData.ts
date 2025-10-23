@@ -1,12 +1,12 @@
 import { useState, useCallback } from 'react';
 
-import { FeedDetailItem } from '@entities/feed';
+import { FeedDetail } from '@entities/feed';
 
 import { apiGetDetailData } from '../api/getDetailFeedData';
 
 // NOTE: 디테일 피드 불러오는 훅
 export const useDetailFeedData = () => {
-  const [detailFeed, setDetailFeed] = useState<FeedDetailItem>();
+  const [detailFeed, setDetailFeed] = useState<FeedDetail>();
 
   const getDetailFeed = useCallback(async (id: string) => {
     try {

@@ -1,6 +1,6 @@
-import { FeedDetailItem } from '@entities/feed';
+import { FeedDetail } from '@entities/feed';
 
-export const dummyFeedDetail: FeedDetailItem = {
+export const dummyFeedDetail: FeedDetail = {
   id: '2',
   profileImage: 'https://placehold.co/100x100?text=Profile',
   nickname: '요리왕 키키',

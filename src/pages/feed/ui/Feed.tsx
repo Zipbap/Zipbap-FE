@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
 
 import { FeedDetailModal, FeedCard, useFeedData } from '@features/feed';
-import { FeedItem } from '@entities/feed';
+import { Feed as FeedItem } from '@entities/feed';
 
 const Feed = () => {
   const { dataList, onEndReached, onRefresh, isRefreshing } = useFeedData();

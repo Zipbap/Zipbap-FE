@@ -1,6 +1,6 @@
-import { FeedItem } from '@entities/feed';
+import { Feed } from '@entities/feed';
 
-export const dummyFeeds: FeedItem[] = [
+export const dummyFeeds: Feed[] = [
   {
     id: '1',
     profileImage: 'https://placekitten.com/100/100',

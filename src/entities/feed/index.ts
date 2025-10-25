@@ -1,3 +1,1 @@
-// NOTE: user model
-export { FeedDetailItem } from './model/feedDetailTypes';
-export { FeedItem } from './model/feedTypes';
+export { Feed, FeedDetail, RecipeStep } from './model/index';

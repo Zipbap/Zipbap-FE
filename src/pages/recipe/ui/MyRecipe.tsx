@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { View, FlatList, Text, Pressable } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
 import { ArticleView, mockRecipes, Recipe, FeedView, ImageView } from '@entities/recipe';
 import { useViewTypeStore } from '@shared/store';
 import { WebViewAutoVideoPlayer } from '@shared/ui';
@@ -19,9 +17,9 @@ const MyRecipe = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
+    <View style={{ flex: 1 }}>
       <View className="h-full w-full flex-1 items-center justify-start bg-white">
-        <View className="h-full w-full px-6 pt-[20px]">
+        <View className="h-full w-full px-6">
           {!isRecipeListEmpty ? (
             <FlatList
               key={viewType}
@@ -66,7 +64,7 @@ const MyRecipe = () => {
         feedId={selectedRecipeId}
         onClose={() => setSelectedRecipeId(null)}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 

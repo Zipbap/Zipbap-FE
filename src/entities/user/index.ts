@@ -1,9 +1,9 @@
-// NOTE: user api
+// user api
 export { mockUser } from './api/mockUser';
 
-// NOTE: user model
-export { User, Feed, FeedEmpty, BookmarkEmpty } from './model/userType';
+// user model
+export { User, UserFeed, FeedEmpty, BookmarkEmpty } from './model';
 
-// NOTE: user UI
+// user UI
 export { default as Button } from './ui/Button';
 export { default as UserHeader } from './ui/UserHeader';

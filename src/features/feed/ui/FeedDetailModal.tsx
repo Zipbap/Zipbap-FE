@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Pressable, ScrollView, Platform } from 'react-native';
+import { View, Text, Image, Pressable, ScrollView } from 'react-native';
 
 import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
 import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
@@ -18,9 +18,10 @@ import {
   TwoViewTypeSwitcher,
 } from '@shared/ui';
 
-import { RecipeSteps, RecipeDetailSection } from '..';
 import { useDetailFeedData } from '../model/useDetailFeedData';
 import FeedBottomTab from './FeedBottomTab';
+import RecipeDetailSection from './RecipeDetailSection';
+import RecipeSteps from './RecipeSteps';
 import HeaderRightContent from './header/HeaderRightContent';
 
 interface Props {
@@ -65,10 +66,7 @@ const FeedDetailModal = ({ visible, onClose, feedId = '1' }: Props) => {
 
   return (
     <ModalContainer visible={visible} onClose={onClose}>
-      <View
-        className="h-[100%] overflow-hidden bg-white"
-        style={{ marginTop: Platform.OS === 'ios' ? 25 : 0 }}
-      >
+      <View className="h-[100%] overflow-hidden bg-white">
         {/* 헤더 */}
         <ModalHeader
           title="레시피 상세"

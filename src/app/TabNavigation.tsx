@@ -2,10 +2,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
 import { Feed } from '@pages/feed';
-import { MyRecipe, RecipeCreate } from '@pages/recipe';
+import { MyRecipe, RecipeCreate, MyRecipeTopSection, RecipeCreateTopSection } from '@pages/recipe';
 import { Mypage } from '@pages/user';
 import { MyFeedTopSection } from '@widgets/feed';
-import { MyRecipeTopSection, RecipeCreateTopSection } from '@widgets/recipe';
 import { UserHeader } from '@entities/user';
 import { RootNavigationProp } from '@shared/types';
 import CustomTabBar from '@shared/ui/Tab';

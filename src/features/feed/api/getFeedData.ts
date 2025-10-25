@@ -1,8 +1,8 @@
-import { FeedItem } from '@entities/feed';
+import { Feed } from '@entities/feed';
 
 import { dummyFeeds } from './dummyFeeds';
 
-export const apiGetData = async (page: number, limit: number): Promise<FeedItem[]> => {
+export const apiGetData = async (page: number, limit: number): Promise<Feed[]> => {
   // NOTE: 실제 API라면 fetch 호출, 더미데이터 페이징 흉내
   const start = page * limit;
   const end = start + limit;

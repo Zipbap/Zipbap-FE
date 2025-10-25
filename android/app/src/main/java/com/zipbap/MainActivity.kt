@@ -1,4 +1,4 @@
-package com.kgs9843.zipbap
+package com.zipbap
 
 import android.os.Build
 import android.os.Bundle

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
 
@@ -21,7 +20,7 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
+    <View style={{ flex: 1 }}>
       <View className="h-full w-full flex-1 bg-white">
         <View className="h-full w-full px-6 pt-[20px]">
           <FlatList
@@ -52,7 +51,7 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
           <PlusIcon width={36} height={36} />
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

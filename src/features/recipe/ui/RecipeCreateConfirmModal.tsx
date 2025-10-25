@@ -1,34 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-
-import { RootNavigationProp } from '@shared/types';
 import { ConfirmModal } from '@shared/ui';
+import { useRecipeConfirmAction } from '../model/useRecipeConfirmAction';
 
-const RecipeCreateConfirmModal = ({
-  modalVisible,
-  setModalVisible,
-}: {
+interface Props {
   modalVisible: boolean;
   setModalVisible: (visible: boolean) => void;
-}) => {
-  const navigation = useNavigation<RootNavigationProp<'Main'>>();
+}
 
-  const handleAction = (type: 'tempSave' | 'save' | 'delete') => {
-    switch (type) {
-      case 'tempSave':
-        console.log('임시저장 실행');
-        break;
-      case 'save':
-        console.log('저장 실행');
-        break;
-      case 'delete':
-        console.log('삭제 실행');
-        break;
-    }
-    setModalVisible(false);
-    if (type !== 'tempSave') navigation.goBack();
-  };
+const RecipeCreateConfirmModal = ({ modalVisible, setModalVisible }: Props) => {
+  const { handleAction: handleConfirmAction } = useRecipeConfirmAction(setModalVisible);
 
   return (
     // FIXME: modal 퍼블리싱 작업
@@ -49,7 +30,7 @@ const RecipeCreateConfirmModal = ({
         <>
           <TouchableOpacity
             className="inline-flex h-11 flex-col items-center justify-center gap-2 self-stretch border-b-[0.50px] border-g6"
-            onPress={() => handleAction('tempSave')}
+            onPress={() => handleConfirmAction('tempSave')}
           >
             <Text className="justify-center text-center font-['Pretendard'] text-base font-medium leading-snug text-g2">
               임시저장
@@ -57,7 +38,7 @@ const RecipeCreateConfirmModal = ({
           </TouchableOpacity>
           <TouchableOpacity
             className="inline-flex h-11 flex-col items-center justify-center gap-2 self-stretch border-b-[0.50px] border-g6"
-            onPress={() => handleAction('save')}
+            onPress={() => handleConfirmAction('save')}
           >
             <Text className="justify-center text-center font-['Pretendard'] text-base font-medium leading-snug text-g2">
               저장
@@ -65,7 +46,7 @@ const RecipeCreateConfirmModal = ({
           </TouchableOpacity>
           <TouchableOpacity
             className="inline-flex h-11 flex-col items-center justify-center gap-2 self-stretch"
-            onPress={() => handleAction('delete')}
+            onPress={() => handleConfirmAction('delete')}
           >
             <Text className="justify-center text-center font-['Pretendard'] text-base font-medium leading-snug text-g2">
               삭제

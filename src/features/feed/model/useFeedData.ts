@@ -1,14 +1,12 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
-
-import { FeedItem } from '@entities/feed';
-
+import { Feed } from '@entities/feed';
 import { apiGetData } from '../api/getFeedData';
 
 export const useFeedData = () => {
   const page = useRef(0);
   const isLoading = useRef(false);
   const [isRefreshing, setIsRefreshing] = useState(false); // 새로 추가된 상태
-  const [dataList, setDataList] = useState<FeedItem[]>([]);
+  const [dataList, setDataList] = useState<Feed[]>([]);
   const limit = 10; //페이지 불러올 개수
 
   //피드들 FETCH

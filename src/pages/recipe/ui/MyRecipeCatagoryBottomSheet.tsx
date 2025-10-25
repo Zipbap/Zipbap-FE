@@ -44,7 +44,7 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
               {originalCategory.map((category, index) => (
                 <View
                   key={index}
-                  className="flex-row items-center justify-start gap-56 self-stretch py-4"
+                  className="flex-row items-center justify-between gap-56 self-stretch py-4"
                 >
                   <Text>{category}</Text>
                   <View className="flex-row gap-[14px]">
@@ -62,15 +62,13 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
       <ModalContentSection
         subTitle="카테고리 추가"
         content={
-          <>
-            <TextInput
-              className="h-14 w-96 items-center justify-start overflow-hidden rounded-2xl bg-g4 px-5 py-4 text-[14px] font-medium text-g2"
-              placeholder="새 카테고리 이름"
-              placeholderTextColor="#847C70"
-              value={newCategory}
-              onChangeText={setNewCategory}
-            />
-          </>
+          <TextInput
+            className="h-14 items-center justify-start overflow-hidden rounded-2xl bg-g4 px-5 py-4 text-[14px] font-medium text-g2"
+            placeholder="새 카테고리 이름"
+            placeholderTextColor="#847C70"
+            value={newCategory}
+            onChangeText={setNewCategory}
+          />
         }
       />
       {/* 버튼 그룹 */}

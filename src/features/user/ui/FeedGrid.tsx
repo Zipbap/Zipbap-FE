@@ -2,11 +2,11 @@ import React from 'react';
 import { FlatList, Image, View } from 'react-native';
 
 import FeedsSvg from '@/assets/img/feeds-icon.svg';
-import { Feed } from '@entities/user';
+import { UserFeed } from '@entities/user';
 import EmptyState from './EmptyState';
 
 interface Props {
-  data: Feed[];
+  data: UserFeed[];
   type: 'feeds' | 'bookmarks';
 }
 
@@ -37,7 +37,7 @@ const FeedGrid = ({ data, type }: Props) => {
             <View className="absolute right-2 top-2 z-10">
               <FeedsSvg />
             </View>
-            <Image source={{ uri: item.imageUrl }} className="h-[150px] w-[130px] bg-g5" />
+            <Image source={{ uri: item.mainImage }} className="h-[150px] w-[130px] bg-g5" />
           </View>
         )}
         keyExtractor={item => item.id}

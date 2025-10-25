@@ -1,15 +1,13 @@
 import React from 'react';
 import { Pressable, Text, View, StyleSheet, Platform } from 'react-native';
-
 import { cn } from '@shared/lib';
 
-const FormRecipeVisibilityToggle = ({
-  selectedToggle,
-  setSelectedToggle,
-}: {
+interface Props {
   selectedToggle: 'public' | 'private';
   setSelectedToggle: (toggle: 'public' | 'private') => void;
-}) => {
+}
+
+const FormRecipeVisibilityToggle = ({ selectedToggle, setSelectedToggle }: Props) => {
   return (
     <View className="my-[12px] h-[32px] w-full flex-row rounded-lg bg-g6 p-[2px]">
       {/* 공개 */}

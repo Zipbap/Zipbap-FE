@@ -3,7 +3,6 @@ apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
-
 // NOTE: env파일을 위한 설정
 def kakaoKey
 def dotenv = new Properties()
@@ -15,10 +14,6 @@ if(envFile.exists()){
     // NOTE: eas build 추후 배포를 위한 설정 
     kakaoKey = System.getenv("EXPO_PUBLIC_KAKAO_NATIVE_KEY")
 }
-
-
-
-
 /**
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
@@ -102,16 +97,13 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.kgs9843.zipbap'
+    namespace 'com.zipbap'
     defaultConfig {
-        applicationId 'com.kgs9843.zipbap'
+        applicationId 'com.zipbap'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
-
-
-        
         // NOTE: env파일을 위한 설정
         // resValue는 strings.xml에 kakaoKey 삽입
         // placeholders는 AndroidManifest.xml에 치환 가능

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ScrollView, View, KeyboardAvoidingView, Platform, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FullWidthButton } from '@shared/ui';
+import { useRecipeCreateForm } from '../model/useRecipeCreateForm';
 
 import FormAddRecipeOrder from './FormAddRecipeOrder';
 import FormLongTextInput from './FormLongTextInput';
@@ -12,73 +13,9 @@ import FormTextInput from './FormTextInput';
 import FormTitle from './FormTitle';
 import RecipeCreateHeader from './RecipeCreateHeader';
 
-// FIXME: 추후 타입 실제 api에 맞게 변경
-interface CookingOrder {
-  image?: string;
-  description?: string;
-}
-
-interface RecipeDetail {
-  id: string;
-  title?: string;
-  thumbnail?: string;
-  subtitle?: string;
-  introduction?: string;
-  myCategoryId?: string;
-  cookingTypeId?: number;
-  situationId?: number;
-  mainIngredientId?: number;
-  methodId?: number;
-  headcountId?: number;
-  cookingTimeId?: number;
-  levelId?: number;
-  ingredientInfo?: string;
-  kick?: string;
-  isPrivate: boolean;
-  cookingOrders: CookingOrder[];
-  video?: string;
-}
-
 const RecipeCreateForm = () => {
-  const [recipe, setRecipe] = useState<RecipeDetail>({
-    id: '',
-    title: '',
-    thumbnail: '',
-    subtitle: '',
-    introduction: '',
-    myCategoryId: undefined,
-    cookingTypeId: undefined,
-    situationId: undefined,
-    mainIngredientId: undefined,
-    methodId: undefined,
-    headcountId: undefined,
-    cookingTimeId: undefined,
-    levelId: undefined,
-    ingredientInfo: '',
-    kick: '',
-    isPrivate: false,
-    cookingOrders: [],
-    video: '',
-  });
-
-  const updateField = <K extends keyof RecipeDetail>(key: K, value: RecipeDetail[K]) => {
-    setRecipe(prev => ({ ...prev, [key]: value }));
-  };
-
-  const updateCookingOrder = (index: number, field: keyof CookingOrder, value: unknown) => {
-    setRecipe(prev => {
-      const updated = [...prev.cookingOrders];
-      updated[index] = { ...updated[index], [field]: value };
-      return { ...prev, cookingOrders: updated };
-    });
-  };
-
-  const handleTempSave = () => {
-    console.log(recipe);
-  };
-  const handleFinalizeSave = () => {
-    console.log(recipe);
-  };
+  const { recipe, updateField, updateCookingOrder, handleTempSave, handleFinalizeSave } =
+    useRecipeCreateForm();
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
       <View className="flex-1">

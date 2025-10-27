@@ -41,12 +41,12 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
         return (
           <TouchableOpacity
             key={tab.name}
-            className="flex-1 items-center py-1"
+            className="flex-1 items-center justify-center py-1"
             onPress={() => navigation.navigate(tab.name)}
           >
             {isFocused ? <ActiveIcon /> : <InactiveIcon />}
             <Text
-              className={cn('mt-2 text-[8px] font-semibold', isFocused ? 'text-sub2' : 'text-g2')}
+              className={cn('mt-2 text-[8px] font-semibold', isFocused ? 'text-sub1' : 'text-g2')}
             >
               {tab.label}
             </Text>

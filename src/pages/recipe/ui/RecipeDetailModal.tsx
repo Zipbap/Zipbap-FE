@@ -7,7 +7,7 @@ import ShareSvg from '@/assets/img/feed/share-icon.svg';
 // FIXME: 추후 경로 수정
 import { RecipeDetailSection, RecipeSteps } from '@features/feed';
 
-import { useTwoViewTypeStore } from '@shared/store';
+import { useViewStore } from '@shared/store';
 import {
   FullWidthButton,
   WebViewVideo,
@@ -29,7 +29,7 @@ interface Props {
 
 const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
   const { getDetailRecipe, detailRecipe } = useDetailRecipeData();
-  const { viewType, setViewType } = useTwoViewTypeStore();
+  const { twoViewType, setTwoViewType } = useViewStore();
   useEffect(() => {
     getDetailRecipe(feedId ? feedId : '1');
   }, [feedId, getDetailRecipe]);
@@ -113,7 +113,9 @@ const RecipeDetailModal = ({ visible, onClose, feedId }: Props) => {
               <ModalContentSection
                 subTitle="레시피 순서"
                 content={<RecipeSteps steps={detailRecipe.steps} />}
-                subTitleOption={<TwoViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />}
+                subTitleOption={
+                  <TwoViewTypeSwitcher viewType={twoViewType} onSwitch={setTwoViewType} />
+                }
               />
               {/* 레시피 Kick */}
               <ModalContentSection

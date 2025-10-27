@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 
-import { useTwoViewTypeStore } from '@shared/store';
+import { useViewStore } from '@shared/store';
 
 interface Step {
   step: number;
@@ -16,11 +16,11 @@ interface Props {
 
 // FIXME: 추후 뷰타입에 맞춰 수정이 필요!
 const RecipeSteps = ({ steps }: Props) => {
-  const { viewType } = useTwoViewTypeStore();
+  const { twoViewType } = useViewStore();
   if (!steps || steps.length === 0) return null;
 
   const renderItem = (item: Step) => {
-    switch (viewType) {
+    switch (twoViewType) {
       case 'article':
         return (
           <View key={item.step} className="flex-col">

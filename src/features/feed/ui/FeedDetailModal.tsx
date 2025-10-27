@@ -6,8 +6,8 @@ import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 
+import { useViewStore } from '@/src/shared/store';
 import { cn } from '@shared/lib';
-import { useTwoViewTypeStore } from '@shared/store';
 import {
   WebViewVideo,
   defaultShadow,
@@ -38,7 +38,7 @@ const FeedDetailModal = ({ visible, onClose, feedId = '1' }: Props) => {
   const [bookmarkCount, setBookmarkCount] = useState<number | undefined>(detailFeed?.bookmarks);
   const [follow, setFollow] = useState<boolean | undefined>(detailFeed?.isFollowing);
 
-  const { viewType, setViewType } = useTwoViewTypeStore();
+  const { twoViewType, setTwoViewType } = useViewStore();
   // NOTE: feed의 ID를 통해 feed를 받아오는 작업
   useEffect(() => {
     getDetailFeed(feedId ? feedId : '1');
@@ -206,7 +206,9 @@ const FeedDetailModal = ({ visible, onClose, feedId = '1' }: Props) => {
               <ModalContentSection
                 subTitle="레시피 순서"
                 content={<RecipeSteps steps={detailFeed.steps} />}
-                subTitleOption={<TwoViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />}
+                subTitleOption={
+                  <TwoViewTypeSwitcher viewType={twoViewType} onSwitch={setTwoViewType} />
+                }
               />
 
               {/* 레시피 Kick */}

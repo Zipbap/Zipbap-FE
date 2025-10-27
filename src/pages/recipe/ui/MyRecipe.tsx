@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, FlatList, Text, Pressable } from 'react-native';
 import { ArticleView, mockRecipes, Recipe, FeedView, ImageView } from '@entities/recipe';
-import { useViewTypeStore } from '@shared/store';
+import { useViewStore } from '@shared/store';
 import { WebViewAutoVideoPlayer } from '@shared/ui';
 
 import RecipeDetailModal from './RecipeDetailModal';
@@ -10,7 +10,7 @@ const MyRecipe = () => {
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
   const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);
   const isRecipeListEmpty = recipeList.length === 0;
-  const { viewType } = useViewTypeStore();
+  const { viewType } = useViewStore();
 
   useEffect(() => {
     setRecipeList(mockRecipes);

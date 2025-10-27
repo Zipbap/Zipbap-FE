@@ -3,14 +3,14 @@ import { View, ScrollView } from 'react-native';
 
 import PlusIcon from '@/assets/img/plus.svg';
 import { ViewTypeSwitcher } from '@features/recipe';
-import { useViewTypeStore } from '@shared/store';
+import { useViewStore } from '@shared/store';
 import { CategoryChipButton } from '@shared/ui';
 
 import { useBottomSheetModal } from '../model/useBottomSheetModal';
 import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
 
 const MyRecipeCatagory = () => {
-  const { viewType, setViewType } = useViewTypeStore();
+  const { viewType, setViewType } = useViewStore();
   const [catagory] = useState(['점심', '저녁']);
   const [selected, setSelected] = useState<string>('전체');
 

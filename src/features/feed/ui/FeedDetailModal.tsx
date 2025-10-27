@@ -6,8 +6,8 @@ import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 
-import { useViewStore } from '@/src/shared/store';
 import { cn } from '@shared/lib';
+import { useViewStore } from '@shared/store';
 import {
   WebViewVideo,
   defaultShadow,

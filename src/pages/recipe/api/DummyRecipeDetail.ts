@@ -1,6 +1,6 @@
-import { RecipeDetailItem } from '@entities/recipe';
+import { RecipeDetail } from '@entities/recipe';
 
-export const dummyRecipeDetail: RecipeDetailItem = {
+export const dummyRecipeDetail: RecipeDetail = {
   id: '2',
   nickname: '요리왕 키키',
   title: '초간단 10분 김치볶음밥',

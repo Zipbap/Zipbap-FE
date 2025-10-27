@@ -8,7 +8,7 @@ export interface Recipe {
   author: string; // 올린 사람 이름
 }
 
-export interface RecipeDetailItem {
+export interface RecipeDetail {
   id: string;
   nickname: string; // 닉네임
   title: string; // 피드 제목

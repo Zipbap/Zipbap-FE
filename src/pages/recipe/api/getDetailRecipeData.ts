@@ -1,8 +1,8 @@
-import { RecipeDetailItem } from '@entities/recipe';
+import { RecipeDetail } from '@entities/recipe';
 
 import { dummyRecipeDetail } from './DummyRecipeDetail';
 
-export const apiGetDetailData = async (id: string): Promise<RecipeDetailItem> => {
+export const apiGetDetailData = async (id: string): Promise<RecipeDetail> => {
   // 실제 API라면 fetch 호출
   // 여기서는 더미데이터 페이징 흉내
   console.log(id);

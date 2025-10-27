@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react';
 
-import { RecipeDetailItem } from '@entities/recipe';
+import { RecipeDetail } from '@entities/recipe';
 import { apiGetDetailData } from '../api/getDetailRecipeData';
 
 export const useDetailRecipeData = () => {
-  const [detailRecipe, setDetailRecipe] = useState<RecipeDetailItem>();
+  const [detailRecipe, setDetailRecipe] = useState<RecipeDetail>();
 
   //디테일 피드
   const getDetailRecipe = useCallback(async (id: string) => {

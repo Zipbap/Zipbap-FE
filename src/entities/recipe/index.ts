@@ -1,7 +1,6 @@
 // recipe model
-export { Recipe } from './model';
+export { Recipe, RecipeDetailItem } from './model';
 export { mockRecipes } from './model/mockRecipe';
-export { RecipeDetailItem } from './model/RecipeDetailTypes';
 
 // recipe UI
 export { default as ArticleView } from './ui/ArticleView';

@@ -5,7 +5,7 @@ interface CookingOrder {
   description?: string;
 }
 
-interface RecipeDetail {
+interface CreateRecipeDetail {
   id: string;
   title?: string;
   thumbnail?: string;
@@ -27,7 +27,7 @@ interface RecipeDetail {
 }
 
 export const useRecipeCreateForm = () => {
-  const [recipe, setRecipe] = useState<RecipeDetail>({
+  const [recipe, setRecipe] = useState<CreateRecipeDetail>({
     id: '',
     title: '',
     thumbnail: '',
@@ -40,7 +40,10 @@ export const useRecipeCreateForm = () => {
     video: '',
   });
 
-  const updateField = <K extends keyof RecipeDetail>(key: K, value: RecipeDetail[K]) => {
+  const updateField = <K extends keyof CreateRecipeDetail>(
+    key: K,
+    value: CreateRecipeDetail[K],
+  ) => {
     setRecipe(prev => ({ ...prev, [key]: value }));
   };
 

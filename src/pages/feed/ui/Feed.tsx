@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
 
-import { FeedDetailModal, FeedCard, useFeedData } from '@features/feed';
+import { FeedCard, useFeedData } from '@features/feed';
 import { Feed as FeedItem } from '@entities/feed';
+import { RootNavigationProp } from '@shared/types';
 
-const Feed = () => {
+interface FeedPageProps {
+  navigation: RootNavigationProp<'Main'>;
+}
+
+const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
   const { dataList, onEndReached, onRefresh, isRefreshing } = useFeedData();
-  const [selectedFeed, setSelectedFeed] = useState<FeedItem | null>(null);
 
   const renderItem = ({ item }: { item: FeedItem }) => (
     <FeedCard
       feed={item}
       onPress={() => {
-        setSelectedFeed(item);
+        navigation.navigate('FeedDetail', { feedId: item.id });
       }}
     />
   );
@@ -31,11 +35,6 @@ const Feed = () => {
             refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
           />
         </View>
-        <FeedDetailModal
-          visible={!!selectedFeed}
-          feedId={selectedFeed?.id}
-          onClose={() => setSelectedFeed(null)}
-        />
       </View>
     </View>
   );

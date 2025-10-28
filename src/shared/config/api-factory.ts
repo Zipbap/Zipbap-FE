@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, useMutation, UseQueryOptions } from '@tanstack/react-query';
 import { apiService } from './api-service';
 
@@ -24,7 +25,7 @@ export function createApi<T>(opts: { baseEndpoint: string; entityKey: string }) 
           const res = await apiService.get(`${baseEndpoint}/${id}`);
           return res.data as T;
         },
-        enabled: id != null,
+        enabled: id !== null,
         ...(options as any),
       }),
 

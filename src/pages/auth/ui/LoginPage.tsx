@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Logo from '@/assets/img/logo.svg';
 // import { AppleLoginButton, KakaoLoginButton } from '@features/auth';
-import { KakaoLoginButton } from '@/src/features/auth';
+import { KakaoLoginButton } from '@features/auth';
 import { RootNavigationProp } from '@shared/types';
 
 interface Props {

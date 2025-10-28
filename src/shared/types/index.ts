@@ -1,1 +1,6 @@
-export { RootNavigationProp } from './navigation';
+export {
+  RootStackParamList,
+  RootNavigationProp,
+  FeedDetailProps,
+  RecipeDetailProps,
+} from './navigation';

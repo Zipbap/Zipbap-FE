@@ -42,9 +42,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
   // NOTE: feed의 ID를 통해 feed를 받아오는 작업
   useEffect(() => {
     getDetailFeed(feedId ? feedId : '1');
-  }, [feedId, getDetailFeed]);
 
-  useEffect(() => {
     if (detailFeed) {
       setBookmarked(detailFeed.isBookmarked);
       setLiked(detailFeed.isLiked);
@@ -52,7 +50,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
       setBookmarkCount(detailFeed.bookmarks);
       setFollow(detailFeed.isFollowing);
     }
-  }, [detailFeed]);
+  }, [feedId, getDetailFeed, detailFeed]);
 
   if (!feedId) return null;
   else if (!detailFeed) {

@@ -5,9 +5,10 @@ import { Host } from 'react-native-portalize';
 import { LoginPage } from '@pages/auth';
 import { FeedDetail } from '@pages/feed';
 import { RecipeDetail } from '@pages/recipe';
-import { Setting } from '@pages/setting';
+import { Setting, Secession } from '@pages/setting';
 import { RecipeCreateForm } from '@features/recipe';
 import { RootStackParamList } from '@shared/types';
+import { ProfileEdit, FollowDetail } from '../pages/user';
 import MainTabNavigator from './TabNavigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -19,27 +20,22 @@ export function Navigation() {
           <Stack.Screen name="Login" component={LoginPage} />
           <Stack.Screen name="Main" component={MainTabNavigator} />
           <Stack.Screen name="Setting" component={Setting} />
-          <Stack.Screen
-            name="RecipeDetail"
-            component={RecipeDetail}
-            options={{
-              presentation: 'modal',
-              gestureEnabled: true,
-              animation: 'slide_from_bottom',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="FeedDetail"
-            component={FeedDetail}
-            options={{
-              presentation: 'modal',
-              gestureEnabled: true,
-              animation: 'slide_from_bottom',
-              headerShown: false,
-            }}
-          />
           <Stack.Screen name="RecipeCreateForm" component={RecipeCreateForm} />
+          {/* NOTE: 모달 페이지 관리 */}
+          <Stack.Group
+            screenOptions={{
+              presentation: 'modal',
+              gestureEnabled: true,
+              animation: 'slide_from_bottom',
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen name="RecipeDetail" component={RecipeDetail} />
+            <Stack.Screen name="FeedDetail" component={FeedDetail} />
+            <Stack.Screen name="ProfileEdit" component={ProfileEdit} />
+            <Stack.Screen name="FollowDetail" component={FollowDetail} />
+            <Stack.Screen name="Secession" component={Secession} />
+          </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>
     </Host>

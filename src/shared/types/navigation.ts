@@ -7,6 +7,9 @@ export type RootStackParamList = {
   RecipeCreateForm: undefined;
   RecipeDetail: { recipeId: string };
   FeedDetail: { feedId: string };
+  ProfileEdit: { userId: string };
+  FollowDetail: { userId: string };
+  Secession: { userId: string };
 };
 
 export type RootNavigationProp<T extends keyof RootStackParamList> = NativeStackNavigationProp<
@@ -16,6 +19,7 @@ export type RootNavigationProp<T extends keyof RootStackParamList> = NativeStack
 
 // NOTE: route 기능을 사용해야됨
 export type RecipeDetailProps = NativeStackScreenProps<RootStackParamList, 'RecipeDetail'>;
-
-// NOTE: route 기능을 사용해야됨
 export type FeedDetailProps = NativeStackScreenProps<RootStackParamList, 'FeedDetail'>;
+export type ProfileEditProps = NativeStackScreenProps<RootStackParamList, 'ProfileEdit'>;
+export type FollowDetailProps = NativeStackScreenProps<RootStackParamList, 'FollowDetail'>;
+export type SecessionProps = NativeStackScreenProps<RootStackParamList, 'Secession'>;

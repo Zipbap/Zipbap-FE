@@ -3,4 +3,7 @@ export {
   RootNavigationProp,
   FeedDetailProps,
   RecipeDetailProps,
+  ProfileEditProps,
+  FollowDetailProps,
+  SecessionProps,
 } from './navigation';

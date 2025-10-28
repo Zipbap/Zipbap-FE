@@ -3,11 +3,9 @@ import { View, ScrollView } from 'react-native';
 
 import PlusIcon from '@/assets/img/plus.svg';
 import { ViewTypeSwitcher } from '@features/recipe';
-import { useViewStore } from '@shared/store';
-import { CategoryChipButton } from '@shared/ui';
+import { useBottomSheetStore, useViewStore } from '@shared/store';
 
-import { useBottomSheetModal } from '../model/useBottomSheetModal';
-import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
+import { CategoryChipButton } from '@shared/ui';
 
 const MyRecipeCatagory = () => {
   const { viewType, setViewType } = useViewStore();
@@ -15,7 +13,7 @@ const MyRecipeCatagory = () => {
   const [selected, setSelected] = useState<string>('전체');
 
   // Modal state
-  const { bottomSheetVisible, bottomSheetOpen, bottomSheetClose } = useBottomSheetModal();
+  const { bottomSheetOpen } = useBottomSheetStore();
 
   return (
     <>
@@ -53,11 +51,6 @@ const MyRecipeCatagory = () => {
           <ViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />
         </View>
       </View>
-
-      <MyRecipeCatagoryBottomSheet
-        bottomSheetVisible={bottomSheetVisible}
-        bottomSheetClose={bottomSheetClose}
-      />
     </>
   );
 };

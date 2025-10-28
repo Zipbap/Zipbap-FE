@@ -1,6 +1,6 @@
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useEffect, useRef } from 'react';
 import { TouchableOpacity } from 'react-native';
-import Modal from 'react-native-modal';
+import { Modalize } from 'react-native-modalize';
 
 interface Props {
   visible: boolean;
@@ -10,28 +10,29 @@ interface Props {
 }
 
 const BottomSheetModal = ({ visible, onClose, children, height = 500 }: Props) => {
+  const modalizeRef = useRef<Modalize>(null);
+
+  useEffect(() => {
+    if (visible) {
+      modalizeRef.current?.open();
+    } else {
+      modalizeRef.current?.close();
+    }
+  }, [visible]);
+
   const handleOutsidePress = useCallback(() => {
     onClose();
   }, [onClose]);
   return (
-    <Modal
-      isVisible={visible}
-      onSwipeComplete={onClose}
-      onBackButtonPress={onClose}
-      // NOTE: 밑으로 내리끌면 닫아짐
-      swipeDirection="down"
-      style={{ margin: 0, justifyContent: 'flex-start' }}
-      hasBackdrop={false}
-      // NOTE: 내리는 감도
-      swipeThreshold={100}
-      // NOTE: 안에 scrollView, flatList 불가! 모달창 터치 인식을 하기 때문!
-      propagateSwipe={false}
-      animationIn="slideInUp"
-      animationOut="slideOutDown"
-      animationInTiming={400}
-      animationOutTiming={400}
-      backdropTransitionOutTiming={0}
-      hideModalContentWhileAnimating
+    <Modalize
+      ref={modalizeRef}
+      withOverlay={false}
+      onClosed={onClose}
+      panGestureEnabled
+      adjustToContentHeight
+      handlePosition="inside"
+      handleStyle={{ width: 50, backgroundColor: '#ccc' }}
+      modalStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
     >
       <TouchableOpacity
         className="flex-1 justify-end"
@@ -54,7 +55,7 @@ const BottomSheetModal = ({ visible, onClose, children, height = 500 }: Props) =
           {children}
         </TouchableOpacity>
       </TouchableOpacity>
-    </Modal>
+    </Modalize>
   );
 };
 

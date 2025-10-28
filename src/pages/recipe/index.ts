@@ -5,4 +5,5 @@ export {
   RecipeCreateExtension,
   MyRecipeTopSection,
   RecipeCreateTopSection,
+  RecipeDetail,
 } from './ui';

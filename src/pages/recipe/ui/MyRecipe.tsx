@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, FlatList, Text, Pressable } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import { ArticleView, mockRecipes, Recipe, FeedView, ImageView } from '@entities/recipe';
 import { useViewTypeStore, useBottomSheetStore } from '@shared/store';
+import { RootNavigationProp } from '@shared/types';
 import { WebViewAutoVideoPlayer } from '@shared/ui';
 
 import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
 
-import RecipeDetailModal from './RecipeDetailModal';
+interface RecipePageProps {
+  navigation: RootNavigationProp<'Main'>;
+}
 
-const MyRecipe = () => {
+const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
-  const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);
   const isRecipeListEmpty = recipeList.length === 0;
   const { viewType } = useViewTypeStore();
 
@@ -38,7 +40,7 @@ const MyRecipe = () => {
                   return (
                     <Pressable
                       onPress={() => {
-                        setSelectedRecipeId(item.id);
+                        navigation.navigate('RecipeDetail', { recipeId: item.id });
                       }}
                     >
                       <ArticleView item={item} />
@@ -64,11 +66,6 @@ const MyRecipe = () => {
           )}
         </View>
       </View>
-      <RecipeDetailModal
-        visible={!!selectedRecipeId}
-        feedId={selectedRecipeId}
-        onClose={() => setSelectedRecipeId(null)}
-      />
       <Portal>
         <MyRecipeCatagoryBottomSheet
           bottomSheetVisible={bottomSheetVisible}

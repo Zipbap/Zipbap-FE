@@ -4,13 +4,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Logo from '@/assets/img/logo.svg';
 // import { AppleLoginButton, KakaoLoginButton } from '@features/auth';
+import { KakaoLoginButton } from '@/src/features/auth';
 import { RootNavigationProp } from '@shared/types';
 
 interface Props {
   navigation: RootNavigationProp<'Login'>;
 }
 
-// 카카오 api key 변경 전, 임시 로그인 로직
+// FIXME: 카카오 api key 변경 전, 임시 로그인 로직
 const useTempLogin = ({ navigation }: Props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -43,7 +44,7 @@ const LoginPage = ({ navigation }: Props) => {
               <Text className="font-bold text-sub1">회원가입</Text>
             </View>
             {/* 카카오 버튼 */}
-            {/* <KakaoLoginButton navigation={navigation} />
+            <KakaoLoginButton navigation={navigation} />
             {/* 애플 버튼 */}
             {/* <AppleLoginButton /> */}
           </View>

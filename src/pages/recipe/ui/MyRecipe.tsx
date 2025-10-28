@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { View, FlatList, Text, Pressable } from 'react-native';
+import { Portal } from 'react-native-portalize';
 import { ArticleView, mockRecipes, Recipe, FeedView, ImageView } from '@entities/recipe';
-import { useViewTypeStore } from '@shared/store';
+import { useViewTypeStore, useBottomSheetStore } from '@shared/store';
 import { WebViewAutoVideoPlayer } from '@shared/ui';
+
+import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
 
 import RecipeDetailModal from './RecipeDetailModal';
 
@@ -15,6 +18,8 @@ const MyRecipe = () => {
   useEffect(() => {
     setRecipeList(mockRecipes);
   }, []);
+
+  const { bottomSheetVisible, bottomSheetClose } = useBottomSheetStore();
 
   return (
     <View style={{ flex: 1 }}>
@@ -64,6 +69,12 @@ const MyRecipe = () => {
         feedId={selectedRecipeId}
         onClose={() => setSelectedRecipeId(null)}
       />
+      <Portal>
+        <MyRecipeCatagoryBottomSheet
+          bottomSheetVisible={bottomSheetVisible}
+          bottomSheetClose={bottomSheetClose}
+        />
+      </Portal>
     </View>
   );
 };

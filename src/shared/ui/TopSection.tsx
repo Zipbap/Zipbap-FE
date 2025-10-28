@@ -22,7 +22,7 @@ const Extension = TopExtensionDefault;
 const Root = ({ children, className, style }: Props) => {
   return (
     <View
-      className={['w-screen justify-start bg-white', className].filter(Boolean).join(' ')}
+      className={['w-full justify-start bg-white', className].filter(Boolean).join(' ')}
       style={style}
     >
       {children}

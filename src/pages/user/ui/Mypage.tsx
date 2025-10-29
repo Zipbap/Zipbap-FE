@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 
 import { UserHeaderSection, FeedGrid } from '@features/user';
-import { mockUser, User } from '@entities/user';
+import { mockUser, User, MyPageTabType } from '@entities/user';
 import { RootNavigationProp } from '@shared/types';
 
 interface MyPageProps {
@@ -11,7 +11,7 @@ interface MyPageProps {
 
 const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
   const [user] = useState<User>(mockUser);
-  const [tab, setTab] = useState<'feeds' | 'bookmarks'>('feeds');
+  const [tab, setTab] = useState<MyPageTabType>('feeds');
 
   return (
     <View style={{ flex: 1 }}>

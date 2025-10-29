@@ -58,8 +58,12 @@ const UserHeaderSection = ({ user, tab, setTab, navigation }: Props) => {
       {/* 탭 */}
       <UserTabs
         active={tab}
-        feedCount={user.feedCount}
-        bookmarkCount={user.bookmarkCount}
+        leftTitle="내가 올린 피드"
+        leftCount={user.feedCount}
+        leftValue={'feeds'}
+        rightTitle="북마크"
+        rightCount={user.bookmarkCount}
+        rightValue={'bookmarks'}
         onChange={setTab}
       />
 

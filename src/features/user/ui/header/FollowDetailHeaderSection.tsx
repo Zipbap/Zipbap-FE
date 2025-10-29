@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { UserTabs } from '@features/user';
 import { User, FollowTabType } from '@entities/user';

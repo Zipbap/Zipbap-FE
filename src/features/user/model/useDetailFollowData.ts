@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { FollowData, FollowTabType, FollowDetailUser } from '@entities/user';
+import { FollowData } from '@entities/user';
 import { apiGetDetailFollowData } from '../api/getFollowData';
 
 export const useFollowData = () => {

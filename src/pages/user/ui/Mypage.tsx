@@ -3,13 +3,11 @@ import { View } from 'react-native';
 
 import { UserHeaderSection, FeedGrid } from '@features/user';
 import { mockUser, User, MyPageTabType } from '@entities/user';
-import { RootNavigationProp } from '@shared/types';
+import { MyPageProps } from '@shared/types';
 
-interface MyPageProps {
-  navigation: RootNavigationProp<'Main'>;
-}
-
-const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
+const Mypage: React.FC<MyPageProps> = ({ navigation, route }) => {
+  const userId = route.params?.userId;
+  console.log('넘어온 userId:', userId);
   const [user] = useState<User>(mockUser);
   const [tab, setTab] = useState<MyPageTabType>('feeds');
 

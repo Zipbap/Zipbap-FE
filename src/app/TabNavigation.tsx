@@ -6,14 +6,14 @@ import { MyRecipe, RecipeCreate, MyRecipeTopSection, RecipeCreateTopSection } fr
 import { Mypage } from '@pages/user';
 import { MyFeedTopSection } from '@widgets/feed';
 import { UserHeader } from '@entities/user';
-import { RootNavigationProp } from '@shared/types';
+import { RootNavigationProp, MainTabParamList } from '@shared/types';
 import CustomTabBar from '@shared/ui/Tab';
 
 interface Props {
   navigation: RootNavigationProp<'Main'>;
 }
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<MainTabParamList>();
 const MainTabNavigator = ({ navigation }: Props) => {
   return (
     <Tab.Navigator

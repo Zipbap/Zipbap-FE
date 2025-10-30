@@ -3,6 +3,8 @@ import React
 import ReactAppDependencyProvider
 import KakaoSDKCommon
 import KakaoSDKAuth
+import KakaoSDKCommon
+import KakaoSDKAuth
 
 @UIApplicationMain
 public class AppDelegate: ExpoAppDelegate {
@@ -15,7 +17,7 @@ public class AppDelegate: ExpoAppDelegate {
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
   ) -> Bool {
-    KakaoSDK.initSDK(appKey: "585d33485c28f8d38c53a6d68d5907f9")
+    KakaoSDK.initSDK(appKey: "9957eb80ae4feba2d9efdb29d787275a")
     
     let delegate = ReactNativeDelegate()
     let factory = ExpoReactNativeFactory(delegate: delegate)

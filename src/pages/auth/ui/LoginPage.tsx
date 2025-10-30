@@ -19,6 +19,7 @@ const LoginPage = ({ navigation }: Props) => {
         <View className="w-5/6 items-center justify-center">
           {/* 로고 */}
           <Logo width={150} height={150} />
+
           {/* 설명 */}
           <Text className="mb-[150px] mt-6 text-center leading-6 text-g2">
             당신이 만든 요리와 가족의 손맛을{'\n'}
@@ -40,4 +41,5 @@ const LoginPage = ({ navigation }: Props) => {
     </SafeAreaView>
   );
 };
+
 export default LoginPage;

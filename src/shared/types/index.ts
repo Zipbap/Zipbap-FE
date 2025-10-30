@@ -7,6 +7,5 @@ export {
   FollowDetailProps,
   SecessionProps,
   MainTabParamList,
-  MyPageNavigationProp,
-  MyPageProps,
+  AnotherUserPageProps,
 } from './navigation';

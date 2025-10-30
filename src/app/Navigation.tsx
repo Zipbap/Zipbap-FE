@@ -5,10 +5,10 @@ import { Host } from 'react-native-portalize';
 import { LoginPage } from '@pages/auth';
 import { FeedDetail } from '@pages/feed';
 import { RecipeDetail } from '@pages/recipe';
-import { Setting, Secession } from '@pages/setting';
+import { Secession } from '@pages/setting';
 import { RecipeCreateForm } from '@features/recipe';
 import { RootStackParamList } from '@shared/types';
-import { ProfileEdit, FollowDetail } from '../pages/user';
+import { ProfileEdit, FollowDetail, AnotherUserPage } from '../pages/user';
 import MainTabNavigator from './TabNavigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -19,8 +19,8 @@ export function Navigation() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Login" component={LoginPage} />
           <Stack.Screen name="Main" component={MainTabNavigator} />
-          <Stack.Screen name="Setting" component={Setting} />
           <Stack.Screen name="RecipeCreateForm" component={RecipeCreateForm} />
+          <Stack.Screen name="AnotherUserPage" component={AnotherUserPage} />
           {/* NOTE: 모달 페이지 관리 */}
           <Stack.Group
             screenOptions={{

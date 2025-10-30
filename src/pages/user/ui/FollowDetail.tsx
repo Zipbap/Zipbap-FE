@@ -60,7 +60,7 @@ const FollowDetail = ({ navigation, route }: FollowDetailProps) => {
       <View className="flex w-full flex-col px-[8px]">
         <View className="h-[150px]" />
         <SearchBox searchTitle="검색" />
-        <FollowList users={currentUsers} />
+        <FollowList users={currentUsers} navigation={navigation} />
       </View>
     </View>
   );

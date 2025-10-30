@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import { User } from '@entities/user';
-import { MyPageNavigationProp } from '@shared/types';
+import { RootNavigationProp } from '@shared/types';
 import { defaultShadow } from '@shared/ui';
 
 import EditProfileButton from '../EditProfileButton';
@@ -12,7 +12,7 @@ type Props = {
   user: User;
   tab: 'feeds' | 'bookmarks';
   setTab: (tab: 'feeds' | 'bookmarks') => void;
-  navigation: MyPageNavigationProp;
+  navigation: RootNavigationProp<'Main'>;
 };
 
 const UserHeaderSection = ({ user, tab, setTab, navigation }: Props) => {

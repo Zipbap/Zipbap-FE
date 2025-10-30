@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-import { View, Text, Image, Pressable } from 'react-native';
+import { View, Text, Image, Pressable, TouchableOpacity } from 'react-native';
 
 import { FollowDetailUser } from '@entities/user';
+import { RootNavigationProp } from '@shared/types';
 
 interface Props {
   user: FollowDetailUser;
+  navigation: RootNavigationProp<'FollowDetail'>;
 }
 
-const FollowItem = ({ user }: Props) => {
+const FollowItem = ({ user, navigation }: Props) => {
   const [isFollowing, setIsFollowing] = useState(true);
   return (
-    <View className="flex-row items-center justify-between bg-white px-4 py-3">
+    <TouchableOpacity
+      className="flex-row items-center justify-between bg-white px-4 py-3"
+      onPress={() => navigation.navigate('AnotherUserPage', { userId: '1' })}
+    >
       {/* 프로필 이미지 + 이름/소개 */}
       <View className="flex-row items-center">
         <Image source={{ uri: user.profileImage }} className="h-[56px] w-[56px] rounded-full" />
@@ -35,7 +40,7 @@ const FollowItem = ({ user }: Props) => {
           </Text>
         </View>
       </Pressable>
-    </View>
+    </TouchableOpacity>
   );
 };
 

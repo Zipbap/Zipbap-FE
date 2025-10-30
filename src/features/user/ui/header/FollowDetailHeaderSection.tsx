@@ -6,7 +6,7 @@ import { RootNavigationProp } from '@shared/types';
 import { defaultShadow, ModalHeader } from '@shared/ui';
 
 export interface Props {
-  navigation: RootNavigationProp<'FollowDetail'>; // 혹은 'Main' 등 실제 네비게이션 키에 맞게 수정
+  navigation: RootNavigationProp<'FollowDetail'>;
   detailUser: User;
   tab: FollowTabType;
   setTab: React.Dispatch<React.SetStateAction<FollowTabType>>;

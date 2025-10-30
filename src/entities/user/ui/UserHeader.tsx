@@ -3,20 +3,18 @@ import { TouchableOpacity } from 'react-native';
 
 import HeaderLogo from '@/assets/img/header-logo.svg';
 import SettingSvg from '@/assets/img/setting-icon.svg';
-import { RootNavigationProp } from '@shared/types';
+import { useSettingBottomSheetStore } from '@shared/store';
 import { Header } from '@shared/ui';
 
-interface Props {
-  navigation: RootNavigationProp<'Main'>;
-}
-
-const UserHeader = ({ navigation }: Props) => {
+const UserHeader = () => {
+  // NOTE: BottomSheetModal state
+  const { bottomSheetOpen } = useSettingBottomSheetStore();
   return (
     <Header
       style={undefined}
       center={<HeaderLogo width={75} height={12} />}
       right={
-        <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
+        <TouchableOpacity onPress={bottomSheetOpen}>
           <SettingSvg />
         </TouchableOpacity>
       }

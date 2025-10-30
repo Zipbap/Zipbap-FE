@@ -2,5 +2,5 @@
   <string name="app_name">zipbap</string>
   <string name="expo_splash_screen_resize_mode" translatable="false">contain</string>
   <string name="expo_splash_screen_status_bar_translucent" translatable="false">false</string>
-  <string name="kakao_app_key">585d33485c28f8d38c53a6d68d5907f9</string>
+  <string name="kakao_app_key">9957eb80ae4feba2d9efdb29d787275a</string>
 </resources>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, Text, Pressable } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import { ArticleView, mockRecipes, Recipe, FeedView, ImageView } from '@entities/recipe';
-import { useViewTypeStore, useBottomSheetStore } from '@shared/store';
+import { useViewTypeStore, useCategoryBottomSheetStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
 import { WebViewAutoVideoPlayer } from '@shared/ui';
 
@@ -21,7 +21,7 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
     setRecipeList(mockRecipes);
   }, []);
 
-  const { bottomSheetVisible, bottomSheetClose } = useBottomSheetStore();
+  const { bottomSheetVisible, bottomSheetClose } = useCategoryBottomSheetStore();
 
   return (
     <View style={{ flex: 1 }}>
@@ -66,12 +66,14 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
           )}
         </View>
       </View>
-      <Portal>
-        <MyRecipeCatagoryBottomSheet
-          bottomSheetVisible={bottomSheetVisible}
-          bottomSheetClose={bottomSheetClose}
-        />
-      </Portal>
+      {bottomSheetVisible && (
+        <Portal>
+          <MyRecipeCatagoryBottomSheet
+            bottomSheetVisible={bottomSheetVisible}
+            bottomSheetClose={bottomSheetClose}
+          />
+        </Portal>
+      )}
     </View>
   );
 };

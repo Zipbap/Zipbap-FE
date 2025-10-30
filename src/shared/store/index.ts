@@ -1,3 +1,4 @@
 export { useTwoViewTypeStore } from './useTwoViewTypeStore';
 export { useViewTypeStore } from './useViewTypeStore';
-export { useBottomSheetStore } from './useBottomSheetStore';
+export { useCategoryBottomSheetStore } from './useCategoryBottomSheetStore';
+export { useSettingBottomSheetStore } from './useSettingBottomSheetStore';

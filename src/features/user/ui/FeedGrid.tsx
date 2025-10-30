@@ -2,12 +2,12 @@ import React from 'react';
 import { FlatList, Image, View } from 'react-native';
 
 import FeedsSvg from '@/assets/img/feeds-icon.svg';
-import { UserFeed } from '@entities/user';
+import { UserFeed, MyPageTabType } from '@entities/user';
 import EmptyState from './EmptyState';
 
 interface Props {
   data: UserFeed[];
-  type: 'feeds' | 'bookmarks';
+  type: MyPageTabType;
 }
 
 const FeedGrid = ({ data, type }: Props) => {

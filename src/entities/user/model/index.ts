@@ -26,3 +26,13 @@ export interface BookmarkEmpty {
   id: string;
   videoUrl: string;
 }
+
+export type FollowTabType = 'follower' | 'following';
+export type MyPageTabType = 'feeds' | 'bookmarks';
+
+export type FollowDetailUser = Pick<User, 'id' | 'profileImage' | 'name' | 'introduce'>;
+
+export interface FollowData {
+  follower: FollowDetailUser[];
+  following: FollowDetailUser[];
+}

@@ -54,7 +54,6 @@ const SearchBox = ({ searchTitle }: Props) => {
 
   const handleOutsidePress = () => {
     Keyboard.dismiss();
-    setIsSearchBarOn(false);
   };
 
   return (

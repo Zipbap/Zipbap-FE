@@ -6,15 +6,11 @@ import { MyRecipe, RecipeCreate, MyRecipeTopSection, RecipeCreateTopSection } fr
 import { Mypage } from '@pages/user';
 import { MyFeedTopSection } from '@widgets/feed';
 import { UserHeader } from '@entities/user';
-import { RootNavigationProp } from '@shared/types';
+import { MainTabParamList } from '@shared/types';
 import CustomTabBar from '@shared/ui/Tab';
 
-interface Props {
-  navigation: RootNavigationProp<'Main'>;
-}
-
-const Tab = createBottomTabNavigator();
-const MainTabNavigator = ({ navigation }: Props) => {
+const Tab = createBottomTabNavigator<MainTabParamList>();
+const MainTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -47,7 +43,7 @@ const MainTabNavigator = ({ navigation }: Props) => {
         name="Mypage"
         component={Mypage}
         options={{
-          header: () => <UserHeader navigation={navigation} />,
+          header: () => <UserHeader />,
         }}
       />
     </Tab.Navigator>

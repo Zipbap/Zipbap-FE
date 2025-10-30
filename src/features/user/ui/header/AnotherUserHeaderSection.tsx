@@ -1,25 +1,17 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, Pressable } from 'react-native';
 
 import { User } from '@entities/user';
 import { RootNavigationProp } from '@shared/types';
 import { defaultShadow } from '@shared/ui';
 
-import EditProfileButton from '../EditProfileButton';
-import UserTabs from '../UserTabs';
-
 type Props = {
   user: User;
-  tab: 'feeds' | 'bookmarks';
-  setTab: (tab: 'feeds' | 'bookmarks') => void;
-  navigation: RootNavigationProp<'Main'>;
+  navigation: RootNavigationProp<'AnotherUserPage'>;
 };
 
-const UserHeaderSection = ({ user, tab, setTab, navigation }: Props) => {
-  const handlePageOpen = () => {
-    navigation.navigate('ProfileEdit', { userId: user.id });
-  };
-
+const AnotherUserHeaderSection = ({ user, navigation }: Props) => {
+  const [isFollowing, setIsFollowing] = useState(true);
   return (
     <View
       style={[defaultShadow.roundedContainer]}
@@ -51,23 +43,35 @@ const UserHeaderSection = ({ user, tab, setTab, navigation }: Props) => {
           </View>
         </View>
 
-        {/* 프로필 편집 */}
-        <EditProfileButton onPress={handlePageOpen} />
+        {/* 팔로우 / 언팔로우 버튼 */}
+        <View className="mt-7">
+          <Pressable
+            onPress={() => setIsFollowing(prev => !prev)}
+            className={`mt-4 flex w-full items-center justify-center rounded-3xl py-[8px] ${isFollowing ? 'bg-g3' : 'border-orange-400 bg-sub1'}`}
+          >
+            <Text
+              className={`${isFollowing ? 'text-g2' : 'text-white'} text-center text-[16px] font-semibold`}
+            >
+              {isFollowing ? '언팔로우' : '팔로우'}
+            </Text>
+          </Pressable>
+        </View>
       </View>
 
       {/* 탭 */}
-      <UserTabs
-        active={tab}
-        leftTitle="내가 올린 피드"
-        leftCount={user.feedCount}
-        leftValue={'feeds'}
-        rightTitle="북마크"
-        rightCount={user.bookmarkCount}
-        rightValue={'bookmarks'}
-        onChange={setTab}
-      />
+      <View className={`mt-4 flex-row`}>
+        <TouchableOpacity className={`flex-1 items-center border-b-2 border-sub1 py-2`}>
+          <View className="flex w-full items-center justify-center">
+            <Text className={`'font-bold text-center color-sub1`}>
+              레시피
+              {'\n'}
+              {user.feedCount}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
-export default UserHeaderSection;
+export default AnotherUserHeaderSection;

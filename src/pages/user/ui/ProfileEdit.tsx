@@ -1,42 +1,25 @@
-import React, { memo } from 'react';
-import { Image, Pressable, Text, TextInput, View, Platform, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, Pressable, Text, TextInput, View, TouchableOpacity } from 'react-native';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDetailUserData } from '@features/user';
 import { pickImageFromLibrary } from '@shared/lib';
-import {
-  FullWidthButton,
-  ToggleSwitch,
-  ModalContainer,
-  ModalHeader,
-  defaultShadow,
-} from '@shared/ui';
+import { ProfileEditProps } from '@shared/types';
+import { FullWidthButton, ToggleSwitch, ModalHeader, defaultShadow } from '@shared/ui';
 
-interface Props {
-  isVisible: boolean;
-  onClose: () => void;
-  nickname: string;
-  setNickname: (text: string) => void;
-  statusMessage: string;
-  setStatusMessage: (text: string) => void;
-  profileImage: string;
-  setProfileImage: (uri: string) => void;
-  isProfilePublic: boolean;
-  setIsProfilePublic: (value: boolean) => void;
-  onSave: () => void;
-}
+const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
+  const { userId } = route.params;
+  console.log(userId);
+  const insets = useSafeAreaInsets();
 
-const ProfileEditModal = ({
-  isVisible,
-  onClose,
-  nickname,
-  setNickname,
-  statusMessage,
-  setStatusMessage,
-  profileImage,
-  setProfileImage,
-  isProfilePublic,
-  setIsProfilePublic,
-  onSave,
-}: Props) => {
+  const { getDetailUser, detailUser } = useDetailUserData();
+
+  const [nickname, setNickname] = useState('');
+  const [statusMessage, setStatusMessage] = useState('');
+  const [profileImage, setProfileImage] = useState('dd');
+  const [isProfilePublic, setIsProfilePublic] = useState<boolean>(false);
+
   const handleChangeImage = async () => {
     const newImageUri = await pickImageFromLibrary();
     if (newImageUri) {
@@ -44,26 +27,53 @@ const ProfileEditModal = ({
     }
   };
 
+  const handleSave = () => {
+    // FIXME: 여기에서 API 호출을 수행하여 변경된 정보 저장
+  };
+
+  // NOTE: user의 ID를 통해 profile를 받아오는 작업
+  useEffect(() => {
+    getDetailUser(userId ? userId : '1');
+
+    if (detailUser) {
+      setNickname(detailUser.name);
+      setStatusMessage(detailUser.introduce);
+      setProfileImage(detailUser.profileImage);
+      setIsProfilePublic(detailUser.isPublic);
+    }
+  }, [userId, getDetailUser, detailUser]);
+
   const headerRightContent = (
-    <Pressable onPress={onSave}>
+    <Pressable onPress={handleSave}>
       <Text className="font-bold text-g2">저장</Text>
     </Pressable>
   );
 
+  if (!userId) return null;
+  else if (!detailUser) {
+    // FIXME: 로딩 인디케이터로 바꿔야함
+    return (
+      <View className="flex flex-1" style={{ paddingTop: insets.top }}>
+        <Text> 로딩 중 </Text>
+      </View>
+    );
+  }
+
   return (
-    <ModalContainer visible={isVisible} onClose={onClose}>
-      <View
+    <View className="flex-1">
+      <ModalHeader
+        style={[defaultShadow.shadowContainer, defaultShadow.roundedContainer]}
+        title="프로필 편집"
+        onBackPress={navigation.goBack}
+        rightContent={headerRightContent}
+      />
+      <KeyboardAwareScrollView
         className="h-[100%] overflow-hidden bg-white"
-        style={{ marginTop: Platform.OS === 'ios' ? 25 : 0 }}
+        contentContainerStyle={{ flexGrow: 1 }}
+        bottomOffset={80}
       >
         <View className="h-[80px]" />
-        <ModalHeader
-          style={[defaultShadow.shadowContainer, defaultShadow.roundedContainer]}
-          title="프로필 편집"
-          onBackPress={onClose}
-          rightContent={headerRightContent}
-        />
-        <View className="bg-gray-50 flex-1 items-center px-4 pt-8">
+        <View className="flex items-center px-4 pt-8">
           {/* 프로필 이미지 */}
           <Image source={{ uri: profileImage }} className="h-[128px] w-[128px] rounded-full" />
 
@@ -116,7 +126,7 @@ const ProfileEditModal = ({
           {/* 저장하기 버튼 */}
           <FullWidthButton
             buttonText="저장하기"
-            onPress={onSave}
+            onPress={navigation.goBack}
             backgroundColor="#DC6E3F"
             textColor="white"
           />
@@ -124,14 +134,14 @@ const ProfileEditModal = ({
           {/* 취소 버튼 */}
           <FullWidthButton
             buttonText="취소"
-            onPress={onClose}
+            onPress={navigation.goBack}
             backgroundColor="#F0EDE6"
             textColor="#847C70"
           />
         </View>
-      </View>
-    </ModalContainer>
+      </KeyboardAwareScrollView>
+    </View>
   );
 };
 
-export default memo(ProfileEditModal);
+export default ProfileEdit;

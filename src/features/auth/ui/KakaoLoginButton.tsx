@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native';
-
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
 import { Button } from '@entities/user';
 import { RootNavigationProp } from '@shared/types';
-
 import { kakaoLogin } from '../api/login';
 
 interface Props {
@@ -12,28 +10,32 @@ interface Props {
 }
 
 const KakaoLoginButton = ({ navigation }: Props) => {
-  const [isPressed, setIsPressed] = useState<boolean>(false);
-  const [result, setResult] = useState<string>('');
-  const signInWithKakao = async (): Promise<void> => {
+  const [isPressed, setIsPressed] = useState(false);
+
+  const signInWithKakao = async () => {
     try {
-      const token = await kakaoLogin();
-      //console.log('login success ', token);
-      setResult(JSON.stringify(token));
-      console.log('login success ', token);
-      // navigation.replace('Main');
+      console.log('🟡 Kakao 로그인 시도중...');
+      const { accessToken, refreshToken } = await kakaoLogin();
+      console.log('✅ login ok', { accessToken, refreshToken });
+
+      // 혹시 undefined인지 확인
+      if (!accessToken) {
+        console.warn('⚠️ accessToken 없음');
+        return;
+      }
+
+      navigation.replace('Main'); // 성공 시 이동
     } catch (err) {
-      console.error('login err', err);
+      console.error('❌ login err', err);
     }
-    // FIXME: 추후 수정
-    navigation.replace('Main');
   };
-  console.log(result);
+
   return (
     <Button
       isPressedFunc={signInWithKakao}
       isPressed={isPressed}
       setIsPressed={setIsPressed}
-      color={'#FFE300'}
+      color="#FFE300"
     >
       <KakaoSvg />
       <Text className="text-base font-bold">카카오로 시작하기</Text>

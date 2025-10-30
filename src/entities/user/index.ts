@@ -17,3 +17,4 @@ export {
 // user UI
 export { default as Button } from './ui/Button';
 export { default as UserHeader } from './ui/UserHeader';
+export { default as AnotherUserHeader } from './ui/AnotherUserHeader';

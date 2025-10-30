@@ -7,6 +7,7 @@ import { FeedDetail } from '@pages/feed';
 import { RecipeDetail } from '@pages/recipe';
 import { Secession } from '@pages/setting';
 import { RecipeCreateForm } from '@features/recipe';
+import { AnotherUserHeader } from '@entities/user';
 import { RootStackParamList } from '@shared/types';
 import { ProfileEdit, FollowDetail, AnotherUserPage } from '../pages/user';
 import MainTabNavigator from './TabNavigation';
@@ -16,11 +17,19 @@ export function Navigation() {
   return (
     <Host>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Login" component={LoginPage} />
-          <Stack.Screen name="Main" component={MainTabNavigator} />
-          <Stack.Screen name="RecipeCreateForm" component={RecipeCreateForm} />
-          <Stack.Screen name="AnotherUserPage" component={AnotherUserPage} />
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={LoginPage} options={{ headerShown: false }} />
+          <Stack.Screen name="Main" component={MainTabNavigator} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="RecipeCreateForm"
+            component={RecipeCreateForm}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AnotherUserPage"
+            component={AnotherUserPage}
+            options={{ header: () => <AnotherUserHeader /> }}
+          />
           {/* NOTE: 모달 페이지 관리 */}
           <Stack.Group
             screenOptions={{

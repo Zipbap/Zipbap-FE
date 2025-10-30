@@ -66,12 +66,14 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
           )}
         </View>
       </View>
-      <Portal>
-        <MyRecipeCatagoryBottomSheet
-          bottomSheetVisible={bottomSheetVisible}
-          bottomSheetClose={bottomSheetClose}
-        />
-      </Portal>
+      {bottomSheetVisible && (
+        <Portal>
+          <MyRecipeCatagoryBottomSheet
+            bottomSheetVisible={bottomSheetVisible}
+            bottomSheetClose={bottomSheetClose}
+          />
+        </Portal>
+      )}
     </View>
   );
 };

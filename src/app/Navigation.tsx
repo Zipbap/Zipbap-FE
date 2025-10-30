@@ -5,11 +5,10 @@ import { Host } from 'react-native-portalize';
 import { LoginPage } from '@pages/auth';
 import { FeedDetail } from '@pages/feed';
 import { RecipeDetail } from '@pages/recipe';
-import { Secession } from '@pages/setting';
+import { Secession, ProfileEdit, FollowDetail, AnotherUserPage } from '@pages/user';
 import { RecipeCreateForm } from '@features/recipe';
 import { AnotherUserHeader } from '@entities/user';
 import { RootStackParamList } from '@shared/types';
-import { ProfileEdit, FollowDetail, AnotherUserPage } from '../pages/user';
 import MainTabNavigator from './TabNavigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

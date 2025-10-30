@@ -1,30 +1,43 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
+import { RootNavigationProp } from '@/src/shared/types';
 import { SettingItem } from '@features/user';
 import { FullWidthButton, ModalContentSection, BottomSheetModal } from '@shared/ui';
 
 interface Props {
   bottomSheetVisible: boolean;
   bottomSheetClose: () => void;
+  navigation: RootNavigationProp<'Main'>;
+  userId: string;
 }
 
-const UserSettingBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: Props) => {
+const UserSettingBottomSheet = ({
+  userId,
+  navigation,
+  bottomSheetVisible,
+  bottomSheetClose,
+}: Props) => {
   const [pushAll, setPushAll] = useState(false);
   const [followerActivity, setFollowerActivity] = useState(true);
   const [likesComments, setLikesComments] = useState(false);
   const [appUpdates, setAppUpdates] = useState(false);
   const [nightMode, setNightMode] = useState(false);
-  const handleCatagoryAdd = () => {
-    // 카테고리 추가 로직
+
+  const handleCategorySecession = () => {
+    bottomSheetClose();
+    navigation.navigate('Secession', { userId });
+    console.log(1);
   };
 
   const handleCatagorySave = () => {
     // 카테고리 저장 로직
     bottomSheetClose();
+    console.log(2);
   };
+  console.log(pushAll);
 
   return (
-    <BottomSheetModal visible={bottomSheetVisible} onClose={bottomSheetClose} height={'auto'}>
+    <BottomSheetModal visible={bottomSheetVisible} onClose={bottomSheetClose}>
       <Text className="mt-[40px] text-center text-[20px] font-bold text-black">설정</Text>
 
       {/* 알림 관리 */}
@@ -54,7 +67,7 @@ const UserSettingBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: Props)
       />
 
       {/* 버튼 그룹 */}
-      <View className="mt-12 flex-col items-center">
+      <View className="mb-4 mt-12 flex-col items-center">
         <FullWidthButton
           buttonText="저장하기"
           onPress={handleCatagorySave}
@@ -63,7 +76,7 @@ const UserSettingBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: Props)
         />
         <FullWidthButton
           buttonText="회원 탈퇴하기"
-          onPress={handleCatagoryAdd}
+          onPress={handleCategorySecession}
           backgroundColor="#F0EDE6"
           textColor="#847C70"
         />

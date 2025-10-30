@@ -25,12 +25,16 @@ const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
 
         {/* 피드/북마크 */}
         <FeedGrid data={tab === 'feeds' ? user.feeds : user.bookmarks} type={tab} />
-        <Portal>
-          <UserSettingBottomSheet
-            bottomSheetVisible={bottomSheetVisible}
-            bottomSheetClose={bottomSheetClose}
-          />
-        </Portal>
+        {bottomSheetVisible && (
+          <Portal>
+            <UserSettingBottomSheet
+              userId={user.id}
+              navigation={navigation}
+              bottomSheetVisible={bottomSheetVisible}
+              bottomSheetClose={bottomSheetClose}
+            />
+          </Portal>
+        )}
       </View>
     </View>
   );

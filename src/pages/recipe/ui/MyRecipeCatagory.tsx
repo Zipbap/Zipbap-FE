@@ -3,7 +3,7 @@ import { View, ScrollView } from 'react-native';
 
 import PlusIcon from '@/assets/img/plus.svg';
 import { ViewTypeSwitcher } from '@features/recipe';
-import { useBottomSheetStore, useViewTypeStore } from '@shared/store';
+import { useCategoryBottomSheetStore, useViewTypeStore } from '@shared/store';
 
 import { CategoryChipButton } from '@shared/ui';
 
@@ -12,8 +12,8 @@ const MyRecipeCatagory = () => {
   const [catagory] = useState(['점심', '저녁']);
   const [selected, setSelected] = useState<string>('전체');
 
-  // Modal state
-  const { bottomSheetOpen } = useBottomSheetStore();
+  // NOTE: BottomSheetModal state
+  const { bottomSheetOpen } = useCategoryBottomSheetStore();
 
   return (
     <>

@@ -1,12 +1,12 @@
 import { create } from 'zustand';
 
-interface BottomSheetState {
+interface CategoryBottomSheetState {
   bottomSheetVisible: boolean;
   bottomSheetOpen: () => void;
   bottomSheetClose: () => void;
 }
 
-export const useBottomSheetStore = create<BottomSheetState>(set => ({
+export const useCategoryBottomSheetStore = create<CategoryBottomSheetState>(set => ({
   bottomSheetVisible: false,
   bottomSheetOpen: () => set({ bottomSheetVisible: true }),
   bottomSheetClose: () => set({ bottomSheetVisible: false }),

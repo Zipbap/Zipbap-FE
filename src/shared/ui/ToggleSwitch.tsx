@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Pressable, Animated } from 'react-native';
+import { Pressable, Animated } from 'react-native';
 
 interface Props {
   isOn: boolean;

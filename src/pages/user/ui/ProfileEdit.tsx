@@ -73,7 +73,7 @@ const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
         bottomOffset={80}
       >
         <View className="h-[80px]" />
-        <View className="bg-gray-50 items-center px-4 pt-8">
+        <View className="flex items-center px-4 pt-8">
           {/* 프로필 이미지 */}
           <Image source={{ uri: profileImage }} className="h-[128px] w-[128px] rounded-full" />
 

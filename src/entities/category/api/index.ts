@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { queryKeys } from '@/src/shared/config';
+import { MyCategory } from '@entities/category/model';
+import { queryKeys } from '@shared/config';
 import { createApi } from '@shared/config/api-factory';
-import { MyCategory } from '@shared/types/api';
 
 export const categoryApi = createApi<MyCategory>({
   baseEndpoint: '/my-categories',

@@ -3,6 +3,7 @@ import { Text, View, ScrollView, TextInput } from 'react-native';
 
 import EditIcon from '@/assets/img/catagory/edit.svg';
 import TrashIcon from '@/assets/img/catagory/trash.svg';
+import categoryService from '@entities/category/api';
 import { FullWidthButton, ModalContentSection, BottomSheetModal } from '@shared/ui';
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
 
 const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: Props) => {
   // FIXME: api로 카테고리 가져오기
-  const [originalCategory] = useState(['점심', '저녁']);
+  const { data: categoryResponse, isLoading } = categoryService.useGetListQuery();
   const [newCategory, setNewCategory] = useState('');
 
   const handleCatagoryAdd = () => {
@@ -28,6 +29,13 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
     handleModalClose();
   };
 
+  if (isLoading)
+    return (
+      <View>
+        <Text>로딩중 ui</Text>
+      </View>
+    );
+
   return (
     <BottomSheetModal visible={bottomSheetVisible} onClose={handleModalClose} height={'auto'}>
       <Text className="mt-[40px] text-center text-[20px] font-bold text-black">카테고리 관리</Text>
@@ -41,12 +49,12 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
               <Text>전체</Text>
             </View>
             <ScrollView className="px-11">
-              {originalCategory.map((category, index) => (
+              {categoryResponse?.result?.map((category, index) => (
                 <View
                   key={index}
                   className="flex-row items-center justify-between gap-56 self-stretch py-4"
                 >
-                  <Text>{category}</Text>
+                  <Text>{category.name}</Text>
                   <View className="flex-row gap-[14px]">
                     <EditIcon width={16} height={16} />
                     <TrashIcon width={16} height={16} />

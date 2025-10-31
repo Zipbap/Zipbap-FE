@@ -32,11 +32,11 @@ const AppleLoginButton = ({ navigation }: Props) => {
         throw new Error('Apple identityToken이 존재하지 않습니다.');
       }
 
-      // ✅ 서버 DTO(LoginRequestDto)와 맞춤
       const payload = {
         accessToken: credential.identityToken,
       };
 
+      // TODO: api 변경
       const response = await fetch(`${API_BASE}/api/auth/apple/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -60,6 +60,7 @@ const AppleLoginButton = ({ navigation }: Props) => {
         console.log('사용자가 Apple 로그인을 취소했습니다.');
       } else {
         console.error('Apple 로그인 실패:', error);
+        // TODO: 토스트 알림
         Alert.alert('로그인 실패', String(error.message || error));
       }
     }

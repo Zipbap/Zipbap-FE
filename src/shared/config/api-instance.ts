@@ -1,8 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
+import { getTokens } from '@/src/shared/store/token';
 
 export const apiInstance: AxiosInstance = axios.create({
-  baseURL: process.env.EXPO_PUBLIC_BASE_URL || 'http://localhost:3000/api',
-  withCredentials: true,
+  baseURL: process.env.EXPO_PUBLIC_BASE_URL || 'http://localhost:8080/api',
+  withCredentials: false,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -10,7 +11,11 @@ export const apiInstance: AxiosInstance = axios.create({
 });
 
 apiInstance.interceptors.request.use(
-  config => {
+  async config => {
+    const tokens = await getTokens();
+    if (tokens?.accessToken) {
+      config.headers.Authorization = `Bearer ${tokens.accessToken}`;
+    }
     return config;
   },
   error => {

@@ -2,6 +2,7 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import React, { useState } from 'react';
 import { Alert, Text } from 'react-native';
 import AppleSvg from '@/assets/img/auth/apple.svg';
+import { storeTokens } from '@/src/shared/store/token';
 import { RootNavigationProp } from '@/src/shared/types';
 import { Button } from '@entities/user';
 
@@ -27,9 +28,6 @@ const AppleLoginButton = ({ navigation }: Props) => {
         ],
       });
 
-      console.log('🍎 Apple 로그인 성공');
-      console.log('identityToken:', credential.identityToken);
-
       if (!credential.identityToken) {
         throw new Error('Apple identityToken이 존재하지 않습니다.');
       }
@@ -46,17 +44,17 @@ const AppleLoginButton = ({ navigation }: Props) => {
       });
 
       const data = await response.json();
-      console.log('📩 서버 응답:', data);
 
       if (!response.ok || !data.isSuccess) {
         throw new Error(data.message || '로그인 실패');
       }
 
       const { accessToken, refreshToken } = data.result;
-      console.log('✅ JWT 발급 완료:', { accessToken, refreshToken });
 
-      Alert.alert('로그인 성공', '집밥에 오신 걸 환영합니다!');
+      await storeTokens({ accessToken, refreshToken });
+
       navigation.replace('Main');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.code === 'ERR_REQUEST_CANCELED') {
         console.log('사용자가 Apple 로그인을 취소했습니다.');

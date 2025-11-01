@@ -20,7 +20,7 @@ const EmptyState = ({ video, title, subtitle, buttonText, onPress }: Props) => {
 
   return (
     <View className="items-center justify-center">
-      <View className="mb-1 h-[220px] w-[130px]">
+      <View className="h-[180px] w-[130px]">
         <View className="flex-1">
           <VideoView style={{ flex: 1 }} player={player} nativeControls={false} />
         </View>

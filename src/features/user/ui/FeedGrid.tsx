@@ -18,7 +18,7 @@ const FeedGrid = ({ data, type, navigation }: Props) => {
     return (
       <View
         className="absolute bottom-0 left-0 right-0 top-0 items-center justify-center"
-        style={{ transform: [{ translateY: 90 }] }}
+        style={{ transform: [{ translateY: 70 }] }}
       >
         <EmptyState
           video={loginVideo}

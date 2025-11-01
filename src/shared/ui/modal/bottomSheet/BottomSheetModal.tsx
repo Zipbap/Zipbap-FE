@@ -12,10 +12,14 @@ const BottomSheetModal = ({ visible, onClose, children }: Props) => {
   const modalizeRef = useRef<Modalize>(null);
 
   useEffect(() => {
+    const modal = modalizeRef.current;
+    if (!modal) return;
+
     if (visible) {
-      modalizeRef.current?.open();
+      // NOTE: 애니메이션 마치고 내용 오픈
+      requestAnimationFrame(() => modal.open());
     } else {
-      modalizeRef.current?.close();
+      modal.close();
     }
   }, [visible]);
 

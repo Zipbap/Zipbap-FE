@@ -2,28 +2,36 @@ import React from 'react';
 import { FlatList, Image, View } from 'react-native';
 
 import FeedsSvg from '@/assets/img/feeds-icon.svg';
+import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
 import { UserFeed, MyPageTabType } from '@entities/user';
+import { RootNavigationProp } from '@shared/types';
 import EmptyState from './EmptyState';
 
 interface Props {
   data: UserFeed[];
   type: MyPageTabType;
+  navigation: RootNavigationProp<'Main'>;
 }
 
-const FeedGrid = ({ data, type }: Props) => {
+const FeedGrid = ({ data, type, navigation }: Props) => {
   if (data.length === 0) {
     return (
-      <EmptyState
-        video={'null'}
-        title={type === 'feeds' ? '레시피를 공유해 보세요' : '마음에 드는 레시피를 저장해 보세요'}
-        subtitle={
-          type === 'feeds'
-            ? '레시피 수정에서 공유로 전환하면 됩니다'
-            : `피드에서 다른 셰프님의 레시피 중\n좋은 레시피를 모아둘 수 있어요`
-        }
-        buttonText={type === 'feeds' ? '레시피 공유하기' : '북마크 하기'}
-        onPress={() => console.log(type === 'feeds' ? '공유하기' : '북마크 하기')}
-      />
+      <View
+        className="absolute bottom-0 left-0 right-0 top-0 items-center justify-center"
+        style={{ transform: [{ translateY: 90 }] }}
+      >
+        <EmptyState
+          video={loginVideo}
+          title={type === 'feeds' ? '레시피를 공유해 보세요' : '마음에 드는 레시피를 저장해 보세요'}
+          subtitle={
+            type === 'feeds'
+              ? '레시피 수정에서 공유로 전환하면 됩니다'
+              : `피드에서 다른 셰프님의 레시피 중\n좋은 레시피를 모아둘 수 있어요`
+          }
+          buttonText={type === 'feeds' ? '레시피 공유하기' : '북마크 하기'}
+          onPress={() => navigation.navigate('Main', { screen: 'Feed' })}
+        />
+      </View>
     );
   }
 

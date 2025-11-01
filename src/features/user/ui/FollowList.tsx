@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View, Dimensions } from 'react-native';
 
 import { FollowDetailUser } from '@entities/user';
 
@@ -13,20 +13,35 @@ interface Props {
 }
 
 const FollowList = ({ users, navigation }: Props) => {
+  const { height } = Dimensions.get('window');
   return (
-    <FlatList
-      data={users}
-      keyExtractor={item => item.id}
-      ListEmptyComponent={
-        <EmptyFollowList
-          title="마음에 드는 셰프를 팔로우해 보세요"
-          subtitle={`피드에서 좋은 레시피를 가진\n셰프들을 팔로우 할 수 있어요`}
-          buttonText="팔로우 하기"
-          onPress={() => console.log('팔로우하기')}
-        />
-      }
-      renderItem={({ item }) => <FollowItem user={item} navigation={navigation} />}
-    />
+    <View className="flex-1">
+      <FlatList
+        data={users}
+        keyExtractor={item => item.id}
+        ListEmptyComponent={
+          <View className="items-center justify-center" style={{ height: height - 230 }}>
+            <EmptyFollowList
+              title="마음에 드는 셰프를 팔로우해 보세요"
+              subtitle={`피드에서 좋은 레시피를 가진\n셰프들을 팔로우 할 수 있어요`}
+              buttonText="팔로우 하기"
+              onPress={() =>
+                navigation.reset({
+                  index: 0,
+                  routes: [
+                    {
+                      name: 'Main',
+                      params: { screen: 'Feed' },
+                    },
+                  ],
+                })
+              }
+            />
+          </View>
+        }
+        renderItem={({ item }) => <FollowItem user={item} navigation={navigation} />}
+      />
+    </View>
   );
 };
 

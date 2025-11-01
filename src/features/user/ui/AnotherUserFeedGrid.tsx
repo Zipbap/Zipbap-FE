@@ -11,8 +11,10 @@ interface Props {
 const AnotherUserFeedGrid = ({ data }: Props) => {
   if (data.length === 0) {
     return (
-      <View className="flex-1 items-center justify-center px-6">
-        <View className="h-[180px]" />
+      <View
+        className="absolute bottom-0 left-0 right-0 top-0 items-center justify-center"
+        style={{ transform: [{ translateY: 90 }] }}
+      >
         {/* FIXME: 비디오로 추후 교체 */}
         <View className="mb-8 h-24 w-24 bg-g5" />
         <Text className="text-lg font-bold color-black">레시피가 없습니다</Text>

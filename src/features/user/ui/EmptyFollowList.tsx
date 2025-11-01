@@ -12,8 +12,7 @@ interface Props {
 
 const EmptyFollowList = ({ title, subtitle, buttonText, onPress }: Props) => {
   return (
-    <View className="flex-1 items-center justify-center px-6">
-      <View className="h-[180px]" />
+    <View className="items-center justify-center">
       {/* FIXME: 비디오로 추후 교체 */}
       <AddFollowSvgIcon />
       <Text className="mt-8 text-lg font-bold color-black">{title}</Text>

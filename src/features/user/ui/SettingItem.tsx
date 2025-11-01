@@ -15,4 +15,4 @@ const SettingItem = ({ title, isOn, onToggle }: Props) => (
   </View>
 );
 
-export default React.memo(SettingItem);
+export default SettingItem;

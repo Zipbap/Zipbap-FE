@@ -1,10 +1,11 @@
+import { VideoSource, useVideoPlayer, VideoView } from 'expo-video';
 import React from 'react';
 import { View, Text } from 'react-native';
 
 import { EmptyScreenActionButton } from '@shared/ui';
 
 interface Props {
-  video: 'video/mp4' | string;
+  video: VideoSource;
   title: string;
   subtitle: string;
   buttonText: string;
@@ -12,12 +13,18 @@ interface Props {
 }
 
 const EmptyState = ({ video, title, subtitle, buttonText, onPress }: Props) => {
-  console.log(video);
+  const player = useVideoPlayer(video, player => {
+    player.loop = true;
+    player.play();
+  });
+
   return (
-    <View className="flex-1 items-center justify-center px-6">
-      <View className="h-[180px]" />
-      {/* FIXME: 비디오로 추후 교체 */}
-      <View className="mb-8 h-24 w-24 bg-g5" />
+    <View className="items-center justify-center">
+      <View className="mb-1 h-[220px] w-[130px]">
+        <View className="flex-1">
+          <VideoView style={{ flex: 1 }} player={player} nativeControls={false} />
+        </View>
+      </View>
       <Text className="text-lg font-bold color-black">{title}</Text>
       <Text className="mt-1 text-center text-sm color-g2">{subtitle}</Text>
       <EmptyScreenActionButton buttonText={buttonText} onPress={onPress} />

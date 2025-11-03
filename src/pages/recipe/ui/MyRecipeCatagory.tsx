@@ -1,7 +1,11 @@
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { View, ScrollView } from 'react-native';
 
 import PlusIcon from '@/assets/img/plus.svg';
+import { MyCategory } from '@/src/entities/category/model';
+import { queryKeys } from '@/src/shared/config';
+import { apiInstance } from '@/src/shared/config/api-instance';
 import { ViewTypeSwitcher } from '@features/recipe';
 import { useBottomSheetStore, useViewStore } from '@shared/store';
 
@@ -9,8 +13,17 @@ import { CategoryChipButton } from '@shared/ui';
 
 const MyRecipeCatagory = () => {
   const { viewType, setViewType } = useViewStore();
-  const [catagory] = useState(['점심', '저녁']);
   const [selected, setSelected] = useState<string>('전체');
+
+  const { data: categoryResponse } = useQuery({
+    queryKey: queryKeys.myCategories.all,
+    queryFn: async () => {
+      const res = await apiInstance.get('/my-categories');
+      return res.data;
+    },
+  });
+
+  const categories: MyCategory[] = categoryResponse?.result || [];
 
   // Modal state
   const { bottomSheetOpen } = useBottomSheetStore();
@@ -33,12 +46,12 @@ const MyRecipeCatagory = () => {
             contentContainerStyle={{ alignItems: 'center', paddingRight: 20 }}
           >
             <View className="flex-row items-center gap-2">
-              {catagory.map((category, index) => (
+              {categories.map((category, index) => (
                 <CategoryChipButton
                   key={index}
-                  label={category}
-                  selected={selected === category}
-                  onPress={() => setSelected(category)}
+                  label={category.name}
+                  selected={selected === category.name}
+                  onPress={() => setSelected(category.name)}
                 />
               ))}
               <PlusIcon onPress={bottomSheetOpen} width={26} height={26} />

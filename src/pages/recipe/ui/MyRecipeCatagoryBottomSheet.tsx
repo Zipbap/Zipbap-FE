@@ -24,7 +24,6 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
     queryKey: queryKeys.myCategories.all,
     queryFn: async () => {
       const res = await apiInstance.get(categoryEndpoint);
-      console.log(res.data);
       return res.data;
     },
     enabled: bottomSheetVisible,
@@ -54,7 +53,6 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
 
   const deleteCategory = useMutation({
     mutationFn: async (id: string) => {
-      console.log(id);
       await apiInstance.delete(`${categoryEndpoint}/${id}`);
     },
     onSuccess: () => {

@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
 import { View, FlatList, Text, Pressable } from 'react-native';
 import { Portal } from 'react-native-portalize';
-import { ArticleView, mockRecipes, Recipe, FeedView, ImageView } from '@entities/recipe';
+import { queryKeys } from '@/src/shared/config';
+import { apiInstance } from '@/src/shared/config/api-instance';
+import { ArticleView, Recipe, FeedView, ImageView } from '@entities/recipe';
 import { useBottomSheetStore, useViewStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
 import { WebViewAutoVideoPlayer } from '@shared/ui';
@@ -13,15 +16,39 @@ interface RecipePageProps {
 }
 
 const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
-  const [recipeList, setRecipeList] = useState<Recipe[]>([]);
-  const isRecipeListEmpty = recipeList.length === 0;
   const { viewType } = useViewStore();
-
-  useEffect(() => {
-    setRecipeList(mockRecipes);
-  }, []);
-
   const { bottomSheetVisible, bottomSheetClose } = useBottomSheetStore();
+
+  const {
+    data: recipes,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: queryKeys.recipes.all,
+    queryFn: async () => {
+      const res = await apiInstance.get('/recipes/me');
+      return res.data;
+    },
+  });
+  const recipeList: Recipe[] = recipes?.result || [];
+
+  const isRecipeListEmpty = recipeList.length === 0;
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-white">
+        <Text>불러오는 중...</Text>
+      </View>
+    );
+  }
+
+  if (isError) {
+    return (
+      <View className="flex-1 items-center justify-center bg-white">
+        <Text>레시피를 불러오는데 실패했습니다.</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -57,6 +84,7 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
               }}
             />
           ) : (
+            // TODO: 빈 화면 완성
             <View className="flex-1">
               <Text className="text-[16px] font-bold">아무것도 없네요</Text>
               <View className="h-[300px] w-[300px]">

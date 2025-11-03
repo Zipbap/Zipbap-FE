@@ -1,25 +1,25 @@
-import { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 
+import { useRecipeTypeStore } from '@/src/shared/store/useRecipeMode';
 import { cn } from '@shared/lib';
 
 const RecipeCreateExtension = () => {
-  const [activeTab, setActiveTab] = useState<'done' | 'progress'>('done');
+  const { recipeType, setRecipeTypeTemp, setRecipeTypeFinal } = useRecipeTypeStore();
 
   return (
     <View className="w-full flex-row overflow-hidden rounded-b-3xl bg-white px-9">
       {/* 작성 완료 */}
       <Pressable
-        onPress={() => setActiveTab('done')}
+        onPress={setRecipeTypeFinal}
         className={cn(
           'flex-1 items-center justify-center py-3',
-          activeTab === 'done' ? 'border-b-2 border-sub1' : 'border-b border-g2',
+          recipeType === 'final' ? 'border-b-2 border-sub1' : 'border-b border-g2',
         )}
       >
         <Text
           className={cn(
             'text-base',
-            activeTab === 'done' ? 'font-bold text-sub1' : 'font-semibold text-g2',
+            recipeType === 'final' ? 'font-bold text-sub1' : 'font-semibold text-g2',
           )}
         >
           작성 완료
@@ -28,16 +28,16 @@ const RecipeCreateExtension = () => {
 
       {/* 작성 중 */}
       <Pressable
-        onPress={() => setActiveTab('progress')}
+        onPress={setRecipeTypeTemp}
         className={cn(
           'flex-1 items-center justify-center py-3',
-          activeTab === 'progress' ? 'border-b-2 border-sub1' : 'border-b border-g2',
+          recipeType === 'temp' ? 'border-b-2 border-sub1' : 'border-b border-g2',
         )}
       >
         <Text
           className={cn(
             'text-base',
-            activeTab === 'progress' ? 'font-bold text-sub1' : 'font-semibold text-g2',
+            recipeType === 'temp' ? 'font-bold text-sub1' : 'font-semibold text-g2',
           )}
         >
           작성 중

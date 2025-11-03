@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { View, FlatList, TouchableOpacity } from 'react-native';
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import { View, FlatList, TouchableOpacity, Text } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
 
-import { mockRecipes, Recipe, ArticleView, DetailDeleteComponent } from '@entities/recipe';
+import { queryKeys } from '@/src/shared/config';
+import { apiInstance } from '@/src/shared/config/api-instance';
+import { useRecipeTypeStore } from '@/src/shared/store/useRecipeMode';
+import { Recipe, ArticleView, DetailDeleteComponent } from '@entities/recipe';
 import { RootNavigationProp } from '@shared/types';
 
 interface MainPageProps {
@@ -13,28 +17,63 @@ interface MainPageProps {
 
 const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
   const navigateToRecipeCreateForm = () => navigation.navigate('RecipeCreateForm');
-  const [recipeList, setRecipeList] = useState<Recipe[]>([]);
+  const { recipeType } = useRecipeTypeStore();
 
-  useEffect(() => {
-    setRecipeList(mockRecipes);
-  }, []);
+  const {
+    data: recipes,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: recipeType === 'temp' ? queryKeys.recipeTemp.all : queryKeys.recipeFinal.all,
+    queryFn: async () => {
+      const res = await apiInstance.get(recipeType === 'temp' ? '/recipes/temp' : '/recipes');
+      return res.data.result;
+    },
+  });
+
+  const recipeList: Recipe[] = recipes || [];
+
+  const isRecipeListEmpty = recipeList.length === 0;
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-white">
+        <Text>불러오는 중...</Text>
+      </View>
+    );
+  }
+
+  if (isError) {
+    return (
+      <View className="flex-1 items-center justify-center bg-white">
+        <Text>레시피를 불러오는데 실패했습니다.</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={{ flex: 1 }}>
       <View className="h-full w-full flex-1 bg-white">
         <View className="h-full w-full px-6 pt-[20px]">
-          <FlatList
-            key={'article'}
-            data={recipeList}
-            keyExtractor={item => item.id}
-            contentContainerStyle={{ paddingTop: 12, paddingBottom: 100 }}
-            numColumns={1}
-            renderItem={({ item }) => (
-              <Swipeable renderRightActions={() => <DetailDeleteComponent targetId={item.id} />}>
-                <ArticleView item={item} />
-              </Swipeable>
-            )}
-          />
+          {!isRecipeListEmpty ? (
+            <FlatList
+              key={'article'}
+              data={recipeList}
+              keyExtractor={item => item.id}
+              contentContainerStyle={{ paddingTop: 12, paddingBottom: 100 }}
+              numColumns={1}
+              renderItem={({ item }) => (
+                <Swipeable renderRightActions={() => <DetailDeleteComponent targetId={item.id} />}>
+                  <ArticleView item={item} />
+                </Swipeable>
+              )}
+            />
+          ) : (
+            // TODO: 빈 화면 완성
+            <View className="flex-1 items-center justify-center">
+              <Text className="text-[16px] font-bold">아무것도 없네요</Text>
+            </View>
+          )}
         </View>
 
         <TouchableOpacity

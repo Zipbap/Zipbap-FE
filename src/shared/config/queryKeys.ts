@@ -18,4 +18,16 @@ export const queryKeys = {
     list: () => [...queryKeys.recipes.all, 'list'] as const,
     detail: (id: number) => [...queryKeys.recipes.all, 'detail', id] as const,
   },
+  recipeTemp: {
+    key: 'recipeTemp',
+    all: ['recipeTemp'] as const,
+    list: () => [...queryKeys.recipeTemp.all, 'list'] as const,
+    detail: (id: number) => [...queryKeys.recipeTemp.all, 'detail', id] as const,
+  },
+  recipeFinal: {
+    key: 'recipeFinal',
+    all: ['recipeFinal'] as const,
+    list: () => [...queryKeys.recipeFinal.all, 'list'] as const,
+    detail: (id: number) => [...queryKeys.recipeFinal.all, 'detail', id] as const,
+  },
 } as const;

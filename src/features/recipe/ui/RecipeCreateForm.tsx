@@ -16,10 +16,11 @@ import RecipeCreateHeader from './RecipeCreateHeader';
 const RecipeCreateForm = () => {
   const { recipe, updateField, updateCookingOrder, handleTempSave, handleFinalizeSave } =
     useRecipeCreateForm();
+  console.log('recipe!!!\n', recipe, '\n\n');
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
       <View className="flex-1">
-        <RecipeCreateHeader hasShadow={true} />
+        <RecipeCreateHeader hasShadow />
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           className="bg-white"
@@ -33,40 +34,46 @@ const RecipeCreateForm = () => {
           >
             <FormTitle title="레시피 기본 정보" />
 
+            {/* 썸네일 업로드 */}
             <FormMediaUpload
               uploadType="image"
               value={recipe.thumbnail}
               onUpload={uri => updateField('thumbnail', uri)}
             />
 
+            {/* 제목 */}
             <FormTitle title="레시피 제목" />
             <FormTextInput
               placeholder="예) 소고기 미역국"
-              value={recipe.title ?? ''}
+              value={recipe.title}
               onChangeText={text => updateField('title', text)}
             />
 
+            {/* 부제목 */}
             <FormTitle title="레시피 소제목" />
             <FormTextInput
               placeholder="예) 할머니의 손맛"
-              value={recipe.subtitle ?? ''}
+              value={recipe.subtitle}
               onChangeText={text => updateField('subtitle', text)}
             />
 
+            {/* 소개글 */}
             <FormTitle title="레시피 소개" />
             <FormLongTextInput
-              placeholder="예) 제 생일이면 늘..."
-              value={recipe.introduction ?? ''}
+              placeholder="예) 제 생일이면 늘 끓여주시던 미역국입니다."
+              value={recipe.introduction}
               onChangeText={text => updateField('introduction', text)}
             />
 
+            {/* 재료 정보 */}
             <FormTitle title="재료 정보" />
             <FormLongTextInput
-              placeholder="예) 다진 소고기 50g..."
-              value={recipe.ingredientInfo ?? ''}
+              placeholder="예) 다진 소고기 50g, 미역 20g..."
+              value={recipe.ingredientInfo}
               onChangeText={text => updateField('ingredientInfo', text)}
             />
 
+            {/* 영상 */}
             <FormTitle title="레시피 영상(선택)" />
             <FormMediaUpload
               uploadType="video"
@@ -74,48 +81,35 @@ const RecipeCreateForm = () => {
               onUpload={uri => updateField('video', uri)}
             />
 
+            {/* 순서 */}
             <FormTitle title="레시피 순서" />
-            <Text>요리의 맛이 좌우될 수 있는 중요한 부분은 빠짐 없이 적어주세요.</Text>
+            <Text className="text-gray-600 mb-2">요리의 핵심 포인트는 빠짐없이 적어주세요.</Text>
 
-            {/* Step 1 */}
-            <FormMediaUpload
-              uploadType="image"
-              value={recipe.cookingOrders[0]?.image ?? ''}
-              onUpload={uri => updateCookingOrder(0, 'image', uri)}
-            />
-            <FormLongTextInput
-              placeholder="예) 그 사이에 양파와 버섯, 대파도 썰어서 준비해 주세요."
-              value={recipe.cookingOrders[0]?.description ?? ''}
-              onChangeText={text => updateCookingOrder(0, 'description', text)}
-            />
-            {/* Step 2 */}
-            <FormMediaUpload
-              uploadType="image"
-              value={recipe.cookingOrders[1]?.image ?? ''}
-              onUpload={uri => updateCookingOrder(1, 'image', uri)}
-            />
-            <FormLongTextInput
-              placeholder="예) 그 사이에 양파와 버섯, 대파도 썰어서 준비해 주세요."
-              value={recipe.cookingOrders[1]?.description ?? ''}
-              onChangeText={text => updateCookingOrder(1, 'description', text)}
-            />
+            {recipe.cookingOrders?.map((order, index) => (
+              <View key={index}>
+                <FormMediaUpload
+                  uploadType="image"
+                  value={order.image}
+                  onUpload={uri => updateCookingOrder(index, 'image', uri)}
+                />
+                <FormLongTextInput
+                  placeholder="예) 미역을 불린 후, 소고기를 볶아주세요."
+                  value={order.description}
+                  onChangeText={text => updateCookingOrder(index, 'description', text)}
+                />
+              </View>
+            ))}
+
             <FormAddRecipeOrder />
 
-            {/* 레시피 Kick */}
-            <FormTitle title="레시피 Kick" />
-            <FormLongTextInput
-              placeholder="예) 치킨스톡을 살짝 넣으면 더 맛있습니다."
-              value={recipe.kick ?? ''}
-              onChangeText={text => updateField('kick', text)}
-            />
-
-            <FormTitle title="레시피 공개여부" />
-
+            {/* 공개 여부 */}
+            <FormTitle title="레시피 공개 여부" />
             <FormRecipeVisibilityToggle
               selectedToggle={recipe.isPrivate ? 'private' : 'public'}
               setSelectedToggle={toggle => updateField('isPrivate', toggle === 'private')}
             />
 
+            {/* 버튼 */}
             <FullWidthButton
               buttonText="임시저장"
               onPress={handleTempSave}

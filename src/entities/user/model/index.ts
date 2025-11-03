@@ -16,17 +16,6 @@ export interface User {
   isPublic: boolean;
 }
 
-// NOTE: 피드가 비어있을 경우 타입
-export interface FeedEmpty {
-  id: string;
-  videoUrl: string;
-}
-// NOTE: 북마크가 비어있을 경우 타입
-export interface BookmarkEmpty {
-  id: string;
-  videoUrl: string;
-}
-
 export type FollowTabType = 'follower' | 'following';
 export type MyPageTabType = 'feeds' | 'bookmarks';
 

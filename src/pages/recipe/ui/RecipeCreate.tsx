@@ -5,7 +5,7 @@ import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
 
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
-import { EmptyState } from '@features/user';
+import { EmptyStateUsingVideo } from '@features/user';
 import { mockRecipes, Recipe, ArticleView, DetailDeleteComponent } from '@entities/recipe';
 import { RootNavigationProp } from '@shared/types';
 
@@ -44,7 +44,7 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
               className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center"
               style={{ transform: [{ translateY: -50 }] }}
             >
-              <EmptyState
+              <EmptyStateUsingVideo
                 video={loginVideo}
                 title={'첫번째 레시피를 기록해 보세요'}
                 subtitle={'내가 기억하고 싶은 레시피를 작성해 보세요'}

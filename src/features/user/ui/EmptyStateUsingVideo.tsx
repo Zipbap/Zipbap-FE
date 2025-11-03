@@ -12,7 +12,7 @@ interface Props {
   onPress: () => void;
 }
 
-const EmptyState = ({ video, title, subtitle, buttonText, onPress }: Props) => {
+const EmptyStateUsingVideo = ({ video, title, subtitle, buttonText, onPress }: Props) => {
   const player = useVideoPlayer(video, player => {
     player.loop = true;
     player.play();
@@ -32,4 +32,4 @@ const EmptyState = ({ video, title, subtitle, buttonText, onPress }: Props) => {
   );
 };
 
-export default EmptyState;
+export default EmptyStateUsingVideo;

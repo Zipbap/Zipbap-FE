@@ -219,7 +219,6 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
               initialComments={detailFeed.comments}
               isLiked={detailFeed.isLiked}
               isBookmarked={detailFeed.isBookmarked}
-              isCommented={detailFeed.isCommented}
             />
           </View>
         </View>

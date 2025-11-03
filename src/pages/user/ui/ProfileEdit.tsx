@@ -67,11 +67,7 @@ const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
         onBackPress={navigation.goBack}
         rightContent={headerRightContent}
       />
-      <KeyboardAwareScrollView
-        className="h-[100%] overflow-hidden bg-white"
-        contentContainerStyle={{ flexGrow: 1 }}
-        bottomOffset={80}
-      >
+      <KeyboardAwareScrollView className="h-[100%] bg-white" bottomOffset={80}>
         <View className="h-[80px]" />
         <View className="flex items-center px-4 pt-8">
           {/* 프로필 이미지 */}

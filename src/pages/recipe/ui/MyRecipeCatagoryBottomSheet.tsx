@@ -31,67 +31,68 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
 
   return (
     <BottomSheetModal visible={bottomSheetVisible} onClose={handleModalClose}>
-      <KeyboardAwareScrollView>
+      <View className="px-6 py-6">
         <Text className="mt-[40px] text-center text-[20px] font-bold text-black">
           카테고리 관리
         </Text>
-
-        {/* 기존 카테고리 */}
-        <ModalContentSection
-          subTitle="기존 카테고리"
-          content={
-            <>
-              <View className="px-11 pb-4">
-                <Text>전체</Text>
-              </View>
-              <ScrollView className="px-11">
-                {originalCategory.map((category, index) => (
-                  <View
-                    key={index}
-                    className="flex-row items-center justify-between gap-56 self-stretch py-4"
-                  >
-                    <Text>{category}</Text>
-                    <View className="flex-row gap-[14px]">
-                      <EditIcon width={16} height={16} />
-                      <TrashIcon width={16} height={16} />
+        <KeyboardAwareScrollView className="h-[520px]" bottomOffset={30}>
+          {/* 기존 카테고리 */}
+          <ModalContentSection
+            subTitle="기존 카테고리"
+            content={
+              <>
+                <View className="px-11 pb-4">
+                  <Text>전체</Text>
+                </View>
+                <ScrollView className="px-11">
+                  {originalCategory.map((category, index) => (
+                    <View
+                      key={index}
+                      className="flex-row items-center justify-between gap-56 self-stretch py-4"
+                    >
+                      <Text>{category}</Text>
+                      <View className="flex-row gap-[14px]">
+                        <EditIcon width={16} height={16} />
+                        <TrashIcon width={16} height={16} />
+                      </View>
                     </View>
-                  </View>
-                ))}
-              </ScrollView>
-            </>
-          }
-        />
+                  ))}
+                </ScrollView>
+              </>
+            }
+          />
 
-        {/* 카테고리 추가 */}
-        <ModalContentSection
-          subTitle="카테고리 추가"
-          content={
-            <TextInput
-              className="h-14 items-center justify-start overflow-hidden rounded-2xl bg-g4 px-5 py-4 text-[14px] font-medium text-g2"
-              placeholder="새 카테고리 이름"
-              placeholderTextColor="#847C70"
-              value={newCategory}
-              onChangeText={setNewCategory}
+          {/* 카테고리 추가 */}
+          <ModalContentSection
+            subTitle="카테고리 추가"
+            content={
+              <TextInput
+                className="h-14 items-center justify-start overflow-hidden rounded-2xl bg-g4 px-5 py-4 text-[14px] font-medium text-g2"
+                placeholder="새 카테고리 이름"
+                placeholderTextColor="#847C70"
+                value={newCategory}
+                onChangeText={setNewCategory}
+              />
+            }
+          />
+          {/* 버튼 그룹 */}
+          <View className="mt-12 flex-col items-center">
+            <FullWidthButton
+              buttonText="추가하기"
+              onPress={handleCatagoryAdd}
+              backgroundColor="#AEA79C"
+              textColor="white"
             />
-          }
-        />
-        {/* 버튼 그룹 */}
-        <View className="mt-12 flex-col items-center">
-          <FullWidthButton
-            buttonText="추가하기"
-            onPress={handleCatagoryAdd}
-            backgroundColor="#AEA79C"
-            textColor="white"
-          />
 
-          <FullWidthButton
-            buttonText="저장하기"
-            onPress={handleCatagorySave}
-            backgroundColor="#DC6E3F"
-            textColor="white"
-          />
-        </View>
-      </KeyboardAwareScrollView>
+            <FullWidthButton
+              buttonText="저장하기"
+              onPress={handleCatagorySave}
+              backgroundColor="#DC6E3F"
+              textColor="white"
+            />
+          </View>
+        </KeyboardAwareScrollView>
+      </View>
     </BottomSheetModal>
   );
 };

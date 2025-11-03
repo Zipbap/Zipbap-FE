@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 interface Props {
@@ -25,6 +24,7 @@ const BottomSheetModal = ({ visible, onClose, children }: Props) => {
 
   return (
     <Modalize
+      disableScrollIfPossible={true}
       ref={modalizeRef}
       withOverlay={false}
       onClosed={onClose}
@@ -34,7 +34,7 @@ const BottomSheetModal = ({ visible, onClose, children }: Props) => {
       handleStyle={{ width: 50, backgroundColor: '#ccc' }}
       modalStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
     >
-      <View className="px-6 py-6">{children}</View>
+      {children}
     </Modalize>
   );
 };

@@ -1,9 +1,12 @@
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { Text, View, ScrollView, TextInput } from 'react-native';
+import { Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 
 import EditIcon from '@/assets/img/catagory/edit.svg';
 import TrashIcon from '@/assets/img/catagory/trash.svg';
-import categoryService from '@entities/category/api';
+import { MyCategory } from '@/src/entities/category/model';
+import { queryKeys } from '@/src/shared/config';
+import { apiInstance } from '@/src/shared/config/api-instance';
 import { FullWidthButton, ModalContentSection, BottomSheetModal } from '@shared/ui';
 
 interface Props {
@@ -11,22 +14,61 @@ interface Props {
   bottomSheetClose: () => void;
 }
 
+const categoryEndpoint = '/my-categories';
+
 const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: Props) => {
-  // FIXME: api로 카테고리 가져오기
-  const { data: categoryResponse, isLoading } = categoryService.useGetListQuery();
   const [newCategory, setNewCategory] = useState('');
+  const queryClient = useQueryClient();
+
+  const { data: categoryResponse, isLoading } = useQuery({
+    queryKey: queryKeys.myCategories.all,
+    queryFn: async () => {
+      const res = await apiInstance.get(categoryEndpoint);
+      console.log(res.data);
+      return res.data;
+    },
+    enabled: bottomSheetVisible,
+  });
+
+  const createCategory = useMutation({
+    mutationFn: async (name: string) => {
+      const res = await apiInstance.post(categoryEndpoint, { name });
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.myCategories.all });
+      setNewCategory('');
+    },
+  });
+
+  const updateCategory = useMutation({
+    mutationFn: async ({ id, name }: { id: string; name: string }) => {
+      const res = await apiInstance.put(`${categoryEndpoint}/${id}`, { name });
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.myCategories.all });
+      setNewCategory('');
+    },
+  });
+
+  const deleteCategory = useMutation({
+    mutationFn: async (id: string) => {
+      console.log(id);
+      await apiInstance.delete(`${categoryEndpoint}/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.myCategories.all });
+    },
+  });
 
   const handleCatagoryAdd = () => {
-    // 카테고리 추가 로직
+    if (!newCategory.trim()) return;
+    createCategory.mutate(newCategory);
   };
 
   const handleModalClose = () => {
     bottomSheetClose();
-  };
-
-  const handleCatagorySave = () => {
-    // 카테고리 저장 로직
-    handleModalClose();
   };
 
   if (isLoading)
@@ -49,15 +91,27 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
               <Text>전체</Text>
             </View>
             <ScrollView className="px-11">
-              {categoryResponse?.result?.map((category, index) => (
+              {categoryResponse?.result?.map((category: MyCategory, index: number) => (
                 <View
                   key={index}
                   className="flex-row items-center justify-between gap-56 self-stretch py-4"
                 >
                   <Text>{category.name}</Text>
                   <View className="flex-row gap-[14px]">
-                    <EditIcon width={16} height={16} />
-                    <TrashIcon width={16} height={16} />
+                    <TouchableOpacity
+                      onPress={() => {
+                        updateCategory.mutate({ id: category.id, name: newCategory });
+                      }}
+                    >
+                      <EditIcon width={16} height={16} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        deleteCategory.mutate(category.id);
+                      }}
+                    >
+                      <TrashIcon width={16} height={16} />
+                    </TouchableOpacity>
                   </View>
                 </View>
               ))}
@@ -72,13 +126,14 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
         content={
           <TextInput
             className="h-14 items-center justify-start overflow-hidden rounded-2xl bg-g4 px-5 py-4 text-[14px] font-medium text-g2"
-            placeholder="새 카테고리 이름"
+            placeholder="카테고리 이름"
             placeholderTextColor="#847C70"
             value={newCategory}
             onChangeText={setNewCategory}
           />
         }
       />
+
       {/* 버튼 그룹 */}
       <View className="mt-12 flex-col items-center">
         <FullWidthButton
@@ -90,7 +145,7 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
 
         <FullWidthButton
           buttonText="저장하기"
-          onPress={handleCatagorySave}
+          onPress={handleModalClose}
           backgroundColor="#DC6E3F"
           textColor="white"
         />

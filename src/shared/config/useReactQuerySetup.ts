@@ -1,4 +1,4 @@
-import { focusManager, onlineManager, QueryClient } from '@tanstack/react-query';
+import { focusManager, onlineManager } from '@tanstack/react-query';
 import * as Network from 'expo-network';
 import { useEffect } from 'react';
 import { AppState, Platform } from 'react-native';
@@ -29,8 +29,6 @@ const setupFocusManager = () => {
 
 // hook
 const useReactQuerySetup = () => {
-  const queryClient = new QueryClient();
-
   useEffect(() => {
     setupOnlineManager();
   }, []);
@@ -39,8 +37,6 @@ const useReactQuerySetup = () => {
     const cleanup = setupFocusManager();
     return cleanup;
   }, []);
-
-  return { queryClient };
 };
 
 export default useReactQuerySetup;

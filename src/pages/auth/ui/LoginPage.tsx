@@ -14,8 +14,8 @@ const isIOS = () => Platform.OS === 'ios';
 
 const LoginPage = ({ navigation }: Props) => {
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
-      <View className="flex-1 items-center justify-center bg-white px-6">
+    <SafeAreaView style={{ flex: 1 }} edges={['bottom']} className="bg-white">
+      <View className="flex-1 items-center justify-center px-6">
         <View className="w-5/6 items-center justify-center">
           {/* 로고 */}
           <Logo width={150} height={150} />

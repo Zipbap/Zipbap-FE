@@ -5,7 +5,12 @@ export const queryKeys = {
     list: () => [...queryKeys.myCategories.all, 'list'] as const,
     detail: (id: string) => [...queryKeys.myCategories.all, 'detail', id] as const,
   },
-
+  categories: {
+    key: 'categories',
+    all: ['categories'] as const,
+    list: () => [...queryKeys.categories.all, 'list'] as const,
+    detail: (id: string) => [...queryKeys.categories.all, 'detail', id] as const,
+  },
   products: {
     key: 'products',
     all: ['products'] as const,

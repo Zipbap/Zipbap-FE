@@ -4,7 +4,7 @@ export type RootStackParamList = {
   Login: undefined;
   Main: undefined;
   Setting: undefined;
-  RecipeCreateForm: undefined;
+  RecipeCreateForm: { recipeId?: string };
   RecipeDetail: { recipeId: string };
   FeedDetail: { feedId: string };
 };

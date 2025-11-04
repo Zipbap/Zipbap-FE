@@ -5,6 +5,7 @@ import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
 
+import { CreateRecipeDetail } from '@/src/features/recipe/model/useRecipeCreateForm';
 import { queryKeys } from '@/src/shared/config';
 import { apiInstance } from '@/src/shared/config/api-instance';
 import { useRecipeTypeStore } from '@/src/shared/store/useRecipeMode';
@@ -13,25 +14,24 @@ import { RootNavigationProp } from '@shared/types';
 
 interface MainPageProps {
   navigation: RootNavigationProp<'Main'>;
+  RecipeCreateForm: { recipeId?: string };
 }
 
 const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
-  const navigateToRecipeCreateForm = () => navigation.navigate('RecipeCreateForm');
+  const navigateToRecipeCreateForm = (targetId: string) =>
+    navigation.navigate('RecipeCreateForm', { recipeId: targetId });
   const { recipeType } = useRecipeTypeStore();
 
-  const {
-    data: recipes,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: recipeType === 'temp' ? queryKeys.recipeTemp.all : queryKeys.recipeFinal.all,
     queryFn: async () => {
       const res = await apiInstance.get(recipeType === 'temp' ? '/recipes/temp' : '/recipes');
       return res.data.result;
     },
+    select: data => [...data].reverse(),
   });
 
-  const recipeList: Recipe[] = recipes || [];
+  const recipeList = (data || []) as Recipe[] | CreateRecipeDetail[];
 
   const isRecipeListEmpty = recipeList.length === 0;
 
@@ -51,6 +51,24 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
     );
   }
 
+  const renderItem = ({ item }: { item: Recipe | CreateRecipeDetail }) => {
+    const targetId = item.id;
+
+    const handlePress = () => {
+      if (recipeType === 'temp') {
+        navigateToRecipeCreateForm(targetId);
+      }
+    };
+
+    return (
+      <Swipeable renderRightActions={() => <DetailDeleteComponent targetId={targetId} />}>
+        <TouchableOpacity activeOpacity={0.8} onPress={handlePress}>
+          <ArticleView item={item as Recipe} />
+        </TouchableOpacity>
+      </Swipeable>
+    );
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View className="h-full w-full flex-1 bg-white">
@@ -62,22 +80,19 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
               keyExtractor={item => item.id}
               contentContainerStyle={{ paddingTop: 12, paddingBottom: 100 }}
               numColumns={1}
-              renderItem={({ item }) => (
-                <Swipeable renderRightActions={() => <DetailDeleteComponent targetId={item.id} />}>
-                  <ArticleView item={item} />
-                </Swipeable>
-              )}
+              renderItem={renderItem}
             />
           ) : (
-            // TODO: 빈 화면 완성
+            // TODO: 빈 화면
             <View className="flex-1 items-center justify-center">
               <Text className="text-[16px] font-bold">아무것도 없네요</Text>
             </View>
           )}
         </View>
 
+        {/* 플로팅 버튼 */}
         <TouchableOpacity
-          onPress={navigateToRecipeCreateForm}
+          onPress={() => navigateToRecipeCreateForm('')}
           className="absolute bottom-[129px] right-8 h-fit w-fit items-center justify-center rounded-full"
           style={{
             shadowColor: '#000',

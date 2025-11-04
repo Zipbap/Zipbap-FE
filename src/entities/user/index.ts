@@ -6,8 +6,6 @@ export { mockFollowData } from './api/mockUser';
 export {
   User,
   UserFeed,
-  FeedEmpty,
-  BookmarkEmpty,
   MyPageTabType,
   FollowTabType,
   FollowData,
@@ -18,3 +16,4 @@ export {
 export { default as Button } from './ui/Button';
 export { default as UserHeader } from './ui/UserHeader';
 export { default as AnotherUserHeader } from './ui/AnotherUserHeader';
+export { default as EmptySearchState } from './ui/EmptySearchState';

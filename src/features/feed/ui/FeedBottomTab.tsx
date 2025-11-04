@@ -8,6 +8,7 @@ import ChatOnSvg from '@/assets/img/feed/chat-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 
+import { useFeedChatBottomSheetStore } from '@shared/store';
 import { toggleLike, toggleBookmark } from '../api/feedBottomTabActionsApi';
 
 interface Props {
@@ -16,8 +17,8 @@ interface Props {
   initialComments?: number;
   isLiked?: boolean;
   isBookmarked?: boolean;
-  isCommented?: boolean;
   feedId?: string;
+  // setBottomSheetVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FeedBottomTab = ({
@@ -26,15 +27,22 @@ const FeedBottomTab = ({
   initialComments = 0,
   isLiked = false,
   isBookmarked = false,
-  isCommented = false,
   feedId = '1',
 }: Props) => {
+  const {
+    bottomSheetOpen,
+    bottomSheetClose,
+    bottomSheetVisible,
+    feedId: activeFeedId,
+  } = useFeedChatBottomSheetStore();
+
   const [liked, setLiked] = useState(isLiked);
   const [bookmarked, setBookmarked] = useState(isBookmarked);
-  const [commented, setCommented] = useState(isCommented);
   const [likeCount, setLikeCount] = useState(initialLikes);
   const [bookmarkCount, setBookmarkCount] = useState(initialBookmarks);
-  const [commentCount, setCommentCount] = useState(initialComments);
+  const [commentCount] = useState(initialComments);
+
+  const isCommented = bottomSheetVisible && activeFeedId === feedId;
 
   const handleLikePress = async () => {
     setLiked(prev => !prev);
@@ -51,8 +59,11 @@ const FeedBottomTab = ({
   };
 
   const handleCommentPress = () => {
-    setCommented(prev => !prev);
-    setCommentCount(prev => (commented ? prev - 1 : prev + 1));
+    if (isCommented) {
+      bottomSheetClose();
+    } else {
+      bottomSheetOpen(feedId);
+    }
   };
   return (
     <View className="flex-row items-center justify-between px-8">
@@ -75,7 +86,7 @@ const FeedBottomTab = ({
       {/* 채팅 */}
       <Pressable className="flex-row items-center gap-1" onPress={handleCommentPress}>
         <View className="flex h-6 w-6 items-center justify-center">
-          {commented ? <ChatOnSvg /> : <ChatOffSvg />}
+          {isCommented ? <ChatOnSvg /> : <ChatOffSvg />}
         </View>
         <Text className="font-bold text-g2">{commentCount}</Text>
       </Pressable>

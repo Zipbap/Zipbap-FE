@@ -5,7 +5,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ShareSvg from '@/assets/img/feed/share-icon.svg';
 
 // FIXME: 추후 경로 수정
-import { RecipeDetailSection, RecipeSteps } from '@features/feed';
+import {
+  RecipeDetailSection,
+  RecipeStepsArticleViewType,
+  RecipeStepsFeedViewType,
+} from '@features/feed';
 
 import { useTwoViewTypeStore } from '@shared/store';
 import { RecipeDetailProps } from '@shared/types';
@@ -79,61 +83,75 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
           <Text className="mb-2 text-2xl font-bold color-black">{detailRecipe.title}</Text>
         </View>
         <View className="flex-col items-start">
-          <View className="w-full flex-col items-start px-4">
-            {/* 레시피 소개 */}
-            <ModalContentSection
-              content={<Text className="text-base leading-6 text-g1">{detailRecipe.content}</Text>}
-              subTitle="레시피 소개"
-            />
-            {/* 카테고리 */}
-            <ModalContentSection
-              subTitle="카테고리 및 요리 정보"
-              content={<ModalCategoriesSection categories={detailRecipe.categories} />}
-            />
-            {/* 인원/요리시간/ 난이도 */}
-            <RecipeDetailSection
-              serving={detailRecipe.serving}
-              cookingTime={detailRecipe.cookingTime}
-              difficulty={detailRecipe.difficulty}
-            />
-            {/* 재료 */}
-            <ModalContentSection
-              content={
-                <Text className="text-base leading-6 text-g1">{detailRecipe.ingredients}</Text>
-              }
-              subTitle="레시피 소개"
-            />
-            {/* 레시피 영상 */}
-            <ModalContentSection
-              subTitle="레시피 영상"
-              content={<WebViewVideo videoUrl={detailRecipe.video} />}
-            />
+          <View className="w-full flex-col items-start">
+            <View className="w-full px-4">
+              {/* 레시피 소개 */}
+              <ModalContentSection
+                content={
+                  <Text className="text-base leading-6 text-g1">{detailRecipe.content}</Text>
+                }
+                subTitle="레시피 소개"
+              />
+              {/* 카테고리 */}
+              <ModalContentSection
+                subTitle="카테고리 및 요리 정보"
+                content={<ModalCategoriesSection categories={detailRecipe.categories} />}
+              />
+              {/* 인원/요리시간/ 난이도 */}
+              <RecipeDetailSection
+                serving={detailRecipe.serving}
+                cookingTime={detailRecipe.cookingTime}
+                difficulty={detailRecipe.difficulty}
+              />
+              {/* 재료 */}
+              <ModalContentSection
+                content={
+                  <Text className="text-base leading-6 text-g1">{detailRecipe.ingredients}</Text>
+                }
+                subTitle="레시피 소개"
+              />
+              {/* 레시피 영상 */}
+              <ModalContentSection
+                subTitle="레시피 영상"
+                content={<WebViewVideo videoUrl={detailRecipe.video} />}
+              />
+            </View>
             {/* 레시피 순서 */}
-            <ModalContentSection
-              subTitle="레시피 순서"
-              content={<RecipeSteps steps={detailRecipe.steps} />}
-              subTitleOption={<TwoViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />}
-            />
-            {/* 레시피 Kick */}
-            <ModalContentSection
-              content={<Text className="text-base leading-6 text-g1">{detailRecipe.tip}</Text>}
-              subTitle="레시피 Kick"
-            />
-            <View className="h-6" />
-            {/* 수정하기 버튼 */}
-            <FullWidthButton
-              buttonText="수정하기"
-              onPress={navigation.goBack}
-              backgroundColor="#F0EDE6"
-              textColor="#60594E"
-            />
-            {/* 삭제하기 버튼 */}
-            <FullWidthButton
-              buttonText="삭제하기"
-              onPress={navigation.goBack}
-              backgroundColor="#DC6E3F"
-              textColor="white"
-            />
+            <View className="mt-12 w-full">
+              <View className="mb-3 flex w-full flex-row justify-between px-4">
+                <Text className="text-xl font-bold color-black">레시피 순서</Text>
+                <TwoViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />
+              </View>
+              {viewType === 'article' ? (
+                <View className="w-full px-4">
+                  <RecipeStepsArticleViewType steps={detailRecipe.steps} />
+                </View>
+              ) : (
+                <RecipeStepsFeedViewType steps={detailRecipe.steps} />
+              )}
+            </View>
+            <View className="w-full px-4">
+              {/* 레시피 Kick */}
+              <ModalContentSection
+                content={<Text className="text-base leading-6 text-g1">{detailRecipe.tip}</Text>}
+                subTitle="레시피 Kick"
+              />
+              <View className="h-6" />
+              {/* 수정하기 버튼 */}
+              <FullWidthButton
+                buttonText="수정하기"
+                onPress={navigation.goBack}
+                backgroundColor="#F0EDE6"
+                textColor="#60594E"
+              />
+              {/* 삭제하기 버튼 */}
+              <FullWidthButton
+                buttonText="삭제하기"
+                onPress={navigation.goBack}
+                backgroundColor="#DC6E3F"
+                textColor="white"
+              />
+            </View>
           </View>
           <View className="h-[40px]" />
         </View>

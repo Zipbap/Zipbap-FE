@@ -9,7 +9,8 @@ export { useDetailFeedData } from './model/useDetailFeedData';
 export { default as FeedBottomTab } from './ui/FeedBottomTab';
 export { default as FeedCard } from './ui/FeedCard';
 export { default as RecipeDetailSection } from './ui/RecipeDetailSection';
-export { default as RecipeSteps } from './ui/RecipeSteps';
+export { default as RecipeStepsArticleViewType } from './ui/RecipeStepsArticleViewType';
+export { default as RecipeStepsFeedViewType } from './ui/RecipeStepsFeedViewType';
 // feed/header UI
 export { default as MyFeedExtension } from './ui/header/MyFeedExtension';
 export { default as HeaderRightContent } from './ui/header/HeaderRightContent';

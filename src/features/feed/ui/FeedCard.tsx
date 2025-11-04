@@ -5,19 +5,24 @@ import BellSvg from '@/assets/img/feed/bell-icon.svg';
 import ClockSvg from '@/assets/img/feed/clock-icon.svg';
 import StarSvg from '@/assets/img/feed/star-icon.svg';
 import { Feed } from '@entities/feed';
+import { RootNavigationProp } from '@shared/types';
 
 import FeedBottomTab from './FeedBottomTab';
 
 interface Props {
   feed: Feed;
-  onPress: () => void;
+  navigation: RootNavigationProp<'Main'>;
 }
 
-const FeedCard = ({ feed, onPress }: Props) => {
+const FeedCard = ({ feed, navigation }: Props) => {
   return (
     <View className="mb-8 flex-col">
       <View className="mb-4 rounded-[20px] bg-white p-4">
-        <Pressable onPress={onPress}>
+        <Pressable
+          onPress={() => {
+            navigation.navigate('FeedDetail', { feedId: feed.id });
+          }}
+        >
           {/* 프로필 섹션 */}
           <View className="mb-4 flex-row items-center">
             <Image
@@ -62,7 +67,7 @@ const FeedCard = ({ feed, onPress }: Props) => {
         initialComments={feed.comments}
         isLiked={feed.isLiked}
         isBookmarked={feed.isBookmarked}
-        isCommented={feed.isCommented}
+        feedId={feed.id}
       />
     </View>
   );

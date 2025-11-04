@@ -18,11 +18,7 @@ const RecipeCreateForm = () => {
   return (
     <View style={{ flex: 1 }}>
       <RecipeCreateHeader hasShadow={true} />
-      <KeyboardAwareScrollView
-        className="h-[100%] overflow-hidden bg-white px-[16px] pt-[16px]"
-        contentContainerStyle={{ flexGrow: 1 }}
-        bottomOffset={80}
-      >
+      <KeyboardAwareScrollView className="h-[100%] bg-white px-[16px] pt-[16px]" bottomOffset={80}>
         <FormTitle title="레시피 기본 정보" />
 
         <FormMediaUpload

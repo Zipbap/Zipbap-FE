@@ -1,24 +1,23 @@
 import React from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
 
+import { Portal } from 'react-native-portalize';
 import { FeedCard, useFeedData } from '@features/feed';
 import { Feed as FeedItem } from '@entities/feed';
+import { useFeedChatBottomSheetStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
+import FeedChatBottomSheet from './FeedChatBottomSheet';
 
 interface FeedPageProps {
   navigation: RootNavigationProp<'Main'>;
 }
 
 const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
+  const { bottomSheetVisible, bottomSheetClose, feedId } = useFeedChatBottomSheetStore();
   const { dataList, onEndReached, onRefresh, isRefreshing } = useFeedData();
 
   const renderItem = ({ item }: { item: FeedItem }) => (
-    <FeedCard
-      feed={item}
-      onPress={() => {
-        navigation.navigate('FeedDetail', { feedId: item.id });
-      }}
-    />
+    <FeedCard feed={item} navigation={navigation} />
   );
 
   return (
@@ -36,6 +35,13 @@ const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
           />
         </View>
       </View>
+      <Portal>
+        <FeedChatBottomSheet
+          feedId={feedId}
+          bottomSheetVisible={bottomSheetVisible}
+          bottomSheetClose={bottomSheetClose}
+        />
+      </Portal>
     </View>
   );
 };

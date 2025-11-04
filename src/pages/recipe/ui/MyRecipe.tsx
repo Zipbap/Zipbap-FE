@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Text, Pressable } from 'react-native';
+import { View, FlatList, Pressable } from 'react-native';
 import { Portal } from 'react-native-portalize';
+import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
+import { EmptyStateUsingVideo } from '@features/user';
 import { ArticleView, mockRecipes, Recipe, FeedView, ImageView } from '@entities/recipe';
 import { useViewTypeStore, useCategoryBottomSheetStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
-import { WebViewAutoVideoPlayer } from '@shared/ui';
 
 import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
 
@@ -57,11 +58,17 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
               }}
             />
           ) : (
-            <View className="flex-1">
-              <Text className="text-[16px] font-bold">아무것도 없네요</Text>
-              <View className="h-[300px] w-[300px]">
-                <WebViewAutoVideoPlayer videoUrl="https://www.youtube.com/watch?v=e9atdvrmp8A" />
-              </View>
+            <View
+              className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center"
+              style={{ transform: [{ translateY: -50 }] }}
+            >
+              <EmptyStateUsingVideo
+                video={loginVideo}
+                title={'첫번째 레시피를 기록해 보세요'}
+                subtitle={'내가 기억하고 싶은 레시피를 작성해 보세요'}
+                buttonText={'레시피 작성하기'}
+                onPress={() => navigation.navigate('RecipeCreateForm')}
+              />
             </View>
           )}
         </View>

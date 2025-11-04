@@ -24,7 +24,11 @@ const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
         <UserHeaderSection user={mockUser} tab={tab} setTab={setTab} navigation={navigation} />
 
         {/* 피드/북마크 */}
-        <FeedGrid data={tab === 'feeds' ? user.feeds : user.bookmarks} type={tab} />
+        <FeedGrid
+          data={tab === 'feeds' ? user.feeds : user.bookmarks}
+          type={tab}
+          navigation={navigation}
+        />
         {bottomSheetVisible && (
           <Portal>
             <UserSettingBottomSheet

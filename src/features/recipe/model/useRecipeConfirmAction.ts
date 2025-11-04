@@ -26,6 +26,7 @@ export const useRecipeConfirmAction = (setModalVisible: (visible: boolean) => vo
           console.log('최종저장 완료');
           break;
         case 'delete':
+          await apiInstance.delete(`recipes/${recipe.id}`);
           console.log('삭제 완료');
           break;
       }

@@ -1,11 +1,13 @@
 import { Pressable } from 'react-native';
 
 import TrashIcon from '@/assets/img/recipe/trash-slide.svg';
+import { useDeleteRecipe } from '@/src/entities/recipe/api';
 
 const DetailDeleteComponent = ({ targetId }: { targetId: string }) => {
+  const { mutate: deleteRecipe } = useDeleteRecipe();
+
   const onDelete = () => {
-    // FIXME: 삭제 로직 구현
-    console.log('요소 삭제 id:', targetId);
+    deleteRecipe(targetId);
   };
 
   return (

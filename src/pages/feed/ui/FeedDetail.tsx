@@ -10,8 +10,9 @@ import {
   FeedBottomTab,
   useDetailFeedData,
   RecipeDetailSection,
-  RecipeSteps,
+  RecipeStepsArticleViewType,
   HeaderRightContent,
+  RecipeStepsFeedViewType,
 } from '@features/feed';
 
 import { cn } from '@shared/lib';
@@ -39,6 +40,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
   const [follow, setFollow] = useState<boolean | undefined>(detailFeed?.isFollowing);
 
   const { viewType, setViewType } = useTwoViewTypeStore();
+  console.log(viewType);
   // NOTE: feed의 ID를 통해 feed를 받아오는 작업
   useEffect(() => {
     getDetailFeed(feedId ? feedId : '1');
@@ -76,7 +78,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
         <Image source={{ uri: detailFeed.mainImage }} className="h-[300px] w-full bg-sub1" />
 
         <View
-          className="-mt-6 rounded-t-3xl bg-white px-4 pb-6 pt-10"
+          className="-mt-6 rounded-t-3xl bg-white px-[16px] pb-6 pt-10"
           style={defaultShadow.shadowContainer}
         >
           <View className="w-full flex-col">
@@ -168,47 +170,59 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
           </View>
         </View>
         <View className="flex-col items-start">
-          <View className="w-full flex-col items-start px-4">
-            {/* 레시피 소개 */}
-            <ModalContentSection
-              subTitle="레시피 소개"
-              content={<Text className="text-base leading-6 text-g1">{detailFeed.content}</Text>}
-            />
-            {/* 카테고리 */}
-            <ModalContentSection
-              subTitle="카테고리 및 요리 정보"
-              content={<ModalCategoriesSection categories={detailFeed.categories} />}
-            />
-            {/* 인원/요리시간/ 난이도 */}
-            <RecipeDetailSection
-              serving={detailFeed.serving}
-              cookingTime={detailFeed.cookingTime}
-              difficulty={detailFeed.difficulty}
-            />
-            {/* 재료 */}
-            <ModalContentSection
-              subTitle="재료"
-              content={
-                <Text className="text-base leading-6 text-g1">{detailFeed.ingredients}</Text>
-              }
-            />
-            {/* 레시피 영상 */}
-            <ModalContentSection
-              subTitle="레시피 영상"
-              content={<WebViewVideo videoUrl={detailFeed.video} />}
-            />
+          <View className="w-full flex-col items-start">
+            <View className="w-full px-4">
+              {/* 레시피 소개 */}
+              <ModalContentSection
+                subTitle="레시피 소개"
+                content={<Text className="text-base leading-6 text-g1">{detailFeed.content}</Text>}
+              />
+              {/* 카테고리 */}
+              <ModalContentSection
+                subTitle="카테고리 및 요리 정보"
+                content={<ModalCategoriesSection categories={detailFeed.categories} />}
+              />
+              {/* 인원/요리시간/ 난이도 */}
+              <RecipeDetailSection
+                serving={detailFeed.serving}
+                cookingTime={detailFeed.cookingTime}
+                difficulty={detailFeed.difficulty}
+              />
+              {/* 재료 */}
+              <ModalContentSection
+                subTitle="재료"
+                content={
+                  <Text className="text-base leading-6 text-g1">{detailFeed.ingredients}</Text>
+                }
+              />
+              {/* 레시피 영상 */}
+              <ModalContentSection
+                subTitle="레시피 영상"
+                content={<WebViewVideo videoUrl={detailFeed.video} />}
+              />
+            </View>
             {/* 레시피 순서 */}
-            <ModalContentSection
-              subTitle="레시피 순서"
-              content={<RecipeSteps steps={detailFeed.steps} />}
-              subTitleOption={<TwoViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />}
-            />
+            <View className="mt-12 w-full">
+              <View className="mb-3 flex w-full flex-row justify-between px-4">
+                <Text className="text-xl font-bold color-black">레시피 순서</Text>
+                <TwoViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />
+              </View>
+              {viewType === 'article' ? (
+                <View className="w-full px-4">
+                  <RecipeStepsArticleViewType steps={detailFeed.steps} />
+                </View>
+              ) : (
+                <RecipeStepsFeedViewType steps={detailFeed.steps} />
+              )}
+            </View>
 
-            {/* 레시피 Kick */}
-            <ModalContentSection
-              content={<Text className="text-base leading-6 text-g1">{detailFeed.tip}</Text>}
-              subTitle="레시피 Kick"
-            />
+            <View className="w-full px-4">
+              {/* 레시피 Kick */}
+              <ModalContentSection
+                content={<Text className="text-base leading-6 text-g1">{detailFeed.tip}</Text>}
+                subTitle="레시피 Kick"
+              />
+            </View>
           </View>
           <View className="h-[40px]" />
           {/* 바텀 tab */}

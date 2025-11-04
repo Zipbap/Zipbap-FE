@@ -50,15 +50,18 @@ const FeedCard = ({ feed, navigation }: Props) => {
           <View className="mb-4 flex-row justify-between text-xs">
             <View className="flex-row items-center justify-center gap-1.5">
               <ClockSvg />
-              <Text className="color-sub1">요리시간 {feed.cookingTime}분</Text>
+              <Text className="text-[12px] font-semibold color-sub1">요리시간</Text>
+              <Text className="text-[12px] font-medium color-sub1">{feed.cookingTime}분</Text>
             </View>
             <View className="flex-row items-center justify-center gap-1.5">
               <StarSvg />
-              <Text className="color-sub1">난이도 {feed.difficulty}</Text>
+              <Text className="text-[12px] font-semibold color-sub1">난이도</Text>
+              <Text className="text-[12px] font-medium color-sub1">{feed.difficulty}</Text>
             </View>
             <View className="flex-row items-center justify-center gap-1.5">
               <BellSvg />
-              <Text className="color-sub1">재료 {feed.ingredientsCount}개</Text>
+              <Text className="text-[12px] font-semibold color-sub1">재료</Text>
+              <Text className="text-[12px] font-medium color-sub1">{feed.ingredientsCount}개</Text>
             </View>
           </View>
         </Pressable>

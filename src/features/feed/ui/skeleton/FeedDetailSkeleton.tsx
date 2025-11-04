@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   mainImage: {
     width: '100%',
-    height: 300,
+    height: 250,
     marginTop: 90,
     backgroundColor: '#F0EDE6',
   },
@@ -125,26 +125,27 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   titleSection: {
+    marginTop: 16,
     marginBottom: 16,
   },
   titleSub: {
     width: 100,
-    height: 14,
+    height: 25,
     borderRadius: 4,
     marginBottom: 8,
   },
   titleMain: {
     width: 220,
-    height: 20,
+    height: 40,
     borderRadius: 4,
   },
   statBox: {
     width: 180,
-    height: 12,
+    height: 15,
     borderRadius: 4,
   },
   section: {
-    marginVertical: 24,
+    marginVertical: 20,
   },
   sectionTitle: {
     marginTop: 20,
@@ -155,17 +156,18 @@ const styles = StyleSheet.create({
   },
   sectionBox: {
     width: '100%',
-    height: 120,
+    height: 60,
     borderRadius: 10,
   },
 
   categoryRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    gap: 15,
   },
   categoryItem: {
-    width: 100,
-    height: 30,
+    width: 60,
+    height: 40,
     borderRadius: 8,
   },
 });

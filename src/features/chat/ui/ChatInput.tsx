@@ -1,13 +1,5 @@
-import React, { forwardRef, useEffect, useState } from 'react';
-import {
-  View,
-  TextInput,
-  Pressable,
-  Image,
-  Keyboard,
-  Text,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import React, { forwardRef, useState } from 'react';
+import { View, TextInput, Pressable, Image, Text, TouchableWithoutFeedback } from 'react-native';
 import SendButtonIconSvg from '@/assets/img/send-button-icon.svg';
 
 interface Props {
@@ -19,18 +11,18 @@ interface Props {
 
 const ChatInput = forwardRef<TextInput, Props>(
   ({ replyTo, inputValue, setInputValue, handleSubmit }, ref) => {
-    const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+    // const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
     const [inputHeight, setInputHeight] = useState(40);
 
-    useEffect(() => {
-      const showSub = Keyboard.addListener('keyboardDidShow', () => setIsKeyboardVisible(true));
-      const hideSub = Keyboard.addListener('keyboardDidHide', () => setIsKeyboardVisible(false));
+    // useEffect(() => {
+    //   const showSub = Keyboard.addListener('keyboardDidShow', () => setIsKeyboardVisible(true));
+    //   const hideSub = Keyboard.addListener('keyboardDidHide', () => setIsKeyboardVisible(false));
 
-      return () => {
-        showSub.remove();
-        hideSub.remove();
-      };
-    }, []);
+    //   return () => {
+    //     showSub.remove();
+    //     hideSub.remove();
+    //   };
+    // }, []);
 
     return (
       <TouchableWithoutFeedback>

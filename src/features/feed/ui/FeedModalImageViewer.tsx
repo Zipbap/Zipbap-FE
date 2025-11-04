@@ -17,7 +17,7 @@ interface Props {
   item: Step | null;
 }
 
-const ModalImageViewer = ({ visible, onClose, item }: Props) => {
+const FeedModalImageViewer = ({ visible, onClose, item }: Props) => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -60,4 +60,4 @@ const ModalImageViewer = ({ visible, onClose, item }: Props) => {
   );
 };
 
-export default React.memo(ModalImageViewer);
+export default React.memo(FeedModalImageViewer);

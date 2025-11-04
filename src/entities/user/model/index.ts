@@ -12,9 +12,18 @@ export interface User {
   feedCount: number; //피드 수
   bookmarkCount: number; //북마크 수
   feeds: UserFeed[]; //피드 배열
-  bookmarks: Feed[]; // 북마크 배열
+  bookmarks: UserFeed[]; // 북마크 배열
   isPublic: boolean;
 }
+
+// NOTE: feed/bookmark 등 무거운 필드 제외한 "기본 프로필"용 타입
+export type UserBase = Omit<User, 'feeds' | 'bookmarks'>;
+
+// NOTE: UserWithoutFeeds: feed만 제외한 타입 (북마크는 포함)
+export type UserWithoutFeeds = Omit<User, 'feeds'>;
+
+// NOTE: UserWithoutBookmarks: bookmark만 제외한 타입 (피드는 포함)
+export type UserWithoutBookmarks = Omit<User, 'bookmarks'>;
 
 export type FollowTabType = 'follower' | 'following';
 export type MyPageTabType = 'feeds' | 'bookmarks';

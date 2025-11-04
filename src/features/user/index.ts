@@ -1,6 +1,7 @@
 //user MODEL
 export { useDetailUserData } from './model/useDetailUserData';
 export { useFollowData } from './model/useDetailFollowData';
+export { useBookmarkData, useFeedData } from './model/useMyPageData';
 
 // user UI
 export { default as FeedGrid } from './ui/FeedGrid';
@@ -13,3 +14,5 @@ export { default as EmptyStateUsingVideo } from './ui/EmptyStateUsingVideo';
 export { default as UserHeaderSection } from './ui/header/UserHeaderSection';
 export { default as AnotherUserHeaderSection } from './ui/header/AnotherUserHeaderSection';
 export { default as FollowDetailHeaderSection } from './ui/header/FollowDetailHeaderSection';
+// user/skeleton UI
+export { default as FollowDetailSkeleton } from './ui/skeleton/FollowDetailSkeleton';

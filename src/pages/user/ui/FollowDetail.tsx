@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Platform, Text, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Platform, View } from 'react-native';
 import {
   FollowList,
   useDetailUserData,
   FollowDetailHeaderSection,
   useFollowData,
+  FollowDetailSkeleton,
 } from '@features/user';
 import { FollowTabType, FollowDetailUser } from '@entities/user';
 import { FollowDetailProps } from '@shared/types';
@@ -13,13 +13,12 @@ import { SearchBox } from '@shared/ui';
 
 const FollowDetail = ({ navigation, route }: FollowDetailProps) => {
   const { userId } = route.params;
-  const insets = useSafeAreaInsets();
   const [tab, setTab] = useState<FollowTabType>('follower');
 
   // NOTE: 유저 디테일 정보 불러오기
-  const { getDetailUser, detailUser } = useDetailUserData();
+  const { getDetailUser, detailUser, loading: userDataLoading } = useDetailUserData();
   // NOTE: 팔로워 목록 불러오기
-  const { getFollowData, followData } = useFollowData();
+  const { getFollowData, followData, loading: followDataLoading } = useFollowData();
 
   // NOTE: user의 ID를 통해 profile를 받아오는 작업
   useEffect(() => {
@@ -32,18 +31,11 @@ const FollowDetail = ({ navigation, route }: FollowDetailProps) => {
 
   // NOTE: followData와 tab 상태에 따라 보여줄 users 계산
   const currentUsers: FollowDetailUser[] = useMemo(() => {
-    if (!followData) return [];
-    return followData[tab] ?? [];
+    return followData[tab];
   }, [followData, tab]);
 
-  if (!userId) return null;
-
-  if (!detailUser || !followData) {
-    return (
-      <View className="flex flex-1" style={{ paddingTop: insets.top }}>
-        <Text> 로딩 중 </Text>
-      </View>
-    );
+  if (userDataLoading || followDataLoading || !detailUser || !followData) {
+    return <FollowDetailSkeleton />;
   }
 
   return (

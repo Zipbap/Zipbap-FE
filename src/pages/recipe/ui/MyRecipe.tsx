@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, Pressable } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
+import { RecipeItemSkeleton } from '@features/recipe';
 import { EmptyStateUsingVideo } from '@features/user';
 import { ArticleView, mockRecipes, Recipe, FeedView, ImageView } from '@entities/recipe';
 import { useViewTypeStore, useCategoryBottomSheetStore } from '@shared/store';
@@ -17,6 +18,7 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
   const isRecipeListEmpty = recipeList.length === 0;
   const { viewType } = useViewTypeStore();
+  const [loading] = useState(false);
 
   useEffect(() => {
     setRecipeList(mockRecipes);
@@ -24,10 +26,14 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
 
   const { bottomSheetVisible, bottomSheetClose } = useCategoryBottomSheetStore();
 
+  if (loading) {
+    return <RecipeItemSkeleton />;
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <View className="h-full w-full flex-1 items-center justify-start bg-white">
-        <View className="h-full w-full px-6">
+        <View className="h-full w-full px-6 py-4">
           {!isRecipeListEmpty ? (
             <FlatList
               key={viewType}

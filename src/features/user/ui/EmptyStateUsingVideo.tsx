@@ -8,11 +8,19 @@ interface Props {
   video: VideoSource;
   title: string;
   subtitle: string;
-  buttonText: string;
+  buttonText?: string;
   onPress: () => void;
+  isButton?: boolean;
 }
 
-const EmptyStateUsingVideo = ({ video, title, subtitle, buttonText, onPress }: Props) => {
+const EmptyStateUsingVideo = ({
+  video,
+  title,
+  subtitle,
+  buttonText = '',
+  onPress,
+  isButton = true,
+}: Props) => {
   const player = useVideoPlayer(video, player => {
     player.loop = true;
     player.play();
@@ -27,7 +35,7 @@ const EmptyStateUsingVideo = ({ video, title, subtitle, buttonText, onPress }: P
       </View>
       <Text className="text-lg font-bold color-black">{title}</Text>
       <Text className="mt-1 text-center text-sm color-g2">{subtitle}</Text>
-      <EmptyScreenActionButton buttonText={buttonText} onPress={onPress} />
+      {isButton ?? <EmptyScreenActionButton buttonText={buttonText} onPress={onPress} />}
     </View>
   );
 };

@@ -13,6 +13,7 @@ import {
   RecipeStepsArticleViewType,
   HeaderRightContent,
   RecipeStepsFeedViewType,
+  FeedDetailSkeleton,
 } from '@features/feed';
 
 import { cn } from '@shared/lib';
@@ -56,12 +57,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
 
   if (!feedId) return null;
   else if (!detailFeed) {
-    // FIXME: 로딩 인디케이터로 바꿔야함
-    return (
-      <View className="flex flex-1" style={{ paddingTop: insets.top }}>
-        <Text> 로딩 중 </Text>
-      </View>
-    );
+    return <FeedDetailSkeleton />;
   }
 
   return (

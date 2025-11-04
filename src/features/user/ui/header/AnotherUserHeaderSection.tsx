@@ -62,7 +62,7 @@ const AnotherUserHeaderSection = ({ user, navigation }: Props) => {
       <View className={`mt-4 flex-row`}>
         <TouchableOpacity className={`flex-1 items-center border-b-2 border-sub1 py-2`}>
           <View className="flex w-full items-center justify-center">
-            <Text className={`'font-bold text-center color-sub1`}>
+            <Text className={`text-center text-[14px] font-bold color-sub1`}>
               레시피
               {'\n'}
               {user.feedCount}

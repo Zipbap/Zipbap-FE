@@ -1,6 +1,7 @@
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowUpDown } from 'lucide-react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView, View, KeyboardAvoidingView, Platform, Text } from 'react-native';
 
 import { useUploadToS3 } from '@/src/features/recipe/lib/uploadToS3';
@@ -8,6 +9,7 @@ import { usePresignedUrl } from '@/src/features/recipe/lib/usePresignedUrl';
 import FormCategory from '@/src/features/recipe/ui/FormCategory';
 import { queryKeys } from '@/src/shared/config';
 import { apiInstance } from '@/src/shared/config/api-instance';
+import { RootStackParamList } from '@/src/shared/types';
 import { FullWidthButton } from '@shared/ui';
 import { CreateRecipeDetail, useRecipeCreateForm } from '../model/useRecipeCreateForm';
 
@@ -40,8 +42,12 @@ interface CategoriesResponse {
   message: string;
   result: CategoriesResult;
 }
+type RecipeCreateFormRouteProp = RouteProp<RootStackParamList, 'RecipeCreateForm'>;
 
 const RecipeCreateForm = () => {
+  const route = useRoute<RecipeCreateFormRouteProp>();
+  const recipeId = route.params?.recipeId;
+  console.log('\n넘어온 recipeId\n', recipeId);
   const {
     recipe,
     updateField,
@@ -49,8 +55,28 @@ const RecipeCreateForm = () => {
     addCookingOrder,
     handleTempSave,
     handleFinalizeSave,
+    loadTempRecipe,
+    tempRecipeMutation,
   } = useRecipeCreateForm();
+  console.log(recipe);
 
+  // RecipeCreateForm.tsx
+  useEffect(() => {
+    const loadRecipe = async () => {
+      if (recipeId) {
+        const loaded = await loadTempRecipe(recipeId);
+        if (!loaded) {
+          // 일치하는 레시피가 없을 경우 새로 생성
+          tempRecipeMutation.mutate();
+        }
+      } else {
+        // 새 레시피 생성
+        tempRecipeMutation.mutate();
+      }
+    };
+
+    loadRecipe();
+  }, [recipeId]);
   // media upload
   const presignedUrlMutation = usePresignedUrl();
   const uploadToS3Mutation = useUploadToS3();

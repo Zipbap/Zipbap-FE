@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { apiInstance } from '@/src/shared/config/api-instance';
 
@@ -155,7 +155,6 @@ export const useRecipeCreateForm = () => {
       console.log('현재 recipe 상태:', recipe);
       return;
     }
-
     console.log('임시 저장 요청 전 recipe:', recipe);
     tempSaveMutation.mutate(recipe);
   };
@@ -163,7 +162,37 @@ export const useRecipeCreateForm = () => {
   const handleFinalizeSave = () => {
     console.log('최종저장:', recipe);
   };
+  const fetchTempRecipes = useQuery({
+    queryKey: ['tempRecipes'],
+    queryFn: async () => {
+      const res = await apiInstance.get('/recipes/temp');
+      return res.data.result;
+    },
+    enabled: false, // 수동으로 실행하도록 설정
+  });
 
+  const loadTempRecipe = async (id: string) => {
+    try {
+      const { data: tempRecipes } = await fetchTempRecipes.refetch();
+      const foundRecipe = tempRecipes?.find((recipe: any) => recipe.id === id);
+
+      if (foundRecipe) {
+        setRecipe(prev => ({
+          ...prev,
+          ...foundRecipe,
+          cookingOrders:
+            foundRecipe.cookingOrders?.length > 0
+              ? foundRecipe.cookingOrders
+              : [{ turn: 1, image: null, description: '' }],
+        }));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('임시 레시피 불러오기 실패:', error);
+      return false;
+    }
+  };
   return {
     recipe,
     updateField,
@@ -171,5 +200,7 @@ export const useRecipeCreateForm = () => {
     addCookingOrder,
     handleTempSave,
     handleFinalizeSave,
+    loadTempRecipe,
+    tempRecipeMutation,
   };
 };

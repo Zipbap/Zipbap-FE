@@ -18,8 +18,10 @@ interface MainPageProps {
 }
 
 const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
-  const navigateToRecipeCreateForm = (targetId: string) =>
+  const navigateToRecipeCreateForm = (targetId: string) => {
+    console.log(targetId);
     navigation.navigate('RecipeCreateForm', { recipeId: targetId });
+  };
   const { recipeType } = useRecipeTypeStore();
 
   const { data, isLoading, isError } = useQuery({

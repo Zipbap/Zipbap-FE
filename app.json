@@ -16,6 +16,7 @@
     },
     "ios": {
       "supportsTablet": true,
+      "usesAppleSignIn": true,
       "bundleIdentifier": "com.zipbap",
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "레시피 사진을 업로드하기 위해 사진 라이브러리에 접근합니다.",
@@ -25,9 +26,10 @@
       },
       "buildNumber": "5"
     },
+    "plugins": ["expo-apple-authentication"],
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/img/adaptive-icon.png",
+        "foregroundImage": "./assets/img/app-icon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
@@ -41,7 +43,6 @@
       "eas": {
         "projectId": "c84832a3-9f25-48ab-947e-9136a4a2fa97"
       }
-    },
-    "plugins": ["expo-video"]
+    }
   }
 }

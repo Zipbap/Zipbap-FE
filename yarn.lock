@@ -3742,6 +3742,11 @@ exec-async@^2.2.0:
   resolved "https://registry.yarnpkg.com/exec-async/-/exec-async-2.2.0.tgz#c7c5ad2eef3478d38390c6dd3acfe8af0efc8301"
   integrity sha512-87OpwcEiMia/DeiKFzaQNBNFeN3XkkpYIh9FyOqq5mS2oKv3CBE67PXoEKcr6nodWdXNogTiQ0jE2NGuoffXPw==
 
+expo-apple-authentication@~7.2.4:
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/expo-apple-authentication/-/expo-apple-authentication-7.2.4.tgz#fd66339064de8d81526ec9d58d2fae8ebf87f088"
+  integrity sha512-T2agaLLPT4Ax97FeXImB7BCCEzEJ0gB+ZwlFa/FXBtbp6WFKcGRlTVKiX2YPYLZzN5QjXcmQ9HHJ17jRthNHMg==
+
 expo-asset@~11.1.7:
   version "11.1.7"
   resolved "https://registry.yarnpkg.com/expo-asset/-/expo-asset-11.1.7.tgz#dfc61100312cc0dd394d0e0b33613bb0cc898746"

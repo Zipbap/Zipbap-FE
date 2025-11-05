@@ -4,17 +4,25 @@ import { getUploadText } from '../lib/getUploadText';
 import { useMediaUpload } from '../lib/useMediaUpload';
 
 interface Props {
+  title: string;
+  description: string;
+  buttonText: string;
   uploadType: 'image' | 'video';
   isThumbnail?: boolean;
   value?: string | null;
   onUpload: (uri: string) => void;
 }
 
-const FormMediaUpload = ({ uploadType, isThumbnail, value, onUpload }: Props) => {
+const FormMediaUpload = ({
+  title,
+  description,
+  buttonText,
+  uploadType,
+  value,
+  onUpload,
+}: Props) => {
   const { upload } = useMediaUpload(onUpload);
   const handleUpload = () => upload(uploadType);
-
-  const { title, description, buttonText } = getUploadText({ uploadType, isThumbnail, value });
 
   return (
     <View

@@ -1,1 +1,7 @@
-export { MyCategory, CreateMyCategoryRequest, UpdateMyCategoryRequest } from './model/index';
+export {
+  MyCategory,
+  CreateMyCategoryRequest,
+  UpdateMyCategoryRequest,
+  CategoryItem,
+  CategoriesResult,
+} from './model/index';

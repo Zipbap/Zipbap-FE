@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Recipe, RecipeDetail } from '@entities/recipe';
 import { queryKeys } from '@shared/config';
-import { recipeApi } from './index';
+import { recipeApi } from './recipeApi';
 
 export const useRecipeListQuery = (recipeType: 'temp' | 'final') => {
   return useQuery<Recipe[] | RecipeDetail[]>({

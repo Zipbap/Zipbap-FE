@@ -3,11 +3,11 @@ import React from 'react';
 import { View, FlatList, Pressable } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
-import { queryKeys } from '@/src/shared/config';
-import { apiInstance } from '@/src/shared/config/api-instance';
 import { RecipeItemSkeleton } from '@features/recipe';
 import { EmptyStateUsingVideo } from '@features/user';
 import { ArticleView, Recipe, FeedView, ImageView } from '@entities/recipe';
+import { queryKeys } from '@shared/config';
+import { apiInstance } from '@shared/config/api-instance';
 import { useViewTypeStore, useCategoryBottomSheetStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
 

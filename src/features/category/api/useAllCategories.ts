@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { CategoriesResult, CategoryItem } from '@/src/entities/category/model';
+import { CategoriesResult, CategoryItem } from '@entities/category';
 import { queryKeys } from '@shared/config';
 import { categoryApi } from './categoryApi';
 

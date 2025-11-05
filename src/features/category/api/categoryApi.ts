@@ -1,5 +1,4 @@
-import { CategoriesResult } from '@/src/entities/category/model';
-import { MyCategory } from '@entities/category';
+import { MyCategory, CategoriesResult } from '@entities/category';
 import { apiInstance } from '@shared/config/api-instance';
 import { ApiResponse } from '@shared/types/api';
 

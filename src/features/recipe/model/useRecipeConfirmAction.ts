@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '@/src/shared/config';
 import { apiInstance } from '@/src/shared/config/api-instance';
+import { CreateRecipeDetail } from '@entities/recipe';
 import { RootNavigationProp } from '@shared/types';
-import { CreateRecipeDetail } from './useRecipeCreateForm';
 
 export const useRecipeConfirmAction = (setModalVisible: (visible: boolean) => void) => {
   const navigation = useNavigation<RootNavigationProp<'Main'>>();

@@ -1,7 +1,7 @@
 import { View, Text, Pressable } from 'react-native';
 
-import { useRecipeTypeStore } from '@/src/shared/store/useRecipeMode';
 import { cn } from '@shared/lib';
+import { useRecipeTypeStore } from '@shared/store/useRecipeMode';
 
 const RecipeCreateExtension = () => {
   const { recipeType, setRecipeTypeTemp, setRecipeTypeFinal } = useRecipeTypeStore();

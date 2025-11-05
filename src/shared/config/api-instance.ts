@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { getTokens } from '@/src/shared/store/token';
+import { getTokens } from '@shared/store/token';
 
 export const apiInstance: AxiosInstance = axios.create({
   baseURL: process.env.EXPO_PUBLIC_BASE_URL || 'http://localhost:8080/api',

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { ApiResponse } from '@/src/shared/types/api';
+import { ApiResponse } from '@shared/types/api';
 import { apiInstance } from './api-instance';
 
 export const apiService = {

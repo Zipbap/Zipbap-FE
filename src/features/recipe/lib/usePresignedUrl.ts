@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { apiInstance } from '@/src/shared/config/api-instance';
+import { apiInstance } from '@shared/config/api-instance';
 import type { PresignedUrlRequest, PresignedUrlResponse } from './PresignedUrl';
 
 export const usePresignedUrl = () => {

@@ -2,36 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { queryKeys } from '@/src/shared/config';
 import { apiInstance } from '@/src/shared/config/api-instance';
-
-interface CookingOrder {
-  image?: string;
-  description?: string;
-}
-
-export interface CreateRecipeDetail {
-  id: string;
-  thumbnail: string | null;
-  title: string;
-  subtitle: string;
-  introduction: string;
-  myCategoryId: string | null;
-  ingredientInfo: string;
-  kick: string;
-  isPrivate: boolean;
-  cookingOrders: {
-    turn: number;
-    image: string | null;
-    description: string;
-  }[];
-  cookingTimeId: number | null;
-  cookingTypeId: number | null;
-  situationId: number | null;
-  mainIngredientId: number | null;
-  methodId: number | null;
-  headcountId: number | null;
-  levelId: number | null;
-  video: string | null;
-}
+import { CookingOrder, CreateRecipeDetail } from '@entities/recipe';
 
 export const useRecipeCreateForm = () => {
   // 초기 임시 레시피 상태

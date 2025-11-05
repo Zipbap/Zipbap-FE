@@ -1,8 +1,8 @@
 import { ChevronDown } from 'lucide-react-native';
 import { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { cn } from '@/src/shared/lib';
 import { CategoryItem } from '@features/recipe/ui/RecipeCreateForm';
+import { cn } from '@shared/lib';
 
 interface Props {
   categoryText: string;

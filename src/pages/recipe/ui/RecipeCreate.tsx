@@ -6,11 +6,10 @@ import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
 
-import { CreateRecipeDetail } from '@/src/features/recipe/model/useRecipeCreateForm';
-import { queryKeys } from '@/src/shared/config';
-import { apiInstance } from '@/src/shared/config/api-instance';
-import { useRecipeTypeStore } from '@/src/shared/store/useRecipeMode';
-import { Recipe, ArticleView, DetailDeleteComponent } from '@entities/recipe';
+import { CreateRecipeDetail, Recipe, ArticleView, DetailDeleteComponent } from '@entities/recipe';
+import { queryKeys } from '@shared/config';
+import { apiInstance } from '@shared/config/api-instance';
+import { useRecipeTypeStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
 
 const RecipeCreate = () => {

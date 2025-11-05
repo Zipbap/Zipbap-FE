@@ -2,9 +2,9 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import React, { useState } from 'react';
 import { Alert, Text } from 'react-native';
 import AppleSvg from '@/assets/img/auth/apple.svg';
-import { storeTokens } from '@/src/shared/store/token';
-import { RootNavigationProp } from '@/src/shared/types';
 import { Button } from '@entities/user';
+import { storeTokens } from '@shared/store/token';
+import { RootNavigationProp } from '@shared/types';
 
 const API_BASE = 'https://zipbap.store';
 

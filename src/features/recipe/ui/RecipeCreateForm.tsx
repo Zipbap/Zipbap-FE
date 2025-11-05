@@ -4,14 +4,15 @@ import { ArrowUpDown } from 'lucide-react-native';
 import React, { useEffect } from 'react';
 import { ScrollView, View, KeyboardAvoidingView, Platform, Text } from 'react-native';
 
-import { useUploadToS3 } from '@/src/features/recipe/lib/uploadToS3';
-import { usePresignedUrl } from '@/src/features/recipe/lib/usePresignedUrl';
-import FormCategory from '@/src/features/recipe/ui/FormCategory';
-import { queryKeys } from '@/src/shared/config';
-import { apiInstance } from '@/src/shared/config/api-instance';
-import { RootStackParamList } from '@/src/shared/types';
+import { useUploadToS3 } from '@features/recipe/lib/uploadToS3';
+import { usePresignedUrl } from '@features/recipe/lib/usePresignedUrl';
+import FormCategory from '@features/recipe/ui/FormCategory';
+import { CreateRecipeDetail } from '@entities/recipe';
+import { queryKeys } from '@shared/config';
+import { apiInstance } from '@shared/config/api-instance';
+import { RootStackParamList } from '@shared/types';
 import { FullWidthButton } from '@shared/ui';
-import { CreateRecipeDetail, useRecipeCreateForm } from '../model/useRecipeCreateForm';
+import { useRecipeCreateForm } from '../model/useRecipeCreateForm';
 
 import FormAddRecipeOrder from './FormAddRecipeOrder';
 import FormLongTextInput from './FormLongTextInput';
@@ -42,6 +43,7 @@ interface CategoriesResponse {
   message: string;
   result: CategoriesResult;
 }
+
 type RecipeCreateFormRouteProp = RouteProp<RootStackParamList, 'RecipeCreateForm'>;
 
 const RecipeCreateForm = () => {

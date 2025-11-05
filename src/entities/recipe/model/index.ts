@@ -32,3 +32,30 @@ export interface RecipeDetail {
   }[];
   tip: string; // 레시피 팁 (추가)
 }
+
+export interface CreateRecipeDetail {
+  id: string;
+  thumbnail: string | null;
+  title: string;
+  subtitle: string;
+  introduction: string;
+  myCategoryId: string | null;
+  ingredientInfo: string;
+  kick: string;
+  isPrivate: boolean;
+  cookingOrders: {
+    turn: number;
+    image: string | null;
+    description: string;
+  }[];
+  cookingTimeId: number | null;
+  cookingTypeId: number | null;
+  situationId: number | null;
+  mainIngredientId: number | null;
+  methodId: number | null;
+  headcountId: number | null;
+  levelId: number | null;
+  video: string | null;
+}
+
+export type CookingOrder = CreateRecipeDetail['cookingOrders'][number];

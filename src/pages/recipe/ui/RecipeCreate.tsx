@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
 
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
+import { useRecipeListQuery } from '@features/recipe/api/useRecipeListQuery';
 import { EmptyStateUsingVideo } from '@features/user';
-import { Recipe, ArticleView, DetailDeleteComponent } from '@entities/recipe';
+import { ArticleView, DetailDeleteComponent, RecipeDetail } from '@entities/recipe';
+import { useRecipeTypeStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
 
 interface MainPageProps {
@@ -14,8 +16,15 @@ interface MainPageProps {
 }
 
 const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
-  const navigateToRecipeCreateForm = () => navigation.navigate('RecipeCreateForm');
-  const [recipeList] = useState<Recipe[]>([]);
+  const navigateToRecipeCreateForm = () => {
+    navigation.navigate('RecipeCreateForm');
+  };
+
+  const { recipeType } = useRecipeTypeStore();
+
+  // TODO: isLoading
+  const { data } = useRecipeListQuery(recipeType);
+  const recipeList = (data || []) as RecipeDetail[];
   const isRecipeListEmpty = recipeList.length === 0;
 
   return (

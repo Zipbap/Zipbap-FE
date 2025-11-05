@@ -1,6 +1,6 @@
 export interface Recipe {
   /** 대표 사진 */
-  image: string;
+  thumbnail: string;
   /** 레시피 ID */
   id: string;
   /** 레시피 제목 */

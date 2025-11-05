@@ -7,7 +7,7 @@ import { Recipe } from '../model';
 const ArticleView = ({ item }: { item: Recipe }) => {
   return (
     <View className="mb-[33px] flex-row gap-4 rounded-xl bg-white">
-      <Image className="h-[90px] w-[94px] rounded-xl" source={{ uri: item.image }} />
+      <Image className="h-[90px] w-[94px] rounded-xl" source={{ uri: item.thumbnail }} />
       <View className="flex-1">
         {/* 서브타이틀, 요리시간 */}
         <View className="flex-row items-center">

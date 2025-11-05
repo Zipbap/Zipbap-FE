@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
 import { View, FlatList, Pressable } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
+import { queryKeys } from '@/src/shared/config';
+import { apiInstance } from '@/src/shared/config/api-instance';
 import { RecipeItemSkeleton } from '@features/recipe';
 import { EmptyStateUsingVideo } from '@features/user';
-import { ArticleView, mockRecipes, Recipe, FeedView, ImageView } from '@entities/recipe';
+import { ArticleView, Recipe, FeedView, ImageView } from '@entities/recipe';
 import { useViewTypeStore, useCategoryBottomSheetStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
 
@@ -15,18 +18,22 @@ interface RecipePageProps {
 }
 
 const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
-  const [recipeList, setRecipeList] = useState<Recipe[]>([]);
-  const isRecipeListEmpty = recipeList.length === 0;
   const { viewType } = useViewTypeStore();
-  const [loading] = useState(false);
 
-  useEffect(() => {
-    setRecipeList(mockRecipes);
-  }, []);
+  const { data: recipes, isLoading } = useQuery({
+    queryKey: queryKeys.recipes.all,
+    queryFn: async () => {
+      const res = await apiInstance.get('/recipes/me');
+      return res.data;
+    },
+  });
+  const recipeList: Recipe[] = recipes?.result || [];
+
+  const isRecipeListEmpty = recipeList.length === 0;
 
   const { bottomSheetVisible, bottomSheetClose } = useCategoryBottomSheetStore();
 
-  if (loading) {
+  if (isLoading) {
     return <RecipeItemSkeleton />;
   }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Platform, Text, TextInput, View, Pressable } from 'react-native';
+import { Platform, Text, TextInput, View, Pressable, ActivityIndicator } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CheckSvgIcon from '@/assets/img/check.svg';
 import { useDetailUserData } from '@features/user';
@@ -35,10 +35,9 @@ const Secession = ({ navigation, route }: SecessionProps) => {
 
   if (!userId) return null;
   else if (!detailUser) {
-    // FIXME: 로딩 인디케이터로 바꿔야함
     return (
-      <View className="flex flex-1" style={{ paddingTop: insets.top }}>
-        <Text> 로딩 중 </Text>
+      <View className="flex-1 items-center justify-center bg-white">
+        <ActivityIndicator size="large" color="#DC6E3F" />
       </View>
     );
   }

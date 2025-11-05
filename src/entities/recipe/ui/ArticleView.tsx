@@ -17,9 +17,11 @@ const ArticleView = ({ item }: { item: Recipe }) => {
         </View>
 
         {/* 제목 */}
-        <Text className="mt-[2px] text-sm font-bold leading-tight text-black">{item.title}</Text>
+        <Text className="mt-[2px] text-[14px] font-bold leading-tight text-black">
+          {item.title}
+        </Text>
         {/* 소개 */}
-        <Text className="mt-[8px] text-xs font-normal text-[#827066]">{item.introduction}</Text>
+        <Text className="mt-[8px] text-[12px] font-normal text-[#827066]">{item.introduction}</Text>
       </View>
     </View>
   );

@@ -1,15 +1,15 @@
 import { Recipe } from '.';
 
 export const mockRecipes: Recipe[] = [
-  // {
-  //   image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop',
-  //   id: 'RC-1-00001',
-  //   title: '김치찌개',
-  //   subtitle: '집밥의 정석',
-  //   introduction: '매콤하고 깊은 맛의 김치찌개입니다. 돼지고기와 김치의 조화가 일품이에요.',
-  //   cookingTimeId: 2,
-  //   author: '김민수',
-  // },
+  {
+    image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop',
+    id: 'RC-1-00001',
+    title: '김치찌개',
+    subtitle: '집밥의 정석',
+    introduction: '매콤하고 깊은 맛의 김치찌개입니다. 돼지고기와 김치의 조화가 일품이에요.',
+    cookingTimeId: 2,
+    author: '김민수',
+  },
   // {
   //   image: 'https://mall.ourhome.co.kr//attach_file/20240411/12B5F95E8CB2488DAF2F6EF5922E2D00.jpg',
   //   id: 'RC-1-00002',

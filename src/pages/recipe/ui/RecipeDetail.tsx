@@ -9,6 +9,7 @@ import {
   RecipeDetailSection,
   RecipeStepsArticleViewType,
   RecipeStepsFeedViewType,
+  FeedDetailSkeleton,
 } from '@features/feed';
 
 import { useTwoViewTypeStore } from '@shared/store';
@@ -46,12 +47,7 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
   );
   if (!recipeId) return null;
   else if (!detailRecipe) {
-    // FIXME: 로딩 인디케이터로 바꿔야함
-    return (
-      <View className="flex flex-1" style={{ paddingTop: insets.top }}>
-        <Text> 로딩 중 </Text>
-      </View>
-    );
+    return <FeedDetailSkeleton />;
   }
 
   return (

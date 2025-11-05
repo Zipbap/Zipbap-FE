@@ -15,12 +15,12 @@ interface Props {
 const FollowList = ({ users, navigation }: Props) => {
   const { height } = Dimensions.get('window');
   return (
-    <View className="flex-1">
+    <View className="mt-[12px] flex-1">
       <FlatList
         data={users}
         keyExtractor={item => item.id}
         ListEmptyComponent={
-          <View className="items-center justify-center" style={{ height: height - 230 }}>
+          <View className="items-center justify-center" style={{ height: height - 242 }}>
             <EmptyFollowList
               title="마음에 드는 셰프를 팔로우해 보세요"
               subtitle={`피드에서 좋은 레시피를 가진\n셰프들을 팔로우 할 수 있어요`}

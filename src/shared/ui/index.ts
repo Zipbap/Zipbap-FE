@@ -14,6 +14,7 @@ export { default as WebViewAutoVideoPlayer } from './WebViewAutoVideoPlayer';
 export { default as WebViewVideo } from './WebViewVideo';
 export { defaultShadow } from './defaultShadow';
 export { default as withTouchableOverlay } from './withTouchableOverlay';
+export { default as SkeletonLayout } from './SkeletonLayout';
 // shared/ui/modal
 export { default as ModalContentSection } from './modal/ModalContentSection';
 export { default as ConfirmModal } from './modal/Confirm/ConfirmModal';

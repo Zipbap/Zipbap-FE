@@ -7,9 +7,15 @@ export const useFollowData = () => {
   const [loading, setLoading] = useState(false);
 
   const getFollowData = useCallback(async (id: string) => {
-    setLoading(true);
-    const data = await apiGetDetailFollowData(id);
-    setFollowData(data);
+    try {
+      setLoading(true);
+      const data = await apiGetDetailFollowData(id);
+      setFollowData(data);
+    } catch (error) {
+      console.error('[useFollowData] API 호출 오류:', error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   return {

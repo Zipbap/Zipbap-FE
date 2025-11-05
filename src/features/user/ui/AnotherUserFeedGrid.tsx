@@ -1,23 +1,31 @@
 import React from 'react';
-import { FlatList, Image, View, Text } from 'react-native';
+import { FlatList, Image, View, TouchableOpacity } from 'react-native';
 
 import FeedsSvg from '@/assets/img/feeds-icon.svg';
+import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
 import { UserFeed } from '@entities/user';
+import { RootNavigationProp } from '@shared/types';
+import EmptyStateUsingVideo from './EmptyStateUsingVideo';
 
 interface Props {
   data: UserFeed[];
+  navigation: RootNavigationProp<'AnotherUserPage'>;
 }
 
-const AnotherUserFeedGrid = ({ data }: Props) => {
+const AnotherUserFeedGrid = ({ data, navigation }: Props) => {
   if (data.length === 0) {
     return (
       <View
         className="absolute bottom-0 left-0 right-0 top-0 items-center justify-center"
-        style={{ transform: [{ translateY: 90 }] }}
+        style={{ transform: [{ translateY: 70 }] }}
       >
-        {/* FIXME: 비디오로 추후 교체 */}
-        <View className="mb-8 h-24 w-24 bg-g5" />
-        <Text className="text-lg font-bold color-black">레시피가 없습니다</Text>
+        <EmptyStateUsingVideo
+          video={loginVideo}
+          title={'레시피가 없습니다'}
+          subtitle="요리사의 레시피가 없어요"
+          onPress={() => navigation.navigate('Main', { screen: 'Feed' })}
+          isButton={false}
+        />
       </View>
     );
   }
@@ -28,12 +36,12 @@ const AnotherUserFeedGrid = ({ data }: Props) => {
         ListHeaderComponent={() => <View className="h-[270px]" />}
         data={data}
         renderItem={({ item }) => (
-          <View>
+          <TouchableOpacity onPress={() => navigation.navigate('FeedDetail', { feedId: item.id })}>
             <View className="absolute right-2 top-2 z-10">
               <FeedsSvg />
             </View>
             <Image source={{ uri: item.mainImage }} className="h-[150px] w-[130px] bg-g5" />
-          </View>
+          </TouchableOpacity>
         )}
         keyExtractor={item => item.id}
         numColumns={3}

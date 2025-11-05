@@ -1,37 +1,25 @@
 import { useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-import BackIcon from '@/assets/img/back-icon.svg';
-import { Header, defaultShadow } from '@shared/ui';
+import { ModalHeader, defaultShadow } from '@shared/ui';
 
 import RecipeCreateConfirmModal from './RecipeCreateConfirmModal';
 
-interface Props {
-  hasShadow?: boolean;
-}
-
-const RecipeCreateHeader = ({ hasShadow = false }: Props) => {
+const RecipeCreateHeader = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <>
-      <Header
-        style={
-          hasShadow ? [defaultShadow.shadowContainer, defaultShadow.roundedContainer] : undefined
-        }
-        left={
+      <ModalHeader
+        style={[defaultShadow.shadowContainer, defaultShadow.roundedContainer]}
+        title="레시피 작성"
+        onBackPress={() => setModalVisible(true)}
+        rightContent={
           <TouchableOpacity onPress={() => setModalVisible(true)}>
-            <BackIcon width={24} height={24} />
-          </TouchableOpacity>
-        }
-        center={<Text>레시피 작성</Text>}
-        right={
-          <TouchableOpacity onPress={() => setModalVisible(true)}>
-            <Text>임시저장</Text>
+            <Text className="text-[12px] font-bold color-g2">임시저장</Text>
           </TouchableOpacity>
         }
       />
-
       {/* confirm modal */}
       <RecipeCreateConfirmModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </>

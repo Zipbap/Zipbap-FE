@@ -2,7 +2,7 @@ import React from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
 
 import { Portal } from 'react-native-portalize';
-import { FeedCard, useFeedData } from '@features/feed';
+import { FeedCard, useFeedData, FeedCardSkeleton } from '@features/feed';
 import { Feed as FeedItem } from '@entities/feed';
 import { useFeedChatBottomSheetStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
@@ -14,12 +14,15 @@ interface FeedPageProps {
 
 const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
   const { bottomSheetVisible, bottomSheetClose, feedId } = useFeedChatBottomSheetStore();
-  const { dataList, onEndReached, onRefresh, isRefreshing } = useFeedData();
+  const { dataList, onEndReached, onRefresh, isRefreshing, isInitialLoading } = useFeedData();
 
   const renderItem = ({ item }: { item: FeedItem }) => (
     <FeedCard feed={item} navigation={navigation} />
   );
 
+  if (isInitialLoading) {
+    return <FeedCardSkeleton />;
+  }
   return (
     <View style={{ flex: 1 }}>
       <View className="flex-1 items-center justify-start bg-g4">

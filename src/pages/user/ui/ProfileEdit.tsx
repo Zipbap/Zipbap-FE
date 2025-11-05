@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Pressable, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import {
+  Image,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDetailUserData } from '@features/user';
 import { pickImageFromLibrary } from '@shared/lib';
 import { ProfileEditProps } from '@shared/types';
@@ -11,7 +18,6 @@ import { FullWidthButton, ToggleSwitch, ModalHeader, defaultShadow } from '@shar
 const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
   const { userId } = route.params;
   console.log(userId);
-  const insets = useSafeAreaInsets();
 
   const { getDetailUser, detailUser } = useDetailUserData();
 
@@ -51,10 +57,9 @@ const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
 
   if (!userId) return null;
   else if (!detailUser) {
-    // FIXME: 로딩 인디케이터로 바꿔야함
     return (
-      <View className="flex flex-1" style={{ paddingTop: insets.top }}>
-        <Text> 로딩 중 </Text>
+      <View className="flex-1 items-center justify-center bg-white">
+        <ActivityIndicator size="large" color="#DC6E3F" />
       </View>
     );
   }

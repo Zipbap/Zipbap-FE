@@ -13,6 +13,7 @@ import {
   RecipeStepsArticleViewType,
   HeaderRightContent,
   RecipeStepsFeedViewType,
+  FeedDetailSkeleton,
 } from '@features/feed';
 
 import { cn } from '@shared/lib';
@@ -56,12 +57,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
 
   if (!feedId) return null;
   else if (!detailFeed) {
-    // FIXME: 로딩 인디케이터로 바꿔야함
-    return (
-      <View className="flex flex-1" style={{ paddingTop: insets.top }}>
-        <Text> 로딩 중 </Text>
-      </View>
-    );
+    return <FeedDetailSkeleton />;
   }
 
   return (
@@ -87,50 +83,59 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
               <Text className="text-[12px] color-g5">작성일 {detailFeed.createdAt}</Text>
             </View>
             {/* 작성자, 팔로워, subtitle */}
-            <View className="mb-4 flex-row items-center justify-between">
-              <View className="flex-row items-center">
+            <View className="mb-4 w-full flex-row items-center justify-between gap-[8px]">
+              <View className="flex-1 flex-row items-start">
                 <Image
                   source={{ uri: detailFeed.profileImage }}
-                  className="mr-2 h-12 w-12 rounded-2xl bg-primary"
+                  className="mr-[12px] h-[48px] w-[48px] rounded-2xl bg-primary"
                 />
-                <View>
-                  <Text className="flex-1 text-sm font-bold color-g1">
-                    <Text className="text-lg">{detailFeed.nickname}</Text>
+                <View className="flex-1">
+                  <Text className="mb-2 text-[12px] font-medium">
+                    <Text className="text-[18px] font-bold">{detailFeed.nickname}</Text>
                     {'   '}셰프
                   </Text>
-                  <View className="max-w-44 flex-row">
-                    <Text className="text-sm font-semibold color-g2">
-                      팔로워 {detailFeed.followers} |{' '}
-                    </Text>
-                    <Text className="text-sm font-medium color-g2">{detailFeed.introduce}</Text>
+                  <View className="w-full flex-row">
+                    <View>
+                      <Text className="text-sm font-semibold">
+                        팔로워 {detailFeed.followers} |{' '}
+                      </Text>
+                    </View>
+                    <View className="flex-1">
+                      <Text className="text-sm font-medium color-g2" style={{ flexWrap: 'wrap' }}>
+                        {detailFeed.introduce}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
-              <Pressable
-                onPress={() => {
-                  setFollow(!follow);
-                }}
-                className={cn(
-                  'flex h-[37px] w-[77px] items-center justify-center rounded-full px-3 py-1',
-                  follow ? 'bg-g3' : 'bg-sub2',
-                )}
-              >
-                {follow ? (
-                  <Text className="text-sm font-semibold color-g2">팔로잉</Text>
-                ) : (
-                  <Text className="text-sm font-semibold color-white">팔로우</Text>
-                )}
-              </Pressable>
+
+              <View className="h-[37px] w-[77px]">
+                <Pressable
+                  onPress={() => setFollow(!follow)}
+                  className={cn(
+                    'flex h-[37px] w-[77px] items-center justify-center rounded-full px-3 py-1',
+                    follow ? 'bg-g3' : 'bg-sub2',
+                  )}
+                >
+                  {follow ? (
+                    <Text className="text-sm font-semibold color-g2">팔로잉</Text>
+                  ) : (
+                    <Text className="text-sm font-semibold color-white">팔로우</Text>
+                  )}
+                </Pressable>
+              </View>
             </View>
           </View>
 
           {/* 제목 */}
-          <Text className="text-md mb-1 mt-3 font-bold color-sub1">{detailFeed.subTitle}</Text>
-          <Text className="mb-2 text-2xl font-bold color-black">{detailFeed.title}</Text>
+          <Text className="mb-1 mt-[24px] text-[16px] font-bold color-sub1">
+            {detailFeed.subTitle}
+          </Text>
+          <Text className="mb-2 text-[24px] font-bold color-black">{detailFeed.title}</Text>
 
           {/* 통계 */}
           <View className="mb-4 h-5 flex-row items-center gap-4">
-            <Text className="text-xs color-g2">조회 {detailFeed.views}</Text>
+            <Text className="text-[12px] font-medium color-g2">조회 {detailFeed.views}</Text>
             <View className="flex-row items-center gap-0">
               <Pressable
                 className="flex-row items-center gap-1"
@@ -147,7 +152,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                   )}
                 </View>
               </Pressable>
-              <Text className="text-xs color-g2"> {likeCount}</Text>
+              <Text className="text-[12px] font-medium color-g2"> {likeCount}</Text>
             </View>
 
             <View className="flex-row items-center gap-0">
@@ -165,7 +170,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                   )}
                 </View>
               </Pressable>
-              <Text className="text-xs color-g2"> {bookmarkCount}</Text>
+              <Text className="text-[12px] font-medium color-g2"> {bookmarkCount}</Text>
             </View>
           </View>
         </View>

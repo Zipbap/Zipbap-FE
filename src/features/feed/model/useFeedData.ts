@@ -5,7 +5,8 @@ import { apiGetData } from '../api/getFeedData';
 export const useFeedData = () => {
   const page = useRef(0);
   const isLoading = useRef(false);
-  const [isRefreshing, setIsRefreshing] = useState(false); // 새로 추가된 상태
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [dataList, setDataList] = useState<Feed[]>([]);
   const limit = 10; //페이지 불러올 개수
 
@@ -24,8 +25,12 @@ export const useFeedData = () => {
   };
 
   useEffect(() => {
-    // 최초 1회 로드
-    fetchData(0);
+    const loadInitial = async () => {
+      setIsInitialLoading(true);
+      await fetchData(0);
+      setIsInitialLoading(false);
+    };
+    loadInitial();
   }, []);
 
   //피드 초기화
@@ -46,5 +51,5 @@ export const useFeedData = () => {
     }
   };
 
-  return { dataList, onEndReached, onRefresh, isRefreshing };
+  return { dataList, onEndReached, onRefresh, isRefreshing, isInitialLoading };
 };

@@ -24,38 +24,44 @@ const FeedCard = ({ feed, navigation }: Props) => {
           }}
         >
           {/* 프로필 섹션 */}
-          <View className="mb-4 flex-row items-center">
+          <View className="mb-6 flex-row items-center">
             <Image
               source={{ uri: feed.profileImage }}
-              className="mr-2 h-12 w-12 rounded-full bg-g2"
+              className="mr-3 h-[55px] w-[55px] rounded-full bg-g2"
             />
             <View>
-              <Text className="text-base font-bold">{feed.title}</Text>
-              <Text className="text-xs font-semibold color-g2">
+              <Text className="mb-1 text-[16px] font-bold">{feed.title}</Text>
+              <Text className="text-[14px] font-semibold color-g2">
                 {feed.nickname} | 전체 공개 | 조회 {feed.views}
               </Text>
             </View>
           </View>
 
           {/* 대표 사진 */}
-          <Image source={{ uri: feed.mainImage }} className="mb-2 h-52 w-full rounded-xl bg-g3" />
+          <Image
+            source={{ uri: feed.mainImage }}
+            className="mb-6 h-[200px] w-full rounded-2xl bg-g3"
+          />
 
           {/* 본문 */}
-          <Text className="mb-2 text-sm font-semibold color-g1">{feed.content}</Text>
+          <Text className="mb-[16px] text-[16px] font-medium color-g1">{feed.content}</Text>
 
           {/* 요리 정보 */}
           <View className="mb-4 flex-row justify-between text-xs">
             <View className="flex-row items-center justify-center gap-1.5">
               <ClockSvg />
-              <Text className="color-sub1">요리시간 {feed.cookingTime}분</Text>
+              <Text className="text-[12px] font-semibold color-sub1">요리시간</Text>
+              <Text className="text-[12px] font-medium color-sub1">{feed.cookingTime}분</Text>
             </View>
             <View className="flex-row items-center justify-center gap-1.5">
               <StarSvg />
-              <Text className="color-sub1">난이도 {feed.difficulty}</Text>
+              <Text className="text-[12px] font-semibold color-sub1">난이도</Text>
+              <Text className="text-[12px] font-medium color-sub1">{feed.difficulty}</Text>
             </View>
             <View className="flex-row items-center justify-center gap-1.5">
               <BellSvg />
-              <Text className="color-sub1">재료 {feed.ingredientsCount}개</Text>
+              <Text className="text-[12px] font-semibold color-sub1">재료</Text>
+              <Text className="text-[12px] font-medium color-sub1">{feed.ingredientsCount}개</Text>
             </View>
           </View>
         </Pressable>

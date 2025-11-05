@@ -1,2 +1,4 @@
 yarn lint
+yarn format:check
+yarn type-check
 npx lint-staged

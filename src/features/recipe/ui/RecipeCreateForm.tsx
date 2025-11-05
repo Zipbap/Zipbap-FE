@@ -1,7 +1,9 @@
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { ArrowDown } from 'lucide-react-native';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { RootStackParamList } from '@/src/shared/types';
 import { useGetAllCategories } from '@features/category';
 import { RecipeDetail } from '@entities/recipe';
 import { useUploadToS3 } from '@shared/lib/uploadToS3';
@@ -18,7 +20,14 @@ import FormTextInput from './FormTextInput';
 import FormTitle from './FormTitle';
 import RecipeCreateHeader from './RecipeCreateHeader';
 
+type RecipeCreateFormRouteProp = RouteProp<RootStackParamList, 'RecipeCreateForm'>;
+
 const RecipeCreateForm = () => {
+  // route
+  const route = useRoute<RecipeCreateFormRouteProp>();
+
+  const recipeId = route.params?.recipeId;
+
   // create utils
   const {
     recipe,
@@ -55,8 +64,8 @@ const RecipeCreateForm = () => {
   };
 
   // catogories logic
-  const categories = useGetAllCategories();
-  if (!categories) return null;
+  const { categories, isLoading } = useGetAllCategories();
+  if (isLoading || !categories) return null;
 
   const {
     cookingTimes,
@@ -76,8 +85,8 @@ const RecipeCreateForm = () => {
       <KeyboardAwareScrollView className="h-[100%] px-[16px]" bottomOffset={80}>
         {/* 썸네일 업로드 */}
         <FormMediaUpload
-          title="대표사진"
-          description="대표사진을 업로드 해주세요"
+          title="대표 사진"
+          description="대표 사진을 업로드 해주세요"
           buttonText="사진 업로드"
           uploadType="image"
           value={recipe.thumbnail}

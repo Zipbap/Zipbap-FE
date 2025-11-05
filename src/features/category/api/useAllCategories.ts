@@ -1,38 +1,40 @@
+// useGetAllCategories.ts
 import { useQuery } from '@tanstack/react-query';
-import { CategoriesResult, CategoryItem } from '@entities/category';
+import { useMemo } from 'react';
+import { CategoriesResult } from '@entities/category';
 import { queryKeys } from '@shared/config';
 import { categoryApi } from './categoryApi';
 
-export const useAllCategoriesQuery = (enabled = true) =>
-  useQuery({
+/**
+ * 전체 카테고리 데이터 조회 훅
+ * - 선언적이고 null-safe하게 카테고리 데이터를 반환함
+ */
+export const useGetAllCategories = (enabled = true) => {
+  const { data, isLoading, isError } = useQuery({
     queryKey: queryKeys.categories.all,
     queryFn: categoryApi.getAllCategories,
     enabled,
   });
 
-export const useGetAllCategories = () => {
-  const { data: categoriesData } = useAllCategoriesQuery();
+  const categories = useMemo(() => {
+    const result = data?.result as CategoriesResult | undefined;
+    if (!result) return null;
 
-  if (categoriesData === undefined) return;
-
-  const categories: CategoriesResult = categoriesData.result;
-  const cookingTimes: CategoryItem[] = categories.cookingTimes;
-  const cookingTypes: CategoryItem[] = categories.cookingTypes;
-  const headcounts: CategoryItem[] = categories.headcounts;
-  const levels: CategoryItem[] = categories.levels;
-  const mainIngredients: CategoryItem[] = categories.mainIngredients;
-  const methods: CategoryItem[] = categories.methods;
-  const situations: CategoryItem[] = categories.situations;
-  const myCategories: CategoryItem[] = categories.myCategories;
+    return {
+      cookingTimes: result.cookingTimes,
+      cookingTypes: result.cookingTypes,
+      headcounts: result.headcounts,
+      levels: result.levels,
+      mainIngredients: result.mainIngredients,
+      methods: result.methods,
+      situations: result.situations,
+      myCategories: result.myCategories,
+    };
+  }, [data]);
 
   return {
-    cookingTimes,
-    cookingTypes,
-    headcounts,
-    levels,
-    mainIngredients,
-    methods,
-    situations,
-    myCategories,
+    categories,
+    isLoading,
+    isError,
   };
 };

@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { View, FlatList, TouchableOpacity, Text } from 'react-native';
@@ -12,12 +13,8 @@ import { useRecipeTypeStore } from '@/src/shared/store/useRecipeMode';
 import { Recipe, ArticleView, DetailDeleteComponent } from '@entities/recipe';
 import { RootNavigationProp } from '@shared/types';
 
-interface MainPageProps {
-  navigation: RootNavigationProp<'Main'>;
-  RecipeCreateForm: { recipeId?: string };
-}
-
-const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
+const RecipeCreate = () => {
+  const navigation = useNavigation<RootNavigationProp<'Main'>>();
   const navigateToRecipeCreateForm = (targetId: string) => {
     console.log(targetId);
     navigation.navigate('RecipeCreateForm', { recipeId: targetId });

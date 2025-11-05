@@ -47,7 +47,7 @@ type RecipeCreateFormRouteProp = RouteProp<RootStackParamList, 'RecipeCreateForm
 const RecipeCreateForm = () => {
   const route = useRoute<RecipeCreateFormRouteProp>();
   const recipeId = route.params?.recipeId;
-  console.log('\n넘어온 recipeId\n', recipeId);
+
   const {
     recipe,
     updateField,
@@ -58,9 +58,7 @@ const RecipeCreateForm = () => {
     loadTempRecipe,
     tempRecipeMutation,
   } = useRecipeCreateForm();
-  console.log(recipe);
 
-  // RecipeCreateForm.tsx
   useEffect(() => {
     const loadRecipe = async () => {
       if (recipeId) {
@@ -76,6 +74,7 @@ const RecipeCreateForm = () => {
     };
 
     loadRecipe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipeId]);
   // media upload
   const presignedUrlMutation = usePresignedUrl();

@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import { queryKeys } from '@/src/shared/config';
 import { apiInstance } from '@/src/shared/config/api-instance';
 
 interface CookingOrder {
@@ -59,6 +60,7 @@ export const useRecipeCreateForm = () => {
 
   useEffect(() => {
     queryClient.setQueryData(['tempRecipe'], recipe);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipe]);
 
   useEffect(() => {
@@ -66,6 +68,7 @@ export const useRecipeCreateForm = () => {
     if (cached && recipe.id !== null) {
       setRecipe(cached);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const tempRecipeMutation = useMutation({
@@ -79,6 +82,9 @@ export const useRecipeCreateForm = () => {
         ...data,
         cookingOrders: data.cookingOrders?.length > 0 ? data.cookingOrders : prev.cookingOrders,
       }));
+      queryClient.invalidateQueries({ queryKey: queryKeys.recipeFinal.all });
+      queryClient.invalidateQueries({ queryKey: queryKeys.recipeTemp.all });
+      queryClient.invalidateQueries({ queryKey: queryKeys.recipes.all });
       console.log('임시 레시피 생성 성공:', data);
     },
     onError: err => {
@@ -88,6 +94,7 @@ export const useRecipeCreateForm = () => {
 
   useEffect(() => {
     tempRecipeMutation.mutate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const tempSaveMutation = useMutation({
@@ -117,6 +124,9 @@ export const useRecipeCreateForm = () => {
       return res.data;
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.recipeFinal.all });
+      queryClient.invalidateQueries({ queryKey: queryKeys.recipeTemp.all });
+      queryClient.invalidateQueries({ queryKey: queryKeys.recipes.all });
       console.log('✅ 임시 저장 성공');
     },
     onError: error => {
@@ -162,6 +172,7 @@ export const useRecipeCreateForm = () => {
   const handleFinalizeSave = () => {
     console.log('최종저장:', recipe);
   };
+
   const fetchTempRecipes = useQuery({
     queryKey: ['tempRecipes'],
     queryFn: async () => {
@@ -174,7 +185,7 @@ export const useRecipeCreateForm = () => {
   const loadTempRecipe = async (id: string) => {
     try {
       const { data: tempRecipes } = await fetchTempRecipes.refetch();
-      const foundRecipe = tempRecipes?.find((recipe: any) => recipe.id === id);
+      const foundRecipe = tempRecipes?.find((recipe: CreateRecipeDetail) => recipe.id === id);
 
       if (foundRecipe) {
         setRecipe(prev => ({

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { queryKeys } from '@/src/shared/config';
-import { apiInstance } from '@/src/shared/config/api-instance';
+import { queryKeys } from '@shared/config';
+import { apiInstance } from '@shared/config/api-instance';
 
 export const useDeleteRecipe = () => {
   const queryClient = useQueryClient();

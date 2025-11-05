@@ -4,17 +4,17 @@ import { ArrowUpDown } from 'lucide-react-native';
 import React, { useEffect } from 'react';
 import { ScrollView, View, KeyboardAvoidingView, Platform, Text } from 'react-native';
 
-import { useUploadToS3 } from '@features/recipe/lib/uploadToS3';
-import { usePresignedUrl } from '@features/recipe/lib/usePresignedUrl';
-import FormCategory from '@features/recipe/ui/FormCategory';
 import { CreateRecipeDetail } from '@entities/recipe';
 import { queryKeys } from '@shared/config';
 import { apiInstance } from '@shared/config/api-instance';
 import { RootStackParamList } from '@shared/types';
 import { FullWidthButton } from '@shared/ui';
+import { useUploadToS3 } from '../lib/uploadToS3';
+import { usePresignedUrl } from '../lib/usePresignedUrl';
 import { useRecipeCreateForm } from '../model/useRecipeCreateForm';
 
 import FormAddRecipeOrder from './FormAddRecipeOrder';
+import FormCategory from './FormCategory';
 import FormLongTextInput from './FormLongTextInput';
 import FormMediaUpload from './FormMediaUpload';
 import FormRecipeVisibilityToggle from './FormRecipeVisibilityToggle';

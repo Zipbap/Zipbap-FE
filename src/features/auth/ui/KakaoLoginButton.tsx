@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native';
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
-import { storeTokens } from '@/src/shared/store/token';
 import { Button } from '@entities/user';
+import { storeTokens } from '@shared/store/token';
 import { RootNavigationProp } from '@shared/types';
 import { kakaoLogin } from '../api/login';
 

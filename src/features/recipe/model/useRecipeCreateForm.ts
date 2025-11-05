@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { queryKeys } from '@/src/shared/config';
-import { apiInstance } from '@/src/shared/config/api-instance';
 import { CookingOrder, CreateRecipeDetail } from '@entities/recipe';
+import { queryKeys } from '@shared/config';
+import { apiInstance } from '@shared/config/api-instance';
 
 export const useRecipeCreateForm = () => {
   // 초기 임시 레시피 상태

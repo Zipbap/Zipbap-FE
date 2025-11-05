@@ -4,9 +4,9 @@ import { Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-nativ
 
 import EditIcon from '@/assets/img/catagory/edit.svg';
 import TrashIcon from '@/assets/img/catagory/trash.svg';
-import { MyCategory } from '@/src/entities/category/model';
-import { queryKeys } from '@/src/shared/config';
-import { apiInstance } from '@/src/shared/config/api-instance';
+import { MyCategory } from '@entities/category';
+import { queryKeys } from '@shared/config';
+import { apiInstance } from '@shared/config/api-instance';
 import { FullWidthButton, ModalContentSection, BottomSheetModal } from '@shared/ui';
 
 interface Props {

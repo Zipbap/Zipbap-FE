@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { View, ScrollView } from 'react-native';
 
 import PlusIcon from '@/assets/img/plus.svg';
-import { MyCategory } from '@/src/entities/category/model';
-import { queryKeys } from '@/src/shared/config';
-import { apiInstance } from '@/src/shared/config/api-instance';
 import { ViewTypeSwitcher } from '@features/recipe';
+import { MyCategory } from '@entities/category';
+import { queryKeys } from '@shared/config';
+import { apiInstance } from '@shared/config/api-instance';
 import { useBottomSheetStore, useViewStore } from '@shared/store';
 
 import { CategoryChipButton } from '@shared/ui';

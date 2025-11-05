@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, ScrollView } from 'react-native';
 
 import PlusIcon from '@/assets/img/plus.svg';
+import { useCategoriesQuery } from '@features/category';
 import { ViewTypeSwitcher } from '@features/recipe';
 import { useCategoryBottomSheetStore, useViewTypeStore } from '@shared/store';
 
@@ -9,11 +10,13 @@ import { CategoryChipButton } from '@shared/ui';
 
 const MyRecipeCatagory = () => {
   const { viewType, setViewType } = useViewTypeStore();
-  const [catagory] = useState(['점심', '저녁']);
-  const [selected, setSelected] = useState<string>('전체');
-
-  // NOTE: BottomSheetModal state
   const { bottomSheetOpen } = useCategoryBottomSheetStore();
+
+  // category
+  const { data } = useCategoriesQuery();
+  const categories = data?.result || [];
+
+  const [selected, setSelected] = useState<string>('전체');
 
   return (
     <>
@@ -33,12 +36,12 @@ const MyRecipeCatagory = () => {
             contentContainerStyle={{ alignItems: 'center', paddingRight: 20 }}
           >
             <View className="flex-row items-center gap-2">
-              {catagory.map((category, index) => (
+              {categories.map((category, index) => (
                 <CategoryChipButton
                   key={index}
-                  label={category}
-                  selected={selected === category}
-                  onPress={() => setSelected(category)}
+                  label={category.name}
+                  selected={selected === category.name}
+                  onPress={() => setSelected(category.name)}
                 />
               ))}
               <PlusIcon onPress={bottomSheetOpen} width={26} height={26} />

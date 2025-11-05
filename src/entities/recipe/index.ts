@@ -1,6 +1,5 @@
 // recipe model
 export { Recipe } from './model';
-export { mockRecipes } from './model/mockRecipe';
 export { RecipeDetailItem } from './model/RecipeDetailTypes';
 
 // recipe UI

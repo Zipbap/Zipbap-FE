@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
@@ -6,7 +6,7 @@ import PlusIcon from '@/assets/img/recipe/plus-float.svg';
 
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
 import { EmptyStateUsingVideo } from '@features/user';
-import { mockRecipes, Recipe, ArticleView, DetailDeleteComponent } from '@entities/recipe';
+import { Recipe, ArticleView, DetailDeleteComponent } from '@entities/recipe';
 import { RootNavigationProp } from '@shared/types';
 
 interface MainPageProps {
@@ -15,12 +15,8 @@ interface MainPageProps {
 
 const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
   const navigateToRecipeCreateForm = () => navigation.navigate('RecipeCreateForm');
-  const [recipeList, setRecipeList] = useState<Recipe[]>([]);
+  const [recipeList] = useState<Recipe[]>([]);
   const isRecipeListEmpty = recipeList.length === 0;
-
-  useEffect(() => {
-    setRecipeList(mockRecipes);
-  }, []);
 
   return (
     <View style={{ flex: 1 }}>

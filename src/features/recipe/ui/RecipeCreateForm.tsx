@@ -5,9 +5,7 @@ import { View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { RootStackParamList } from '@/src/shared/types';
 import { useGetAllCategories } from '@features/category';
-import { RecipeDetail } from '@entities/recipe';
-import { useUploadToS3 } from '@shared/lib/uploadToS3';
-import { usePresignedUrl } from '@shared/lib/usePresendUrl';
+import { useRecipeUploader } from '@features/recipe/lib/useRecipeUpload';
 import { FullWidthButton } from '@shared/ui';
 import { useRecipeCreateForm } from '../model/useRecipeCreateForm';
 
@@ -39,29 +37,10 @@ const RecipeCreateForm = () => {
   } = useRecipeCreateForm();
 
   // upload logic
-  const presignedUrlMutation = usePresignedUrl();
-  const uploadToS3Mutation = useUploadToS3();
-  const handleUpload = async (
-    fileUri: string,
-    updateFieldName: keyof RecipeDetail,
-    orderIndex?: number,
-  ) => {
-    try {
-      const fileName = fileUri.split('/').pop() || `file-${Date.now()}.jpg`;
-      const { uploadUrl, fileUrl } = await presignedUrlMutation.mutateAsync({ fileName });
-      await uploadToS3Mutation.mutateAsync({ uploadUrl, fileUri });
-
-      if (updateFieldName === 'thumbnail' || updateFieldName === 'video') {
-        updateField(updateFieldName, fileUrl);
-      } else if (updateFieldName === 'cookingOrders' && orderIndex !== undefined) {
-        updateCookingOrder(orderIndex, 'image', fileUrl);
-      }
-
-      console.log('S3 업로드 및 임시저장 완료:', fileUrl);
-    } catch (err) {
-      console.error('업로드 실패:', err);
-    }
-  };
+  const { handleUpload } = useRecipeUploader({
+    updateField,
+    updateCookingOrder,
+  });
 
   // catogories logic
   const { categories, isLoading } = useGetAllCategories();

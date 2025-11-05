@@ -3,7 +3,7 @@ import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-naviga
 export type RootStackParamList = {
   Login: undefined;
   Main: { screen?: keyof MainTabParamList } | undefined;
-  RecipeCreateForm: undefined;
+  RecipeCreateForm: { recipeId?: string };
   AnotherUserPage: { userId: string };
   RecipeDetail: { recipeId: string };
   FeedDetail: { feedId: string };

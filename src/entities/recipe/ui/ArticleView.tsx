@@ -2,9 +2,9 @@ import { View, Image, Text } from 'react-native';
 
 import TimerIcon from '@/assets/img/recipe/timeer.svg';
 
-import { RecipeDetail } from '../model';
+import { Recipe } from '../model';
 
-const ArticleView = ({ item }: { item: RecipeDetail }) => {
+const ArticleView = ({ item }: { item: Recipe }) => {
   return (
     <View className="mb-[33px] flex-row gap-4 rounded-xl bg-white">
       <Image className="h-[90px] w-[94px] rounded-xl" source={{ uri: item.thumbnail || '' }} />

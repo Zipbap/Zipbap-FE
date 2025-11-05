@@ -7,7 +7,7 @@ import PlusIcon from '@/assets/img/recipe/plus-float.svg';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
 import { useRecipeListQuery } from '@features/recipe/api/useRecipeListQuery';
 import { EmptyStateUsingVideo } from '@features/user';
-import { ArticleView, DetailDeleteComponent, RecipeDetail } from '@entities/recipe';
+import { ArticleView, DetailDeleteComponent, Recipe } from '@entities/recipe';
 import { useRecipeTypeStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
 
@@ -24,7 +24,7 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
 
   // TODO: isLoading
   const { data } = useRecipeListQuery(recipeType);
-  const recipeList = (data || []) as RecipeDetail[];
+  const recipeList = (data || []) as Recipe[];
   const isRecipeListEmpty = recipeList.length === 0;
 
   return (

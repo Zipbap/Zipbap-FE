@@ -27,6 +27,7 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
       return res.data;
     },
   });
+
   const recipeList: Recipe[] = recipes?.result || [];
 
   const isRecipeListEmpty = recipeList.length === 0;

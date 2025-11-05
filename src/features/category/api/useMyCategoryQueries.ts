@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '@shared/config';
-import { categoryApi } from './api';
+import { categoryApi } from './categoryApi';
 
 export const useCategoriesQuery = (enabled = true) =>
   useQuery({

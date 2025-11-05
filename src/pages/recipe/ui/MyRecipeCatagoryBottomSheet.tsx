@@ -60,7 +60,7 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
                   {categories.map(category => (
                     <View
                       key={category.id}
-                      className="flex-row items-center justify-between gap-56 self-stretch py-4"
+                      className="flex-row items-center justify-between self-stretch py-4"
                     >
                       <Text>{category.name}</Text>
                       <View className="flex-row gap-[14px]">

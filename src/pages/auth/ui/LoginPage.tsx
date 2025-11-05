@@ -1,18 +1,20 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Logo from '@/assets/img/logo.svg';
-import { KakaoLoginButton } from '@features/auth';
+import { AppleLoginButton, KakaoLoginButton } from '@features/auth';
 import { RootNavigationProp } from '@shared/types';
 
 interface Props {
   navigation: RootNavigationProp<'Login'>;
 }
 
+const isIOS = () => Platform.OS === 'ios';
+
 const LoginPage = ({ navigation }: Props) => {
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }} edges={['bottom']}>
       <View className="flex-1 items-center justify-center bg-white px-6">
         <View className="w-5/6 items-center justify-center">
           {/* 로고 */}
@@ -30,12 +32,8 @@ const LoginPage = ({ navigation }: Props) => {
               <Text className="font-bold text-sub1">&#183;</Text>
               <Text className="font-bold text-sub1">회원가입</Text>
             </View>
-
-            {/* 카카오 버튼: 로그인 성공 시 Main으로 이동 */}
             <KakaoLoginButton navigation={navigation} />
-
-            {/* 나중에 애플 로그인 붙일 경우 */}
-            {/* <AppleLoginButton navigation={navigation} /> */}
+            {isIOS() && <AppleLoginButton navigation={navigation} />}
           </View>
         </View>
       </View>

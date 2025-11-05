@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { Text, View, ScrollView, TextInput } from 'react-native';
-
+import { Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import EditIcon from '@/assets/img/catagory/edit.svg';
 import TrashIcon from '@/assets/img/catagory/trash.svg';
+
+import {
+  useCategoriesQuery,
+  useCreateCategory,
+  useUpdateCategory,
+  useDeleteCategory,
+} from '@features/category';
+import { MyCategory } from '@entities/category';
 import { FullWidthButton, ModalContentSection, BottomSheetModal } from '@shared/ui';
 
 interface Props {
@@ -12,31 +19,36 @@ interface Props {
 }
 
 const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: Props) => {
-  // FIXME: api로 카테고리 가져오기
-  const [originalCategory] = useState(['점심', '저녁']);
   const [newCategory, setNewCategory] = useState('');
 
-  const handleCatagoryAdd = () => {
-    // 카테고리 추가 로직
+  const { data, isLoading } = useCategoriesQuery(bottomSheetVisible);
+  const createCategory = useCreateCategory();
+  const updateCategory = useUpdateCategory();
+  const deleteCategory = useDeleteCategory();
+
+  const categories: MyCategory[] = data?.result ?? [];
+
+  const handleAdd = () => {
+    if (!newCategory.trim()) return;
+    createCategory.mutate(newCategory, {
+      onSuccess: () => setNewCategory(''),
+    });
   };
 
-  const handleModalClose = () => {
-    bottomSheetClose();
-  };
-
-  const handleCatagorySave = () => {
-    // 카테고리 저장 로직
-    handleModalClose();
-  };
+  if (isLoading)
+    return (
+      <View>
+        <Text>로딩중 UI</Text>
+      </View>
+    );
 
   return (
-    <BottomSheetModal visible={bottomSheetVisible} onClose={handleModalClose}>
+    <BottomSheetModal visible={bottomSheetVisible} onClose={bottomSheetClose}>
       <View className="px-6 py-6">
         <Text className="mt-[40px] text-center text-[20px] font-bold text-black">
           카테고리 관리
         </Text>
         <KeyboardAwareScrollView className="h-[520px]" bottomOffset={30}>
-          {/* 기존 카테고리 */}
           <ModalContentSection
             subTitle="기존 카테고리"
             content={
@@ -45,15 +57,30 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
                   <Text>전체</Text>
                 </View>
                 <ScrollView className="px-11">
-                  {originalCategory.map((category, index) => (
+                  {categories.map(category => (
                     <View
-                      key={index}
+                      key={category.id}
                       className="flex-row items-center justify-between gap-56 self-stretch py-4"
                     >
-                      <Text>{category}</Text>
+                      <Text>{category.name}</Text>
                       <View className="flex-row gap-[14px]">
-                        <EditIcon width={16} height={16} />
-                        <TrashIcon width={16} height={16} />
+                        <TouchableOpacity
+                          onPress={() => {
+                            if (newCategory.trim()) {
+                              updateCategory.mutate({ id: category.id, name: newCategory });
+                              setNewCategory('');
+                            }
+                          }}
+                        >
+                          <EditIcon width={16} height={16} />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => {
+                            deleteCategory.mutate(category.id);
+                          }}
+                        >
+                          <TrashIcon width={16} height={16} />
+                        </TouchableOpacity>
                       </View>
                     </View>
                   ))}
@@ -62,31 +89,29 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
             }
           />
 
-          {/* 카테고리 추가 */}
           <ModalContentSection
             subTitle="카테고리 추가"
             content={
               <TextInput
                 className="h-14 items-center justify-start overflow-hidden rounded-2xl bg-g4 px-5 py-4 text-[14px] font-medium text-g2"
-                placeholder="새 카테고리 이름"
+                placeholder="카테고리 이름"
                 placeholderTextColor="#847C70"
                 value={newCategory}
                 onChangeText={setNewCategory}
               />
             }
           />
-          {/* 버튼 그룹 */}
+
           <View className="mt-12 flex-col items-center">
             <FullWidthButton
               buttonText="추가하기"
-              onPress={handleCatagoryAdd}
+              onPress={handleAdd}
               backgroundColor="#AEA79C"
               textColor="white"
             />
-
             <FullWidthButton
               buttonText="저장하기"
-              onPress={handleCatagorySave}
+              onPress={bottomSheetClose}
               backgroundColor="#DC6E3F"
               textColor="white"
             />

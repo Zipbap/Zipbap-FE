@@ -1,43 +1,26 @@
 import { useState } from 'react';
-
-interface CookingOrder {
-  image?: string;
-  description?: string;
-}
-
-interface RecipeDetail {
-  id: string;
-  title?: string;
-  thumbnail?: string;
-  subtitle?: string;
-  introduction?: string;
-  myCategoryId?: string;
-  cookingTypeId?: number;
-  situationId?: number;
-  mainIngredientId?: number;
-  methodId?: number;
-  headcountId?: number;
-  cookingTimeId?: number;
-  levelId?: number;
-  ingredientInfo?: string;
-  kick?: string;
-  isPrivate: boolean;
-  cookingOrders: CookingOrder[];
-  video?: string;
-}
+import { CookingOrder, RecipeDetail } from '@entities/recipe';
 
 export const useRecipeCreateForm = () => {
   const [recipe, setRecipe] = useState<RecipeDetail>({
     id: '',
-    title: '',
     thumbnail: '',
+    title: '',
     subtitle: '',
     introduction: '',
+    myCategoryId: null,
     ingredientInfo: '',
     kick: '',
     isPrivate: false,
-    cookingOrders: [],
-    video: '',
+    cookingOrders: [{ turn: 1, image: null, description: '' }],
+    cookingTimeId: null,
+    cookingTypeId: null,
+    situationId: null,
+    mainIngredientId: null,
+    methodId: null,
+    headcountId: null,
+    levelId: null,
+    video: null,
   });
 
   const updateField = <K extends keyof RecipeDetail>(key: K, value: RecipeDetail[K]) => {
@@ -51,14 +34,24 @@ export const useRecipeCreateForm = () => {
       return { ...prev, cookingOrders: updated };
     });
   };
+  const addCookingOrder = () => {
+    setRecipe(prev => {
+      const nextTurn = prev.cookingOrders.length + 1;
+      return {
+        ...prev,
+        cookingOrders: [...prev.cookingOrders, { turn: nextTurn, image: null, description: '' }],
+      };
+    });
+  };
 
-  const handleTempSave = () => console.log('임시저장:', recipe);
-  const handleFinalizeSave = () => console.log('최종저장:', recipe);
+  const handleTempSave = () => {};
+  const handleFinalizeSave = () => {};
 
   return {
     recipe,
     updateField,
     updateCookingOrder,
+    addCookingOrder,
     handleTempSave,
     handleFinalizeSave,
   };

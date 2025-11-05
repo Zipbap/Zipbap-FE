@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, Image } from 'react-native';
-import { getUploadText } from '../lib/getUploadText';
 import { useMediaUpload } from '../lib/useMediaUpload';
 
 interface Props {

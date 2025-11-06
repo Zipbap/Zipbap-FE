@@ -30,9 +30,8 @@ const RecipeCreateForm = () => {
     updateField,
     updateCookingOrder,
     addCookingOrder,
-    handleTempSave,
-    handleFinalizeSave,
     useLoadTempRecipe,
+    recipeMutation,
   } = useRecipeCreateForm();
 
   // load temp recipe
@@ -237,14 +236,14 @@ const RecipeCreateForm = () => {
         {/* 버튼 */}
         <FullWidthButton
           buttonText="임시저장"
-          onPress={handleTempSave}
+          onPress={() => recipeMutation.tempSave(recipe)}
           backgroundColor="#F0EDE6"
           textColor="#60594E"
         />
 
         <FullWidthButton
           buttonText="추가하기"
-          onPress={handleFinalizeSave}
+          onPress={() => recipeMutation.finalizeSave(recipe)}
           backgroundColor="#DC6E3F"
           textColor="white"
         />

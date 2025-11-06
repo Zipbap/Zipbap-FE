@@ -5,11 +5,12 @@ export {
   CategoryItem,
   CategoriesResult,
 } from './model/index';
-export { categoryApi } from './api/categoryApi';
-export { useGetAllCategories } from './api/useAllCategories';
+
 export {
   useCategoriesQuery,
   useCreateCategory,
   useDeleteCategory,
   useUpdateCategory,
 } from './api/useMyCategoryQueries';
+export { categoryApi } from './api/categoryApi';
+export { useCategories } from './api/useCategories';

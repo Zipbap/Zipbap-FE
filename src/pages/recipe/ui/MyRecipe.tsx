@@ -24,7 +24,7 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
   const { data: recipes, isLoading } = useQuery({
     queryKey: queryKeys.recipes.all,
     queryFn: async () => {
-      const res = await apiInstance.get('/recipes/me');
+      const res = await apiInstance.get('/recipes');
       return res.data;
     },
   });

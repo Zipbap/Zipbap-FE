@@ -2,9 +2,12 @@ import { View, Image, Text } from 'react-native';
 
 import TimerIcon from '@/assets/img/recipe/timeer.svg';
 
+import { useCategories } from '@entities/category';
 import { Recipe } from '../model';
 
 const ArticleView = ({ item }: { item: Recipe }) => {
+  const { getCookingTime } = useCategories();
+
   return (
     <View className="mb-[33px] flex-row gap-4 rounded-xl bg-white">
       <Image className="h-[90px] w-[94px] rounded-xl" source={{ uri: item.thumbnail || '' }} />
@@ -13,7 +16,7 @@ const ArticleView = ({ item }: { item: Recipe }) => {
         <View className="flex-row items-center">
           <Text className="mr-[8px] text-[10px] font-semibold text-sub1">{item.subtitle}</Text>
           <TimerIcon width={8} height={8} />
-          <Text className="text-[8px] font-semibold text-sub1">{item.cookingTimeId}분</Text>
+          <Text className="text-[8px] font-semibold text-sub1">{getCookingTime(item)}</Text>
         </View>
 
         {/* 제목 */}

@@ -5,7 +5,7 @@ import { View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { RootStackParamList } from '@/src/shared/types';
 import { useRecipeUploader } from '@features/recipe/lib/useRecipeUpload';
-import { useGetAllCategories } from '@entities/category';
+import { useCategories } from '@entities/category';
 import { FullWidthButton } from '@shared/ui';
 import { useRecipeCreateForm } from '../model/useRecipeCreateForm';
 import FormAddRecipeOrder from './FormAddRecipeOrder';
@@ -44,7 +44,7 @@ const RecipeCreateForm = () => {
   });
 
   // catogories logic
-  const { categories, isLoading } = useGetAllCategories();
+  const { categories, isLoading } = useCategories();
   if (isLoading || !categories) return null;
 
   const {

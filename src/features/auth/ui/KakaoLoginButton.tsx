@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native';
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
+import { storeTokens } from '@/src/shared/store/token';
 import { Button } from '@entities/user';
 import { RootNavigationProp } from '@shared/types';
 import { kakaoLogin } from '../api/login';
@@ -23,6 +24,7 @@ const KakaoLoginButton = ({ navigation }: Props) => {
         console.warn('⚠️ accessToken 없음');
         return;
       }
+      await storeTokens({ accessToken, refreshToken });
 
       navigation.replace('Main'); // 성공 시 이동
     } catch (err) {

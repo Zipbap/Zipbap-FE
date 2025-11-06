@@ -23,6 +23,11 @@ export const useRecipeConfirmAction = (setModalVisible: (visible: boolean) => vo
     recipeMutation.delete(recipeId);
   };
 
+  const handleCloseActions = () => {
+    setModalVisible(false);
+    navigation.goBack();
+  };
+
   const handleAction = async (type: 'tempSave' | 'save' | 'delete') => {
     const recipe = queryClient.getQueryData<RecipeDetail>(['tempRecipe']);
     if (!recipe) {
@@ -43,8 +48,7 @@ export const useRecipeConfirmAction = (setModalVisible: (visible: boolean) => vo
           break;
       }
     } finally {
-      setModalVisible(false);
-      navigation.goBack();
+      handleCloseActions();
     }
   };
 

@@ -16,16 +16,25 @@ interface MainPageProps {
 }
 
 const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
-  const navigateToRecipeCreateForm = () => {
-    navigation.navigate('RecipeCreateForm');
-  };
-
+  // recipe type
   const { recipeType } = useRecipeTypeStore();
 
-  // TODO: isLoading
+  // recipe list
   const { data } = useRecipeListQuery(recipeType);
   const recipeList = (data || []) as Recipe[];
   const isRecipeListEmpty = recipeList.length === 0;
+
+  // navigate
+  const navigateToRecipeCreateForm = () => {
+    navigation.navigate('RecipeCreateForm', { recipeId: '' });
+  };
+
+  const navigateToTempRecipeCreateForm = (targetId: string) => {
+    if (recipeType === 'temp') {
+      console.log(targetId);
+      navigation.navigate('RecipeCreateForm', { recipeId: targetId });
+    }
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -40,7 +49,9 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
               numColumns={1}
               renderItem={({ item }) => (
                 <Swipeable renderRightActions={() => <DetailDeleteComponent targetId={item.id} />}>
-                  <ArticleView item={item} />
+                  <TouchableOpacity onPress={() => navigateToTempRecipeCreateForm(item.id)}>
+                    <ArticleView item={item} />
+                  </TouchableOpacity>
                 </Swipeable>
               )}
             />
@@ -54,7 +65,7 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
                 title={'첫번째 레시피를 기록해 보세요'}
                 subtitle={'내가 기억하고 싶은 레시피를 작성해 보세요'}
                 buttonText={'레시피 작성하기'}
-                onPress={() => navigation.navigate('RecipeCreateForm')}
+                onPress={navigateToRecipeCreateForm}
               />
             </View>
           )}

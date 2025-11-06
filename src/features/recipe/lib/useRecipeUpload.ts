@@ -3,6 +3,7 @@ import { useUploadToS3 } from '@shared/lib/uploadToS3';
 import { usePresignedUrl } from '@shared/lib/usePresendUrl';
 
 interface Props {
+  // NOTE: useRecipeCreateForm의 updateXXX의 타입과 일치합니다.
   updateField: <K extends keyof RecipeDetail>(key: K, value: RecipeDetail[K]) => void;
   updateCookingOrder: (index: number, field: keyof CookingOrder, value: unknown) => void;
 }

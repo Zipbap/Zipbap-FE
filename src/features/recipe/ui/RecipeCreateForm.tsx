@@ -1,5 +1,5 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { ArrowDown } from 'lucide-react-native';
+import { ArrowUpDown } from 'lucide-react-native';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
@@ -8,7 +8,6 @@ import { useGetAllCategories } from '@features/category';
 import { useRecipeUploader } from '@features/recipe/lib/useRecipeUpload';
 import { FullWidthButton } from '@shared/ui';
 import { useRecipeCreateForm } from '../model/useRecipeCreateForm';
-
 import FormAddRecipeOrder from './FormAddRecipeOrder';
 import FormCategory from './FormCategory';
 import FormLongTextInput from './FormLongTextInput';
@@ -24,9 +23,8 @@ const RecipeCreateForm = () => {
   // route
   const route = useRoute<RecipeCreateFormRouteProp>();
 
-  const recipeId = route.params?.recipeId;
-
   // create utils
+  const recipeId = route.params.recipeId;
   const {
     recipe,
     updateField,
@@ -34,7 +32,11 @@ const RecipeCreateForm = () => {
     addCookingOrder,
     handleTempSave,
     handleFinalizeSave,
+    useLoadTempRecipe,
   } = useRecipeCreateForm();
+
+  // load temp recipe
+  useLoadTempRecipe(recipeId);
 
   // upload logic
   const { handleUpload } = useRecipeUploader({
@@ -63,6 +65,7 @@ const RecipeCreateForm = () => {
       <View className="h-[70px]" />
       <KeyboardAwareScrollView className="h-[100%] px-[16px]" bottomOffset={80}>
         {/* 썸네일 업로드 */}
+        <FormTitle title="레시피 기본 정보" />
         <FormMediaUpload
           title="대표 사진"
           description="대표 사진을 업로드 해주세요"
@@ -101,29 +104,34 @@ const RecipeCreateForm = () => {
         <FormCategory
           categoryText="내 카테고리"
           items={myCategories}
+          prevSelectedId={recipe.myCategoryId}
           onSelectId={id => updateField('myCategoryId', id.toString())}
         />
 
         <FormCategory
           categoryText="종류"
           items={cookingTypes}
+          prevSelectedId={recipe.cookingTypeId}
           onSelectId={id => updateField('cookingTypeId', Number(id))}
         />
 
         <FormCategory
           categoryText="상황"
           items={situations}
+          prevSelectedId={recipe.situationId}
           onSelectId={id => updateField('situationId', Number(id))}
         />
 
         <FormCategory
           categoryText="주재료"
           items={mainIngredients}
+          prevSelectedId={recipe.mainIngredientId}
           onSelectId={id => updateField('mainIngredientId', Number(id))}
         />
         <FormCategory
           categoryText="방법"
           items={methods}
+          prevSelectedId={recipe.methodId}
           onSelectId={id => updateField('methodId', Number(id))}
         />
 
@@ -132,16 +140,19 @@ const RecipeCreateForm = () => {
         <FormCategory
           categoryText="인원"
           items={headcounts}
+          prevSelectedId={recipe.headcountId}
           onSelectId={id => updateField('headcountId', Number(id))}
         />
         <FormCategory
           categoryText="요리 시간"
           items={cookingTimes}
+          prevSelectedId={recipe.cookingTimeId}
           onSelectId={id => updateField('cookingTimeId', Number(id))}
         />
         <FormCategory
           categoryText="난이도"
           items={levels}
+          prevSelectedId={recipe.levelId}
           onSelectId={id => updateField('levelId', Number(id))}
         />
 
@@ -181,7 +192,7 @@ const RecipeCreateForm = () => {
         {recipe.cookingOrders?.map((order, index) => (
           <View key={index} className="mt-4">
             <View className="flex-row items-center gap-1">
-              <ArrowDown size={16} color={'#60594E'} />
+              <ArrowUpDown size={16} color={'#60594E'} />
               <Text className="text-sm font-bold text-g1">Step {index + 1}</Text>
             </View>
             <FormMediaUpload

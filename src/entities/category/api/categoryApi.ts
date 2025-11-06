@@ -2,31 +2,31 @@ import { MyCategory, CategoriesResult } from '@entities/category';
 import { apiInstance } from '@shared/config/api-instance';
 import { ApiResponse } from '@shared/types/api';
 
-const BASE_URL = '/my-categories';
-const CATEGORIES_URL = '/categories';
+const MY_CATEGORIES = '/my-categories';
+const CATEGORIES = '/categories';
 
 export const categoryApi = {
   getAll: async (): Promise<ApiResponse<MyCategory[]>> => {
-    const res = await apiInstance.get(BASE_URL);
+    const res = await apiInstance.get(MY_CATEGORIES);
     return res.data;
   },
 
   create: async (name: string): Promise<ApiResponse<MyCategory>> => {
-    const res = await apiInstance.post(BASE_URL, { name });
+    const res = await apiInstance.post(MY_CATEGORIES, { name });
     return res.data;
   },
 
   update: async (id: string, name: string): Promise<ApiResponse<MyCategory>> => {
-    const res = await apiInstance.put(`${BASE_URL}/${id}`, { name });
+    const res = await apiInstance.put(`${MY_CATEGORIES}/${id}`, { name });
     return res.data;
   },
 
   delete: async (id: string): Promise<void> => {
-    await apiInstance.delete(`${BASE_URL}/${id}`);
+    await apiInstance.delete(`${MY_CATEGORIES}/${id}`);
   },
 
   getAllCategories: async (): Promise<ApiResponse<CategoriesResult>> => {
-    const res = await apiInstance.get(CATEGORIES_URL);
+    const res = await apiInstance.get(CATEGORIES);
     return res.data;
   },
 };

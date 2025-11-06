@@ -9,8 +9,8 @@ import {
   useCreateCategory,
   useUpdateCategory,
   useDeleteCategory,
-} from '@features/category';
-import { MyCategory } from '@entities/category';
+  MyCategory,
+} from '@entities/category';
 import { FullWidthButton, ModalContentSection, BottomSheetModal } from '@shared/ui';
 
 interface Props {

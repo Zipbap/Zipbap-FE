@@ -19,6 +19,7 @@ interface RecipePageProps {
 
 const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
   const { viewType } = useViewTypeStore();
+  const { bottomSheetVisible, bottomSheetClose } = useCategoryBottomSheetStore();
 
   const { data: recipes, isLoading } = useQuery({
     queryKey: queryKeys.recipes.all,
@@ -32,7 +33,6 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
 
   const isRecipeListEmpty = recipeList.length === 0;
 
-  const { bottomSheetVisible, bottomSheetClose } = useCategoryBottomSheetStore();
   if (isLoading) {
     return <RecipeItemSkeleton />;
   }
@@ -52,6 +52,7 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
               renderItem={({ item }) => {
                 if (viewType === 'article') {
                   return (
+                    // 레시피 각 요소
                     <Pressable
                       onPress={() => {
                         navigation.navigate('RecipeDetail', { recipeId: item.id });

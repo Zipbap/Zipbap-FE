@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { apiInstance } from '@/src/shared/config/api-instance';
 import {
   RecipeDetailSection,
   RecipeStepsArticleViewType,
@@ -9,7 +10,6 @@ import {
 } from '@features/feed';
 import { useCategories } from '@entities/category';
 import { useRecipeDetailQuery } from '@entities/recipe/api/useRecipeDetialQuery';
-
 import { isValidString } from '@shared/lib/isValidString';
 import { useTwoViewTypeStore } from '@shared/store';
 import { RecipeDetailProps } from '@shared/types';
@@ -31,8 +31,6 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
 
   const { recipeId } = route.params;
 
-  console.log(recipeId); // FIXME: 제거 바람
-
   // recipe list
   const { data: detailRecipe, isLoading } = useRecipeDetailQuery(recipeId);
   const isRecipeDetail = detailRecipe !== null;
@@ -48,6 +46,14 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
     categoryValue?.getMainIngredient(detailRecipe),
     categoryValue?.getMethod(detailRecipe),
   ].filter(isValidString);
+
+  const deleteRecipe = (recipeId: string) => {
+    apiInstance.delete(`/recipe/${recipeId}`);
+  };
+
+  const navigateToRecipeCreateForm = () => {
+    navigation.navigate('RecipeCreateForm', { recipeId: detailRecipe.id });
+  };
 
   return (
     <View className="flex-1 bg-white" style={{ paddingTop: insets.top }}>
@@ -135,14 +141,14 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
               {/* 수정하기 버튼 */}
               <FullWidthButton
                 buttonText="수정하기"
-                onPress={navigation.goBack} // TODO:
+                onPress={() => navigateToRecipeCreateForm()}
                 backgroundColor="#F0EDE6"
                 textColor="#60594E"
               />
               {/* 삭제하기 버튼 */}
               <FullWidthButton
                 buttonText="삭제하기"
-                onPress={navigation.goBack} // TODO:
+                onPress={() => deleteRecipe(detailRecipe.id)}
                 backgroundColor="#DC6E3F"
                 textColor="white"
               />

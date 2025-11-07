@@ -7,7 +7,7 @@ import StarGraySvg from '@/assets/img/feed/star-gray-icon.svg';
 
 interface Props {
   serving?: string;
-  cookingTime?: number;
+  cookingTime?: string;
   difficulty?: string;
 }
 

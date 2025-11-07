@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { CategoriesResult } from '@entities/category';
-import { Recipe } from '@entities/recipe';
+import { Recipe, RecipeDetail } from '@entities/recipe';
 import { queryKeys } from '@shared/config';
 import { categoryApi } from './categoryApi';
 
@@ -28,7 +28,7 @@ export const useCategories = (enabled = true) => {
     };
   }, [data]);
 
-  const getCategoryValue = useMemo(() => {
+  const categoryValue = useMemo(() => {
     if (!categories) return null;
 
     return {
@@ -40,19 +40,39 @@ export const useCategories = (enabled = true) => {
         categories.mainIngredients.find(item => item.id === id),
       method: (id: number | null) => categories.methods.find(item => item.id === id),
       situation: (id: number | null) => categories.situations.find(item => item.id === id),
-      myCategory: (id: number | null) => categories.myCategories.find(item => item.id === id),
+      myCategory: (id: string | null) => categories.myCategories.find(item => item.id === id),
+
+      getCookingTime(recipe: Recipe | RecipeDetail) {
+        return this.cookingTime(recipe.cookingTimeId)?.name ?? null;
+      },
+      getCookingType(recipe: RecipeDetail) {
+        return this.cookingType(recipe.cookingTypeId)?.name ?? null;
+      },
+      getHeadcount(recipe: RecipeDetail) {
+        return this.headcount(recipe.headcountId)?.name ?? null;
+      },
+      getLevel(recipe: RecipeDetail) {
+        return this.level(recipe.levelId)?.name ?? null;
+      },
+      getMainIngredient(recipe: RecipeDetail) {
+        return this.mainIngredient(recipe.mainIngredientId)?.name ?? null;
+      },
+      getMethod(recipe: RecipeDetail) {
+        return this.method(recipe.methodId)?.name ?? null;
+      },
+      getSituation(recipe: RecipeDetail) {
+        return this.situation(recipe.situationId)?.name ?? null;
+      },
+      getMyCategory(recipe: RecipeDetail) {
+        return this.myCategory(recipe.myCategoryId)?.name ?? null;
+      },
     };
   }, [categories]);
-
-  const getCookingTime = (item: Recipe) => {
-    const cookingTime = getCategoryValue?.cookingTime(item.cookingTimeId);
-    return cookingTime?.name;
-  };
 
   return {
     categories,
     isLoading,
     isError,
-    getCookingTime,
+    categoryValue,
   };
 };

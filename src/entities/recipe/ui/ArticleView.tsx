@@ -6,7 +6,7 @@ import { useCategories } from '@entities/category';
 import { Recipe } from '../model';
 
 const ArticleView = ({ item }: { item: Recipe }) => {
-  const { getCookingTime } = useCategories();
+  const { categoryValue } = useCategories();
 
   return (
     <View className="mb-[33px] flex-row gap-4 rounded-xl bg-white">
@@ -16,7 +16,9 @@ const ArticleView = ({ item }: { item: Recipe }) => {
         <View className="flex-row items-center">
           <Text className="mr-[8px] text-[10px] font-semibold text-sub1">{item.subtitle}</Text>
           <TimerIcon width={8} height={8} />
-          <Text className="text-[8px] font-semibold text-sub1">{getCookingTime(item)}</Text>
+          <Text className="text-[8px] font-semibold text-sub1">
+            {categoryValue?.getCookingTime(item)}
+          </Text>
         </View>
 
         {/* 제목 */}

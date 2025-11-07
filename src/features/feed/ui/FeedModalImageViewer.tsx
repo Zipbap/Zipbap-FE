@@ -2,19 +2,13 @@ import React from 'react';
 import { View, Image, Text, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CloseIconSvg from '@/assets/img/close-icon.svg';
+import { CookingOrder } from '@entities/recipe';
 import { ModalContainer } from '@shared/ui';
-
-interface Step {
-  step: number;
-  title: string;
-  description: string;
-  image: string;
-}
 
 interface Props {
   visible: boolean;
   onClose: () => void;
-  item: Step | null;
+  item: CookingOrder | null;
 }
 
 const FeedModalImageViewer = ({ visible, onClose, item }: Props) => {
@@ -35,9 +29,9 @@ const FeedModalImageViewer = ({ visible, onClose, item }: Props) => {
           {item ? (
             <View className="flex-col">
               <Text className="mb-1 text-[14px] font-semibold color-sub1">
-                step {item.step.toString().padStart(2, '0')}
+                step {item.turn.toString().padStart(2, '0')}
               </Text>
-              <Text className="mb-4 text-[18px] font-bold color-black">{item.title}</Text>
+              <Text className="mb-4 text-[18px] font-bold color-black">{item.description}</Text>
               <View className="w-full flex-row justify-between gap-5">
                 <Text className="flex-1 text-[16px] font-medium leading-5 color-g1">
                   {item.description}

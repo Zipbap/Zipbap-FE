@@ -1,13 +1,10 @@
 import React from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
-
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
-import { useRecipeListQuery } from '@features/recipe';
 import { EmptyStateUsingVideo } from '@features/user';
-import { ArticleView, DetailDeleteComponent, Recipe } from '@entities/recipe';
+import { useRecipeListQuery, ArticleView, DetailDeleteComponent, Recipe } from '@entities/recipe';
 import { useRecipeTypeStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
 

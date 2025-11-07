@@ -1,25 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
+import { CookingOrder } from '@entities/recipe';
 import FeedModalImageViewer from './FeedModalImageViewer';
 
-interface Step {
-  step: number;
-  title: string;
-  description: string;
-  image: string;
-}
-
 interface Props {
-  steps?: Step[];
+  steps?: CookingOrder[];
 }
 
 const RecipeStepsArticleViewType = ({ steps }: Props) => {
   const [visible, setVisible] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<Step | null>(null);
+  const [selectedItem, setSelectedItem] = useState<CookingOrder | null>(null);
 
   if (!steps || steps.length === 0) return null;
 
-  const openModal = (item: Step) => {
+  const openModal = (item: CookingOrder) => {
     setSelectedItem(item);
     setVisible(true);
   };
@@ -32,15 +26,15 @@ const RecipeStepsArticleViewType = ({ steps }: Props) => {
   return (
     <View className="flex-col gap-6">
       {steps.map(item => (
-        <View key={item.step} className="flex-col">
+        <View key={item.turn} className="flex-col">
           <Text className="mb-1 text-sm font-bold color-sub1">
-            step {item.step.toString().padStart(2, '0')}
+            step {item.turn.toString().padStart(2, '0')}
           </Text>
-          <Text className="mb-2 text-base font-semibold color-black">{item.title}</Text>
+          <Text className="mb-2 text-base font-semibold color-black">{item.description}</Text>
           <View className="w-full flex-row justify-between gap-5">
             <Pressable onPress={() => openModal(item)} className="active:opacity-80">
               <Image
-                source={{ uri: item.image }}
+                source={{ uri: item.image || '' }}
                 className="mb-2 h-[100px] w-[100px] rounded-xl bg-g2"
                 resizeMode="cover"
               />

@@ -12,4 +12,8 @@ export const recipeApi = {
     const res = await apiInstance.get('/recipes/temp');
     return res.data;
   },
+  getRecipeDetial: async (id: string): Promise<ApiResponse<RecipeDetail>> => {
+    const res = await apiInstance.get(`/recipes/${id}`);
+    return res.data;
+  },
 };

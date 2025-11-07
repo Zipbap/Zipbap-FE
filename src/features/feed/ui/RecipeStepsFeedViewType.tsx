@@ -8,16 +8,10 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
 } from 'react-native';
-
-interface Step {
-  step: number;
-  title: string;
-  description: string;
-  image: string;
-}
+import { CookingOrder } from '@entities/recipe';
 
 interface Props {
-  steps?: Step[];
+  steps?: CookingOrder[];
 }
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -38,7 +32,7 @@ const RecipeStepsFeedViewType = ({ steps }: Props) => {
       <FlatList
         ref={flatListRef}
         data={steps}
-        keyExtractor={item => item.step.toString()}
+        keyExtractor={item => item.turn.toString()}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
@@ -51,7 +45,7 @@ const RecipeStepsFeedViewType = ({ steps }: Props) => {
               resizeMode="cover"
             />
             <Text className="mb-0.5 text-[14px] font-semibold color-sub1">
-              step {item.step.toString().padStart(2, '0')}
+              step {item.turn.toString().padStart(2, '0')}
             </Text>
             <Text className="mb-2 text-[18px] font-bold color-black">{item.title}</Text>
             <Text className="text-[16px] font-medium leading-5 color-g1">{item.description}</Text>

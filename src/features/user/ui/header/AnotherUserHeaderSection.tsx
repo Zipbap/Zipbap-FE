@@ -18,15 +18,29 @@ const AnotherUserHeaderSection = ({ user, navigation }: Props) => {
       className="absolute top-0 z-10 flex h-[270px] w-full justify-between bg-white"
     >
       {/* 프로필 */}
-      <View className="bg-white p-4">
+      <View className="h-[190px] flex-col bg-white p-4">
         <View className="flex-row items-start gap-6 space-x-4">
-          <Image source={{ uri: user.profileImage }} className="h-28 w-28 rounded-full" />
-          <View className="max-w-60">
+          {user.profileImage ? (
+            <Image
+              source={{ uri: user.profileImage }}
+              className="h-[110px] w-[110px] rounded-full"
+            />
+          ) : (
+            <View
+              style={{
+                width: 110,
+                height: 110,
+                borderRadius: 110 / 2,
+                backgroundColor: '#E5E5E5',
+              }}
+            />
+          )}
+          <View className="max-w-60 bg-white">
             <Text className="text-lg font-bold color-black">{user.name}</Text>
-            <Text className="mt-1 color-g1">{user.introduce}</Text>
+            <Text className="mt-1 flex-1 color-g1">{user.introduce}</Text>
             {/* 팔로워 / 팔로잉 */}
             <TouchableOpacity
-              className="mt-4 flex-row justify-start gap-12"
+              className="flex-row justify-start gap-12"
               onPress={() => {
                 navigation.navigate('FollowDetail', { userId: user.id });
               }}
@@ -44,7 +58,7 @@ const AnotherUserHeaderSection = ({ user, navigation }: Props) => {
         </View>
 
         {/* 팔로우 / 언팔로우 버튼 */}
-        <View className="mt-7">
+        <View className="mt-2 w-full">
           <Pressable
             onPress={() => setIsFollowing(prev => !prev)}
             className={`mt-4 flex w-full items-center justify-center rounded-3xl py-[8px] ${isFollowing ? 'bg-g3' : 'border-orange-400 bg-sub1'}`}

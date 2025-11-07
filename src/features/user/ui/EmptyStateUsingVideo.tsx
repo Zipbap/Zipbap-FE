@@ -35,7 +35,7 @@ const EmptyStateUsingVideo = ({
       </View>
       <Text className="text-lg font-bold color-black">{title}</Text>
       <Text className="mt-1 text-center text-sm color-g2">{subtitle}</Text>
-      {isButton ?? <EmptyScreenActionButton buttonText={buttonText} onPress={onPress} />}
+      {isButton && <EmptyScreenActionButton buttonText={buttonText} onPress={onPress} />}
     </View>
   );
 };

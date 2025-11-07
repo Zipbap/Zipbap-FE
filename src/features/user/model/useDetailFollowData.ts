@@ -1,3 +1,4 @@
+// TODO: 나중에 삭제할 것
 import { useState, useCallback } from 'react';
 import { FollowData } from '@entities/user';
 import { apiGetDetailFollowData } from '../api/getFollowData';

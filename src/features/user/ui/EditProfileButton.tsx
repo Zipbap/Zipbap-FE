@@ -10,7 +10,7 @@ interface Props {
 const EditProfileButton = ({ onPress }: Props) => {
   return (
     <>
-      <View className="mt-7" />
+      <View className="mt-2 w-full" />
       <FollowAndEditButton
         buttonText="프로필 편집"
         onPress={onPress}

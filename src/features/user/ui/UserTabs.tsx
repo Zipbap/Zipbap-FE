@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 type Props<T> = {
-  leftCount: number;
-  rightCount: number;
+  leftCount: number | undefined;
+  rightCount: number | undefined;
   leftTitle: string;
   rightTitle: string;
   leftValue: T;
@@ -34,7 +34,7 @@ const UserTabs = <T,>({
           >
             {leftTitle}
             {'\n'}
-            {leftCount}
+            {leftCount ?? 0}
           </Text>
         </View>
       </TouchableOpacity>
@@ -48,7 +48,7 @@ const UserTabs = <T,>({
           >
             {rightTitle}
             {'\n'}
-            {rightCount}
+            {rightCount ?? 0}
           </Text>
         </View>
       </TouchableOpacity>

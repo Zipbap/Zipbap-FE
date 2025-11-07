@@ -6,7 +6,10 @@ const FeedView = ({ item }: { item: Recipe }) => {
   console.log('FeedView');
   return (
     <View className="mb-[33px] flex-col">
-      <Image className="relative h-52 self-stretch rounded-3xl" source={{ uri: item.image }} />
+      <Image
+        className="relative h-52 w-full self-stretch rounded-3xl"
+        source={{ uri: item.image }}
+      />
       <Text className="mt-[16px] justify-start self-stretch font-['Pretendard'] text-lg font-bold leading-snug text-black">
         {item.title}
       </Text>

@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Logo from '@/assets/img/logo.svg';
-import { KakaoLoginButton } from '@features/auth';
+import { AppleLoginButton, KakaoLoginButton } from '@features/auth';
 import { RootNavigationProp } from '@shared/types';
 
 interface Props {
@@ -35,7 +35,7 @@ const LoginPage = ({ navigation }: Props) => {
             <KakaoLoginButton navigation={navigation} />
 
             {/* 나중에 애플 로그인 붙일 경우 */}
-            {/* <AppleLoginButton navigation={navigation} /> */}
+            <AppleLoginButton />
           </View>
         </View>
       </View>

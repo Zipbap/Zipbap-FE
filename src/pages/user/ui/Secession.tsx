@@ -24,7 +24,7 @@ const Secession = ({ navigation, route }: SecessionProps) => {
       return;
     }
     // TODO: 회원 탈퇴 로직 추가
-    alert('회원 탈퇴가 완료되었습니다.');
+
     navigation.navigate('Login');
   };
 

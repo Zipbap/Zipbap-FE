@@ -17,15 +17,17 @@ const FollowItem = ({ user, navigation }: Props) => {
       onPress={() => navigation.navigate('AnotherUserPage', { userId: '1' })}
     >
       {/* 프로필 이미지 + 이름/소개 */}
-      <View className="flex-row items-center">
+      <View className="flex-1 flex-row items-center">
         <Image source={{ uri: user.profileImage }} className="h-[56px] w-[56px] rounded-full" />
-        <View className="ml-3">
+        <View className="ml-3 w-full flex-col justify-center">
           <Text className="text-[16px] font-bold text-black">{user.name}</Text>
-          {user.introduce ? (
-            <Text className="text-[12px] text-sm font-medium color-[#876E63]">
-              {user.introduce}
-            </Text>
-          ) : null}
+          <View className="w-[80%]">
+            {user.introduce ? (
+              <Text className="flex-wrap text-[12px] text-sm font-medium color-[#876E63]">
+                {user.introduce}
+              </Text>
+            ) : null}
+          </View>
         </View>
       </View>
 

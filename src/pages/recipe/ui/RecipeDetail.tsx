@@ -1,9 +1,12 @@
+import { useVideoPlayer, VideoView } from 'expo-video';
 import React, { useEffect } from 'react';
 import { Text, View, Image, Pressable, ScrollView } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ShareSvg from '@/assets/img/feed/share-icon.svg';
 
+import MainImage from '@/assets/img/dummy/complete.png';
+import ShareSvg from '@/assets/img/feed/share-icon.svg';
+import mockVideo from '@/assets/video/mockVideo.mp4';
 // FIXME: 추후 경로 수정
 import {
   RecipeDetailSection,
@@ -16,7 +19,7 @@ import { useTwoViewTypeStore } from '@shared/store';
 import { RecipeDetailProps } from '@shared/types';
 import {
   FullWidthButton,
-  WebViewVideo,
+  // WebViewVideo,
   defaultShadow,
   ModalContentSection,
   ModalCategoriesSection,
@@ -27,6 +30,11 @@ import {
 import { useDetailRecipeData } from '../model/getDetailRecipe';
 
 const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
+  const player = useVideoPlayer(mockVideo, player => {
+    player.loop = true;
+    player.play();
+  });
+
   const { recipeId } = route.params;
   console.log(recipeId);
   const insets = useSafeAreaInsets();
@@ -61,7 +69,7 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
 
       {/* 스크롤 영역 */}
       <ScrollView>
-        <Image source={{ uri: detailRecipe.mainImage }} className="h-[300px] w-full bg-sub1" />
+        <Image source={MainImage} className="h-[300px] w-full bg-sub1" />
 
         <View
           className="-mt-6 rounded-t-3xl bg-white px-4 pb-6 pt-10"
@@ -104,12 +112,16 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
                 content={
                   <Text className="text-base leading-6 text-g1">{detailRecipe.ingredients}</Text>
                 }
-                subTitle="레시피 소개"
+                subTitle="재료"
               />
               {/* 레시피 영상 */}
               <ModalContentSection
                 subTitle="레시피 영상"
-                content={<WebViewVideo videoUrl={detailRecipe.video} />}
+                content={
+                  <View className="z-10 h-[200px] w-full overflow-hidden rounded-2xl bg-g2">
+                    <VideoView style={{ flex: 1 }} player={player} nativeControls={true} />
+                  </View>
+                }
               />
             </View>
             {/* 레시피 순서 */}

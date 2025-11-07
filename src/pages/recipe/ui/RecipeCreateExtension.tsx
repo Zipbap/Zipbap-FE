@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-
 import { cn } from '@shared/lib';
+import { useWriteTabStore } from '@shared/store';
 
 const RecipeCreateExtension = () => {
-  const [activeTab, setActiveTab] = useState<'done' | 'progress'>('done');
+  const { activeTab, setActiveTab } = useWriteTabStore();
 
   return (
     <View className="w-full flex-row overflow-hidden rounded-b-3xl bg-white px-9">

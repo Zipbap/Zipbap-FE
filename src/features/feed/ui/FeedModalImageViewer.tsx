@@ -27,11 +27,13 @@ const FeedModalImageViewer = ({ visible, onClose, item }: Props) => {
 
         {/* 이미지 */}
         {item?.image && (
-          <Image source={{ uri: item.image }} className="flex-1" resizeMode="contain" />
+          <View className="absolute bottom-0 z-0 h-full w-full">
+            <Image source={{ uri: item.image }} className="flex-1" resizeMode="cover" />
+          </View>
         )}
 
         {/* 하단 설명 바 */}
-        <View className="min-h-[250px] w-full rounded-t-3xl bg-white px-6 py-[16px]">
+        <View className="absolute bottom-0 min-h-[250px] w-full rounded-t-3xl bg-white px-6 py-[16px]">
           {item ? (
             <View className="flex-col">
               <Text className="mb-1 text-[14px] font-semibold color-sub1">

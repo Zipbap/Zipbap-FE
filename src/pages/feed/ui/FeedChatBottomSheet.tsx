@@ -42,10 +42,11 @@ const FeedChatBottomSheet = ({ feedId, bottomSheetVisible, bottomSheetClose }: P
 
     const newComment = {
       id: Date.now().toString(),
-      nickname: '나',
-      profileImage: 'https://i.pravatar.cc/100?img=5',
+      nickname: '자취킹',
+      profileImage:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG1AeGzp_5HxeH2Q7qE9UG5ef3VYmitAuqKw&s',
       content: inputValue,
-      createdAt: new Date().toISOString(),
+      createdAt: '방금 전',
       replies: [] as Comment[],
       parentId: replyTo?.id,
       isLiked: false,

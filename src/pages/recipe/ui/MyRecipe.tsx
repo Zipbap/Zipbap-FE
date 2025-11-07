@@ -35,34 +35,37 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
       <View className="h-full w-full flex-1 items-center justify-start bg-white">
         <View className="h-full w-full px-6 py-4">
           {!isRecipeListEmpty ? (
-            <FlatList
-              key={viewType}
-              data={recipeList}
-              keyExtractor={item => item.id}
-              contentContainerStyle={{ paddingTop: 12 }}
-              numColumns={viewType === 'image' ? 2 : 1}
-              columnWrapperStyle={viewType === 'image' ? { gap: 16 } : undefined}
-              renderItem={({ item }) => {
-                if (viewType === 'article') {
-                  return (
-                    <Pressable
-                      onPress={() => {
-                        navigation.navigate('RecipeDetail', { recipeId: item.id });
-                      }}
-                    >
-                      <ArticleView item={item} />
-                    </Pressable>
-                  );
-                }
-                if (viewType === 'feed') {
-                  return <FeedView item={item} />;
-                }
-                if (viewType === 'image') {
-                  return <ImageView item={item} />;
-                }
-                return <ArticleView item={item} />;
-              }}
-            />
+            <View className="flex-1">
+              <FlatList
+                key={viewType}
+                data={recipeList}
+                keyExtractor={item => item.id}
+                contentContainerStyle={{ paddingTop: 12 }}
+                numColumns={viewType === 'image' ? 2 : 1}
+                columnWrapperStyle={viewType === 'image' ? { gap: 16 } : undefined}
+                renderItem={({ item }) => {
+                  if (viewType === 'article') {
+                    return (
+                      <Pressable
+                        onPress={() => {
+                          navigation.navigate('RecipeDetail', { recipeId: item.id });
+                        }}
+                      >
+                        <ArticleView item={item} />
+                      </Pressable>
+                    );
+                  }
+                  if (viewType === 'feed') {
+                    return <FeedView item={item} />;
+                  }
+                  if (viewType === 'image') {
+                    return <ImageView item={item} />;
+                  }
+                  return <ArticleView item={item} />;
+                }}
+              />
+              <View className="h-[70px]" />
+            </View>
           ) : (
             <View
               className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center"
@@ -72,6 +75,7 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
                 video={loginVideo}
                 title={'첫번째 레시피를 기록해 보세요'}
                 subtitle={'내가 기억하고 싶은 레시피를 작성해 보세요'}
+                isButton={true}
                 buttonText={'레시피 작성하기'}
                 onPress={() => navigation.navigate('RecipeCreateForm')}
               />

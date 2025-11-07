@@ -3,3 +3,4 @@ export { useViewTypeStore } from './useViewTypeStore';
 export { useCategoryBottomSheetStore } from './useCategoryBottomSheetStore';
 export { useSettingBottomSheetStore } from './useSettingBottomSheetStore';
 export { useFeedChatBottomSheetStore } from './useFeedChatBottomSheetStore';
+export { useWriteTabStore } from './useWriteTabStore';

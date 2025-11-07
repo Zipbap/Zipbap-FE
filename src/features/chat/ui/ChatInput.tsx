@@ -28,7 +28,9 @@ const ChatInput = forwardRef<TextInput, Props>(
       <TouchableWithoutFeedback>
         <View className="min-h-[80px] flex-row items-center gap-[16px] rounded-tl-3xl rounded-tr-3xl bg-g4 px-[16px] py-[12px]">
           <Image
-            source={{ uri: 'https://i.pravatar.cc/100?img=5' }}
+            source={{
+              uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG1AeGzp_5HxeH2Q7qE9UG5ef3VYmitAuqKw&s',
+            }}
             className="h-[40px] w-[40px] rounded-full"
           />
           <View

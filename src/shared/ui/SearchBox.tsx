@@ -29,7 +29,7 @@ const activeShadowStyle = {
   elevation: 10,
 };
 
-const serarchReultMockData = ['닭도리탕', '계란찜', '탕수육 대자', '짱뽕!'];
+const serarchReultMockData = ['닭도리탕', '계란찜', '탕수육', '짱뽕'];
 
 const SearchBox = ({ searchTitle }: Props) => {
   const searchRef = useRef<TextInput>(null);

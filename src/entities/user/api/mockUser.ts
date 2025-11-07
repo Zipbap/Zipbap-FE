@@ -3,12 +3,13 @@ import { FollowData } from '../model';
 
 export const mockUser: User = {
   id: '1',
-  profileImage: 'https://i.pravatar.cc/150?img=12',
-  name: '이설희',
+  profileImage:
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG1AeGzp_5HxeH2Q7qE9UG5ef3VYmitAuqKw&s',
+  name: '자취킹',
   introduce: '아 찜닭 먹고싶다 난 강정순살파야...',
-  followers: 120,
-  following: 85,
-  feedCount: 15,
+  followers: 0,
+  following: 3,
+  feedCount: 9,
   bookmarkCount: 0,
   feeds: [
     {
@@ -36,12 +37,92 @@ export const mockUser: User = {
     { id: 'f7', mainImage: 'https://source.unsplash.com/300x300/?ramen' },
     { id: 'f8', mainImage: 'https://source.unsplash.com/300x300/?pizza' },
     { id: 'f9', mainImage: 'https://source.unsplash.com/300x300/?noodles' },
-    { id: 'f10', mainImage: 'https://source.unsplash.com/300x300/?sandwich' },
-    { id: 'f11', mainImage: 'https://source.unsplash.com/300x300/?dumplings' },
-    { id: 'f12', mainImage: 'https://source.unsplash.com/300x300/?bbq' },
-    { id: 'f13', mainImage: 'https://source.unsplash.com/300x300/?sushi' },
-    { id: 'f14', mainImage: 'https://source.unsplash.com/300x300/?burger' },
-    { id: 'f15', mainImage: 'https://source.unsplash.com/300x300/?tacos' },
+  ],
+  bookmarks: [],
+  isPublic: false,
+};
+
+export const mockAnotherUser: User = {
+  id: '1',
+  name: '요리 천재',
+  profileImage:
+    'https://mblogthumb-phinf.pstatic.net/20121228_209/jmj4969_1356683129749hTkjU_JPEG/IMG_7040-1.jpg?type=w420',
+  introduce: '맛있는 레시피를 연구하고 공유하는 걸 좋아해요! 🍰',
+  followers: 111,
+  following: 113,
+  feedCount: 14,
+  bookmarkCount: 0,
+  feeds: [
+    {
+      id: 'f1',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2019/01/31/a2465af21645699a80b721ab9100bf921.jpg', // 첫 번째 이미지는 유지
+    },
+    {
+      id: 'f2',
+      mainImage:
+        'https://static.wtable.co.kr/image-resize/production/service/recipe/2167/4x3/c9d9173f-d3e1-43cd-871d-339614b0dbac.jpg',
+    },
+    {
+      id: 'f3',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2023/06/22/376cbcd0d346096bb5f9256f310ce6081.jpg',
+    },
+    {
+      id: 'f4',
+      mainImage:
+        'https://i.namu.wiki/i/C_O2aueHgWZvr5VBHnw6AVrRQOnXva-yhg5SIMVL3l_7bvOlV2OXzPM0LYhS3csxBdo5ku2IlzfUl8VtcYvplA.webp',
+    },
+    {
+      id: 'f5',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2016/09/05/653376c36a1f1a8f0a3eb27a76d388081.jpg',
+    },
+    {
+      id: 'f6',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2021/10/06/48f9f45425c180a70812c7eb98639e6b1.jpg',
+    },
+    {
+      id: 'f7',
+      mainImage:
+        'https://recipekorea.com/data/cheditor4/1503/5acf80de0a10c6d3b0d9a8e665edf7c3_1C3GeLuQ5KTKzc.JPG',
+    },
+    {
+      id: 'f8',
+      mainImage:
+        'https://static.wtable.co.kr/image/production/service/recipe/331/6baf63f5-4056-4cec-abb3-c371782e6de3.jpg',
+    },
+    {
+      id: 'f9',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2021/11/02/2d758e8c80964bb735f07c9395d872d61.jpg',
+    },
+    {
+      id: 'f10',
+      mainImage:
+        'https://recipekorea.com/data/cheditor4/1503/5acf80de0a10c6d3b0d9a8e665edf7c3_Ye9LUBNYV78XNZJO58.JPG',
+    },
+    {
+      id: 'f11',
+      mainImage:
+        'https://static.wtable.co.kr/image/production/service/recipe/2312/b3eb7ad7-35e8-46d3-b410-bb0b7c77e185.jpg?size=800x800',
+    },
+    {
+      id: 'f12',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2022/02/04/272f90a66d73b38e9462b752eaea39e81.jpg',
+    },
+    {
+      id: 'f13',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2018/05/30/92a632f339a7dbdf8807cc1f2ca84dd11.jpg',
+    },
+    {
+      id: 'f14',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2016/10/28/7dea4eed79af0d4c28d10db7044adfb91.jpg',
+    },
   ],
   bookmarks: [],
   isPublic: false,
@@ -49,89 +130,99 @@ export const mockUser: User = {
 
 export const mockUserFeed: UserWithoutBookmarks = {
   id: '1',
-  profileImage: 'https://i.pravatar.cc/150?img=12',
-  name: '이설희',
+  profileImage:
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG1AeGzp_5HxeH2Q7qE9UG5ef3VYmitAuqKw&s',
+  name: '자취킹',
   introduce: '아 찜닭 먹고싶다 난 강정순살파야...',
-  followers: 120,
-  following: 85,
-  feedCount: 15,
+  followers: 15,
+  following: 1,
+  feedCount: 9,
   bookmarkCount: 0,
   feeds: [
     {
       id: 'f1',
-      mainImage:
-        'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUTExMWFhUXFxoYFxgYGRofHRsgHhodGhobGBcaHSggGiAoGxoXIjEhJSkrLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGy0lICUtLS0tLS01LS0vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAPsAyQMBIgACEQEDEQH/xAAcAAACAwEBAQEAAAAAAAAAAAAFBgMEBwIAAQj/xABFEAACAQIEAwYDBQUGBQQDAQABAhEDIQAEEjEFQVEGEyJhcYEykaFCUrHR8AcUI8HhFmJygpLxM0NTk9JUorLTFbPiF//EABoBAAMBAQEBAAAAAAAAAAAAAAECAwAEBQb/xAAsEQACAgICAgEDAwQDAQAAAAAAAQIRAyESMQRBURMi8DJhkRRxgbFCodEF/9oADAMBAAIRAxEAPwBVFUsCcVHy/eMlEfbMt5ILt87D3wQ75UBBEAbnFrs9S1B64Ea/Cn+BefuZPpGInSX0oi3Tp5YjZTOLLGMcU13PTCmOKdM6sWmFsc0hC33xGKvTAGPiUvxxFm6umfpiemDacV+JC1sAJRatJAjH1aIKuTebfyxAtS9l98dVmOnSASTAAAk/TDAKGiAIwP4mC4CibX3+mG7h3ZOsy6nGjkA0k/IbYKcO7K0UMuuthuW29l/PGM5Loz3s9wfM13KU1sPiLWUe+LfEuG1qLaaqwYt0PodjjVmOlYQKsRsP5Y+VNFVNFVQwPIi39MZ7FWSjFcyh5YouYNxjQuN9iCCXyxkG/dk3H+E8/fCVmsm9NylRWVuhEYKY12N3Zmn4VaIsMEKdLxMfbE/A1TSFHIDFuiVUMSwAnmccreyx84aV1uOgGJs16YC0OO5ZKrDVMkeIDw7dcFHzVN/hqA4amhH2Bc2LnFApvgpmKe+KLLc+mDY1ArupGK7ZGSCDEYtmb49RBmMPYCkcqwMTPXEelsGKaHUfOcc/u+NyNRezg1xSUQzkID0B+I+yz9MMzUVRAiiAoAAGBvBKDVKr1DcUxoX13Yz6wPY4I10AguZvMD+eHZJFLMId8epCwHnj2ZzWq0W9MWslRG5xvRvYN45X7unbc+Ee/wCjj2VUhV/wj6444nlHzOYWjS0nRDMCwG5i072nB2jwKuzQQqgdT+W+AFtIFPUjfENZC7gU0JJgWvhnPZbSfE+qfuiPqcFsnl1pbJAA5XJ9cHiLzQv8L7Dsy6swxE7IpH1b+WC1LIUaEBE0nm25PqTgsMwpEbfrmPyx9YKRtI89vnuPfDUTcmyg2bERcDqL/PHEG5BBHX9be+Jq+WQ2DR0B39iMUzSIiPrv88YB503BxAq8iMXNYiBf+X5HENRRNiB64BiOnVANrHHszlaGYXTVpq34jzHMY9VppPIHA/iXGKFCzvL/AHVux9eXzwAo6rdm2UTl3G1g1/qN8Zr2qV6FWKrd43OAYX13A9AcMHFe1WYqCF/hp5fEfVvywu1qoJkz6HAUadlbdbBS59W2YDy2xL+9uOZxZzOUSoPhB9Btik3CbSjEeW+HtA2ExxGoPhdo6b4uZbip3IHnywvoXWFImTA0n2uDtitnM8ysyGfCSJG8gwcDhYXOhjzXFqSySTJ5YrZfjdImSSvr/TC1K76p6g4+rRYvpIiN/wDcYb6SSF+q7HhcyrQyMGE7g4nv5YA5SoVUKsBfKMWO9rdfoMRaK8hyya1wuimAq8/5knEoyDbvXA9BgvVZzYAKvPFDNVKV+cbnkPU4rxQtg+sKSb1ifUCMezPFKVIKXqrDGFM/iOWFXinabLuxRSVSILhZJO1p2H1PlvhW4zm6bOBRDCmggFtyeZPTG42BySRpuXyQFR60yzRpI5ADkcR1u39Wg2itRL0xzmHHo3P0OErs/wBoe5M6XIiGQEaf8QB+E+mHvMrRrU11izgGDv19sLVPZtSQa4H2toZiO6qeKL02sw9Bz9pGGPL1gwEEi/v6D+nyxjPFezwvUoEggyAJEX5HBLs520q0GFPOSV2FXmP8X3h54bvonKNGsrTVpJsR0t/T5xiNQ+uxsee0euKWU4gHAZCHRhZlM29r/KfTFwOCLbDmP1b6YIpb4jl9AloM8wPxHP2jFam5FviHmPwJ/nj6/Egydy8yfgf+Xr0wIo8TqIxRwsj2nGAE6NEM4Fxyt/Xl8xj3EcuqtAHLr+oxRfiB+7z6/wBMWq9cuNcbjCtUFCX2n7QvlwKdRCNcnwtHhFhe8X9NsK9HMUWFqn+r88d/tKrls1F/DTUD5sThOjzjBUbKp0OT0Qfikr/cP49MU3dFbab2mTgzleHhqFJS6EBB/ESpSFSiSZIqDUFq0yTaYYXGKp4fmVJ1LQrIDGtatMT/AKmEHywo1opLVUzYjnsMR+G+keXPH0umo6CFYSNJIIt0Yb4+ZpWpoWWS8qQQeh5D9bYAaBmbSTCzP88VaoUCampjBsIEGbX544zufZnLkaWJkwum/XSsCcSZbhtWt4iDHob/AC2xdPiiD+4H02E2H0nF3hlF9dl1E8p/XLBtOFKoiAG9/wDbBnsJwCnmc3oqg6aamowB+KGUBfQzf0wvLlpB48dsWqWapXDIy+smPYXGJv3qn/1B8j+WN8p8Johl0UkVAjKVCqBcqRbyg/M4h/svkf8A01D/AEJ+WD9KzfV/YT+NcRK0mbTMbAsFHuzGwxnvGuNqKbKtTvKtSzFQQiKPspO5uZPnij2p41VzBTU0oBaNp5kxzwEoUizBRzOBFXthnPi6RHj2Dy5BFhRBJ8pYny6Ysnh4bw93JIgKNMg8jqH4fXFCNFXs/wAMpVKiioxiJbl5KAfMzPkMaJTCalVIARbx02Axmmcy1TLVFBsR4hO8Hkf1zw19n+IvUmFd2O8AmOQ2FsSkmzoi0NFWkujkJPLAzNUKdQFTTnlMSfni9SzSd6i1iUpggPIuPXoOp5CcOeS4cFYk010k6UOuF8ROk+EaWBEbHCRiac6MqTK5vJsWyzMqmSUcHQfnad+htgplv2iFfDmaLo33kuPkb/jhzzzrSd1lQVMOGjSetptzPp8sZ3mc5l8y9YIngVyF9PI/PDvQsakXc5+0agy+ClU1jYQBPrBIHqMMOVz/AO90KeYpjxbMvMdR7H6YRV4fTpiyzgt2Lz/7vmNDWpV4F9g+yn32+WFUlYZYqVjrTosROlhbocE8oCEggyOuISKlNrMQpFuftj7TzpQnvX8IvJgAep9v1ybsnxrYsdsOyxzLBhCOBZo38j1HP3xnmf7LZtD/AMPUBF1/I+Yxsr8Zy1WyVkJB5OB5Hn0nFOuaepR3pKEMHINOZ3BBHmOnngJ0NtmZNUyetXp1Xy1WAHD0ToYEQdSajAPPl5DE1ThVKm5ehmTT1LJVaZKP1FMs2lxz0kkjzw+57gtGtI0IwAsTp9fUXB/1YBHsIVDdxUqIDfSCCp9VNjb6jzxjXvZmVV+n0EfTlifLcWqJaZHQ4LcT7GZukTC6x1G+/TAHMZWotnRlidwcPSZuXwGBxtGgVF9xi9SzNMqWVweUQefI4UIwc7PZh6SVXFEVkIC1EJYeG5mBYiecEjywHFBU/kJpm7bel8OP7I3DZjMGIIpj6v8A/wAjCPQoZV11UqldWEl0Kq5XzjUrMvmJjnGNB/ZIiasyyVO88NMT3bJF3N9W+3LGitglLRoBeMcd8cfKpxBOLET80V6usDYEbiwnz8zj7RYKQVuRfqPfDTnOyxmQIxDl+zbziPJHRxdhvs5QyOYEzVSoB4kZGYTz01EH/wAsMeUr5UVO5oIzVonSqGSBzkgADzJAxa4Bx7J0aSK9OpTKi4VSwJHMFZ3843xDxXjVWqVr5amadOlqmtVA8cwpULJJW6zF507c585N0kI4fIE452LzmZrGo+hIEIhJ23u+mCT5W5csPXA+E/u9OmE0rIUFVBJBAlja5O52vB6Yp5LtUwqEVzSqFSBFLwgEid2JB35Eb88MVDOZeunggdQPCy3G4F+nzwrUpdjuDSv0Lf7RMxJoqVQrpcFpljdQViPhgz+WAPC+yWeZZyld6FIiQHOpYkfCpBMbY0RuGZSorF6KEhYFiWifstvB33wqU+M5+jqWhQZqStppmpScuEH94ESABzAJtOMrWgLaoUuO9jc4ig5jMl0Y6ToMCY2IgdD12xToZRKCwuDHGszm67A19YC/CgplEB6wZJMEi5wNdZF/rhrfspFUiOpUB5Y4q0A6xjiqI9v1+WJVqSMBlBu7Odp1emaOZYLUQfExA1DYMCefIjz88X/3/LvY1qZ/zj8/185zjiORFQbXwtp3lCoHQeIHaJBHQjYjDLZKUePRr2Yq5AfHVy8dIBM+2KIyfD2PhQvPNaTx7QI/2GBvBe2mVKHvkWi43XRIPmpA+m/riWt+0LJr8KO/ogH/AMiMNsi2GxwvJAT+7E+kD+duXyGLFHh4A008kigj7TD6wfphe4T2ufNMaeXp0qTgW703P+ECJ9jg1R4fnNWqtmoE/CoCqfRhLYBtktfhuYUTGWojoASfaAMDM1lk2epUqE/Zp07fg0e8YIrknDF1IJ6yzeVmYmMQ0vCWBrS5AlUGph0sJj1tg0axP4l2WWpJWi1LzdxJ/wAq6v5YEZfh1fLk6FeoDF0d0NvMeH/UDjSTWRFZqhA5zVYQPMgGPrgUeO0mDFQapmxClUnymSfaRgt12Zb6F6s9epR75BXVg5SrLm3hBDQsKJk3AHwmBvhx/ZVmEP70FDWZF1MSWaA1zO2+wwrCrm1rB6blHbwhABpYbkMhkMIE36csWqfayplXqI1BQbFjSMAnSSYUz0PP2GEjJJjSg6NSrVRit3uMxqftLY7UmB9V9NoxQ/8A9BrfpF/8sW5/sS4sZcvxdbCsAjHZ90b0aLehg4K0FXSzbztF7ctvngM3Zcl4pM6Mxuq3B9V5jB7s72Gga87GoGQiO2wiNRmB6D54g1fR1JpdlTJdnHzDEjw0wILEfRR9o/hjvtC38eppnu6ahaKgWIUrpUA9fi8zPnh4r5tI0IIAsALAAemE/itPuzLagJlXA1KRPwsBdSORuI6YZaIybkA82aZdlYnS6EKSqCIH8SSgULJ7sjyjzxymeZKa1VkMGCswO41wOV4Mb74mpuned4a6G0FfCtgIE3mYPPFrJ8L/AHmKSITSDBna4Fjq0qdz4oMjpgtphxScJJhfhHatapC1SFb7LbKd/wDSdt95Eb4YXqsR4RJ5A2udhPUm3uBhW4n2MdZan41+6TDCIi+x59PfFCnxuqgNJvFSIh0YEFZ5Cbq3QX6xhbrs75eNDL92F/4C1fj+YvEAixXTsQQCIbxfTbEKdoqpUPVoqV5hlAINgQGuDeY2kXwKPFC57tgahE6WL6anuftjkJPLH3PU8xRp6mytUoTMJ4iD1gMT7xhk0zgnjnB1IaMtRytdNQo0iLyCiyPKwx6p2cyv/QT5H88BeyGfANSo5WjS0wFZhqJtJPTkIwfq9oMsP+apt5m0xyHkfljDKE30mVH7L5Q/8mPRmH4NihX7HZQydLDfZz874tVe1eWH22N4spHON2gcvpipU7XUdwlQ9TbaSOvvgaKLDm+GDc/+z3LuLO4/0n52GAz/ALMb+CuCPNI+oOGF+2QMaaPzeLTeLGeWK1TthWjw00W4mZIiYJuRv69cbkOvFzN9FbL9gnVCNNJrzIJB8oJFj748+W4tQQqqissGNcFx/mDDUPW/niX+0+avpIJn7KyfDY7z1vcYOcFqZx6b1atRqdJDdiiBiZsoUrvtM9fbA0NPxppXJoVshn8wBGdymYN7d3q0e9NBMe7Y+1uOZmo3cZLKFfVCijz02+bEemCfGO1VVINKpqAsdSqTPWwH4Y5ynaV8yoQ1HpGfiQJf1BBnntB88HkQ+kr7Fapwpi+rN1dTr4mDfAgBEnSLenWD0wM4vxZVYLQdmA+Im1wdgBYD0BBti320yeZouzVJirBDCAXiBB0mNUaZW3vvhOJHWMNGN7ZObp0ho7PcWLZym9W9yIvFwRYCYIBN9usbjnj2XajKMQ2pG0tMyAGANucEW/lBIHh2a7pxU0huk8j1BIIm43BicEON8Tp1WJKFTsRsZkS5gmWgFbzMzNowzimhFLYK7y59fz/nGLHct0HyxWyjAODaLzq2/A/hg1+/H79P/tv/AOGMazWOMNmsq2pCYLAB053+FhPONrjbBXgfGxmPA9qgA32bqV87G3LBPMupUq41BgQQdja4j+uE/iPZqvrBpfAboxbSUiTBMaiuo2CycS66PRhPFmhxnUWumOvcr/vvjr90V7RI88VeH03CAVSKj8yBpXytufpggi1Dtb0/PfDUee2k6IF4FQW5QT5/qMWzVQCAQPT+mOBkepuTHvjs0qa7n+V+l8Tlmxw7ZkpPpERzC859v64qcRydCt8dOY2Ox+YP0xfYqpIK3HIfr645asJ2GmLEbEx1P62xKXmYl+48Y5E7WhRqdj6ZMiow9Vk9LkMLxacT5bgNWmZp5ph5FLfLXtv88MKZuQQFjlMjeeUY9++KF1MBB2P0k++FXl4f3OiWfyJKm7/j/wAAWd7O0qwJqKq1P+pTEE+qkEH3n2wBbsO+qRWUifu/KRqHPlh0Gb1MQBImLYuDuoJnbfD4/IxZF3X9xVnz49JiF/ZALJao1ydkABtG5k779cdp2Wo89ZHQtHTko8vxw+nLjkRfENbJg7r8rY6OK9CPy8r7YppwHLAEFBB5HWb79ZH8r+eL9LI0FstJBIgwom+4mJ/QwRfIkGVPsfzxXqEr8Q5dMCqFeWUu2z1V9+sRvz3j8cfONVkORdahbwOrEDcg9Z9/SRihnM4tNS7b8hHy26/z8jipwarVaqXePGpQyJUA7eDaA0fXAYF2J+eoioSaNIhAOctJUavEYAvER547yeWqrUBqRTaxgiI2jwgW9Ixfprm6jsxQUlptMhQlIaCIgCJvHnfFavl6VJwdZcMdQQSIQ3WXO5gxaYIOB6KWMWbytPM0Wy7sSrRpc7hh8LgeR+kjnjH+L8PalUZGglSdWncQT8S7jbe4O4JxqNPiAdhoQIgNlWT8ybk4XO3HBHcjN0SRUpqDUAtAGzgjYjn5AHkcHHKtCZI3sQKaTA3HT9fjhizdOn3WXAQQS+vlJAp6SfId4Z9DtuA1fPVAfGiauugKT5+GAcSHilM6S1NyVER3g03BDeHQYmeuKvZHo9mMt3RuutCoYTIMc7qbFWlSDIBHnj53af8ASqf91P8A68Xsrx2iBD06loIhlN/vCw0mLGLNzBxL/aHLf+m+lH/6sa2HR+gKY+6J8z/Icvri1Syc+Jj6knFikFXYbRM7DENXNaja4EXNgJFucD3xw5PMjHUNjxxt9kvgUdeh8+QGIq+aOsICBKtfoYJ29t8UM/mkpMDUYKV2XUSxH3lXn6RecA8/2ppa4FCow8Y1HSJiIbSQCDM9Ij5ccnmy/lFowiuhpat4SDYkCDcD/ERyH1scV2qWOlvhgMDzMz4QBMYBp2to1fCwdGIVQxWQDe3hJv8AoYuVuL0wRTDHUNzpI0kCbmLDTG8YjPHNPpjl/MVAYKqJMjrbmWI33mI2jEWYJaFk6RAjmbbm1h5xYYD8R7R5eko0Co7WAKAkNtBEkXPlO69cK3EO2OZemGiFJdQKZGqRvqdl3HiJMeW+9IeLkn6r8/PQn1Ip0OXEOI0aTF6gnmwQEkX3I8x7ycd5Hi+WqaUDoTBIAPxLIG0QbsPc9cZzm81STKijUcpWtUbxXEhpVoM6iTs2wE+ofOVqdLwqzRTljp3ZyYUayPEABAsOe8nHV/RwWk9hTbVtGwZmtbxcjaDEj05mcQVGJgCwJ35E25nlffGdcP7RvSrICWaksMFJMoAfhD6rgSBJ6QIONDLSq6XUqfg0mSRyFieUWvjgzYZY+ymvRYMxpLaQCSGAmfKcT5LO1NTCZETc2+W/yxArWgi6mQCOZ5Eex6b4hsulmVbi9rm3ntfCRk4O4uhWk9MY6WaRgCw0ztPP0xEBTqCBB6qf19cBs0dI0AjcR4p3E7gQd98fOHPpIeSDMFZB9D13x3Q8+fJKX+SLwqtEfFOzmuprBJG+g9fI8/Q7Y7ohEEEbcvMYOZHiSVTpeFbl5+mOeK8K1C1m5N/Jvzx6UHHJHlElbTpiB2i4fXqONFRe6Pi0MwUKfCCQZ2Mid8D82uXaiop6nq0lbVMAEapbRpPiCmWgxZnPKMF+0VBainLs6pX3UEwxaJt1BHPbY4C8CrZOg7irWarUUwmkBSDG5BjnIgi8Gd8DotuirkRVI1lW0cjELz/I/LDDwjMBSWYzYxPX+eAPFu/qMDRDMjKNIAJgCBoIH3TA8wVPPFWjUqfCxgixBtHthWgoE8UyKJWKATSJJp+Qm49iCPTHVThVMgSgv03wycTWm2W07tT1OG5zF785iPl0wK4RVokxWZ1Ui1RV1aD1amLuvoZEbHCSb9Dxr2Q/2TpGmGRWqEkKQhA0kwYqFjKfavpOwIkHFT+ylP7uZ/7I/wDtw5Zzs5maQStTIqUz8GYy7BgRMjV5TeGBWRvgXqr9Mv8A9tf/ADxF5ZL/AJB4p9Gt0pMnVaIeCLeQHP15TgV2jzT/ALu5pNohfDMaQdQUt5gLqPO42O2C1Ri1PSoUVFOkLyJNrGdwACcIHabiKAd0XJfxB4jRqkaBqkdZtMzjihBuSXr8/KDFWyrS4XVzNN6lTMd3TOmalQQWjyeppVTeORkm+KycMpUhTk11AH8RtaFbut2WGGqCzQsxoHqCTI1cU1NdaaNDBAqMwYQGLEsWknUTKzJuRgV+80AFDtVKSwfTJLNqGmxIUGQRDG2o2Jx7DaWkc05tbO+N5bKx3y061NlIYQzafU+HwvHiOkjcHVfHuE1sxVcmqzaNP2iAXWfCLzfSWu0ubHzPSZrWpZpqagwKMVsJAOnuzKkaok3xQzdOkcup7xUqM4YBiYgaQVWNZ+0W8V4YchcM55TbL9MMKtqncrTLeFyG0QA8C9/AGJmI6CDFLjVeqE1qUKk6dQEnrp8VvOZ3ja2B/arKv3rksGlVC6GYi5gMWIGwkQLeL2xHw1aSrT1l2OrS0tCC8xNgbapv03uAKpaHhCUt9FfJZTNZxtKUy/iAICAKok31AcpaQBN+exLvwWtTc96qszBjTWpTpwxVdIDITzmQZABGx5EeEcTzbBRRIoJp1qsWKkCNIvJgyJiwJvytZrvcy4pvU0VU8Ydd+kGCfvEDbfrGEcpWtaOyWNqDSexUNfv3UPSGmJdkBAIFwBaYkU1iTFgOWPcPzGYplVpE6l5BgTbYlRMRrI3vPkMGq/DWo92GdKRC1F7wl5I1ahO4O17C8bwMUOG5VlYFXZWeTqCwYBOoqx0yLgkyPww7amqOWM5Q7DPAe1Lh2GZcksTodV2JhSpAA3uZjmcNTp9rUSQY5GDM3PMx0xmdfMQv/DVUcgjYkGCLQ0HYSDsZtfDx2T4qa9KWAUqZMbN4QQ8W3+sc9sed5eDj9yOrHkU02gy9QlgALm50zKgm4k7YspTCxsBDAHdoLEzb4vyIxDQSCCPtRA0ifKOgJOJSb6rCTbfwxNx1vflvjiS9jM9VS4gE9CReItz6fhgnwni1tFU+/pvOAjVpZoMC0sPewHPHGSa76QYi3U+ci3z64rhzyxyuIkoKS2Fe1nZ394RWpnTWQhqbXvBnS0cjeDyJ8zjK+NZQs4qKq6yT3o8WkbanEeNfFMqQY6nlrvZvPmTRqNv8E/UYW+3fA6lOt39CIqgh1sNTW62grcgxdOpx7UJrJBTiLie/pydfDFKjxmmvhy9TSwGnWjWO/iAa9wbjb6EBaeRcA1WZQkm7MJJ5gLOo7jYc8XnVMuzMcszPB1KxsLyWQMuqLMLEixgmJxX4ctLNMwnQwuVvtPLpE89zG0zhkGcJQ/UgPxfi8TSSbjxnrzAH0P6OIslWiBztij2h4f3NdhrDzLTEG52KzIO3zxzlKsEYMo6EjIduD8TrUVJoPokyym6MY3dJF/7wIbzi2L/9t6//AEqP/df/AMMAuHPK7c7fr54i7rzP+nHK8cW9oszbqbyxWWAWS2oMSSRZdIiNp+XXGa9q8myVaiimQjQdZHwggAgzZbtYnyvjTKFNu77yyqx1H4jtIAAEAW88CeNZJ9JEFkdNJkSNJ676eUfo44VLglJoMJUzKM9me8qPqOkiKY3ggXiL6QbwBYbRE4t5LKd6gBDErLEMFg6SAqiLKwQXdovAtII641wuCygQaZ5mZ6GdhYb7fTAbW6ACmSrPa0g3kDlMb/PHfB8lcfZsiXGpdehqy+daqClMBaWvxQIUAgMwqMRpOolhDDmARirm6VJ2enKGnOoKPAqC0fCDq1bwNp5iMVuCcWy9Mf8AAWo3xMarQrCCvgUAAG5N5J25Y+rSQiq6hNOlX1sdXdywgJpuBpEH70Da2K1XZwSxySshY1KndtUBGsBECEMCLlQQwOtfCLSDsZvibJ5MPSPfMkoXL+IjTJBgBGKiwcRpJsOmJclw8lFqU6MKsqataQigm+hXhRqU7736ET5KyU3qjK0aT06bmpqqFCV1ALKsY1Re3ne+6v8AYMHLGrr/AGd//laSUCoao1QGUso0BgBOlQRsJ8JkAgQMX+G55m1BRrZn1a3DsTdoZhq8JHhM2EMTaAcAxlRWqSaY0idfdk6ReZAWANRmAJnDBScFzSFMIFOlqjhxqAEArJtvHSYJJ5FxtbN9adaZE2XrqyvVcMAp11ZQqumZ0qWBFhJ8JO9t8ccLrBnGtwyl9SkeF3UGZGsR5wIM+89ZrLhBUrIq09EIVsy6tBIJNrsGbxczEicBqXGiKpqVKFOoFBCuFhvIMRuCAAQd/nK2kqDCE5vSsJ5qmlWa2WSoqounXUdry2shWJYatzJHSTbC9++MIqrWisNWpFEEaYA1ERqLXPtJMnEnEOKO9JVDOoeqWdfs9EVAPsgEz5+2BVeoWYAsZC3m03O0+UDB/VHfR0YYyi2no0HgfaRmdaNUy7KdDiCDG6mIjysPnhpyiCCSxUXuBf28p54yPM1hSdNB8StIM7SoIvHUAY0jhedaqoIAiFB1Wifi/H2x5vlYljkmvZarVhWkgIQiSRaSbEi8xyERj2WEbQGLSZ2AA+TdetsT99ppDqS0E8oMWg398Qiub3Xbnffy9ccj7Ae7uWkSCCASbGd7fK3tg7xQfvGQY7uoJ/zJcfMD/wB2AeZrBPCZZucERbYSMGezDSlVYgWMeZBB/AY7vAnWTj8kcy+2xVyZWsgDhXFjeIiREW8t/l0wE4v2PYjXl3cVB9onxc5Jbn9n2vJtM/A8xBKRsT5+X4freGvLsGgCZPXn9fX9GceoCGWUVXr4MnbhOumaGYQ066LqmPiETrJuTzLDcGTBGoKqVss1KpoYXH19P1zxsva7juXy6qKgRm1eEG7KRA1IB9oDaNpXbYI9JxmVmvRVWUgkCVkH4fChmmDBsOYMWth077Fk13H+CjwqpYgeRxe0D7v4/niarwoJ/FpKe5Okb6ijc1Y/UHmPTEMj7o/XviDWyylaNrRrkgSESB/ePMqAN4P1GKbLVekYfQWZiBEkmfkNo6fPFqtUldCwDB8KrYcgzN6Hcxj2SCsSGJIQDwfZJmxgC+/PHl+6sxlnH8hnJHjB2uVIPvA8z8zgPULqQlYRUHwtAAOxkCDfw+UwMa6cqp1vGkkyBbqQediOm1x5YA8d4NrOg6bchM7G5kXIj8sGGaUO+i3LlpmYnJE31Lp3G8bT1mxMb8sMXBM93OUemMtTKMdRLKYY9KjX1eUFY1GMVuIcHakNTKXABgjp9oCOYwCrcQdyAXkG+kSIiLR6QMenhksitMjk+0Z6nFTVytWk7FUAbuvEGsIKqWLBiAyHxFWJFrROF6nm6WktVXU2lkImAeYLsoBJO31nljunxBe6dB8DKVAuNuh9PI4EuVQtKgmQY5LfmB6j64ZR20wNrjoLZDjDiolNSqK+ldMHQOdr3i0ebH3MLWq5iuaNF1FOm2k1azWLiSpNiB4tRA263iFzgVcrXBpgFFAEkAkBoAIBjxSCbdDixm3AimpuGLNYyzbkkaotBvsfeMaMPgh9KKk2+gt2hpCnTalTqCuzP3jOWQKIkEIu5mF8RiQtgJwCyybXGqdptvzI8+mK3E87B0qTHPzP6j5YhRnC64Ijnzv+HPBljj7OiGWXSDOW4nmKGtKYWXTQbEnSxmBqsJ5kfjiVK9FyFqAAsLmADPmI8sB8rxUgqSSNO0es2xBVzBaq7bMTztAuZ2+gwqSuqC5e7GPKcFDN4iZ1b8jawEeUXw/cK4YacAkaYFgT7x7XvGEfsnUJqDcsLx5RPO0/nh/oVC/iGom487D6Y8fyW+bUireqXQTzBDABVLIoj5bb+22PU6bEsYBJG+rrc8p5j64jqgsQGYbX0nygRO94x1l6ulWgwwiSJ+Zn8PLEG9iej1VT8MAFRv4d+g64KcHqaEqsbAJqPTmcC84W1yDIBmw+RibY645X7rh5I/4leBc7KfwAX8cdfhQbzWvRLK/toSeAtNQ9Tf1/X6vg7xbjAQNRpMpq6DKmAFG12JgSSRAB32JnC5l30KwSoFiC9Ro8IiSUmxtMHYe2BNbiVOv/AAsmKSNMMaxOuqbQUZxDExFyD0x6/ZOiPtdTp0ytekC8uUh4IoOPEacbx9pZ5emF3hOealV7wywYFagk+JTEieRsCDyKg8sPPB+FZtqFWjmAXomi+kuDqR6d0AO8BuR2kxzxx2V7J/vShl8NP7Tx9E6nz2H0Ob+B4peyHJtqQw3eIGu6BhP3e8BEK99trmLGMFv3PIffzXypfnh7y3CqSUhRRAqgQBG87z1J5zvil/Z2n/01/wDd+eHpPslbX6QtWnSFsBAJIjxEjmfT+eOctW1OW1QqgKxgST9nSL3i3kMcZlkTwBI/vEE+pBOIcswggAxq8Mat97xM/wBcfP8AL7jprRPmQZidyd+pNgw2Un32xDTARN9Wrl1K2BB8pAj12x9fMSZB8QM6uQJ2hRz/ADx1mCqqVEnnOmImb72PnOA3u0ECtw81NQkBJGvwzEAlRpkTNxJ8vPCD2j4EEqFgBoYE2sVuJhZNrfXGoVKJhBOkva06o/vG55Ax+GBGf4UpM/Z+GDO45i+0wcGGWWPcR00+zHK9Ir4RPhAKmDfz9MUsyxJJ+8ev1nmLY0njHBR8SCQfCdWogSQNQM2Nh8sDc72LXX8agEb+IiegBJ/HHpQ8+DWycsK9ADs/xfRQq0AAC0jXF4O89bTjtwVqLIixi+4/LBal2Uem2hGUFhJaPDa0E7i5Ox8jgHxLKVFZQTUOkkDUGBA5xyNgYIN+gxfF5EJydMScHxRyuWBeYU+LaYjr5e99sQ8ZzeoBETSIAa8ywPLyuNrYlyGRZyZBkmAOg5k/hGHXKdj6ChS2pn3LEkeYBHl6Yjm8iEZ29/BVJqFdWLHZfs33jg1VlTPUD9RhjznZpHgSBptqFyV3Abkd9/I9cGsnkUVfDY++/pghRomB8z8vP2x52TypylaZkkugd2f4ElNdg7bhtjbkL2t+GD6ZUL8Mg7mDIiRO3tiuittYKBz/AFOCjOUCMu5UX3Jty/piEpctsLs5qUo1A2Fja9vugmd/5YnZ52mW5AgRuPf+mI8yV0gwSSscrE3JGPlQs0QDLAhQdyQYsBsLY1bpAb0ep5Q1KoQkAR4yOi7/AFOEX9oPapGraFk06aA01UxqIcr4jyXwz5j63e3vaQZOk2VoPqzFQRVqD/lg/ZB6n+vSc64tTmqCB4HWmKR5EBFAAJPIzI5Gce34uH6UN9sg/udlOrWerULsTe0AmI+76YYOFcP1+FaYYkG1trbzYDzNsR5bhK0jFc66kgCjSYFpkAB3UFU3FhqYzsMaP2Y7OPZ8zCqIKZdLUxGxq3JqNz8ZPtsLvYbUdnqPDC9NV1sUFNFYhmJqQIhWHwpcy06mttGGjhVFUQIihVAgKLADkAOWLjkG42xJl6QF8OkSs4pZcAXv6467sefzP54lqOqhncgKBJJ5YDf2nyv3m/0HBSAVawaFkkySDAn0sLt+tsfEqKCQgIgA85PraOvTEzZCTIMxcA7+mOFBSzDzM4+eyYcmN/cjqjOLI6bMXJaYg7A3MRBJHniVa1Qn4fK6iQccU2M6iVjf8rfrbElRmaAV3MiP5x/viPIY7IbvFkbAzy/riOo8gkiwmRyk9ZF95xYUowIAkEyXO4A35z5Y7psu4aQP18hg/wCTAPO0abKuwuIJkTab9RiNaIkjw3+vngrSZXZwo/p1PkPzx06pqWBIBsQBv5WtjaqxgZXoAFbAxMD1/piBOHpJhZN9o2I/vc9xgpUpl3IIKjnfyPvjhqBkKXBMSI+e52vgWAGZbhKoYFIXuD7em+JK1BpvAjbzwWyyM0knTpkX52mBj4xWJ023j72N6NeyglBgAYnyxMKIVbmZ+Y9BtGLNOpEMiek2+U49SJOpiAWvH84wUCyDuAFtZiduvSYOJO8vpWYG45+zDFdHUwAb+5I8h5454hmaOXBfMOF3IUCajeQUSR/TDwxzyaggOSXZfbcqEOogWJ2G9ydhPM4Vu1nbBcoDRy515hh4qn2UBsQvUyCPYz0K/wBou2FfNUaqZYGlSKg0yhl6kEGoGbdWCSdO8Bjywm8KpvUpIo1OQxCLcnlZQL8serg8RYvult/6I8ubr0fKrliSxLEmSTuTzk4O9keEVqrMqqTlnDLU1fBMHSydWDwZW4g3GGfgHYqmUpmtT/iC5Gpjfo0HSRtYD1Jw95Th2kAAQBYADbyA5Y7EgOSFnhfB8pw2ia1QyRYuRck8qajafK/UxijW/aTKnusq0KYLVHAAnbVAtPrhy492dp5qiaVUc5BG4PXGb8a7PVspMrKENDXYMTsGO+ok7m9udxhZNro6/DxY8sqm9/mgrS7e11ANWnQCk6QQz2/Gbenrjip22ziA1B3FamLsKYdSBy+K49fEMJOXoOFYSumQSp5kELNxAHiveYxPSbTWBCoAvxFZ0kfaEbQbCJ36ziXNno/0mK641+f9GzUsr+90qVR3ikyq4prB3E+JgYJG1rC+LP8A+By/T64D/s4zKvklhYCu4C7xJ1x/7sNOvHQnaPDyx4TcfhmQ5bjueyRA/wCPRi2s7XMKr77AXMjDTwvtzk8wAlQ9233alh7OLYx/gnaKtlxpHjpnem220HSfs2nyvtgy+Wo5tdeVOlx8dIiCJKi3ILBPluOcYR372iqWOf6tP5NlfJK4GhhHzHscc5vLVNgC0bEfq2MOy2bzOXbTRqujAkQhMapiAux8Rj23w3cJ/aFmQQlRqZPItMNudx8NtO8/lyz8XDP1X9hp4MsFa2jRBlmWxUj+u/riOqykxB8onA6h27Kj+JQaOqMCOd7xaB9Ri/S7a5Q2YOs9Un6rOIv/AOfD1L+SP1JLtEuUVaYmPEf1yxK1VVHiuW+WOD2l4cwE1VHSxH8vMYr1eN8OJLHNLta8RiUvAyLUWmMsqfZ7vNTEJeYkzsJAxYq0h4UETzgR7zgcnH+GII/ehE8rzM/kflipmu13DlMh6r8oVTt6xflhP6LKvgP1EHKraSLSOsWn/fENRifBMTzP9OmFzMdvKP8Ay8rWqRcaiAPWN/pzHXFDNdsc7IIShllNz9poJi5jw9djb6PHwJv9TSN9T4Q4VMvU0aR8OxZiAPYnC9xjtJkcrapmdbgRop3Pub4SeK8Yr16ZqGuaxNN2UEkK2j/iAKOaCDpIuDIOECtUZ2LMSSef5dB5Y7MXg4l+rZOU5eh74t+02oZGUpLRG2tvFUI9eWF18/Rrv3lY10q794r95HSVeGAB6NzwGWlghwnMrRqLUNJKoX7FSSp9gd/WR5Y7FFRVRVC8W+x47Pdnsw1Ra1J00kjXUAmnXTke7sRUBF9t5mZl77O9laWXXTRSOrG7G8xJ5eQxT7IduMpmGWnp7qrHwMYBgSdD/CffSbbYdX4rTQ+KlVXz0rHzDYNA6Ospk9I2xcSkMD37QURyqHyC/mRgVn+0FZ/DSXuwee7ex2H6vg0AYs3Xp0xLsB0HM+i7n2xT7nvUh1Ko32OZHRo2noD6nlgZwXhWn+I92PXf1J64YjtgGBGd7OZWqulsvTiIsoUj0ZYI+eFh/wBmWVJjvcwF+4GWPQEpMYfE6485G+A4orHPliqUmUeEcLpZemKVFdKD6nqSdz+WL2nHJqmJ5Yh/eDgkm23bPzf2h7O18qfGvhmA4nSenoSOR33Ei+BWTrvTcOjFWU2I/UEeRw8cH4/oTQCK1GINFyCVB3CMwIjnoaVPtjvPdlKGZQ1sk4ETqpMY0npLGaZ/xkr/AHxZcAb+5VfjuUzJCVNVFyoHfWgnSVhomFk+XtitxHhj07+FqZkpVWCp5GCLgSRY8gfdercKqLW7qojK4MMrAggbmQfLDJk8w9Ji12Rp7ymSQrg3IIvHkYkYlNJHXgzTjp7RLwritSjClTUpxt/lUKNRkKPg8pPphs4W2Xrg90wJH2LAgTG3S++3iOFnJZLK5oIO9WjmGJBQlirGZkGAFkE+ESLxiKrwnM5Ylo0ggw63Bk7BlkA2n/KMAvwx5v06Y8NwVTM36/K/8/mMQVOziXsP0fzHyUdcC+C9qnSErgsCfjt94zIFjFrD7vlhuyNanVUNTdWkTvcc7ruPQ9MY5MmKePtAT+y9Pp+thv8AKfXE68GpLuNjt9bdDv8APywTz+ao0ATUcAxMc/l+tj1xmXaXt5UdjTyxhYgttJsZXnv7eRwyjZGxh7RcfyuVQqFDuYKgRPPkDKiRv6b4zTifGa+Zaajew+o6xvz5nEApySzksxuSZJOPAHkMOkkam+w32VdiGopHeB1r0ATAZ0kPT/z0yRHPSBixxDstoc1HP7vlmGtTVHjWb90KVmZwZFrQJnFDgvAamY1mQtOmuqo5vE/CAv2mJFhhx7P8HpCaXeGp3oMUKpBWrpt4WC/w330wdxGraZTzRi9jqAi5xqBaKC1AgG9QgsTJvCgBbQNN9t74rrRJw2cQ7IgL3lDXYMe6qDxEJ8Zp1IAqaeawGAHPAkZe3hHqZA5cvlhoZYyVxG4/J3wd6FGlmKlRz3ppvTpIB98adQbrf2Ct1GHbK9tK1KorUx3mWemjPTZtmI8XcyoKgdCIJmAJwjNR1COQm/sT+eNAodm1qZKgQfF3SX9QMac66AoK9jjwXP5TNpNCqA8S1M2ZfVDy8xb1xey+SKtLQemMLzuSqUKhPiUqQVdZEeYI2OHfs1+0cqRSzlxsK6j/APYo/wDkPlzw8Z2JLG10aYw5csSpivlswrqGUhlYSCDII6gixxZTDkyRaZxy6kDljssQMVnqE4BjtnxxAxzfH2BjGPzrxjgGjxIYP6j/AGxTyXF61Bw+pkcbMN46EfaHrhqrDY/rny9h8sBs/SVkLMJMC+EUirVjRk+1uVzNJUzNBTUWAqzp3sO6qATSklZX4IJJUb4r8XyIohSWRlaSIkaV1BQSWADyxIBTUCFnbGfKgv640n9np/ehWpZgCqgphQGAkBVJUBtwAWbY88FpSEtx6AGZykAVUMMpBUjkRcEflgVwfj2ZydQsCzKSdSMWhidyb7+ZnfBRVlXUzClgtzaNr74DcTHiUcunvGFgq0UntWNfC+1eRqkCtSNBxLAo3gt8KwZjYchucLvF+PMtQrTIXQSFanIm8zO/4YX8yL4hAw3BFF5eaKcbCOd4vWrgKzQsAED7W12+8bD5Yt8M4QWufL+l/n8sQcJQEiRhsoqJGNJ1pE4rdsGvwsAeWKrZYASBhhUShm8KT+OBlYWj0xOytB7sZW10auVTw1i61qW3jKwGQzaYEgdZwxcOr0qfjrsqrQJWilQkV6eoaIPhDOIqa52BS2M+pnSAwsZ3+eJu03FK+tf4tQwgiWJiRJiTjjy42569jVob1KZWozmoO5oZmpUdCpkMqlVp03mHLltDAc1nbfOmY2mPTl+hgXms5UZl1OzepJj0nbFvLMTvjpw4nBW2S5JukWEqSesY2Pg5jKUBYxSp79NI8ul4xjNP4oxsPA3LUrmYhR6BVgYOQKK/FMklQMD9388InHOz7UyWQW3j2xolY+P/ACj8cVOJoOnIfhiadDmecD7S5nJv/Cfw7tSe6nmbcjvcX9caz2V7bUM34J7utzpMbn/A2zj6+WMt49QWSYEwcLlJjq3Nrg8xG0HljphK0RnBWfp9a02x5rYTP2dcRq18mlSq5d9TLqO8BoE9bczfDnTxQi9H3HtB6Y6x3OMY/9k=',
+      mainImage: 'https://i.ifh.cc/gDT5Cz.jpg',
     },
     {
       id: 'f2',
       mainImage:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtJE4R0TvPxCmZPoqth8LstFy0NJq6h-sJAg&s',
+        'https://mall.ourhome.co.kr//attach_file/20240411/12B5F95E8CB2488DAF2F6EF5922E2D00.jpg',
     },
     {
       id: 'f3',
       mainImage:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9pPPVNZ7mqSdlKWQ7CiF23X_f2BlvwvTvbw&s',
+        'https://recipe1.ezmember.co.kr/cache/recipe/2016/12/30/df939769792632a48a0eba8bc895e8601.jpg',
     },
     {
       id: 'f4',
       mainImage:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWV8ZyDYBDejdQ21gsuxgZVMqnP923FRuMgA&s',
+        'https://i.namu.wiki/i/dgjXU86ae29hDSCza-L0GZlFt3T9lRx1Ug9cKtqWSzMzs7Cd0CN2SzyLFEJcHVFviKcxAlIwxcllT9s2sck0RA.jpg',
     },
-    { id: 'f5', mainImage: 'https://source.unsplash.com/300x300/?pasta' },
-    { id: 'f6', mainImage: 'https://source.unsplash.com/300x300/?avocado-toast' },
-    { id: 'f7', mainImage: 'https://source.unsplash.com/300x300/?ramen' },
-    { id: 'f8', mainImage: 'https://source.unsplash.com/300x300/?pizza' },
-    { id: 'f9', mainImage: 'https://source.unsplash.com/300x300/?noodles' },
-    { id: 'f10', mainImage: 'https://source.unsplash.com/300x300/?sandwich' },
-    { id: 'f11', mainImage: 'https://source.unsplash.com/300x300/?dumplings' },
-    { id: 'f12', mainImage: 'https://source.unsplash.com/300x300/?bbq' },
-    { id: 'f13', mainImage: 'https://source.unsplash.com/300x300/?sushi' },
-    { id: 'f14', mainImage: 'https://source.unsplash.com/300x300/?burger' },
-    { id: 'f15', mainImage: 'https://source.unsplash.com/300x300/?tacos' },
+    {
+      id: 'f5',
+      mainImage: 'https://s3.ap-northeast-2.amazonaws.com/gred/vendor/920/images/29_1614081088.jpg',
+    },
+    {
+      id: 'f6',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2024/06/06/bb480831398b5120ac555f58cdf7c80c1.jpg',
+    },
+    {
+      id: 'f7',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2023/09/27/02f99bf93da30f810750bd9103c79d451.jpg',
+    },
+    {
+      id: 'f8',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2023/09/16/7dbb36575d7f1d26346f794f3af0d2de1.jpg',
+    },
+    {
+      id: 'f9',
+      mainImage:
+        'https://recipe1.ezmember.co.kr/cache/recipe/2015/05/22/e1af3baa780984f52bedf67991b49c081.jpg',
+    },
   ],
   isPublic: false,
 };
 
 export const mockUserBookmark: UserWithoutFeeds = {
   id: '1',
-  profileImage: 'https://i.pravatar.cc/150?img=12',
-  name: '이설희',
+  profileImage:
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG1AeGzp_5HxeH2Q7qE9UG5ef3VYmitAuqKw&s',
+  name: '자취킹',
   introduce: '아 찜닭 먹고싶다 난 강정순살파야...',
-  followers: 120,
-  following: 85,
-  feedCount: 15,
+  followers: 15,
+  following: 1,
+  feedCount: 9,
   bookmarkCount: 0,
   bookmarks: [],
   isPublic: false,
 };
 
 export const mockFollowData: FollowData = {
-  follower: [
+  follower: [],
+  following: [
     {
       id: '1',
-      name: '홍길동',
-      profileImage: 'https://i.pravatar.cc/150?img=1',
-      introduce: '안녕하세요!',
+      name: '요리천재',
+      profileImage:
+        'https://mblogthumb-phinf.pstatic.net/20121228_209/jmj4969_1356683129749hTkjU_JPEG/IMG_7040-1.jpg?type=w420',
+      introduce: '맛있는 레시피를 연구하고 공유하는 걸 좋아해요! 🍰',
     },
     {
       id: '2',
-      name: '김철수',
-      profileImage: 'https://i.pravatar.cc/150?img=2',
-      introduce: 'React Native 좋아해요.',
+      name: 'Chef Park',
+      profileImage:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiJOisEl4nF_mKqZZS5iGTWFsbRn_V-fvxSQ&s',
+      introduce: '',
     },
-  ],
-  following: [
-    // {
-    //   id: '3',
-    //   name: '박영희',
-    //   profileImage: 'https://i.pravatar.cc/150?img=3',
-    //   introduce: '안녕하세요, 팔로잉 중',
-    // },
-    // {
-    //   id: '4',
-    //   name: '이순신',
-    //   profileImage: 'https://i.pravatar.cc/150?img=4',
-    //   introduce: '팔로잉 리스트 테스트',
-    // },
+    {
+      id: '3',
+      name: '지원',
+      profileImage:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4orYFZ-hqpOZA3Zjavhag7Tbbi3EaahLcfg&s',
+      introduce: '든든한 한 끼를 책임지는 요리 전문가입니다.',
+    },
   ],
 };

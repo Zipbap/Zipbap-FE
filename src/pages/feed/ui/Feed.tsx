@@ -38,6 +38,7 @@ const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
           />
         </View>
       </View>
+      <View className="h-[50px]" />
       <Portal>
         <FeedChatBottomSheet
           feedId={feedId}

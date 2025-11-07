@@ -24,10 +24,11 @@ const KakaoLoginButton = ({ navigation }: Props) => {
         return;
       }
 
-      navigation.replace('Main'); // 성공 시 이동
+      //navigation.replace('Main'); // 성공 시 이동
     } catch (err) {
       console.error('❌ login err', err);
     }
+    navigation.replace('Main'); // 성공 시 이동
   };
 
   return (

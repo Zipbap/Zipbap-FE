@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import RecipeOrderIconSvg from '@/assets/img/recipe/recipe-order.svg';
+import { RootNavigationProp } from '@/src/shared/types';
 import { FullWidthButton, ToggleSwitch } from '@shared/ui';
 import { useRecipeCreateForm } from '../model/useRecipeCreateForm';
 
@@ -14,9 +15,13 @@ import FormTextInput from './FormTextInput';
 import FormTitle from './FormTitle';
 import RecipeCreateHeader from './RecipeCreateHeader';
 
-const RecipeCreateForm = () => {
+interface Props {
+  navigation: RootNavigationProp<'RecipeCreateForm'>;
+}
+
+const RecipeCreateForm = ({ navigation }: Props) => {
   const { recipe, updateField, updateCookingOrder, handleTempSave, handleFinalizeSave } =
-    useRecipeCreateForm();
+    useRecipeCreateForm({ navigation });
   const [isPublic, setIsPublic] = useState(recipe.isPrivate ? false : true);
 
   return (

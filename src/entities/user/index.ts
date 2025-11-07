@@ -1,5 +1,11 @@
 // user api
-export { mockUser, mockFollowData, mockUserBookmark, mockUserFeed } from './api/mockUser';
+export {
+  mockUser,
+  mockFollowData,
+  mockUserBookmark,
+  mockUserFeed,
+  mockAnotherUser,
+} from './api/mockUser';
 
 // user model
 export {

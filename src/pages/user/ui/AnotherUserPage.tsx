@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
-import { useDetailUserData, AnotherUserHeaderSection, AnotherUserFeedGrid } from '@features/user';
+import {
+  AnotherUserHeaderSection,
+  AnotherUserFeedGrid,
+  useDetailAnotherUserData,
+} from '@features/user';
 import { AnotherUserPageProps } from '@shared/types';
 
 const AnotherUserPage = ({ navigation, route }: AnotherUserPageProps) => {
   const { userId } = route.params;
   console.log(userId);
 
-  const { getDetailUser, detailUser } = useDetailUserData();
+  const { getDetailUser, detailUser } = useDetailAnotherUserData();
 
   // NOTE: user의 ID를 통해 profile를 받아오는 작업
   useEffect(() => {

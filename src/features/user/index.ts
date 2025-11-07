@@ -1,5 +1,6 @@
 //user MODEL
 export { useDetailUserData } from './model/useDetailUserData';
+export { useDetailAnotherUserData } from './model/useDetailAnotherUserData';
 export { useFollowData } from './model/useDetailFollowData';
 export { useBookmarkData, useFeedData } from './model/useMyPageData';
 

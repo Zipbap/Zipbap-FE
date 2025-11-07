@@ -1,3 +1,4 @@
+import { useVideoPlayer, VideoView } from 'expo-video';
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, Pressable, ScrollView } from 'react-native';
 
@@ -6,6 +7,8 @@ import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
 import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
+
+import mockVideo2 from '@/assets/video/mockVideo2.mp4';
 import {
   FeedBottomTab,
   useDetailFeedData,
@@ -20,7 +23,7 @@ import { cn } from '@shared/lib';
 import { useTwoViewTypeStore } from '@shared/store';
 import { FeedDetailProps } from '@shared/types';
 import {
-  WebViewVideo,
+  // WebViewVideo,
   defaultShadow,
   ModalContentSection,
   ModalCategoriesSection,
@@ -29,6 +32,10 @@ import {
 } from '@shared/ui';
 
 const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
+  const player = useVideoPlayer(mockVideo2, player => {
+    player.loop = true;
+    player.play();
+  });
   const { feedId } = route.params;
   console.log(feedId);
   const insets = useSafeAreaInsets();
@@ -203,7 +210,11 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
               {/* 레시피 영상 */}
               <ModalContentSection
                 subTitle="레시피 영상"
-                content={<WebViewVideo videoUrl={detailFeed.video} />}
+                content={
+                  <View className="z-10 h-[200px] w-full overflow-hidden rounded-2xl bg-g2">
+                    <VideoView style={{ flex: 1 }} player={player} nativeControls={true} />
+                  </View>
+                }
               />
             </View>
             {/* 레시피 순서 */}

@@ -2,7 +2,7 @@
 export interface User {
   id: string;
   nickname: string;
-  isPrivate: false;
+  isPrivate: boolean;
   statusMessage: string | null;
   profileImage: string | null;
 }

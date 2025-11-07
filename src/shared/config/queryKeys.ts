@@ -21,7 +21,7 @@ export const queryKeys = {
     key: 'recipes',
     all: ['recipes'] as const,
     list: () => [...queryKeys.recipes.all, 'list'] as const,
-    detail: (id: number) => [...queryKeys.recipes.all, 'detail', id] as const,
+    detail: (id: string) => [...queryKeys.recipes.all, 'detail', id] as const,
   },
   recipeTemp: {
     key: 'recipeTemp',

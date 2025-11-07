@@ -1,6 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { Host } from 'react-native-portalize';
 import { LoginPage } from '@pages/auth';
 import { FeedDetail } from '@pages/feed';
@@ -8,17 +7,33 @@ import { RecipeDetail } from '@pages/recipe';
 import { Secession, ProfileEdit, FollowDetail, AnotherUserPage } from '@pages/user';
 import { RecipeCreateForm } from '@features/recipe';
 import { AnotherUserHeader } from '@entities/user';
+import { useAuthStore } from '@shared/store/useAuthStore';
 import { RootStackParamList } from '@shared/types';
+import LoadingIndicator from '@shared/ui/LodingIndicator';
 import MainTabNavigator from './TabNavigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
 export function Navigation() {
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+  const isLoading = useAuthStore(state => state.isLoading);
+  if (isLoading) {
+    return <LoadingIndicator />;
+  }
+
   return (
     <Host>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Login" component={LoginPage} options={{ headerShown: false }} />
-          <Stack.Screen name="Main" component={MainTabNavigator} options={{ headerShown: false }} />
+          {isAuthenticated ? (
+            <Stack.Screen
+              name="Main"
+              component={MainTabNavigator}
+              options={{ headerShown: false }}
+            />
+          ) : (
+            <Stack.Screen name="Login" component={LoginPage} options={{ headerShown: false }} />
+          )}
           <Stack.Screen
             name="RecipeCreateForm"
             component={RecipeCreateForm}

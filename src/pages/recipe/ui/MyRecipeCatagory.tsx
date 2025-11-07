@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { View, ScrollView } from 'react-native';
 
 import PlusIcon from '@/assets/img/plus.svg';
-import { useCategoriesQuery } from '@features/category';
 import { ViewTypeSwitcher } from '@features/recipe';
+import { useCategoriesQuery } from '@entities/category';
 import { useCategoryBottomSheetStore, useViewTypeStore } from '@shared/store';
 
 import { CategoryChipButton } from '@shared/ui';

@@ -9,10 +9,10 @@ import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 import {
   FeedBottomTab,
   useDetailFeedData,
-  RecipeDetailSection,
-  RecipeStepsArticleViewType,
+  // RecipeDetailSection,
+  // RecipeStepsArticleViewType,
   HeaderRightContent,
-  RecipeStepsFeedViewType,
+  // RecipeStepsFeedViewType,
   FeedDetailSkeleton,
 } from '@features/feed';
 
@@ -188,11 +188,11 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                 content={<ModalCategoriesSection categories={detailFeed.categories} />}
               />
               {/* 인원/요리시간/ 난이도 */}
-              <RecipeDetailSection
+              {/* <RecipeDetailSection
                 serving={detailFeed.serving}
                 cookingTime={detailFeed.cookingTime}
                 difficulty={detailFeed.difficulty}
-              />
+              /> */}
               {/* 재료 */}
               <ModalContentSection
                 subTitle="재료"
@@ -212,13 +212,13 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                 <Text className="text-xl font-bold color-black">레시피 순서</Text>
                 <TwoViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />
               </View>
-              {viewType === 'article' ? (
+              {/* {viewType === 'article' ? (
                 <View className="w-full px-4">
                   <RecipeStepsArticleViewType steps={detailFeed.steps} />
                 </View>
               ) : (
                 <RecipeStepsFeedViewType steps={detailFeed.steps} />
-              )}
+              )} */}
             </View>
 
             <View className="w-full px-4">

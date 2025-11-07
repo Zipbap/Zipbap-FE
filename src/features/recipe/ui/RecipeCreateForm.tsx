@@ -1,14 +1,13 @@
-import { ArrowDown } from 'lucide-react-native';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { ArrowUpDown } from 'lucide-react-native';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import { useGetAllCategories } from '@features/category';
-import { RecipeDetail } from '@entities/recipe';
-import { useUploadToS3 } from '@shared/lib/uploadToS3';
-import { usePresignedUrl } from '@shared/lib/usePresendUrl';
+import { RootStackParamList } from '@/src/shared/types';
+import { useRecipeUploader } from '@features/recipe/lib/useRecipeUpload';
+import { useCategories } from '@entities/category';
 import { FullWidthButton } from '@shared/ui';
 import { useRecipeCreateForm } from '../model/useRecipeCreateForm';
-
 import FormAddRecipeOrder from './FormAddRecipeOrder';
 import FormCategory from './FormCategory';
 import FormLongTextInput from './FormLongTextInput';
@@ -18,45 +17,35 @@ import FormTextInput from './FormTextInput';
 import FormTitle from './FormTitle';
 import RecipeCreateHeader from './RecipeCreateHeader';
 
+type RecipeCreateFormRouteProp = RouteProp<RootStackParamList, 'RecipeCreateForm'>;
+
 const RecipeCreateForm = () => {
+  // route
+  const route = useRoute<RecipeCreateFormRouteProp>();
+
   // create utils
+  const recipeId = route.params.recipeId;
   const {
     recipe,
     updateField,
     updateCookingOrder,
     addCookingOrder,
-    handleTempSave,
-    handleFinalizeSave,
+    useLoadTempRecipe,
+    recipeMutation,
   } = useRecipeCreateForm();
 
+  // load temp recipe
+  useLoadTempRecipe(recipeId);
+
   // upload logic
-  const presignedUrlMutation = usePresignedUrl();
-  const uploadToS3Mutation = useUploadToS3();
-  const handleUpload = async (
-    fileUri: string,
-    updateFieldName: keyof RecipeDetail,
-    orderIndex?: number,
-  ) => {
-    try {
-      const fileName = fileUri.split('/').pop() || `file-${Date.now()}.jpg`;
-      const { uploadUrl, fileUrl } = await presignedUrlMutation.mutateAsync({ fileName });
-      await uploadToS3Mutation.mutateAsync({ uploadUrl, fileUri });
-
-      if (updateFieldName === 'thumbnail' || updateFieldName === 'video') {
-        updateField(updateFieldName, fileUrl);
-      } else if (updateFieldName === 'cookingOrders' && orderIndex !== undefined) {
-        updateCookingOrder(orderIndex, 'image', fileUrl);
-      }
-
-      console.log('S3 업로드 및 임시저장 완료:', fileUrl);
-    } catch (err) {
-      console.error('업로드 실패:', err);
-    }
-  };
+  const { handleUpload } = useRecipeUploader({
+    updateField,
+    updateCookingOrder,
+  });
 
   // catogories logic
-  const categories = useGetAllCategories();
-  if (!categories) return null;
+  const { categories, isLoading } = useCategories();
+  if (isLoading || !categories) return null;
 
   const {
     cookingTimes,
@@ -75,9 +64,10 @@ const RecipeCreateForm = () => {
       <View className="h-[70px]" />
       <KeyboardAwareScrollView className="h-[100%] px-[16px]" bottomOffset={80}>
         {/* 썸네일 업로드 */}
+        <FormTitle title="레시피 기본 정보" />
         <FormMediaUpload
-          title="대표사진"
-          description="대표사진을 업로드 해주세요"
+          title="대표 사진"
+          description="대표 사진을 업로드 해주세요"
           buttonText="사진 업로드"
           uploadType="image"
           value={recipe.thumbnail}
@@ -113,29 +103,34 @@ const RecipeCreateForm = () => {
         <FormCategory
           categoryText="내 카테고리"
           items={myCategories}
+          prevSelectedId={recipe.myCategoryId}
           onSelectId={id => updateField('myCategoryId', id.toString())}
         />
 
         <FormCategory
           categoryText="종류"
           items={cookingTypes}
+          prevSelectedId={recipe.cookingTypeId}
           onSelectId={id => updateField('cookingTypeId', Number(id))}
         />
 
         <FormCategory
           categoryText="상황"
           items={situations}
+          prevSelectedId={recipe.situationId}
           onSelectId={id => updateField('situationId', Number(id))}
         />
 
         <FormCategory
           categoryText="주재료"
           items={mainIngredients}
+          prevSelectedId={recipe.mainIngredientId}
           onSelectId={id => updateField('mainIngredientId', Number(id))}
         />
         <FormCategory
           categoryText="방법"
           items={methods}
+          prevSelectedId={recipe.methodId}
           onSelectId={id => updateField('methodId', Number(id))}
         />
 
@@ -144,16 +139,19 @@ const RecipeCreateForm = () => {
         <FormCategory
           categoryText="인원"
           items={headcounts}
+          prevSelectedId={recipe.headcountId}
           onSelectId={id => updateField('headcountId', Number(id))}
         />
         <FormCategory
           categoryText="요리 시간"
           items={cookingTimes}
+          prevSelectedId={recipe.cookingTimeId}
           onSelectId={id => updateField('cookingTimeId', Number(id))}
         />
         <FormCategory
           categoryText="난이도"
           items={levels}
+          prevSelectedId={recipe.levelId}
           onSelectId={id => updateField('levelId', Number(id))}
         />
 
@@ -193,7 +191,7 @@ const RecipeCreateForm = () => {
         {recipe.cookingOrders?.map((order, index) => (
           <View key={index} className="mt-4">
             <View className="flex-row items-center gap-1">
-              <ArrowDown size={16} color={'#60594E'} />
+              <ArrowUpDown size={16} color={'#60594E'} />
               <Text className="text-sm font-bold text-g1">Step {index + 1}</Text>
             </View>
             <FormMediaUpload
@@ -238,14 +236,14 @@ const RecipeCreateForm = () => {
         {/* 버튼 */}
         <FullWidthButton
           buttonText="임시저장"
-          onPress={handleTempSave}
+          onPress={() => recipeMutation.tempSave(recipe)}
           backgroundColor="#F0EDE6"
           textColor="#60594E"
         />
 
         <FullWidthButton
           buttonText="추가하기"
-          onPress={handleFinalizeSave}
+          onPress={() => recipeMutation.finalizeSave(recipe)}
           backgroundColor="#DC6E3F"
           textColor="white"
         />

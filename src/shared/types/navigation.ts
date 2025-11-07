@@ -3,7 +3,7 @@ import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-naviga
 export type RootStackParamList = {
   Login: undefined;
   Main: { screen?: keyof MainTabParamList } | undefined;
-  RecipeCreateForm: undefined;
+  RecipeCreateForm: { recipeId?: string };
   AnotherUserPage: { userId: string };
   RecipeDetail: { recipeId: string };
   FeedDetail: { feedId: string };
@@ -24,20 +24,10 @@ export type RootNavigationProp<T extends keyof RootStackParamList> = NativeStack
   T
 >;
 
-// NOTE: route 기능을 사용해야됨
+// route를 위한 Stack Props
 export type RecipeDetailProps = NativeStackScreenProps<RootStackParamList, 'RecipeDetail'>;
 export type FeedDetailProps = NativeStackScreenProps<RootStackParamList, 'FeedDetail'>;
 export type ProfileEditProps = NativeStackScreenProps<RootStackParamList, 'ProfileEdit'>;
 export type FollowDetailProps = NativeStackScreenProps<RootStackParamList, 'FollowDetail'>;
 export type SecessionProps = NativeStackScreenProps<RootStackParamList, 'Secession'>;
 export type AnotherUserPageProps = NativeStackScreenProps<RootStackParamList, 'AnotherUserPage'>;
-
-// // NOTE: Bottom Tab route 기능
-// // Tab 내에서 Stack으로도 접근 가능하게 하는 타입 조합
-// export type MyPageNavigationProp = CompositeNavigationProp<
-//   BottomTabNavigationProp<MainTabParamList, 'Mypage'>, // 탭 내부용
-//   NativeStackNavigationProp<RootStackParamList, 'Main'> // 스택 접근용
-// >;
-// export type MyPageProps = BottomTabScreenProps<MainTabParamList, 'Mypage'> & {
-//   navigation: MyPageNavigationProp;
-// };

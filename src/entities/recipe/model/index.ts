@@ -38,6 +38,8 @@ export interface RecipeDetail {
   headcountId: number | null;
   levelId: number | null;
   video: string | null;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type CookingOrder = RecipeDetail['cookingOrders'][number];

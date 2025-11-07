@@ -1,27 +1,38 @@
 import { ChevronDown } from 'lucide-react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { CategoryItem } from '@entities/category';
 import { cn } from '@shared/lib';
 
-interface Props {
-  categoryText: string;
-  items: CategoryItem[];
-  onSelectId: (id: Id) => void;
-}
-
 type Id = string | number;
 type CategoryName = string;
 type Selected = [Id, CategoryName];
+interface Props {
+  categoryText: string;
+  items: CategoryItem[];
+  prevSelectedId: Id | null;
+  onSelectId: (id: Id) => void;
+}
 
-const FormCategory = ({ categoryText, items, onSelectId }: Props) => {
+const FormCategory = ({ categoryText, items, prevSelectedId, onSelectId }: Props) => {
   const [isPressButton, setIsPressButton] = useState(false);
+
   const [selectedValue, setSelectedValue] = useState<Selected | null>(null);
+
   const handleSelect = (id: Id, name: CategoryName) => {
     setSelectedValue([id, name]);
     setIsPressButton(false);
     onSelectId(id);
   };
+
+  useEffect(() => {
+    if (prevSelectedId) {
+      const selected = items.find(item => item.id === prevSelectedId);
+      if (selected) {
+        setSelectedValue([selected.id, selected.name]);
+      }
+    }
+  }, [items, prevSelectedId]);
   return (
     <View className="my-3 flex flex-col">
       <TouchableOpacity

@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
-import { getTokens } from '@shared/store/token';
+import { getNewAccessToken } from '@shared/lib/getNewAccessToken';
+import { getToken } from '@shared/lib/getToken';
 
 export const apiInstance: AxiosInstance = axios.create({
   baseURL: process.env.EXPO_PUBLIC_BASE_URL || 'http://localhost:8080/api',
@@ -12,9 +13,9 @@ export const apiInstance: AxiosInstance = axios.create({
 
 apiInstance.interceptors.request.use(
   async config => {
-    const tokens = await getTokens();
-    if (tokens?.accessToken) {
-      config.headers.Authorization = `Bearer ${tokens.accessToken}`;
+    const accessToken = await getToken.accessToken();
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
@@ -25,12 +26,12 @@ apiInstance.interceptors.request.use(
 
 apiInstance.interceptors.response.use(
   response => response,
-  error => {
+  async error => {
     // 공통 에러 처리
     if (error.response) {
       const { status } = error.response;
       if (status === 401) {
-        console.warn('인증 만료. 로그아웃 처리 필요');
+        await getNewAccessToken(error);
       } else if (status >= 500) {
         console.error('서버 오류 발생');
       }

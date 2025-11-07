@@ -19,11 +19,12 @@ interface RecipePageProps {
 
 const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
   const { viewType } = useViewTypeStore();
+  const { bottomSheetVisible, bottomSheetClose } = useCategoryBottomSheetStore();
 
   const { data: recipes, isLoading } = useQuery({
     queryKey: queryKeys.recipes.all,
     queryFn: async () => {
-      const res = await apiInstance.get('/recipes/me');
+      const res = await apiInstance.get('/recipes');
       return res.data;
     },
   });
@@ -31,8 +32,6 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
   const recipeList: Recipe[] = recipes?.result || [];
 
   const isRecipeListEmpty = recipeList.length === 0;
-
-  const { bottomSheetVisible, bottomSheetClose } = useCategoryBottomSheetStore();
 
   if (isLoading) {
     return <RecipeItemSkeleton />;
@@ -53,6 +52,7 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
               renderItem={({ item }) => {
                 if (viewType === 'article') {
                   return (
+                    // 레시피 각 요소
                     <Pressable
                       onPress={() => {
                         navigation.navigate('RecipeDetail', { recipeId: item.id });
@@ -81,7 +81,7 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
                 title={'첫번째 레시피를 기록해 보세요'}
                 subtitle={'내가 기억하고 싶은 레시피를 작성해 보세요'}
                 buttonText={'레시피 작성하기'}
-                onPress={() => navigation.navigate('RecipeCreateForm')}
+                onPress={() => navigation.navigate('RecipeCreateForm', {})}
               />
             </View>
           )}

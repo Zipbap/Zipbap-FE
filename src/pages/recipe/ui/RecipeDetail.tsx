@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react';
-import { Text, View, Image, Pressable, ScrollView } from 'react-native';
-
+import React from 'react';
+import { Text, View, Image, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ShareSvg from '@/assets/img/feed/share-icon.svg';
-
-// FIXME: 추후 경로 수정
 import {
   RecipeDetailSection,
   RecipeStepsArticleViewType,
   RecipeStepsFeedViewType,
   FeedDetailSkeleton,
 } from '@features/feed';
+import { useCategories } from '@entities/category';
+import { useRecipeDetailQuery } from '@entities/recipe/api/useRecipeDetialQuery';
 
+import { isValidString } from '@shared/lib/isValidString';
 import { useTwoViewTypeStore } from '@shared/store';
 import { RecipeDetailProps } from '@shared/types';
 import {
@@ -24,44 +23,40 @@ import {
   TwoViewTypeSwitcher,
 } from '@shared/ui';
 
-import { useDetailRecipeData } from '../model/getDetailRecipe';
+import Shared from '@shared/ui/Shared';
 
 const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
-  const { recipeId } = route.params;
-  console.log(recipeId);
   const insets = useSafeAreaInsets();
-
-  const { getDetailRecipe, detailRecipe } = useDetailRecipeData();
   const { viewType, setViewType } = useTwoViewTypeStore();
-  useEffect(() => {
-    getDetailRecipe(recipeId ? recipeId : '1');
-  }, [recipeId, getDetailRecipe]);
 
-  // 헤더에 들어갈 오른쪽 버튼들을 JSX 변수로 정의
-  const headerRightContent = (
-    <>
-      <Pressable>
-        <ShareSvg />
-      </Pressable>
-    </>
-  );
+  const { recipeId } = route.params;
+
+  console.log(recipeId); // FIXME: 제거 바람
+
+  // recipe list
+  const { data: detailRecipe, isLoading } = useRecipeDetailQuery(recipeId);
+  const isRecipeDetail = detailRecipe !== null;
+  const { categoryValue } = useCategories();
   if (!recipeId) return null;
-  else if (!detailRecipe) {
-    return <FeedDetailSkeleton />;
-  }
+  if (isLoading || !isRecipeDetail) return <FeedDetailSkeleton />;
+
+  if (!recipeId || !detailRecipe) return null;
+  const categories: string[] = [
+    categoryValue?.getMyCategory(detailRecipe),
+    categoryValue?.getCookingType(detailRecipe),
+    categoryValue?.getSituation(detailRecipe),
+    categoryValue?.getMainIngredient(detailRecipe),
+    categoryValue?.getMethod(detailRecipe),
+  ].filter(isValidString);
 
   return (
     <View className="flex-1 bg-white" style={{ paddingTop: insets.top }}>
       {/* 헤더 */}
-      <ModalHeader
-        title="레시피 상세"
-        onBackPress={navigation.goBack}
-        rightContent={headerRightContent}
-      />
+      <ModalHeader title="레시피 상세" onBackPress={navigation.goBack} rightContent={<Shared />} />
 
       {/* 스크롤 영역 */}
       <ScrollView>
-        <Image source={{ uri: detailRecipe.mainImage }} className="h-[300px] w-full bg-sub1" />
+        <Image source={{ uri: detailRecipe?.thumbnail }} className="h-[300px] w-full" />
 
         <View
           className="-mt-6 rounded-t-3xl bg-white px-4 pb-6 pt-10"
@@ -70,13 +65,15 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
           <View className="w-full flex-col">
             {/* 작성일 */}
             <View className="mb-5 w-full flex-row justify-end">
-              <Text className="text-[12px] color-g5">작성일 {detailRecipe.createdAt}</Text>
+              <Text className="text-[12px] color-g5">
+                작성일 {detailRecipe?.createdAt.split('T')[0]}
+              </Text>
             </View>
           </View>
 
           {/* 제목 */}
-          <Text className="text-md mb-1 mt-3 font-bold color-sub1">{detailRecipe.subTitle}</Text>
-          <Text className="mb-2 text-2xl font-bold color-black">{detailRecipe.title}</Text>
+          <Text className="text-md mb-1 mt-3 font-bold color-sub1">{detailRecipe?.subtitle}</Text>
+          <Text className="mb-2 text-2xl font-bold color-black">{detailRecipe?.title}</Text>
         </View>
         <View className="flex-col items-start">
           <View className="w-full flex-col items-start">
@@ -84,32 +81,34 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
               {/* 레시피 소개 */}
               <ModalContentSection
                 content={
-                  <Text className="text-base leading-6 text-g1">{detailRecipe.content}</Text>
+                  <Text className="text-base leading-6 text-g1">{detailRecipe?.introduction}</Text>
                 }
                 subTitle="레시피 소개"
               />
               {/* 카테고리 */}
               <ModalContentSection
                 subTitle="카테고리 및 요리 정보"
-                content={<ModalCategoriesSection categories={detailRecipe.categories} />}
+                content={<ModalCategoriesSection categories={categories} />}
               />
               {/* 인원/요리시간/ 난이도 */}
               <RecipeDetailSection
-                serving={detailRecipe.serving}
-                cookingTime={detailRecipe.cookingTime}
-                difficulty={detailRecipe.difficulty}
+                serving={categoryValue?.getHeadcount(detailRecipe) as string}
+                cookingTime={categoryValue?.getCookingTime(detailRecipe) as string}
+                difficulty={categoryValue?.getLevel(detailRecipe) as string}
               />
               {/* 재료 */}
               <ModalContentSection
                 content={
-                  <Text className="text-base leading-6 text-g1">{detailRecipe.ingredients}</Text>
+                  <Text className="text-base leading-6 text-g1">
+                    {detailRecipe?.ingredientInfo}
+                  </Text>
                 }
                 subTitle="레시피 소개"
               />
               {/* 레시피 영상 */}
               <ModalContentSection
                 subTitle="레시피 영상"
-                content={<WebViewVideo videoUrl={detailRecipe.video} />}
+                content={<WebViewVideo videoUrl={detailRecipe?.video || ''} />}
               />
             </View>
             {/* 레시피 순서 */}
@@ -120,30 +119,30 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
               </View>
               {viewType === 'article' ? (
                 <View className="w-full px-4">
-                  <RecipeStepsArticleViewType steps={detailRecipe.steps} />
+                  <RecipeStepsArticleViewType steps={detailRecipe?.cookingOrders || []} />
                 </View>
               ) : (
-                <RecipeStepsFeedViewType steps={detailRecipe.steps} />
+                <RecipeStepsFeedViewType steps={detailRecipe?.cookingOrders || []} />
               )}
             </View>
             <View className="w-full px-4">
               {/* 레시피 Kick */}
               <ModalContentSection
-                content={<Text className="text-base leading-6 text-g1">{detailRecipe.tip}</Text>}
+                content={<Text className="text-base leading-6 text-g1">{detailRecipe?.kick}</Text>}
                 subTitle="레시피 Kick"
               />
               <View className="h-6" />
               {/* 수정하기 버튼 */}
               <FullWidthButton
                 buttonText="수정하기"
-                onPress={navigation.goBack}
+                onPress={navigation.goBack} // TODO:
                 backgroundColor="#F0EDE6"
                 textColor="#60594E"
               />
               {/* 삭제하기 버튼 */}
               <FullWidthButton
                 buttonText="삭제하기"
-                onPress={navigation.goBack}
+                onPress={navigation.goBack} // TODO:
                 backgroundColor="#DC6E3F"
                 textColor="white"
               />

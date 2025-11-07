@@ -10,4 +10,4 @@ export {
   AnotherUserPageProps,
 } from './navigation';
 
-export { User } from './user';
+// export { User } from './user';

@@ -4,7 +4,16 @@ import { queryKeys } from '@shared/config';
 import { apiInstance } from '@shared/config/api-instance';
 import { ApiResponse } from '@shared/types/api';
 import { useUserStore } from '../store';
-import { User } from '../types';
+// import { User } from '../types';
+
+// NOTE: 내 유저 불러오기
+export interface User {
+  id: string;
+  nickname: string;
+  isPrivate: boolean;
+  statusMessage: string | null;
+  profileImage: string | null;
+}
 
 const myUserApi = {
   getUser: async (): Promise<ApiResponse<User>> => {

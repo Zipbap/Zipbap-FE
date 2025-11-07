@@ -4,15 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Logo from '@/assets/img/logo.svg';
 import { AppleLoginButton, KakaoLoginButton } from '@features/auth';
-import { RootNavigationProp } from '@shared/types';
-
-interface Props {
-  navigation: RootNavigationProp<'Login'>;
-}
 
 const isIOS = () => Platform.OS === 'ios';
 
-const LoginPage = ({ navigation }: Props) => {
+const LoginPage = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }} edges={['bottom']}>
       <View className="flex-1 items-center justify-center bg-white px-6">
@@ -32,8 +27,8 @@ const LoginPage = ({ navigation }: Props) => {
               <Text className="font-bold text-sub1">&#183;</Text>
               <Text className="font-bold text-sub1">회원가입</Text>
             </View>
-            <KakaoLoginButton navigation={navigation} />
-            {isIOS() && <AppleLoginButton navigation={navigation} />}
+            <KakaoLoginButton />
+            {isIOS() && <AppleLoginButton />}
           </View>
         </View>
       </View>

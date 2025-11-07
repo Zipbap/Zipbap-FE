@@ -2,16 +2,13 @@ import React, { useState } from 'react';
 import { Text } from 'react-native';
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
 import { storeTokens } from '@/src/shared/store/token';
+import { useAuthStore } from '@/src/shared/store/useAuthStore';
 import { Button } from '@entities/user';
-import { RootNavigationProp } from '@shared/types';
 import { kakaoLogin } from '../api/login';
 
-interface Props {
-  navigation: RootNavigationProp<'Login'>;
-}
-
-const KakaoLoginButton = ({ navigation }: Props) => {
+const KakaoLoginButton = () => {
   const [isPressed, setIsPressed] = useState(false);
+  const { setAuthenticated } = useAuthStore();
 
   const signInWithKakao = async () => {
     try {
@@ -25,8 +22,7 @@ const KakaoLoginButton = ({ navigation }: Props) => {
         return;
       }
       await storeTokens({ accessToken, refreshToken });
-
-      navigation.replace('Main'); // 성공 시 이동
+      setAuthenticated(true);
     } catch (err) {
       console.error('❌ login err', err);
     }

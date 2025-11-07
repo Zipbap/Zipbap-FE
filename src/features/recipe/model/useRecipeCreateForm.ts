@@ -26,6 +26,8 @@ export const useRecipeCreateForm = () => {
     headcountId: null,
     levelId: null,
     video: null,
+    createdAt: '',
+    updatedAt: '',
   });
 
   // recipe 상태 변경될떄마다 쿼리 캐시 반영

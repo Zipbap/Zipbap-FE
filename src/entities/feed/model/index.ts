@@ -35,7 +35,6 @@ interface FeedBase {
   updatedAt: string;
 }
 
-// feed views, feed isPublic 추가 예정
 export interface Feed extends FeedBase {
   nickname: string;
   profileImage: string;

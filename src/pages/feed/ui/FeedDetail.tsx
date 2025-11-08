@@ -35,6 +35,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
   const { feedId } = route.params;
   const { data: feedDetail } = useFeedDetailQuery(feedId);
 
+  // TODO: refactoring
   const [bookmarked, setBookmarked] = useState<boolean | undefined>(feedDetail?.isBookmarked);
   const [liked, setLiked] = useState<boolean | undefined>(feedDetail?.isLiked);
   const [likeCount, setLikeCount] = useState<number | undefined>(feedDetail?.likeCount);

@@ -3,7 +3,6 @@ import { View, Image, Text } from 'react-native';
 import { Recipe } from '../model';
 
 const FeedView = ({ item }: { item: Recipe }) => {
-  console.log('FeedView');
   return (
     <View className="mb-[33px] flex-col">
       <Image className="relative h-52 self-stretch rounded-3xl" source={{ uri: item.thumbnail }} />

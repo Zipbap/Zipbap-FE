@@ -24,7 +24,6 @@ export function Navigation() {
   if (authLoading || userLoading) {
     return <LoadingIndicator />;
   }
-  console.log(isAuthenticated);
   return (
     <Host>
       <NavigationContainer>

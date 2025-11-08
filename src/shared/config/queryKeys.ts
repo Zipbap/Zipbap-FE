@@ -35,4 +35,23 @@ export const queryKeys = {
     list: () => [...queryKeys.recipeFinal.all, 'list'] as const,
     detail: (id: number) => [...queryKeys.recipeFinal.all, 'detail', id] as const,
   },
+
+  // NOTE : 김기수 작업
+  feed: {
+    key: 'feed',
+    all: ['feed'] as const,
+    list: () => [...queryKeys.feed.all, 'list'] as const,
+    detail: (id: string) => [...queryKeys.feed.all, 'detail', id] as const,
+  },
+  bookmark: {
+    key: 'bookmark',
+    all: ['bookmark'] as const,
+    list: () => [...queryKeys.bookmark.all, 'list'] as const,
+    detail: (id: string) => [...queryKeys.bookmark.all, 'detail', id] as const,
+  },
+  user: {
+    key: 'user',
+    all: ['user'] as const,
+    me: ['users', 'me'] as const,
+  },
 } as const;

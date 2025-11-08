@@ -18,6 +18,8 @@ export const useAuthStore = create<AuthState>(set => ({
   checkAuth: async () => {
     try {
       const tokens = await getTokens();
+      // FIXME: 추후삭제
+      console.log(tokens);
       set({ isAuthenticated: !!tokens?.accessToken });
     } catch (error) {
       console.error('인증 확인 실패:', error);

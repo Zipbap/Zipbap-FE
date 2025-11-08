@@ -1,7 +1,7 @@
 //user MODEL
 export { useDetailUserData } from './model/useDetailUserData';
 export { useFollowData } from './model/useDetailFollowData';
-export { useBookmarkData, useFeedData } from './model/useMyPageData';
+export { useBookmarkQuery, useFeedQuery } from './model/useMyPageControllerQueries';
 
 // user UI
 export { default as FeedGrid } from './ui/FeedGrid';

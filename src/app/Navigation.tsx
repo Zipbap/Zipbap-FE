@@ -7,6 +7,7 @@ import { RecipeDetail } from '@pages/recipe';
 import { Secession, ProfileEdit, FollowDetail, AnotherUserPage } from '@pages/user';
 import { RecipeCreateForm } from '@features/recipe';
 import { AnotherUserHeader } from '@entities/user';
+import { useUserQuery } from '@shared/lib/';
 import { useAuthStore } from '@shared/store/useAuthStore';
 import { RootStackParamList } from '@shared/types';
 import LoadingIndicator from '@shared/ui/LodingIndicator';
@@ -15,9 +16,12 @@ import MainTabNavigator from './TabNavigation';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function Navigation() {
-  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
-  const isLoading = useAuthStore(state => state.isLoading);
-  if (isLoading) {
+  const { isAuthenticated, isLoading: authLoading } = useAuthStore();
+
+  // NOTE: 유저 정보 쿼리
+  const { isLoading: userLoading } = useUserQuery();
+
+  if (authLoading || userLoading) {
     return <LoadingIndicator />;
   }
 
@@ -25,15 +29,10 @@ export function Navigation() {
     <Host>
       <NavigationContainer>
         <Stack.Navigator>
-          {isAuthenticated ? (
-            <Stack.Screen
-              name="Main"
-              component={MainTabNavigator}
-              options={{ headerShown: false }}
-            />
-          ) : (
+          {isAuthenticated ?? (
             <Stack.Screen name="Login" component={LoginPage} options={{ headerShown: false }} />
           )}
+          <Stack.Screen name="Main" component={MainTabNavigator} options={{ headerShown: false }} />
           <Stack.Screen
             name="RecipeCreateForm"
             component={RecipeCreateForm}

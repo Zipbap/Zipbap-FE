@@ -12,6 +12,9 @@ export {
   UserBase,
   UserWithoutBookmarks,
   UserWithoutFeeds,
+  // FIXME: 추후 위에 것들 삭제
+  UserFeeds,
+  UserBookmarks,
 } from './model';
 
 // user UI

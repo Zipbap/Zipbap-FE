@@ -1,6 +1,6 @@
 import { login } from '@react-native-seoul/kakao-login';
 
-const API_BASE = 'https://zipbap.store';
+const API_BASE = process.env.EXPO_PUBLIC_BASE_URL || 'http://localhost:8080/api';
 
 export const kakaoLogin = async () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -8,7 +8,7 @@ export const kakaoLogin = async () => {
     scopes: ['account_email', 'profile_nickname', 'profile_image'],
   });
 
-  const res = await fetch(`${API_BASE}/api/auth/kakao/login`, {
+  const res = await fetch(`${API_BASE}/auth/kakao/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ accessToken: token.accessToken }),

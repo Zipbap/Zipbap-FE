@@ -1,3 +1,4 @@
+// TODO: 나중에 삭제할 것
 import { FollowData, mockFollowData } from '@entities/user';
 
 export const apiGetDetailFollowData = async (id: string): Promise<FollowData> => {

@@ -30,7 +30,7 @@ const ModalHeader = ({
         'absolute top-0 z-10 flex min-h-[80px] w-full flex-col justify-start rounded-b-3xl bg-white px-8',
         style,
       )}
-      style={{ paddingTop: insets.top }}
+      style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
     >
       <View className="flex w-full flex-row items-center justify-between">
         <Pressable onPress={onBackPress} className="w-20">

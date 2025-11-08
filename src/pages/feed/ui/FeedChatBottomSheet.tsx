@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { View, Text, TextInput, FlatList, RefreshControl } from 'react-native';
+import { View, Text, TextInput, FlatList, RefreshControl, Platform } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { ChatInput, CommentItem, createCommentApi, fetchCommentsApi } from '@features/chat';
 import { Comment } from '@entities/feed';
@@ -118,7 +118,11 @@ const FeedChatBottomSheet = ({ feedId, bottomSheetVisible, bottomSheetClose }: P
   return (
     <BottomSheetModal visible={bottomSheetVisible} onClose={bottomSheetClose}>
       <View className="h-[670px]">
-        <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={160} style={{ flex: 1 }}>
+        <KeyboardAvoidingView
+          behavior={'padding'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 160}
+          style={{ flex: 1 }}
+        >
           <View className="mt-6 flex-1 px-6">
             <Text className="mt-5 text-center text-lg font-bold text-black">댓글</Text>
             <View className="mt-4 flex-1">

@@ -1,12 +1,10 @@
 import React from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
-
-import BellSvg from '@/assets/img/feed/bell-icon.svg';
 import ClockSvg from '@/assets/img/feed/clock-icon.svg';
 import StarSvg from '@/assets/img/feed/star-icon.svg';
+import UserSvg from '@/assets/img/user.svg';
 import { Feed } from '@entities/feed';
 import { RootNavigationProp } from '@shared/types';
-
 import FeedBottomTab from './FeedBottomTab';
 
 interface Props {
@@ -20,60 +18,60 @@ const FeedCard = ({ feed, navigation }: Props) => {
       <View className="mb-4 rounded-[20px] bg-white p-4">
         <Pressable
           onPress={() => {
-            navigation.navigate('FeedDetail', { feedId: feed.id });
+            navigation.navigate('FeedDetail', { feedId: feed.recipeId });
           }}
         >
           {/* 프로필 섹션 */}
           <View className="mb-6 flex-row items-center">
-            <Image
-              source={{ uri: feed.profileImage }}
-              className="mr-3 h-[55px] w-[55px] rounded-full bg-g2"
-            />
+            {feed.profileImage ? (
+              <Image
+                source={{ uri: feed.profileImage }}
+                className="mr-3 h-[55px] w-[55px] rounded-full bg-g2"
+              />
+            ) : (
+              <UserSvg width={55} height={55} style={{ marginRight: 12 }} />
+            )}
             <View>
               <Text className="mb-1 text-[16px] font-bold">{feed.title}</Text>
               <Text className="text-[14px] font-semibold color-g2">
-                {feed.nickname} | 전체 공개 | 조회 {feed.views}
+                {feed.nickname} | 조회 {feed.viewCount}
               </Text>
             </View>
           </View>
 
           {/* 대표 사진 */}
           <Image
-            source={{ uri: feed.mainImage }}
+            source={{ uri: feed.thumbnail }}
             className="mb-6 h-[200px] w-full rounded-2xl bg-g3"
           />
 
-          {/* 본문 */}
-          <Text className="mb-[16px] text-[16px] font-medium color-g1">{feed.content}</Text>
+          {/* 요리 소개 */}
+          <Text className="mb-[16px] text-[16px] font-medium color-g1">{feed.introduction}</Text>
 
           {/* 요리 정보 */}
           <View className="mb-4 flex-row justify-between text-xs">
             <View className="flex-row items-center justify-center gap-1.5">
               <ClockSvg />
               <Text className="text-[12px] font-semibold color-sub1">요리시간</Text>
-              <Text className="text-[12px] font-medium color-sub1">{feed.cookingTime}분</Text>
+              <Text className="text-[12px] font-medium color-sub1">{feed.cookingTime}</Text>
             </View>
             <View className="flex-row items-center justify-center gap-1.5">
               <StarSvg />
               <Text className="text-[12px] font-semibold color-sub1">난이도</Text>
-              <Text className="text-[12px] font-medium color-sub1">{feed.difficulty}</Text>
-            </View>
-            <View className="flex-row items-center justify-center gap-1.5">
-              <BellSvg />
-              <Text className="text-[12px] font-semibold color-sub1">재료</Text>
-              <Text className="text-[12px] font-medium color-sub1">{feed.ingredientsCount}개</Text>
+              <Text className="text-[12px] font-medium color-sub1">{feed.level}</Text>
             </View>
           </View>
         </Pressable>
       </View>
+
       {/* 하단 아이콘 (좋아요, 북마크, 댓글) */}
       <FeedBottomTab
-        initialLikes={feed.likes}
-        initialBookmarks={feed.bookmarks}
-        initialComments={feed.comments}
+        initialLikes={feed.likeCount}
+        initialBookmarks={feed.bookmarkCount}
+        initialComments={feed.commentCount}
         isLiked={feed.isLiked}
         isBookmarked={feed.isBookmarked}
-        feedId={feed.id}
+        feedId={feed.recipeId}
       />
     </View>
   );

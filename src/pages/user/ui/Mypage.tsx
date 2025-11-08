@@ -23,7 +23,7 @@ const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
     bookmarks,
     isLoading: isLoadingBookmark,
     refetch: refetchBookmarks,
-  } = useBookmarkQuery('2', false);
+  } = useBookmarkQuery(user!.id, false);
 
   // NOTE: 탭 전환 시 북마크 데이터 로드
   useEffect(() => {

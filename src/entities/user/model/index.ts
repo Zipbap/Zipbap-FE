@@ -1,6 +1,6 @@
 import { Feed } from '@entities/feed';
 
-export type UserFeed = Pick<Feed, 'id' | 'mainImage'>;
+export type UserFeed = Pick<Feed, 'recipeId' | 'thumbnail'>;
 
 export interface User {
   id: string;

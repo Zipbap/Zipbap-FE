@@ -6,13 +6,13 @@ import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
 import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
+import { useFeedDetailQuery } from '@/src/features/feed/api/useFeedDetialQuery';
 import {
   FeedBottomTab,
-  useDetailFeedData,
-  // RecipeDetailSection,
-  // RecipeStepsArticleViewType,
+  RecipeDetailSection,
+  RecipeStepsArticleViewType,
   HeaderRightContent,
-  // RecipeStepsFeedViewType,
+  RecipeStepsFeedViewType,
   FeedDetailSkeleton,
 } from '@features/feed';
 
@@ -29,36 +29,39 @@ import {
 } from '@shared/ui';
 
 const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
-  const { feedId } = route.params;
-  console.log(feedId);
+  const { viewType, setViewType } = useTwoViewTypeStore();
   const insets = useSafeAreaInsets();
 
-  const { getDetailFeed, detailFeed } = useDetailFeedData();
-  const [bookmarked, setBookmarked] = useState<boolean | undefined>(detailFeed?.isBookmarked);
-  const [liked, setLiked] = useState<boolean | undefined>(detailFeed?.isLiked);
-  const [likeCount, setLikeCount] = useState<number | undefined>(detailFeed?.likes);
-  const [bookmarkCount, setBookmarkCount] = useState<number | undefined>(detailFeed?.bookmarks);
-  const [follow, setFollow] = useState<boolean | undefined>(detailFeed?.isFollowing);
+  const { feedId } = route.params;
+  const { data: feedDetail } = useFeedDetailQuery(feedId);
 
-  const { viewType, setViewType } = useTwoViewTypeStore();
-  console.log(viewType);
-  // NOTE: feed의 ID를 통해 feed를 받아오는 작업
+  // TODO: refactoring
+  const [bookmarked, setBookmarked] = useState<boolean | undefined>(feedDetail?.isBookmarked);
+  const [liked, setLiked] = useState<boolean | undefined>(feedDetail?.isLiked);
+  const [likeCount, setLikeCount] = useState<number | undefined>(feedDetail?.likeCount);
+  const [bookmarkCount, setBookmarkCount] = useState<number | undefined>(feedDetail?.bookmarkCount);
+  const [follow, setFollow] = useState<boolean | undefined>(feedDetail?.isFollowing);
+
   useEffect(() => {
-    getDetailFeed(feedId ? feedId : '1');
-
-    if (detailFeed) {
-      setBookmarked(detailFeed.isBookmarked);
-      setLiked(detailFeed.isLiked);
-      setLikeCount(detailFeed.likes);
-      setBookmarkCount(detailFeed.bookmarks);
-      setFollow(detailFeed.isFollowing);
+    if (feedDetail) {
+      setBookmarked(feedDetail.isBookmarked);
+      setLiked(feedDetail.isLiked);
+      setLikeCount(feedDetail.likeCount);
+      setBookmarkCount(feedDetail.bookmarkCount);
+      setFollow(feedDetail.isFollowing);
     }
-  }, [feedId, getDetailFeed, detailFeed]);
+  }, [feedDetail]);
 
   if (!feedId) return null;
-  else if (!detailFeed) {
-    return <FeedDetailSkeleton />;
-  }
+  if (!feedDetail) return <FeedDetailSkeleton />;
+
+  const categories = [
+    feedDetail.myCategory,
+    feedDetail.cookingType,
+    feedDetail.situation,
+    feedDetail.mainIngredient,
+    feedDetail.method,
+  ];
 
   return (
     <View className="h-[100%] overflow-hidden bg-white" style={{ paddingTop: insets.top }}>
@@ -71,7 +74,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
 
       {/* 스크롤 영역 */}
       <ScrollView>
-        <Image source={{ uri: detailFeed.mainImage }} className="h-[300px] w-full bg-sub1" />
+        <Image source={{ uri: feedDetail.thumbnail }} className="h-[300px] w-full bg-sub1" />
 
         <View
           className="-mt-6 rounded-t-3xl bg-white px-[16px] pb-6 pt-10"
@@ -80,29 +83,31 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
           <View className="w-full flex-col">
             {/* 작성일 */}
             <View className="mb-5 w-full flex-row justify-end">
-              <Text className="text-[12px] color-g5">작성일 {detailFeed.createdAt}</Text>
+              <Text className="text-[12px] color-g5">
+                작성일 {feedDetail.createdAt.split('T')[0]}
+              </Text>
             </View>
             {/* 작성자, 팔로워, subtitle */}
             <View className="mb-4 w-full flex-row items-center justify-between gap-[8px]">
               <View className="flex-1 flex-row items-start">
                 <Image
-                  source={{ uri: detailFeed.profileImage }}
+                  source={{ uri: feedDetail.profileImage }}
                   className="mr-[12px] h-[48px] w-[48px] rounded-2xl bg-primary"
                 />
                 <View className="flex-1">
                   <Text className="mb-2 text-[12px] font-medium">
-                    <Text className="text-[18px] font-bold">{detailFeed.nickname}</Text>
+                    <Text className="text-[18px] font-bold">{feedDetail.nickname}</Text>
                     {'   '}셰프
                   </Text>
                   <View className="w-full flex-row">
                     <View>
-                      <Text className="text-sm font-semibold">
-                        팔로워 {detailFeed.followers} |{' '}
+                      <Text className="mr-1 text-sm font-semibold">
+                        팔로워 {feedDetail.followerCount} |
                       </Text>
                     </View>
                     <View className="flex-1">
                       <Text className="text-sm font-medium color-g2" style={{ flexWrap: 'wrap' }}>
-                        {detailFeed.introduce}
+                        {feedDetail.statusMessage || '상태 메시지 없음'}
                       </Text>
                     </View>
                   </View>
@@ -127,15 +132,16 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
             </View>
           </View>
 
-          {/* 제목 */}
+          {/* 소제목 */}
           <Text className="mb-1 mt-[24px] text-[16px] font-bold color-sub1">
-            {detailFeed.subTitle}
+            {feedDetail.subtitle}
           </Text>
-          <Text className="mb-2 text-[24px] font-bold color-black">{detailFeed.title}</Text>
+          {/* 제목 */}
+          <Text className="mb-2 text-[24px] font-bold color-black">{feedDetail.title}</Text>
 
           {/* 통계 */}
           <View className="mb-4 h-5 flex-row items-center gap-4">
-            <Text className="text-[12px] font-medium color-g2">조회 {detailFeed.views}</Text>
+            <Text className="text-[12px] font-medium color-g2">조회 {feedDetail.viewCount}</Text>
             <View className="flex-row items-center gap-0">
               <Pressable
                 className="flex-row items-center gap-1"
@@ -180,30 +186,32 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
               {/* 레시피 소개 */}
               <ModalContentSection
                 subTitle="레시피 소개"
-                content={<Text className="text-base leading-6 text-g1">{detailFeed.content}</Text>}
+                content={
+                  <Text className="text-base leading-6 text-g1">{feedDetail.introduction}</Text>
+                }
               />
               {/* 카테고리 */}
               <ModalContentSection
                 subTitle="카테고리 및 요리 정보"
-                content={<ModalCategoriesSection categories={detailFeed.categories} />}
+                content={<ModalCategoriesSection categories={categories} />}
               />
               {/* 인원/요리시간/ 난이도 */}
-              {/* <RecipeDetailSection
-                serving={detailFeed.serving}
-                cookingTime={detailFeed.cookingTime}
-                difficulty={detailFeed.difficulty}
-              /> */}
+              <RecipeDetailSection
+                serving={feedDetail.headcount}
+                cookingTime={feedDetail.cookingTime}
+                difficulty={feedDetail.level}
+              />
               {/* 재료 */}
               <ModalContentSection
                 subTitle="재료"
                 content={
-                  <Text className="text-base leading-6 text-g1">{detailFeed.ingredients}</Text>
+                  <Text className="text-base leading-6 text-g1">{feedDetail.ingredientInfo}</Text>
                 }
               />
               {/* 레시피 영상 */}
               <ModalContentSection
                 subTitle="레시피 영상"
-                content={<WebViewVideo videoUrl={detailFeed.video} />}
+                content={<WebViewVideo videoUrl={feedDetail.video} />}
               />
             </View>
             {/* 레시피 순서 */}
@@ -212,19 +220,19 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                 <Text className="text-xl font-bold color-black">레시피 순서</Text>
                 <TwoViewTypeSwitcher viewType={viewType} onSwitch={setViewType} />
               </View>
-              {/* {viewType === 'article' ? (
+              {viewType === 'article' ? (
                 <View className="w-full px-4">
-                  <RecipeStepsArticleViewType steps={detailFeed.steps} />
+                  <RecipeStepsArticleViewType steps={feedDetail.cookingOrders} />
                 </View>
               ) : (
-                <RecipeStepsFeedViewType steps={detailFeed.steps} />
-              )} */}
+                <RecipeStepsFeedViewType steps={feedDetail.cookingOrders} />
+              )}
             </View>
 
             <View className="w-full px-4">
               {/* 레시피 Kick */}
               <ModalContentSection
-                content={<Text className="text-base leading-6 text-g1">{detailFeed.tip}</Text>}
+                content={<Text className="text-base leading-6 text-g1">{feedDetail.kick}</Text>}
                 subTitle="레시피 Kick"
               />
             </View>
@@ -233,11 +241,12 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
           {/* 바텀 tab */}
           <View className="relative h-[60px] w-full flex-col justify-center bg-g4">
             <FeedBottomTab
-              initialLikes={detailFeed.likes}
-              initialBookmarks={detailFeed.bookmarks}
-              initialComments={detailFeed.comments}
-              isLiked={detailFeed.isLiked}
-              isBookmarked={detailFeed.isBookmarked}
+              initialLikes={feedDetail.likeCount}
+              initialBookmarks={feedDetail.bookmarkCount}
+              initialComments={feedDetail.commentCount}
+              isLiked={feedDetail.isLiked}
+              isBookmarked={feedDetail.isBookmarked}
+              feedId={feedDetail.recipeId}
             />
           </View>
         </View>

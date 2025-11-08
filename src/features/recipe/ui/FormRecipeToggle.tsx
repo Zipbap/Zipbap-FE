@@ -8,12 +8,11 @@ interface Props {
 
 const FormRecipeToggle = ({ selectedToggle, setSelectedToggle }: Props) => {
   const isPrivate = selectedToggle === 'private';
-
   return (
     <View>
       <Switch
-        value={isPrivate}
-        onValueChange={val => setSelectedToggle(val ? 'private' : 'public')}
+        value={!isPrivate}
+        onValueChange={val => setSelectedToggle(val ? 'public' : 'private')}
         trackColor={{ false: '#AEA79C', true: '#F2A67A' }} // 트랙 색상 (OFF/ON)
         thumbColor="#ffffff" // 동그라미 색상
         ios_backgroundColor="#AEA79C"

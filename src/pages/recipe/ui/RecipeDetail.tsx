@@ -48,7 +48,7 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
   ].filter(isValidString);
 
   const deleteRecipe = (recipeId: string) => {
-    apiInstance.delete(`/recipe/${recipeId}`);
+    apiInstance.delete(`/recipes/${recipeId}`);
   };
 
   const navigateToRecipeCreateForm = () => {

@@ -36,14 +36,16 @@ const AnotherUserFeedGrid = ({ data, navigation }: Props) => {
         ListHeaderComponent={() => <View className="h-[270px]" />}
         data={data}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigation.navigate('FeedDetail', { feedId: item.id })}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('FeedDetail', { feedId: item.recipeId })}
+          >
             <View className="absolute right-2 top-2 z-10">
               <FeedsSvg />
             </View>
-            <Image source={{ uri: item.mainImage }} className="h-[150px] w-[130px] bg-g5" />
+            <Image source={{ uri: item.thumbnail }} className="h-[150px] w-[130px] bg-g5" />
           </TouchableOpacity>
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.recipeId}
         numColumns={3}
       />
     </View>

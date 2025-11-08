@@ -1,9 +1,5 @@
-// user api
-// export { mockUser } from './api/mockUser';
-
 // feed model
-export { useFeedData } from './model/useFeedData';
-export { useDetailFeedData } from './model/useDetailFeedData';
+export { useFeedInfiniteQuery } from './api/useFeedInfiniteQuery';
 
 // feed UI
 export { default as FeedBottomTab } from './ui/FeedBottomTab';

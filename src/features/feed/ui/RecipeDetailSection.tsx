@@ -30,7 +30,7 @@ const RecipeDetailSection = ({ serving, cookingTime, difficulty }: Props) => {
           <ClockGraySvg />
           <Text className="font-semibold text-g2">요리 시간</Text>
         </View>
-        <Text className="font-semibold text-g2">{cookingTime}분 이내</Text>
+        <Text className="font-semibold text-g2">{cookingTime}</Text>
       </View>
       <View className="w-full flex-row justify-between">
         <View className="flex-row gap-6">

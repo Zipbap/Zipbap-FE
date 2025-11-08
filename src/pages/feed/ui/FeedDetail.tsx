@@ -8,10 +8,8 @@ import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 import { useFeedDetailQuery } from '@/src/features/feed/api/useFeedDetialQuery';
 import {
-  FeedBottomTab,
   RecipeDetailSection,
   RecipeStepsArticleViewType,
-  HeaderRightContent,
   RecipeStepsFeedViewType,
   FeedDetailSkeleton,
 } from '@features/feed';
@@ -55,7 +53,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
   if (!feedDetail) return <FeedDetailSkeleton />;
 
   const categories = [
-    feedDetail.myCategory || '마이 카테고리',
+    feedDetail.myCategory,
     feedDetail.cookingType,
     feedDetail.situation,
     feedDetail.mainIngredient,
@@ -65,11 +63,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
   return (
     <View className="h-[100%] overflow-hidden bg-white" style={{ paddingTop: insets.top }}>
       {/* 헤더 */}
-      <ModalHeader
-        title="레시피 상세"
-        onBackPress={navigation.goBack}
-        rightContent={<HeaderRightContent bookmarked={bookmarked} setBookmarked={setBookmarked} />}
-      />
+      <ModalHeader title="레시피 상세" onBackPress={navigation.goBack} />
 
       {/* 스크롤 영역 */}
       <ScrollView>
@@ -100,8 +94,9 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                   </Text>
                   <View className="w-full flex-row">
                     <View>
-                      {/* TODO: backend에게 팔로워 요청 필요 */}
-                      <Text className="text-sm font-semibold">팔로워 | </Text>
+                      <Text className="mr-1 text-sm font-semibold">
+                        팔로워 {feedDetail.followerCount} |
+                      </Text>
                     </View>
                     <View className="flex-1">
                       <Text className="text-sm font-medium color-g2" style={{ flexWrap: 'wrap' }}>
@@ -236,16 +231,6 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
             </View>
           </View>
           <View className="h-[40px]" />
-          {/* 바텀 tab */}
-          <View className="relative h-[60px] w-full flex-col justify-center bg-g4">
-            <FeedBottomTab
-              initialLikes={feedDetail.likeCount}
-              initialBookmarks={feedDetail.bookmarkCount}
-              initialComments={feedDetail.commentCount}
-              isLiked={feedDetail.isLiked}
-              isBookmarked={feedDetail.isBookmarked}
-            />
-          </View>
         </View>
       </ScrollView>
     </View>

@@ -53,23 +53,17 @@ const FeedCard = ({ feed, navigation }: Props) => {
             <View className="flex-row items-center justify-center gap-1.5">
               <ClockSvg />
               <Text className="text-[12px] font-semibold color-sub1">요리시간</Text>
-              <Text className="text-[12px] font-medium color-sub1">{feed.cookingTime}분</Text>
+              <Text className="text-[12px] font-medium color-sub1">{feed.cookingTime}</Text>
             </View>
             <View className="flex-row items-center justify-center gap-1.5">
               <StarSvg />
               <Text className="text-[12px] font-semibold color-sub1">난이도</Text>
               <Text className="text-[12px] font-medium color-sub1">{feed.level}</Text>
             </View>
-            {/*
-              재료 정보 삭제
-            <View className="flex-row items-center justify-center gap-1.5">
-              <BellSvg />
-              <Text className="text-[12px] font-semibold color-sub1">재료</Text>
-              <Text className="text-[12px] font-medium color-sub1">{feed.ingredientsCount}개</Text>
-            </View> */}
           </View>
         </Pressable>
       </View>
+
       {/* 하단 아이콘 (좋아요, 북마크, 댓글) */}
       <FeedBottomTab
         initialLikes={feed.likeCount}

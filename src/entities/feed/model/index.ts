@@ -48,7 +48,6 @@ export interface Feed extends FeedBase {
   viewCount: number;
 }
 
-// my recipe, cookingOrders 추가 예정
 export interface FeedDetail extends FeedBase {
   nickname: string;
   profileImage: string;
@@ -60,6 +59,7 @@ export interface FeedDetail extends FeedBase {
   kick: string;
   recipeIsPrivate: boolean;
   recipeStatus: string;
+  myCategory: string;
   cookingType: string;
   situation: string;
   mainIngredient: string;
@@ -71,6 +71,8 @@ export interface FeedDetail extends FeedBase {
   isBookmarked: boolean;
   commentCount: number;
   cookingOrders: CookingOrder[];
+  viewCount: number;
+  followerCount: number;
 }
 
 export interface FeedPage {

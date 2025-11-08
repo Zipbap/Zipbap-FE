@@ -31,7 +31,7 @@ const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
             data={dataList}
             renderItem={renderItem}
             keyExtractor={item => item.recipeId}
-            ListFooterComponent={() => <View style={{ height: 50 }} />}
+            ListFooterComponent={() => <View style={{ height: 80 }} />}
             onEndReached={onEndReached}
             onEndReachedThreshold={0.6}
             refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}

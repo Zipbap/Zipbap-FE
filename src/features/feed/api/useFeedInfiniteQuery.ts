@@ -40,7 +40,6 @@ export const useFeedInfiniteQuery = (params?: Omit<FeedListParams, 'page'>) => {
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const dataList = data?.pages.flatMap(page => page.content) ?? [];
-  console.log('date pages', data?.pages);
   return {
     dataList,
     onEndReached,

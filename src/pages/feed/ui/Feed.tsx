@@ -1,4 +1,5 @@
-import React from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback } from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import { FeedCard, useFeedInfiniteQuery, FeedCardSkeleton } from '@features/feed';
@@ -13,9 +14,14 @@ interface FeedPageProps {
 
 const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
   const { bottomSheetVisible, bottomSheetClose, feedId } = useFeedChatBottomSheetStore();
-  const { dataList, onEndReached, onRefresh, isRefreshing, isInitialLoading } =
+  const { dataList, onEndReached, onRefresh, isRefreshing, isInitialLoading, refetch } =
     useFeedInfiniteQuery();
 
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
+  );
   const renderItem = ({ item }: { item: FeedItem }) => (
     <FeedCard feed={item} navigation={navigation} />
   );

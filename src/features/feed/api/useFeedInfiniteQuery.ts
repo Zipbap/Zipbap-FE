@@ -46,5 +46,6 @@ export const useFeedInfiniteQuery = (params?: Omit<FeedListParams, 'page'>) => {
     onRefresh,
     isRefreshing: isFetching && !isFetchingNextPage,
     isInitialLoading: isLoading,
+    refetch,
   };
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 
 import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
@@ -36,7 +36,6 @@ const FeedBottomTab = ({
     bottomSheetVisible,
     feedId: activeFeedId,
   } = useFeedChatBottomSheetStore();
-
   const { mutate: toggleLike } = useToggleLikeMutation();
   const { mutate: toggleBookmark } = useToggleBookmarkMutation();
 
@@ -45,6 +44,13 @@ const FeedBottomTab = ({
   const [likeCount, setLikeCount] = useState(initialLikes);
   const [bookmarkCount, setBookmarkCount] = useState(initialBookmarks);
   const [commentCount] = useState(initialComments);
+
+  useEffect(() => {
+    setLiked(isInitialLiked);
+    setBookmarked(isInitialBookmarked);
+    setLikeCount(initialLikes);
+    setBookmarkCount(initialBookmarks);
+  }, [isInitialLiked, isInitialBookmarked, initialLikes, initialBookmarks, initialComments]);
 
   const isCommented = bottomSheetVisible && activeFeedId === feedId;
 

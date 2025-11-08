@@ -8,8 +8,10 @@ import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 import { useFeedDetailQuery } from '@/src/features/feed/api/useFeedDetialQuery';
 import {
+  FeedBottomTab,
   RecipeDetailSection,
   RecipeStepsArticleViewType,
+  HeaderRightContent,
   RecipeStepsFeedViewType,
   FeedDetailSkeleton,
 } from '@features/feed';
@@ -63,7 +65,11 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
   return (
     <View className="h-[100%] overflow-hidden bg-white" style={{ paddingTop: insets.top }}>
       {/* 헤더 */}
-      <ModalHeader title="레시피 상세" onBackPress={navigation.goBack} />
+      <ModalHeader
+        title="레시피 상세"
+        onBackPress={navigation.goBack}
+        rightContent={<HeaderRightContent bookmarked={bookmarked} setBookmarked={setBookmarked} />}
+      />
 
       {/* 스크롤 영역 */}
       <ScrollView>
@@ -231,6 +237,17 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
             </View>
           </View>
           <View className="h-[40px]" />
+          {/* 바텀 tab */}
+          <View className="relative h-[60px] w-full flex-col justify-center bg-g4">
+            <FeedBottomTab
+              initialLikes={feedDetail.likeCount}
+              initialBookmarks={feedDetail.bookmarkCount}
+              initialComments={feedDetail.commentCount}
+              isLiked={feedDetail.isLiked}
+              isBookmarked={feedDetail.isBookmarked}
+              feedId={feedDetail.recipeId}
+            />
+          </View>
         </View>
       </ScrollView>
     </View>

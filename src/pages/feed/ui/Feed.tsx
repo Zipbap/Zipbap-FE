@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
-
 import { Portal } from 'react-native-portalize';
 import { FeedCard, useFeedData, FeedCardSkeleton } from '@features/feed';
 import { Feed as FeedItem } from '@entities/feed';
@@ -30,7 +29,7 @@ const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
           <FlatList
             data={dataList}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.recipeId}
             ListFooterComponent={() => <View style={{ height: 50 }} />}
             onEndReached={onEndReached}
             onEndReachedThreshold={0.6}

@@ -45,6 +45,7 @@ export interface Feed extends FeedBase {
   likeCount: number;
   bookmarkCount: number;
   commentCount: number;
+  viewCount: number;
 }
 
 // my recipe, cookingOrders 추가 예정

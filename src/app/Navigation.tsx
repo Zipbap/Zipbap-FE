@@ -24,6 +24,7 @@ export function Navigation() {
   if (authLoading || userLoading) {
     return <LoadingIndicator />;
   }
+  console.log(isAuthenticated);
   return (
     <Host>
       <NavigationContainer>
@@ -50,7 +51,7 @@ export function Navigation() {
           {/* NOTE: 모달 페이지 관리 */}
           <Stack.Group
             screenOptions={{
-              presentation: 'modal',
+              presentation: 'fullScreenModal',
               gestureEnabled: true,
               animation: 'slide_from_bottom',
               headerShown: false,

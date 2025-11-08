@@ -9,3 +9,5 @@ export {
   MainTabParamList,
   AnotherUserPageProps,
 } from './navigation';
+
+export { User } from './user';

@@ -26,10 +26,10 @@
       },
       "buildNumber": "5"
     },
-    "plugins": ["expo-apple-authentication"],
+    "plugins": ["expo-apple-authentication", "expo-video"],
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/img/app-icon.png",
+        "foregroundImage": "./assets/img/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,

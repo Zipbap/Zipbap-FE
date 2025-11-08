@@ -3,18 +3,19 @@ import { FlatList, Image, View, TouchableOpacity } from 'react-native';
 
 import FeedsSvg from '@/assets/img/feeds-icon.svg';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
-import { UserFeed, MyPageTabType } from '@entities/user';
+import { MyPageTabType } from '@entities/user';
+import { RecipeCard } from '@entities/user/model';
 import { RootNavigationProp } from '@shared/types';
 import EmptyStateUsingVideo from './EmptyStateUsingVideo';
 
 interface Props {
-  data: UserFeed[];
+  data: RecipeCard[] | undefined;
   type: MyPageTabType;
   navigation: RootNavigationProp<'Main'>;
 }
 
 const FeedGrid = ({ data, type, navigation }: Props) => {
-  if (data.length === 0) {
+  if (data?.length === 0) {
     return (
       <View
         className="absolute bottom-0 left-0 right-0 top-0 items-center justify-center"
@@ -45,7 +46,7 @@ const FeedGrid = ({ data, type, navigation }: Props) => {
             <View className="absolute right-2 top-2 z-10">
               <FeedsSvg />
             </View>
-            <Image source={{ uri: item.mainImage }} className="h-[150px] w-[130px] bg-g5" />
+            <Image source={{ uri: item.thumbnail }} className="h-[150px] w-[130px] bg-g5" />
           </TouchableOpacity>
         )}
         keyExtractor={item => item.id}

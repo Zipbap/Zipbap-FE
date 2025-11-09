@@ -6,6 +6,7 @@ interface Props {
   onPress: () => void;
   textColor?: string;
   backgroundColor?: string;
+  disabled?: boolean;
 }
 
 const FullWidthButton = ({
@@ -13,6 +14,7 @@ const FullWidthButton = ({
   onPress,
   textColor = 'white',
   backgroundColor = '#FF7A00',
+  disabled = false,
 }: Props) => {
   return (
     <TouchableOpacity
@@ -21,6 +23,7 @@ const FullWidthButton = ({
         backgroundColor,
       }}
       className={`mt-4 flex h-[50px] w-full items-center justify-center rounded-2xl`}
+      disabled={disabled}
     >
       <Text style={{ color: textColor }} className="text-center text-[16px] font-bold">
         {buttonText}

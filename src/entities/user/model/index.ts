@@ -47,6 +47,7 @@ export interface UserProfile {
   followers: number;
   followings: number;
   isFollowing: boolean;
+  statusMessage: string | null;
 }
 
 // 단일 레시피 카드 정보
@@ -78,16 +79,10 @@ export interface PageableInfo {
 // 레시피 페이지 데이터
 export interface RecipeCardPage {
   content: RecipeCard[];
-  pageable: PageableInfo;
-  totalElements: number;
-  totalPages: number;
-  last: boolean;
+  page: number;
   size: number;
-  number: number;
-  sort: SortInfo;
-  numberOfElements: number;
-  first: boolean;
-  empty: boolean;
+  totalPages: number;
+  totalElements: number;
 }
 
 // NOTE: 팔로우 팔로잉 유저들 리스트 타입
@@ -105,4 +100,12 @@ export interface FollowingAndFollowerCount {
   followingCount: number;
   followerCount: number;
   isFollow: boolean;
+}
+
+export interface EditProfile {
+  id: string;
+  nickname: string;
+  isPrivate: boolean;
+  profileImage: string | null;
+  statusMessage: string | null;
 }

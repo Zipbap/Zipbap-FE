@@ -3,6 +3,7 @@ import {
   UserBookmarks,
   FollowingAndFollowerList,
   FollowingAndFollowerCount,
+  EditProfile,
 } from '@entities/user';
 import { apiInstance } from '@shared/config/api-instance';
 import { ApiResponse } from '@shared/types/api';
@@ -35,5 +36,14 @@ export const myPageApi = {
     const endpoint = `/follows/${userId}/count`;
     const res = await apiInstance.get(endpoint);
     return res.data;
+  },
+  PutProfileEdit: async (data: Omit<EditProfile, 'id'>): Promise<ApiResponse<EditProfile>> => {
+    const endpoint = `/users/profile`;
+    const res = await apiInstance.put(endpoint, data);
+    return res.data;
+  },
+  DeleteUser: async (): Promise<void> => {
+    const endpoint = `/users`;
+    await apiInstance.delete(endpoint);
   },
 };

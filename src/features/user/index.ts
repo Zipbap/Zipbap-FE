@@ -5,6 +5,8 @@ export {
   useFollowerListQuery,
   useFollowingListQuery,
   useFollowerAndFollowingCountQuery,
+  useEditProfileQuery,
+  useDeleteUserQuery,
 } from './model/useMyPageControllerQueries';
 
 // user UI

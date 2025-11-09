@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Platform, Text, TextInput, View, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CheckSvgIcon from '@/assets/img/check.svg';
+import { handleUserDelete } from '@features/auth/api/unlink';
+import { useDeleteUserQuery } from '@features/user';
 import { SecessionProps } from '@shared/types';
 import { defaultShadow, ModalHeader } from '@shared/ui';
 
@@ -11,8 +13,9 @@ const Secession = ({ navigation, route }: SecessionProps) => {
   const insets = useSafeAreaInsets();
   const [confirmText, setConfirmText] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+  const deleteProfileMutation = useDeleteUserQuery();
 
-  const handleSecession = () => {
+  const handleSecession = async () => {
     if (confirmText !== '탈퇴') {
       alert('‘탈퇴’를 입력해주세요.');
       return;
@@ -21,9 +24,17 @@ const Secession = ({ navigation, route }: SecessionProps) => {
       alert('안내사항을 모두 확인해주세요.');
       return;
     }
-    // TODO: 회원 탈퇴 로직 추가
-    alert('회원 탈퇴가 완료되었습니다.');
-    navigation.navigate('Login');
+
+    deleteProfileMutation.mutate(undefined, {
+      onSuccess: response => {
+        console.log('탈퇴 성공:', response);
+        navigation.replace('Login');
+      },
+      onError: error => {
+        console.log('탈퇴 실패:', error);
+      },
+    });
+    await handleUserDelete();
   };
 
   if (!userId) return null;

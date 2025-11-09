@@ -8,12 +8,11 @@ import { defaultShadow, UserProfileImage } from '@shared/ui';
 
 type Props = {
   navigation: RootNavigationProp<'AnotherUserPage'>;
-  statusMessage: string | null;
   profile: UserFeeds['profileBlockDto'];
   feedCount: number | undefined;
 };
 
-const AnotherUserHeaderSection = ({ profile, statusMessage, navigation, feedCount }: Props) => {
+const AnotherUserHeaderSection = ({ profile, navigation, feedCount }: Props) => {
   const [isFollowing, setIsFollowing] = useState(true);
 
   // 팔로우/언팔로우 mutation 훅
@@ -44,7 +43,7 @@ const AnotherUserHeaderSection = ({ profile, statusMessage, navigation, feedCoun
           <UserProfileImage uri={profile.profileImage} size={110} />
           <View className="max-w-60 bg-white">
             <Text className="text-lg font-bold color-black">{profile.nickname}</Text>
-            <Text className="mt-1 flex-1 color-g1">{statusMessage ?? null}</Text>
+            <Text className="mt-1 flex-1 color-g1">{profile.statusMessage ?? null}</Text>
             {/* 팔로워 / 팔로잉 */}
             <TouchableOpacity
               className="flex-row justify-start gap-12"

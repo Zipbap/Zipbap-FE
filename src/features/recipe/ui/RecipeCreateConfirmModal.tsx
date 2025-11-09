@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, TouchableOpacity, Alert } from 'react-native';
-import { validateRecipeForm } from '@/src/features/recipe/lib/validateRecipeForm';
 import { ConfirmModal } from '@shared/ui';
 import { useRecipeConfirmAction } from '../model/useRecipeConfirmAction';
 

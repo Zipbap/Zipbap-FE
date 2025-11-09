@@ -5,7 +5,11 @@ import TimerIcon from '@/assets/img/recipe/timeer.svg';
 import { useCategories } from '@entities/category';
 import { Recipe } from '../model';
 
-const ArticleView = ({ item }: { item: Recipe }) => {
+interface Props {
+  item: Recipe;
+}
+
+const ArticleView = ({ item }: Props) => {
   const { categoryValue } = useCategories();
 
   return (

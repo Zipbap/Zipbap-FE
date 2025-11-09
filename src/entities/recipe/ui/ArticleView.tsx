@@ -28,15 +28,10 @@ const ArticleView = ({ item }: Props) => {
         </View>
 
         {/* 제목 */}
-        {item.title ? (
-          <Text className="mt-[2px] text-[14px] font-bold leading-tight text-black">
-            {item.title}
-          </Text>
-        ) : (
-          <Text className="mt-[2px] text-[14px] font-bold leading-tight text-g2">
-            제목을 입력해주세요.
-          </Text>
-        )}
+        <Text className="mt-[2px] text-[14px] font-bold leading-tight text-black">
+          {item.title || '제목을 입력해주세요.'}
+        </Text>
+
         {/* 소개 */}
         {item.introduction ? (
           <Text className="mt-[8px] text-[12px] font-normal text-[#827066]">

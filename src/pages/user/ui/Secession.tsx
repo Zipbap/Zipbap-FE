@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Platform, Text, TextInput, View, Pressable, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import { Platform, Text, TextInput, View, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CheckSvgIcon from '@/assets/img/check.svg';
-import { useDetailUserData } from '@features/user';
 import { SecessionProps } from '@shared/types';
 import { defaultShadow, ModalHeader } from '@shared/ui';
 
@@ -10,7 +9,6 @@ const Secession = ({ navigation, route }: SecessionProps) => {
   const { userId } = route.params;
   console.log(userId);
   const insets = useSafeAreaInsets();
-  const { getDetailUser, detailUser } = useDetailUserData();
   const [confirmText, setConfirmText] = useState('');
   const [isChecked, setIsChecked] = useState(false);
 
@@ -28,19 +26,7 @@ const Secession = ({ navigation, route }: SecessionProps) => {
     navigation.navigate('Login');
   };
 
-  // NOTE: user의 ID를 통해 profile를 받아오는 작업
-  useEffect(() => {
-    getDetailUser(userId ? userId : '1');
-  }, [userId, getDetailUser]);
-
   if (!userId) return null;
-  else if (!detailUser) {
-    return (
-      <View className="flex-1 items-center justify-center bg-white">
-        <ActivityIndicator size="large" color="#DC6E3F" />
-      </View>
-    );
-  }
   return (
     <View
       className="h-[100%] bg-white"

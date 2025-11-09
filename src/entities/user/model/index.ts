@@ -19,23 +19,10 @@ export interface User {
 // NOTE: feed/bookmark 등 무거운 필드 제외한 "기본 프로필"용 타입
 export type UserBase = Omit<User, 'feeds' | 'bookmarks'>;
 
-// NOTE: UserWithoutFeeds: feed만 제외한 타입 (북마크는 포함)
-export type UserWithoutFeeds = Omit<User, 'feeds'>;
-
-// NOTE: UserWithoutBookmarks: bookmark만 제외한 타입 (피드는 포함)
-export type UserWithoutBookmarks = Omit<User, 'bookmarks'>;
-
+// 진짜 api타입 부분
 export type FollowTabType = 'follower' | 'following';
 export type MyPageTabType = 'feeds' | 'bookmarks';
 
-export type FollowDetailUser = Pick<User, 'id' | 'profileImage' | 'name' | 'introduce'>;
-
-export interface FollowData {
-  follower: FollowDetailUser[];
-  following: FollowDetailUser[];
-}
-
-// 진짜 api타입 부분
 // NOTE: 피드들 불러오기
 export interface UserFeeds {
   profileBlockDto: UserProfile;
@@ -49,7 +36,7 @@ export interface UserBookmarks {
   profileBlockDto: UserProfile;
   recipeCardDtoPage: RecipeCardPage;
   isOwner: boolean;
-  isFeed: boolean; // 북마크에서는 항상 false
+  isFeed: boolean;
 }
 
 // profile 관련 정보
@@ -101,4 +88,21 @@ export interface RecipeCardPage {
   numberOfElements: number;
   first: boolean;
   empty: boolean;
+}
+
+// NOTE: 팔로우 팔로잉 유저들 리스트 타입
+export interface FollowingAndFollowerList {
+  userId: string;
+  nickname: string;
+  profileImage: string;
+  isFollow: boolean;
+  statusMessage: string | null;
+}
+
+// NOTE: 팔로우 팔로잉 유저들 수 타입
+export interface FollowingAndFollowerCount {
+  userId: string;
+  followingCount: number;
+  followerCount: number;
+  isFollow: boolean;
 }

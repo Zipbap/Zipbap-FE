@@ -7,7 +7,7 @@ import { RecipeDetail } from '@pages/recipe';
 import { Secession, ProfileEdit, FollowDetail, AnotherUserPage } from '@pages/user';
 import { RecipeCreateForm } from '@features/recipe';
 import { AnotherUserHeader } from '@entities/user';
-import { useUserQuery } from '@shared/lib/';
+import { useUserQuery } from '@shared/api';
 import { useAuthStore } from '@shared/store/useAuthStore';
 import { RootStackParamList } from '@shared/types';
 import LoadingIndicator from '@shared/ui/LodingIndicator';
@@ -29,7 +29,7 @@ export function Navigation() {
     <Host>
       <NavigationContainer>
         <Stack.Navigator>
-          {isAuthenticated ?? (
+          {!isAuthenticated && (
             <Stack.Screen name="Login" component={LoginPage} options={{ headerShown: false }} />
           )}
           <Stack.Screen name="Main" component={MainTabNavigator} options={{ headerShown: false }} />

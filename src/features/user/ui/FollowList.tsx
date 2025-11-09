@@ -1,14 +1,14 @@
 import React from 'react';
 import { FlatList, View, Dimensions } from 'react-native';
 
-import { FollowDetailUser } from '@entities/user';
+import { FollowingAndFollowerList } from '@entities/user';
 
 import { RootNavigationProp } from '@shared/types';
 import EmptyFollowList from './EmptyFollowList';
 import FollowItem from './FollowItem';
 
 interface Props {
-  users: FollowDetailUser[];
+  users: FollowingAndFollowerList[] | undefined;
   navigation: RootNavigationProp<'FollowDetail'>;
 }
 
@@ -18,7 +18,7 @@ const FollowList = ({ users, navigation }: Props) => {
     <View className="mt-[12px] flex-1">
       <FlatList
         data={users}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.userId}
         ListEmptyComponent={
           <View className="items-center justify-center" style={{ height: height - 242 }}>
             <EmptyFollowList

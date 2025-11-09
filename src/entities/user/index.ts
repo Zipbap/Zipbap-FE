@@ -1,20 +1,17 @@
-// user api
-export { mockUser, mockFollowData, mockUserBookmark, mockUserFeed } from './api/mockUser';
-
 // user model
 export {
   User,
   UserFeed,
   MyPageTabType,
   FollowTabType,
-  FollowData,
-  FollowDetailUser,
   UserBase,
-  UserWithoutBookmarks,
-  UserWithoutFeeds,
+
   // FIXME: 추후 위에 것들 삭제
   UserFeeds,
   UserBookmarks,
+  FollowingAndFollowerList,
+  FollowingAndFollowerCount,
+  RecipeCard,
 } from './model';
 
 // user UI

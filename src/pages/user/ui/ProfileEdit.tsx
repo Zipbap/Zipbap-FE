@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Pressable,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import { Text, TextInput, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { useEditProfileQuery } from '@/src/features/user';
 import { useUserStore } from '@/src/shared/store';
 import { pickImageFromLibrary } from '@shared/lib';
+import { useUploadToS3 } from '@shared/lib/uploadToS3';
+import { usePresignedUrl } from '@shared/lib/usePresendUrl';
 import { ProfileEditProps } from '@shared/types';
 import {
   FullWidthButton,
@@ -26,10 +22,14 @@ const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
 
   const { user } = useUserStore();
 
-  const [nickname, setNickname] = useState('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [nickname, setNickname] = useState<string>('');
   const [statusMessage, setStatusMessage] = useState<string | null>('');
   const [profileImage, setProfileImage] = useState<string | null>('');
   const [isProfilePublic, setIsProfilePublic] = useState<boolean>(false);
+  const profileEditMutation = useEditProfileQuery();
+  const uploadToS3Mutation = useUploadToS3();
+  const presignedUrlMutation = usePresignedUrl();
 
   const handleChangeImage = async () => {
     const newImageUri = await pickImageFromLibrary();
@@ -38,8 +38,42 @@ const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
     }
   };
 
-  const handleSave = () => {
-    // FIXME: 여기에서 API 호출을 수행하여 변경된 정보 저장
+  const handleSave = async () => {
+    setLoading(true);
+    let profileUrl = null;
+    if (profileImage) {
+      const fileName = profileImage.split('/').pop() || `file-${Date.now()}.jpg`;
+      const { uploadUrl, fileUrl } = await presignedUrlMutation.mutateAsync({ fileName });
+      await uploadToS3Mutation.mutateAsync({ uploadUrl, fileUri: profileImage });
+      profileUrl = fileUrl;
+    }
+
+    console.log({
+      nickname,
+      isPrivate: !isProfilePublic,
+      profileImage: profileUrl,
+      statusMessage,
+    });
+    profileEditMutation.mutate(
+      {
+        data: {
+          nickname,
+          isPrivate: !isProfilePublic,
+          profileImage: profileUrl,
+          statusMessage,
+        },
+      },
+      {
+        onSuccess: response => {
+          console.log('성공:', response);
+          navigation.goBack();
+        },
+        onError: error => {
+          console.log('실패:', error);
+        },
+      },
+    );
+    setLoading(false);
   };
 
   // NOTE: user의 ID를 통해 profile를 받아오는 작업
@@ -53,9 +87,9 @@ const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
   }, [user]);
 
   const headerRightContent = (
-    <Pressable onPress={handleSave}>
+    <TouchableOpacity onPress={handleSave}>
       <Text className="font-bold text-g2">저장</Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 
   if (!userId) return null;
@@ -129,10 +163,11 @@ const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
 
           {/* 저장하기 버튼 */}
           <FullWidthButton
-            buttonText="저장하기"
-            onPress={navigation.goBack}
+            buttonText={loading ? '저장 중...' : '저장하기'}
+            onPress={handleSave}
             backgroundColor="#DC6E3F"
             textColor="white"
+            disabled={loading}
           />
 
           {/* 취소 버튼 */}

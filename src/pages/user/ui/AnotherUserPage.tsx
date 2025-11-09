@@ -22,7 +22,6 @@ const AnotherUserPage = ({ navigation, route }: AnotherUserPageProps) => {
       <View className="relative flex-1 bg-white">
         {/*유저 헤더 섹션*/}
         <AnotherUserHeaderSection
-          statusMessage={null}
           profile={profile}
           navigation={navigation}
           feedCount={feeds?.content.length}

@@ -1,6 +1,6 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { UserFeeds, UserBookmarks } from '@entities/user';
+import { UserFeeds, UserBookmarks, EditProfile } from '@entities/user';
 import { queryKeys } from '@shared/config';
 import { useUserStore } from '@shared/store';
 import { myPageApi } from '../api/myPageApi';
@@ -30,11 +30,12 @@ export const useFeedQuery = (userId: string) => {
   }
 
   const feeds = useMemo(() => {
-    const result = data?.result as UserFeeds | undefined;
+    const result = data?.result as UserFeeds;
+
     if (!result) return null;
 
     return {
-      content: result.recipeCardDtoPage.content,
+      content: result.recipeCardPage.content,
     };
   }, [data]);
 
@@ -49,6 +50,7 @@ export const useFeedQuery = (userId: string) => {
       followings: result.profileBlockDto.followings,
       isFollowing: result.profileBlockDto.isFollowing,
       profileImage: result.profileBlockDto.profileImage,
+      statusMessage: result.profileBlockDto.statusMessage,
     };
   }, [data]);
 
@@ -75,7 +77,7 @@ export const useBookmarkQuery = (userId: string, enabledCondition?: boolean) => 
     if (!result) return null;
 
     return {
-      content: result.recipeCardDtoPage.content,
+      content: result.recipeCardPage.content,
     };
   }, [query.data]);
 
@@ -163,4 +165,31 @@ export const useFollowerAndFollowingCountQuery = (userId: string) => {
     refetch: query.refetch,
     isStale: query.isStale,
   };
+};
+
+export const useEditProfileQuery = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ data }: { data: Omit<EditProfile, 'id'> }) => {
+      const result = await myPageApi.PutProfileEdit(data);
+      return result;
+    },
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.user.me });
+      queryClient.invalidateQueries({ queryKey: queryKeys.feed.all });
+    },
+  });
+};
+
+export const useDeleteUserQuery = (onAfterDelete?: () => void) => {
+  return useMutation({
+    mutationFn: async () => {
+      await myPageApi.DeleteUser();
+    },
+    onSuccess: () => {
+      // NOTE: 선택적 후속 처리
+      onAfterDelete?.();
+    },
+  });
 };

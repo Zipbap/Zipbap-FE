@@ -10,7 +10,7 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/img/slash-logo.png",
+      "image": "./assets/img/slash-large.png",
       "resizeMode": "contain",
       "backgroundColor": "#DA5534"
     },

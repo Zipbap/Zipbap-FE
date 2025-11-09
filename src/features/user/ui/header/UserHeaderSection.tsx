@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import { UserFeeds } from '@entities/user';
 import { RootNavigationProp } from '@shared/types';
-import { defaultShadow } from '@shared/ui';
+import { defaultShadow, UserProfileImage } from '@shared/ui';
 
 import EditProfileButton from '../EditProfileButton';
 import UserTabs from '../UserTabs';
@@ -39,21 +39,7 @@ const UserHeaderSection = ({
       {/* 프로필 */}
       <View className="h-[190px] flex-col bg-white p-4">
         <View className="flex-row items-start gap-6 space-x-4">
-          {profile.profileImage ? (
-            <Image
-              source={{ uri: profile.profileImage }}
-              className="h-[110px] w-[110px] rounded-full"
-            />
-          ) : (
-            <View
-              style={{
-                width: 110,
-                height: 110,
-                borderRadius: 110 / 2,
-                backgroundColor: '#E5E5E5',
-              }}
-            />
-          )}
+          <UserProfileImage uri={profile.profileImage} size={110} />
           <View className="max-w-60">
             <Text className="text-lg font-bold color-black">{profile.nickname}</Text>
             <Text className="mt-1 flex-1 color-g1">{statusMessage ?? null}</Text>

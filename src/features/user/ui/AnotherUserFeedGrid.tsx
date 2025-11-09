@@ -3,17 +3,17 @@ import { FlatList, Image, View, TouchableOpacity } from 'react-native';
 
 import FeedsSvg from '@/assets/img/feeds-icon.svg';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
-import { UserFeed } from '@entities/user';
+import { RecipeCard } from '@entities/user';
 import { RootNavigationProp } from '@shared/types';
 import EmptyStateUsingVideo from './EmptyStateUsingVideo';
 
 interface Props {
-  data: UserFeed[];
+  data: RecipeCard[] | undefined;
   navigation: RootNavigationProp<'AnotherUserPage'>;
 }
 
 const AnotherUserFeedGrid = ({ data, navigation }: Props) => {
-  if (data.length === 0) {
+  if (!data || data?.length === 0) {
     return (
       <View
         className="absolute bottom-0 left-0 right-0 top-0 items-center justify-center"
@@ -31,21 +31,19 @@ const AnotherUserFeedGrid = ({ data, navigation }: Props) => {
   }
 
   return (
-    <View className="flex h-full items-center justify-start">
+    <View className="flex h-full items-start justify-start">
       <FlatList
         ListHeaderComponent={() => <View className="h-[270px]" />}
         data={data}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate('FeedDetail', { feedId: item.recipeId })}
-          >
+          <TouchableOpacity onPress={() => navigation.navigate('FeedDetail', { feedId: item.id })}>
             <View className="absolute right-2 top-2 z-10">
               <FeedsSvg />
             </View>
             <Image source={{ uri: item.thumbnail }} className="h-[150px] w-[130px] bg-g5" />
           </TouchableOpacity>
         )}
-        keyExtractor={item => item.recipeId}
+        keyExtractor={item => item.id}
         numColumns={3}
       />
     </View>

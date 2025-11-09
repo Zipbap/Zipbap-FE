@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Image,
   Pressable,
   Text,
   TextInput,
@@ -10,20 +9,26 @@ import {
 } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import { useDetailUserData } from '@features/user';
+import { useUserStore } from '@/src/shared/store';
 import { pickImageFromLibrary } from '@shared/lib';
 import { ProfileEditProps } from '@shared/types';
-import { FullWidthButton, ToggleSwitch, ModalHeader, defaultShadow } from '@shared/ui';
+import {
+  FullWidthButton,
+  ToggleSwitch,
+  ModalHeader,
+  defaultShadow,
+  UserProfileImage,
+} from '@shared/ui';
 
 const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
   const { userId } = route.params;
   console.log(userId);
 
-  const { getDetailUser, detailUser } = useDetailUserData();
+  const { user } = useUserStore();
 
   const [nickname, setNickname] = useState('');
-  const [statusMessage, setStatusMessage] = useState('');
-  const [profileImage, setProfileImage] = useState('dd');
+  const [statusMessage, setStatusMessage] = useState<string | null>('');
+  const [profileImage, setProfileImage] = useState<string | null>('');
   const [isProfilePublic, setIsProfilePublic] = useState<boolean>(false);
 
   const handleChangeImage = async () => {
@@ -39,15 +44,13 @@ const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
 
   // NOTE: user의 ID를 통해 profile를 받아오는 작업
   useEffect(() => {
-    getDetailUser(userId ? userId : '1');
-
-    if (detailUser) {
-      setNickname(detailUser.name);
-      setStatusMessage(detailUser.introduce);
-      setProfileImage(detailUser.profileImage);
-      setIsProfilePublic(detailUser.isPublic);
+    if (user) {
+      setNickname(user.nickname);
+      setStatusMessage(user.statusMessage);
+      setProfileImage(user.profileImage);
+      setIsProfilePublic(!user.isPrivate);
     }
-  }, [userId, getDetailUser, detailUser]);
+  }, [user]);
 
   const headerRightContent = (
     <Pressable onPress={handleSave}>
@@ -56,7 +59,7 @@ const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
   );
 
   if (!userId) return null;
-  else if (!detailUser) {
+  else if (!user) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
         <ActivityIndicator size="large" color="#DC6E3F" />
@@ -76,7 +79,7 @@ const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
         <View className="h-[80px]" />
         <View className="flex items-center px-4 pt-8">
           {/* 프로필 이미지 */}
-          <Image source={{ uri: profileImage }} className="h-[128px] w-[128px] rounded-full" />
+          <UserProfileImage uri={profileImage} size={110} />
 
           {/* 프로필 사진 변경 버튼 */}
           <TouchableOpacity
@@ -103,7 +106,7 @@ const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
             <Text className="mb-1 text-base font-semibold text-g1">상태 메시지</Text>
             <TextInput
               className="bg-gray-200 h-28 rounded-lg bg-g4 p-4 text-base text-black"
-              value={statusMessage}
+              value={statusMessage ?? ''}
               onChangeText={setStatusMessage}
               placeholder="자신을 소개하는 메시지를 남겨보세요"
               placeholderTextColor="#999"

@@ -39,6 +39,11 @@ const RecipeCreateForm = () => {
   useLoadTempRecipe(recipeId);
 
   const handleTempRecipeSave = () => {
+    if (!recipe.thumbnail) {
+      Alert.alert('썸네일 필요', '레시피를 저장하려면 대표 사진을 업로드해주세요.');
+      return;
+    }
+
     Alert.alert('임시 저장 안내', '임시 저장된 레시피는 30일 이후 자동으로 삭제됩니다.', [
       {
         text: '확인',

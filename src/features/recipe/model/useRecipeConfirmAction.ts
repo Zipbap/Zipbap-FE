@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { useQueryClient } from '@tanstack/react-query';
 import { validateRecipeForm } from '@/src/features/recipe/lib/validateRecipeForm';
+import { validateTempRecipeForm } from '@/src/features/recipe/lib/validateTempRecipeForm';
 import { useRecipeCreateForm } from '@features/recipe/model/useRecipeCreateForm';
 import { RecipeDetail } from '@entities/recipe';
 import { RootNavigationProp } from '@shared/types';
@@ -17,9 +18,7 @@ export const useRecipeConfirmAction = (setModalVisible: (visible: boolean) => vo
   };
 
   const finalizeMutation = (recipe: RecipeDetail) => {
-    if (validateRecipeForm(recipe)) {
-      recipeMutation.finalizeSave(recipe);
-    }
+    recipeMutation.finalizeSave(recipe);
   };
 
   const deleteMutation = (recipeId: string) => {
@@ -40,14 +39,20 @@ export const useRecipeConfirmAction = (setModalVisible: (visible: boolean) => vo
 
     try {
       if (type === 'tempSave') {
+        const isValid = validateTempRecipeForm(recipe);
+        if (!isValid) return;
         await tempSaveMutation(recipe);
         handleCloseActions();
-      } else if (type === 'save') {
+      }
+
+      if (type === 'save') {
         const isValid = validateRecipeForm(recipe);
-        if (!isValid) return; // ❗ 유효성 실패 시 닫지 않음
+        if (!isValid) return;
         await finalizeMutation(recipe);
         handleCloseActions();
-      } else if (type === 'delete') {
+      }
+
+      if (type === 'delete') {
         await deleteMutation(recipe.id);
         handleCloseActions();
       }

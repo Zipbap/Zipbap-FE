@@ -3,8 +3,7 @@ import { FlatList, Image, View, TouchableOpacity } from 'react-native';
 
 import FeedsSvg from '@/assets/img/feeds-icon.svg';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
-import { MyPageTabType } from '@entities/user';
-import { RecipeCard } from '@entities/user/model';
+import { MyPageTabType, RecipeCard } from '@entities/user';
 import { RootNavigationProp } from '@shared/types';
 import EmptyStateUsingVideo from './EmptyStateUsingVideo';
 

@@ -4,7 +4,7 @@ import { View, ActivityIndicator } from 'react-native';
 import { Portal } from 'react-native-portalize';
 
 import { UserHeaderSection, FeedGrid, useFeedQuery, useBookmarkQuery } from '@features/user';
-import { mockUser, MyPageTabType } from '@entities/user';
+import { MyPageTabType } from '@entities/user';
 import { useSettingBottomSheetStore, useUserStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
 import UserSettingBottomSheet from './UserSettingBottomSheet';
@@ -21,18 +21,21 @@ const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
   const { profile, feeds, isLoading: isLoadingFeed } = useFeedQuery(user!.id);
   const {
     bookmarks,
-    isLoading: isLoadingBookmark,
+    isStale: isStaleBookmark,
     refetch: refetchBookmarks,
   } = useBookmarkQuery(user!.id, false);
 
   // NOTE: 탭 전환 시 북마크 데이터 로드
   useEffect(() => {
     if (tab === 'bookmarks') {
-      refetchBookmarks();
+      if (!bookmarks || isStaleBookmark) {
+        refetchBookmarks();
+      }
     }
-  }, [tab, refetchBookmarks]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab, isStaleBookmark]);
 
-  if (isLoadingFeed || isLoadingBookmark || !profile) {
+  if (isLoadingFeed || isStaleBookmark || !profile) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
         <ActivityIndicator size="large" color="#DC6E3F" />
@@ -63,7 +66,7 @@ const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
         {bottomSheetVisible && (
           <Portal>
             <UserSettingBottomSheet
-              userId={mockUser.id}
+              userId={user?.id}
               navigation={navigation}
               bottomSheetVisible={bottomSheetVisible}
               bottomSheetClose={bottomSheetClose}

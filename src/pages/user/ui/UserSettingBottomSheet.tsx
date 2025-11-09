@@ -8,7 +8,7 @@ interface Props {
   bottomSheetVisible: boolean;
   bottomSheetClose: () => void;
   navigation: RootNavigationProp<'Main'>;
-  userId: string;
+  userId: string | undefined;
 }
 
 const UserSettingBottomSheet = ({
@@ -25,7 +25,7 @@ const UserSettingBottomSheet = ({
 
   const handleCategorySecession = () => {
     bottomSheetClose();
-    navigation.navigate('Secession', { userId });
+    navigation.navigate('Secession', { userId: userId ?? '1' });
     console.log(1);
   };
 

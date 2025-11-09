@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, Pressable, ScrollView } from 'react-native';
-
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
 import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';

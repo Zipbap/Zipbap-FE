@@ -37,7 +37,7 @@ const FeedGrid = ({ data, type, navigation }: Props) => {
   }
 
   return (
-    <View className="flex h-full items-center justify-start">
+    <View className="flex h-full items-start justify-start">
       <FlatList
         ListHeaderComponent={() => <View className="h-[270px]" />}
         data={data}

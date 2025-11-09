@@ -72,6 +72,7 @@ export interface FeedDetail extends FeedBase {
   cookingOrders: CookingOrder[];
   viewCount: number;
   followerCount: number;
+  isOwner: boolean;
 }
 
 export interface FeedPage {

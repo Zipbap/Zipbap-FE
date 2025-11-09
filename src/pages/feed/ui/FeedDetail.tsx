@@ -114,19 +114,23 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
               </View>
 
               <View className="h-[37px] w-[77px]">
-                <Pressable
-                  onPress={() => setFollow(!follow)}
-                  className={cn(
-                    'flex h-[37px] w-[77px] items-center justify-center rounded-full px-3 py-1',
-                    follow ? 'bg-g3' : 'bg-sub2',
-                  )}
-                >
-                  {follow ? (
-                    <Text className="text-sm font-semibold color-g2">팔로잉</Text>
-                  ) : (
-                    <Text className="text-sm font-semibold color-white">팔로우</Text>
-                  )}
-                </Pressable>
+                {feedDetail.isOwner ? (
+                  <View />
+                ) : (
+                  <Pressable
+                    onPress={() => setFollow(!follow)}
+                    className={cn(
+                      'flex h-[37px] w-[77px] items-center justify-center rounded-full px-3 py-1',
+                      follow ? 'bg-g3' : 'bg-sub2',
+                    )}
+                  >
+                    {follow ? (
+                      <Text className="text-sm font-semibold color-g2">팔로잉</Text>
+                    ) : (
+                      <Text className="text-sm font-semibold color-white">팔로우</Text>
+                    )}
+                  </Pressable>
+                )}
               </View>
             </View>
           </View>

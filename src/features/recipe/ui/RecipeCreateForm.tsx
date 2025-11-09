@@ -3,6 +3,7 @@ import { ArrowUpDown } from 'lucide-react-native';
 import React from 'react';
 import { View, Text, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { validateRecipeForm } from '@/src/features/recipe/lib/validateRecipeForm';
 import { RootStackParamList } from '@/src/shared/types';
 import { useRecipeUploader } from '@features/recipe/lib/useRecipeUpload';
 import { useCategories } from '@entities/category';
@@ -45,6 +46,12 @@ const RecipeCreateForm = () => {
       },
       { text: '취소', style: 'cancel' },
     ]);
+  };
+
+  const handleFinalizeRecipeSave = () => {
+    if (validateRecipeForm(recipe)) {
+      recipeMutation.finalizeSave(recipe);
+    }
   };
 
   // upload logic
@@ -253,7 +260,7 @@ const RecipeCreateForm = () => {
 
         <FullWidthButton
           buttonText="추가하기"
-          onPress={() => recipeMutation.finalizeSave(recipe)}
+          onPress={() => handleFinalizeRecipeSave()}
           backgroundColor="#DC6E3F"
           textColor="white"
         />

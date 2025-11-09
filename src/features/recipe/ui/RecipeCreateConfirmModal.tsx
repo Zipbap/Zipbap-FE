@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, Alert } from 'react-native';
+import { validateRecipeForm } from '@/src/features/recipe/lib/validateRecipeForm';
 import { ConfirmModal } from '@shared/ui';
 import { useRecipeConfirmAction } from '../model/useRecipeConfirmAction';
 
@@ -10,6 +11,7 @@ interface Props {
 
 const RecipeCreateConfirmModal = ({ modalVisible, setModalVisible }: Props) => {
   const { handleAction: handleConfirmAction } = useRecipeConfirmAction(setModalVisible);
+
   const handleTempRecipeSave = () => {
     Alert.alert('임시 저장 안내', '임시 저장된 레시피는 30일 이후 자동으로 삭제됩니다.', [
       {
@@ -19,6 +21,7 @@ const RecipeCreateConfirmModal = ({ modalVisible, setModalVisible }: Props) => {
       { text: '취소', style: 'cancel' },
     ]);
   };
+
   return (
     <ConfirmModal
       visible={modalVisible}

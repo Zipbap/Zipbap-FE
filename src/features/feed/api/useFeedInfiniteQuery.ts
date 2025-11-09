@@ -12,7 +12,7 @@ const fetchFeedList = async ({
   condition,
 }: FeedListParams & { pageParam?: number }): Promise<FeedPage> => {
   const res = await apiInstance.get<ApiResponse<FeedPage>>('/feed', {
-    params: { filter, page: pageParam, size, condition },
+    params: { filter, page: pageParam, size, conditon: condition, sort: 'createdAt,desc' },
   });
   return res.data.result;
 };

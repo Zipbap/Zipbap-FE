@@ -7,45 +7,36 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useSharedValue, withTiming, Easing } from 'react-native-reanimated';
-
 import SearchIcon from '@/assets/img/search-icon.svg';
+import { useFeedFilterStore } from '@shared/store/useFeedFilterStore';
 
 interface Props {
   searchTitle: string;
 }
 
-const activeShadowStyle = {
-  shadowColor: 'rgba(132, 124, 112, 1)',
-  shadowOffset: { width: 0, height: 10 },
-  shadowOpacity: 0.1,
-  shadowRadius: 10,
-  elevation: 10,
-};
-
 const SearchBox = ({ searchTitle }: Props) => {
   const searchRef = useRef<TextInput>(null);
-
   const [searchText, setSearchText] = useState('');
   const [isSearchBarOn, setIsSearchBarOn] = useState(false);
-
   const panelHeight = useSharedValue(0);
+
+  const setCondition = useFeedFilterStore(state => state.setCondition);
 
   useEffect(() => {
     panelHeight.value = withTiming(isSearchBarOn ? 144 : 0, {
       duration: 300,
       easing: Easing.out(Easing.ease),
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSearchBarOn]);
 
-  const handleOutsidePress = () => {
-    Keyboard.dismiss();
-  };
+  useEffect(() => {
+    setCondition(searchText);
+  }, [searchText]);
+  const handleOutsidePress = () => Keyboard.dismiss();
 
   return (
     <TouchableWithoutFeedback onPress={handleOutsidePress}>
       <View className="w-full">
-        {/* search bar */}
         <TouchableOpacity
           onPress={() => {
             searchRef.current?.focus();
@@ -53,7 +44,17 @@ const SearchBox = ({ searchTitle }: Props) => {
           }}
           className="h-12 w-full flex-row items-center justify-start rounded-[20px] bg-g4 px-5 py-3"
           activeOpacity={0.8}
-          style={[isSearchBarOn ? activeShadowStyle : null, { position: 'relative', zIndex: 10 }]}
+          style={[
+            isSearchBarOn
+              ? {
+                  shadowColor: 'rgba(132, 124, 112, 1)',
+                  shadowOffset: { width: 0, height: 10 },
+                  shadowOpacity: 0.1,
+                  shadowRadius: 10,
+                  elevation: 10,
+                }
+              : null,
+          ]}
         >
           <TextInput
             ref={searchRef}

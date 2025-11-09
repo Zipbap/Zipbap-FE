@@ -5,6 +5,7 @@ import { Portal } from 'react-native-portalize';
 import { FeedCard, useFeedInfiniteQuery, FeedCardSkeleton } from '@features/feed';
 import { Feed as FeedItem } from '@entities/feed';
 import { useFeedChatBottomSheetStore } from '@shared/store';
+import { useFeedFilterStore } from '@shared/store/useFeedFilterStore';
 import { RootNavigationProp } from '@shared/types';
 import FeedChatBottomSheet from './FeedChatBottomSheet';
 
@@ -13,10 +14,12 @@ interface FeedPageProps {
 }
 
 const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
+  const { filter, condition } = useFeedFilterStore();
+
   const { bottomSheetVisible, bottomSheetClose, feedId } = useFeedChatBottomSheetStore();
   const { dataList, onEndReached, onRefresh, isRefreshing, isInitialLoading, refetch } =
-    useFeedInfiniteQuery();
-
+    useFeedInfiniteQuery({ filter, condition });
+  console.log(filter, condition);
   useFocusEffect(
     useCallback(() => {
       refetch();

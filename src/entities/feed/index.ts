@@ -1,2 +1,2 @@
-export { Feed, FeedDetail, Comment } from './model/index';
+export { Feed, FeedDetail } from './model/index';
 export { mockComments } from './model/mockComment';

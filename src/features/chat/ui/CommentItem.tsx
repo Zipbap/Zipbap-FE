@@ -1,29 +1,35 @@
 import React, { useState } from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
-import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
-import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
-import { Comment } from '@entities/feed';
+import NoneProfileImgSvg from '@/assets/img/none-profile-img.svg';
+import { Comment } from '@entities/comment';
+import { getTimeAgo } from '@shared/lib/getTimeAgo';
 
 interface Props {
   comment: Comment;
   onReplyPress: (comment: Comment) => void;
+  depth?: number;
 }
 
-const CommentItem = ({ comment, onReplyPress }: Props) => {
-  // NOTE: 추후 api 로직 처리 필요
+const CommentItem = ({ comment, onReplyPress, depth = 1 }: Props) => {
   const [liked, setLiked] = useState<boolean | undefined>(comment?.isLiked);
   const [likeCount, setLikeCount] = useState<number | undefined>(comment?.likeCount);
   return (
     <View className="mb-2">
       <View className="flex-row items-start">
-        <Image
-          source={{ uri: comment.profileImage }}
-          className="mr-[12px] h-[40px] w-[40px] rounded-full"
-        />
+        {comment.profileImage ? (
+          <Image
+            source={{ uri: comment.profileImage }}
+            className="mr-[12px] h-[40px] w-[40px] rounded-full"
+          />
+        ) : (
+          <NoneProfileImgSvg width={40} height={40} style={{ marginRight: 12 }} />
+        )}
         <View className="flex-1">
           <View className="flex flex-row items-center gap-[12px]">
             <Text className="text-[14px] font-bold">{comment.nickname}</Text>
-            <Text className="text-[12px] font-semibold text-g2">{comment.createdAt}</Text>
+            <Text className="text-[12px] font-semibold text-g2">
+              {getTimeAgo(comment.createdAt)}
+            </Text>
           </View>
 
           <Text className="mt-1 text-[14px] font-normal">{comment.content}</Text>
@@ -37,19 +43,11 @@ const CommentItem = ({ comment, onReplyPress }: Props) => {
                     setLiked(!liked);
                     setLikeCount(prev => (prev ? (liked ? prev - 1 : prev + 1) : 0));
                   }}
-                >
-                  <View className="flex h-6 w-6 items-center justify-center">
-                    {liked ? (
-                      <HeartOnSvg height={15} width={15} />
-                    ) : (
-                      <HeartOffSvg height={15} width={15} />
-                    )}
-                  </View>
-                </Pressable>
+                ></Pressable>
                 <Text className="text-[12px] font-medium text-g2">{likeCount}</Text>
               </View>
             </Pressable>
-            {!comment.parentId && (
+            {depth === 1 && !comment.parentId && (
               <Pressable onPress={() => onReplyPress(comment)}>
                 <Text className="text-[12px] font-medium text-g2">답글달기</Text>
               </Pressable>
@@ -57,9 +55,15 @@ const CommentItem = ({ comment, onReplyPress }: Props) => {
           </View>
 
           {/* 재귀 */}
-          {comment.replies?.map(reply => (
-            <CommentItem key={reply.id} comment={reply} onReplyPress={onReplyPress} />
-          ))}
+          {depth < 2 &&
+            comment.replies?.map(reply => (
+              <CommentItem
+                key={reply.id}
+                comment={reply}
+                onReplyPress={onReplyPress}
+                depth={depth + 1}
+              />
+            ))}
         </View>
       </View>
     </View>

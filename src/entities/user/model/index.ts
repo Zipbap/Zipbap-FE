@@ -26,7 +26,7 @@ export type MyPageTabType = 'feeds' | 'bookmarks';
 // NOTE: 피드들 불러오기
 export interface UserFeeds {
   profileBlockDto: UserProfile;
-  recipeCardDtoPage: RecipeCardPage;
+  recipeCardPage: RecipeCardPage;
   isOwner: boolean;
   isFeed: boolean;
 }
@@ -34,7 +34,7 @@ export interface UserFeeds {
 // NOTE: 북마크들 불러오기
 export interface UserBookmarks {
   profileBlockDto: UserProfile;
-  recipeCardDtoPage: RecipeCardPage;
+  recipeCardPage: RecipeCardPage;
   isOwner: boolean;
   isFeed: boolean;
 }

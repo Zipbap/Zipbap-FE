@@ -32,6 +32,7 @@ const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
         refetchBookmarks();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab, isStaleBookmark]);
 
   if (isLoadingFeed || isStaleBookmark || !profile) {

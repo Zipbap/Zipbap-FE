@@ -32,9 +32,8 @@ export const useFeedQuery = (userId: string) => {
   const feeds = useMemo(() => {
     const result = data?.result as UserFeeds | undefined;
     if (!result) return null;
-
     return {
-      content: result.recipeCardDtoPage.content,
+      content: result.recipeCardPage.content,
     };
   }, [data]);
 
@@ -75,7 +74,7 @@ export const useBookmarkQuery = (userId: string, enabledCondition?: boolean) => 
     if (!result) return null;
 
     return {
-      content: result.recipeCardDtoPage.content,
+      content: result.recipeCardPage.content,
     };
   }, [query.data]);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, Alert } from 'react-native';
 import { ConfirmModal } from '@shared/ui';
 import { useRecipeConfirmAction } from '../model/useRecipeConfirmAction';
 
@@ -11,8 +11,17 @@ interface Props {
 const RecipeCreateConfirmModal = ({ modalVisible, setModalVisible }: Props) => {
   const { handleAction: handleConfirmAction } = useRecipeConfirmAction(setModalVisible);
 
+  const handleTempRecipeSave = () => {
+    Alert.alert('임시 저장 안내', '임시 저장된 레시피는 30일 이후 자동으로 삭제됩니다.', [
+      {
+        text: '확인',
+        onPress: () => handleConfirmAction('tempSave'),
+      },
+      { text: '취소', style: 'cancel' },
+    ]);
+  };
+
   return (
-    // FIXME: modal 퍼블리싱 작업
     <ConfirmModal
       visible={modalVisible}
       onClose={() => setModalVisible(false)}
@@ -30,7 +39,7 @@ const RecipeCreateConfirmModal = ({ modalVisible, setModalVisible }: Props) => {
         <>
           <TouchableOpacity
             className="inline-flex h-11 flex-col items-center justify-center gap-2 self-stretch border-b-[0.50px] border-g6"
-            onPress={() => handleConfirmAction('tempSave')}
+            onPress={handleTempRecipeSave}
           >
             <Text className="justify-center text-center font-['Pretendard'] text-base font-medium leading-snug text-g2">
               임시저장

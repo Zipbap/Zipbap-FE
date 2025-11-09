@@ -1,8 +1,9 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { ArrowUpDown } from 'lucide-react-native';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { validateRecipeForm } from '@/src/features/recipe/lib/validateRecipeForm';
 import { RootStackParamList } from '@/src/shared/types';
 import { useRecipeUploader } from '@features/recipe/lib/useRecipeUpload';
 import { useCategories } from '@entities/category';
@@ -37,6 +38,27 @@ const RecipeCreateForm = () => {
   // load temp recipe
   useLoadTempRecipe(recipeId);
 
+  const handleTempRecipeSave = () => {
+    if (!recipe.thumbnail) {
+      Alert.alert('썸네일 필요', '레시피를 저장하려면 대표 사진을 업로드해주세요.');
+      return;
+    }
+
+    Alert.alert('임시 저장 안내', '임시 저장된 레시피는 30일 이후 자동으로 삭제됩니다.', [
+      {
+        text: '확인',
+        onPress: () => recipeMutation.tempSave(recipe),
+      },
+      { text: '취소', style: 'cancel' },
+    ]);
+  };
+
+  const handleFinalizeRecipeSave = () => {
+    if (validateRecipeForm(recipe)) {
+      recipeMutation.finalizeSave(recipe);
+    }
+  };
+
   // upload logic
   const { handleUpload } = useRecipeUploader({
     updateField,
@@ -62,7 +84,7 @@ const RecipeCreateForm = () => {
     <View style={{ flex: 1 }} className="bg-white">
       <RecipeCreateHeader />
       <View className="h-[70px]" />
-      <KeyboardAwareScrollView className="h-[100%] px-[16px]" bottomOffset={80}>
+      <KeyboardAwareScrollView className="h-[100%] px-[16px] pt-2" bottomOffset={80}>
         {/* 썸네일 업로드 */}
         <FormTitle title="레시피 기본 정보" />
         <FormMediaUpload
@@ -236,14 +258,14 @@ const RecipeCreateForm = () => {
         {/* 버튼 */}
         <FullWidthButton
           buttonText="임시저장"
-          onPress={() => recipeMutation.tempSave(recipe)}
+          onPress={() => handleTempRecipeSave()}
           backgroundColor="#F0EDE6"
           textColor="#60594E"
         />
 
         <FullWidthButton
           buttonText="추가하기"
-          onPress={() => recipeMutation.finalizeSave(recipe)}
+          onPress={() => handleFinalizeRecipeSave()}
           backgroundColor="#DC6E3F"
           textColor="white"
         />

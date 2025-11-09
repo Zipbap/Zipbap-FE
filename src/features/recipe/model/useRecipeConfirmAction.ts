@@ -1,5 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { useQueryClient } from '@tanstack/react-query';
+import { validateRecipeForm } from '@/src/features/recipe/lib/validateRecipeForm';
+import { validateTempRecipeForm } from '@/src/features/recipe/lib/validateTempRecipeForm';
 import { useRecipeCreateForm } from '@features/recipe/model/useRecipeCreateForm';
 import { RecipeDetail } from '@entities/recipe';
 import { RootNavigationProp } from '@shared/types';
@@ -36,19 +38,26 @@ export const useRecipeConfirmAction = (setModalVisible: (visible: boolean) => vo
     }
 
     try {
-      switch (type) {
-        case 'tempSave':
-          tempSaveMutation(recipe);
-          break;
-        case 'save':
-          finalizeMutation(recipe);
-          break;
-        case 'delete':
-          deleteMutation(recipe.id);
-          break;
+      if (type === 'tempSave') {
+        const isValid = validateTempRecipeForm(recipe);
+        if (!isValid) return;
+        await tempSaveMutation(recipe);
+        handleCloseActions();
       }
-    } finally {
-      handleCloseActions();
+
+      if (type === 'save') {
+        const isValid = validateRecipeForm(recipe);
+        if (!isValid) return;
+        await finalizeMutation(recipe);
+        handleCloseActions();
+      }
+
+      if (type === 'delete') {
+        await deleteMutation(recipe.id);
+        handleCloseActions();
+      }
+    } catch (error) {
+      console.error('레시피 처리 중 오류:', error);
     }
   };
 

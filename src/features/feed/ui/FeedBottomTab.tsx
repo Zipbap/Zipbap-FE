@@ -43,13 +43,14 @@ const FeedBottomTab = ({
   const [bookmarked, setBookmarked] = useState(isInitialBookmarked);
   const [likeCount, setLikeCount] = useState(initialLikes);
   const [bookmarkCount, setBookmarkCount] = useState(initialBookmarks);
-  const [commentCount] = useState(initialComments);
+  const [commentCount, setCommentCount] = useState(initialComments);
 
   useEffect(() => {
     setLiked(isInitialLiked);
     setBookmarked(isInitialBookmarked);
     setLikeCount(initialLikes);
     setBookmarkCount(initialBookmarks);
+    setCommentCount(initialComments);
   }, [isInitialLiked, isInitialBookmarked, initialLikes, initialBookmarks, initialComments]);
 
   const isCommented = bottomSheetVisible && activeFeedId === feedId;

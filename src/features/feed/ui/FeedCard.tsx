@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
 import ClockSvg from '@/assets/img/feed/clock-icon.svg';
 import StarSvg from '@/assets/img/feed/star-icon.svg';
-import UserSvg from '@/assets/img/user.svg';
+import NoneUserSvg from '@/assets/img/none-profile-img.svg';
 import { Feed } from '@entities/feed';
 import { RootNavigationProp } from '@shared/types';
 import FeedBottomTab from './FeedBottomTab';
@@ -29,7 +29,7 @@ const FeedCard = ({ feed, navigation }: Props) => {
                 className="mr-3 h-[55px] w-[55px] rounded-full bg-g2"
               />
             ) : (
-              <UserSvg width={55} height={55} style={{ marginRight: 12 }} />
+              <NoneUserSvg width={55} height={55} style={{ marginRight: 12 }} />
             )}
             <View>
               <Text className="mb-1 text-[16px] font-bold">{feed.title}</Text>

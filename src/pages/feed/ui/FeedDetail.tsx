@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, Pressable, ScrollView } from 'react-native';
-
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
 import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
+import NoneUserSvg from '@/assets/img/none-profile-img.svg';
 import { useFeedDetailQuery } from '@/src/features/feed/api/useFeedDetialQuery';
 import {
   FeedBottomTab,
@@ -90,10 +90,14 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
             {/* 작성자, 팔로워, subtitle */}
             <View className="mb-4 w-full flex-row items-center justify-between gap-[8px]">
               <View className="flex-1 flex-row items-start">
-                <Image
-                  source={{ uri: feedDetail.profileImage }}
-                  className="mr-[12px] h-[48px] w-[48px] rounded-2xl bg-primary"
-                />
+                {feedDetail.profileImage ? (
+                  <Image
+                    source={{ uri: feedDetail.profileImage }}
+                    className="mr-[12px] h-[48px] w-[48px] rounded-2xl"
+                  />
+                ) : (
+                  <NoneUserSvg width={48} height={48} style={{ marginRight: 12 }} />
+                )}
                 <View className="flex-1">
                   <Text className="mb-2 text-[12px] font-medium">
                     <Text className="text-[18px] font-bold">{feedDetail.nickname}</Text>
@@ -115,19 +119,23 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
               </View>
 
               <View className="h-[37px] w-[77px]">
-                <Pressable
-                  onPress={() => setFollow(!follow)}
-                  className={cn(
-                    'flex h-[37px] w-[77px] items-center justify-center rounded-full px-3 py-1',
-                    follow ? 'bg-g3' : 'bg-sub2',
-                  )}
-                >
-                  {follow ? (
-                    <Text className="text-sm font-semibold color-g2">팔로잉</Text>
-                  ) : (
-                    <Text className="text-sm font-semibold color-white">팔로우</Text>
-                  )}
-                </Pressable>
+                {feedDetail.isOwner ? (
+                  <View />
+                ) : (
+                  <Pressable
+                    onPress={() => setFollow(!follow)}
+                    className={cn(
+                      'flex h-[37px] w-[77px] items-center justify-center rounded-full px-3 py-1',
+                      follow ? 'bg-g3' : 'bg-sub2',
+                    )}
+                  >
+                    {follow ? (
+                      <Text className="text-sm font-semibold color-g2">팔로잉</Text>
+                    ) : (
+                      <Text className="text-sm font-semibold color-white">팔로우</Text>
+                    )}
+                  </Pressable>
+                )}
               </View>
             </View>
           </View>

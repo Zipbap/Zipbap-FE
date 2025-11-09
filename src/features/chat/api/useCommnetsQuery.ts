@@ -13,12 +13,10 @@ const mapCommentDtoToEntity = (dto: CommentDetailResponseDto): Comment => ({
 });
 
 export const useCommentsQuery = (recipeId: string) => {
-  console.log('useCommentQuery', recipeId);
   return useQuery({
     queryKey: ['comments', recipeId],
     queryFn: async () => {
       const data = await fetchCommentsApi(recipeId);
-      console.log('data', data);
       return data.result.map(mapCommentDtoToEntity);
     },
   });

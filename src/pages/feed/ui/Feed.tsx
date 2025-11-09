@@ -22,6 +22,7 @@ const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
       refetch();
     }, [refetch]),
   );
+
   const renderItem = ({ item }: { item: FeedItem }) => (
     <FeedCard feed={item} navigation={navigation} />
   );

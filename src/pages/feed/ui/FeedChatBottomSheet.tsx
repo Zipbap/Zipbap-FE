@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, TextInput, FlatList, RefreshControl, Platform } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { ChatInput, CommentItem } from '@features/chat';
@@ -15,12 +15,20 @@ interface Props {
 const FeedChatBottomSheet = ({ feedId, bottomSheetVisible, bottomSheetClose }: Props) => {
   const inputRef = useRef<TextInput>(null);
   const flatListRef = useRef<FlatList>(null);
+
   const [inputValue, setInputValue] = useState('');
   const [replyTo, setReplyTo] = useState<Comment | null>(null);
-  console.log('feedId', feedId);
+
   const { data: comments, refetch, isRefetching } = useCommentsQuery(feedId);
-  console.log('comments', comments);
   const createMutation = useCreateCommentMutation(feedId);
+
+  // 다른 피드로 넘어갈 경우 reply 초기화
+  useEffect(() => {
+    if (bottomSheetVisible) {
+      setReplyTo(null);
+      setInputValue('');
+    }
+  }, [feedId, bottomSheetVisible]);
 
   const handleSubmit = async () => {
     if (!inputValue.trim()) return;
@@ -29,9 +37,6 @@ const FeedChatBottomSheet = ({ feedId, bottomSheetVisible, bottomSheetClose }: P
       content: inputValue,
       parentId: replyTo ? Number(replyTo.id) : undefined,
     });
-
-    setInputValue('');
-    setReplyTo(null);
 
     // 자동 스크롤
     setTimeout(() => {

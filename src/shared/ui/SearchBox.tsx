@@ -2,18 +2,11 @@ import { useRef, useState, useEffect } from 'react';
 import {
   View,
   TextInput,
-  Text,
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
-  ScrollView,
 } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  Easing,
-} from 'react-native-reanimated';
+import { useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 
 import SearchIcon from '@/assets/img/search-icon.svg';
 
@@ -28,8 +21,6 @@ const activeShadowStyle = {
   shadowRadius: 10,
   elevation: 10,
 };
-
-const serarchReultMockData = ['닭도리탕', '계란찜', '탕수육 대자', '짱뽕!'];
 
 const SearchBox = ({ searchTitle }: Props) => {
   const searchRef = useRef<TextInput>(null);
@@ -46,11 +37,6 @@ const SearchBox = ({ searchTitle }: Props) => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSearchBarOn]);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    height: panelHeight.value,
-    opacity: withTiming(isSearchBarOn ? 1 : 0, { duration: 200 }),
-  }));
 
   const handleOutsidePress = () => {
     Keyboard.dismiss();
@@ -83,25 +69,6 @@ const SearchBox = ({ searchTitle }: Props) => {
             <SearchIcon width={16} height={16} />
           </View>
         </TouchableOpacity>
-
-        {/* animated search result panel */}
-        <Animated.View
-          style={[animatedStyle, { marginTop: -13, paddingTop: 13 }]}
-          className="h-36 w-full overflow-hidden rounded-b-[20px] bg-g4"
-        >
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
-            {serarchReultMockData.map((item, index) => (
-              <View
-                key={index}
-                className="h-[34px] flex-row items-center justify-start gap-2 border-b-[0.50px] border-g6 p-1 py-2 pl-5"
-              >
-                <Text className="h-[34px] text-center text-[14px] font-semibold leading-[34px] text-g1">
-                  {item}
-                </Text>
-              </View>
-            ))}
-          </ScrollView>
-        </Animated.View>
       </View>
     </TouchableWithoutFeedback>
   );

@@ -24,15 +24,19 @@ export function Navigation() {
   if (authLoading || userLoading) {
     return <LoadingIndicator />;
   }
-
   return (
     <Host>
       <NavigationContainer>
         <Stack.Navigator>
-          {!isAuthenticated && (
+          {isAuthenticated === false ? (
             <Stack.Screen name="Login" component={LoginPage} options={{ headerShown: false }} />
+          ) : (
+            <Stack.Screen
+              name="Main"
+              component={MainTabNavigator}
+              options={{ headerShown: false }}
+            />
           )}
-          <Stack.Screen name="Main" component={MainTabNavigator} options={{ headerShown: false }} />
           <Stack.Screen
             name="RecipeCreateForm"
             component={RecipeCreateForm}
@@ -46,7 +50,7 @@ export function Navigation() {
           {/* NOTE: 모달 페이지 관리 */}
           <Stack.Group
             screenOptions={{
-              presentation: 'modal',
+              presentation: 'fullScreenModal',
               gestureEnabled: true,
               animation: 'slide_from_bottom',
               headerShown: false,

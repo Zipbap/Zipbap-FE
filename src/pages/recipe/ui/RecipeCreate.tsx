@@ -28,8 +28,10 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
 
   const navigateToTempRecipeCreateForm = (targetId: string) => {
     if (recipeType === 'temp') {
-      console.log(targetId);
       navigation.navigate('RecipeCreateForm', { recipeId: targetId });
+    }
+    if (recipeType === 'final') {
+      navigation.navigate('RecipeDetail', { recipeId: targetId });
     }
   };
 

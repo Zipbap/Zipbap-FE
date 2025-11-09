@@ -11,7 +11,6 @@ export const apiInstance: AxiosInstance = axios.create({
   timeout: 10_000,
 });
 
-// ✅ Request 인터셉터
 apiInstance.interceptors.request.use(
   async config => {
     const accessToken = await getToken.accessToken();
@@ -21,15 +20,6 @@ apiInstance.interceptors.request.use(
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
-    // ✅ 요청 로그
-    console.log(`%c[API Request]`, {
-      method: config.method?.toUpperCase(),
-      url: config.url,
-      headers: config.headers,
-      params: config.params,
-      data: config.data,
-    });
-
     return config;
   },
   error => {
@@ -38,30 +28,13 @@ apiInstance.interceptors.request.use(
   },
 );
 
-// ✅ Response 인터셉터
 apiInstance.interceptors.response.use(
   response => {
-    // ✅ 응답 로그
-    console.log(`%c[API Response]`, {
-      status: response.status,
-      url: response.config.url,
-      data: response.data,
-    });
     return response;
   },
   async error => {
-    const { response } = error;
-
-    // ✅ 에러 로그
-    console.error(`%c[API Error]`, {
-      status: response?.status,
-      url: response?.config?.url,
-      message: response?.data?.message || error.message,
-    });
-
-    // 공통 에러 처리
-    if (response) {
-      const { status } = response;
+    if (error.response) {
+      const { status } = error.response;
       if (status === 401) {
         await getNewAccessToken(error);
       } else if (status >= 500) {

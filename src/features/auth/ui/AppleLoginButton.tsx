@@ -2,22 +2,15 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import React, { useState } from 'react';
 import { Alert, Text } from 'react-native';
 import AppleSvg from '@/assets/img/auth/apple.svg';
+import { useAuthStore } from '@/src/shared/store/useAuthStore';
 import { Button } from '@entities/user';
 import { storeTokens } from '@shared/store/token';
-import { RootNavigationProp } from '@shared/types';
 
 const API_BASE = 'https://zipbap.store';
 
-/**
- * TODO: apple login 단계에서 필수값(full_name, email)이 없을 경우, 토스트나 모달로서 보여줄 수 있도록 구현
- */
-
-interface Props {
-  navigation: RootNavigationProp<'Login'>;
-}
-
-const AppleLoginButton = ({ navigation }: Props) => {
+const AppleLoginButton = () => {
   const [isPressed, setIsPressed] = useState(false);
+  const { setAuthenticated } = useAuthStore();
 
   const handleAppleLogin = async () => {
     try {
@@ -36,7 +29,6 @@ const AppleLoginButton = ({ navigation }: Props) => {
         accessToken: credential.identityToken,
       };
 
-      // TODO: api 변경
       const response = await fetch(`${API_BASE}/api/auth/apple/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -52,15 +44,14 @@ const AppleLoginButton = ({ navigation }: Props) => {
       const { accessToken, refreshToken } = data.result;
 
       await storeTokens({ accessToken, refreshToken });
+      setAuthenticated(true);
 
-      navigation.replace('Main');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.code === 'ERR_REQUEST_CANCELED') {
         console.log('사용자가 Apple 로그인을 취소했습니다.');
       } else {
         console.error('Apple 로그인 실패:', error);
-        // TODO: 토스트 알림
         Alert.alert('로그인 실패', String(error.message || error));
       }
     }

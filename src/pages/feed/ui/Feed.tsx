@@ -1,8 +1,8 @@
-import React from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback } from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
-
 import { Portal } from 'react-native-portalize';
-import { FeedCard, useFeedData, FeedCardSkeleton } from '@features/feed';
+import { FeedCard, useFeedInfiniteQuery, FeedCardSkeleton } from '@features/feed';
 import { Feed as FeedItem } from '@entities/feed';
 import { useFeedChatBottomSheetStore } from '@shared/store';
 import { RootNavigationProp } from '@shared/types';
@@ -14,8 +14,14 @@ interface FeedPageProps {
 
 const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
   const { bottomSheetVisible, bottomSheetClose, feedId } = useFeedChatBottomSheetStore();
-  const { dataList, onEndReached, onRefresh, isRefreshing, isInitialLoading } = useFeedData();
+  const { dataList, onEndReached, onRefresh, isRefreshing, isInitialLoading, refetch } =
+    useFeedInfiniteQuery();
 
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
+  );
   const renderItem = ({ item }: { item: FeedItem }) => (
     <FeedCard feed={item} navigation={navigation} />
   );
@@ -30,8 +36,8 @@ const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
           <FlatList
             data={dataList}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
-            ListFooterComponent={() => <View style={{ height: 50 }} />}
+            keyExtractor={item => item.recipeId}
+            ListFooterComponent={() => <View style={{ height: 80 }} />}
             onEndReached={onEndReached}
             onEndReachedThreshold={0.6}
             refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}

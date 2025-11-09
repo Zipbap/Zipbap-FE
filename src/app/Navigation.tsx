@@ -24,6 +24,7 @@ export function Navigation() {
   if (authLoading || userLoading) {
     return <LoadingIndicator />;
   }
+
   return (
     <Host>
       <NavigationContainer>

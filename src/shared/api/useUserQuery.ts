@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { queryKeys } from '@shared/config';
 import { apiInstance } from '@shared/config/api-instance';
+import { useAuthStore } from '@shared/store/useAuthStore';
 import { ApiResponse } from '@shared/types/api';
 import { useUserStore } from '../store';
 import { User } from '../types';
@@ -15,12 +16,14 @@ const myUserApi = {
 };
 
 export const useUserQuery = () => {
+  const { isAuthenticated } = useAuthStore();
+
   const setUser = useUserStore(state => state.setUser);
 
   const query = useQuery<ApiResponse<User>, Error>({
     queryKey: queryKeys.user.me, // 구체적인 키 사용
     queryFn: myUserApi.getUser,
-    enabled: true,
+    enabled: isAuthenticated,
   });
 
   useEffect(() => {

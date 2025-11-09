@@ -12,6 +12,7 @@ export {
   FollowingAndFollowerList,
   FollowingAndFollowerCount,
   RecipeCard,
+  EditProfile,
 } from './model';
 
 // user UI

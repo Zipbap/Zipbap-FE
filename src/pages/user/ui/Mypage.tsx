@@ -47,7 +47,6 @@ const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
       <View className="relative flex-1 bg-white">
         {/*유저 헤더 섹션*/}
         <UserHeaderSection
-          statusMessage={user!.statusMessage}
           profile={profile}
           feedCount={feeds?.content.length}
           bookmarkCount={bookmarks?.content.length}

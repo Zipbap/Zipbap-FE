@@ -15,7 +15,6 @@ type Props = {
   navigation: RootNavigationProp<'Main'>;
   feedCount: number | undefined;
   bookmarkCount: number | undefined;
-  statusMessage: string | null;
 };
 
 const UserHeaderSection = ({
@@ -25,7 +24,6 @@ const UserHeaderSection = ({
   feedCount,
   bookmarkCount,
   navigation,
-  statusMessage,
 }: Props) => {
   const handlePageOpen = () => {
     navigation.navigate('ProfileEdit', { userId: profile.id });
@@ -42,7 +40,7 @@ const UserHeaderSection = ({
           <UserProfileImage uri={profile.profileImage} size={110} />
           <View className="max-w-60">
             <Text className="text-lg font-bold color-black">{profile.nickname}</Text>
-            <Text className="mt-1 flex-1 color-g1">{statusMessage ?? null}</Text>
+            <Text className="mt-1 flex-1 color-g1">{profile.statusMessage ?? null}</Text>
             {/* 팔로워 / 팔로잉 */}
             <TouchableOpacity
               className="flex-row justify-start gap-12"

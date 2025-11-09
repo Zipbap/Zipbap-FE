@@ -27,8 +27,7 @@ const LoginPage = () => {
               <Text className="font-bold text-sub1">&#183;</Text>
               <Text className="font-bold text-sub1">회원가입</Text>
             </View>
-            <KakaoLoginButton />
-            {isIOS() && <AppleLoginButton />}
+            {isIOS() ? <AppleLoginButton /> : <KakaoLoginButton />}
           </View>
         </View>
       </View>

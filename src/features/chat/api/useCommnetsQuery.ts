@@ -16,6 +16,10 @@ export const useCommentsQuery = (recipeId: string) => {
   return useQuery({
     queryKey: ['comments', recipeId],
     queryFn: async () => {
+      // FIXME: 근본적인 원인 해결 해야될듯
+      if (recipeId === '') {
+        return null;
+      }
       const data = await fetchCommentsApi(recipeId);
       return data.result.map(mapCommentDtoToEntity);
     },

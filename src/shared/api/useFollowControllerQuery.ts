@@ -17,9 +17,9 @@ export const useFollowUserQuery = () => {
       isFollowed: boolean;
     }) => {
       if (isFollowed) {
-        await followApi.followUser(targetUserId);
-      } else {
         await followApi.unFollowUser(targetUserId);
+      } else {
+        await followApi.followUser(targetUserId);
       }
     },
 

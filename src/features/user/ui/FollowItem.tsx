@@ -23,7 +23,7 @@ const FollowItem = ({ user, navigation }: Props) => {
     setIsFollowing(nextFollowState); // 낙관적 업데이트 (즉시 반응)
 
     followMutation.mutate(
-      { targetUserId: user.userId, isFollowed: nextFollowState },
+      { targetUserId: user.userId, isFollowed: isFollowing },
       {
         onError: () => {
           // 실패 시 상태 되돌림

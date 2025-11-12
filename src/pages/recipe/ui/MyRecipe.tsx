@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { View, FlatList, Pressable } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
 import { RecipeItemSkeleton } from '@features/recipe';

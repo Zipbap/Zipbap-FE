@@ -6,7 +6,6 @@ import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 import NoneUserSvg from '@/assets/img/none-profile-img.svg';
-import { useFeedDetailQuery } from '@/src/features/feed/api/useFeedDetialQuery';
 import {
   FeedBottomTab,
   RecipeDetailSection,
@@ -15,7 +14,8 @@ import {
   RecipeStepsFeedViewType,
   FeedDetailSkeleton,
 } from '@features/feed';
-
+import { useFeedDetailQuery } from '@features/feed/api/useFeedDetialQuery';
+import { useFollowUserQuery } from '@shared/api';
 import { cn } from '@shared/lib';
 import { useTwoViewTypeStore } from '@shared/store';
 import { FeedDetailProps } from '@shared/types';
@@ -42,6 +42,35 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
   const [bookmarkCount, setBookmarkCount] = useState<number | undefined>(feedDetail?.bookmarkCount);
   const [follow, setFollow] = useState<boolean | undefined>(feedDetail?.isFollowing);
 
+  const followMutation = useFollowUserQuery();
+
+  const handleFollow = () => {
+    if (follow === true) {
+      followMutation.mutate(
+        {
+          targetUserId: feedDetail?.userId.toString() || '',
+          isFollowed: follow as boolean,
+        },
+        {
+          onSuccess: () => {
+            setFollow(!follow);
+          },
+        },
+      );
+    } else {
+      followMutation.mutate(
+        {
+          targetUserId: feedDetail?.userId.toString() || '',
+          isFollowed: follow as boolean,
+        },
+        {
+          onSuccess: () => {
+            setFollow(!follow);
+          },
+        },
+      );
+    }
+  };
   useEffect(() => {
     if (feedDetail) {
       setBookmarked(feedDetail.isBookmarked);
@@ -123,7 +152,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                   <View />
                 ) : (
                   <Pressable
-                    onPress={() => setFollow(!follow)}
+                    onPress={() => handleFollow()}
                     className={cn(
                       'flex h-[37px] w-[77px] items-center justify-center rounded-full px-3 py-1',
                       follow ? 'bg-g3' : 'bg-sub2',

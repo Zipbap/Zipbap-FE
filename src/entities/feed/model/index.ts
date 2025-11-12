@@ -73,6 +73,7 @@ export interface FeedDetail extends FeedBase {
   viewCount: number;
   followerCount: number;
   isOwner: boolean;
+  userId: number;
 }
 
 export interface FeedPage {

@@ -6,6 +6,7 @@ import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 import NoneUserSvg from '@/assets/img/none-profile-img.svg';
+import VideoPlayer from '@/src/shared/ui/VideoPlayer';
 import {
   FeedBottomTab,
   RecipeDetailSection,
@@ -20,7 +21,6 @@ import { cn } from '@shared/lib';
 import { useTwoViewTypeStore } from '@shared/store';
 import { FeedDetailProps } from '@shared/types';
 import {
-  WebViewVideo,
   defaultShadow,
   ModalContentSection,
   ModalCategoriesSection,
@@ -248,7 +248,12 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
               {/* 레시피 영상 */}
               <ModalContentSection
                 subTitle="레시피 영상"
-                content={<WebViewVideo videoUrl={feedDetail.video} />}
+                content={
+                  <VideoPlayer
+                    videoSource={feedDetail.video}
+                    style={{ width: '100%', height: 201, borderRadius: 12 }}
+                  />
+                }
               />
             </View>
             {/* 레시피 순서 */}

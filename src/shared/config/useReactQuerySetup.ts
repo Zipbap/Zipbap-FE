@@ -1,6 +1,6 @@
 import { focusManager, onlineManager } from '@tanstack/react-query';
 import * as Network from 'expo-network';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { AppState, Platform } from 'react-native';
 import type { AppStateStatus } from 'react-native';
 
@@ -29,14 +29,23 @@ const setupFocusManager = () => {
 
 // hook
 const useReactQuerySetup = () => {
-  useEffect(() => {
-    setupOnlineManager();
-  }, []);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const cleanup = setupFocusManager();
-    return cleanup;
+    // 1️⃣ 온라인/포커스 매니저 설정
+    setupOnlineManager();
+    const cleanupFocus = setupFocusManager();
+
+    // 2️⃣ 준비 완료 후 isReady true
+    setIsReady(true);
+
+    // 3️⃣ cleanup
+    return () => {
+      cleanupFocus();
+    };
   }, []);
+
+  return isReady;
 };
 
 export default useReactQuerySetup;

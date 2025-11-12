@@ -27,9 +27,6 @@
     },
     "production": {
       "autoIncrement": true,
-      "env": {
-        "EXPO_PUBLIC_BASE_URL": "https://zipbap.store/api/"
-      },
       "android": {
         "buildType": "app-bundle"
       },

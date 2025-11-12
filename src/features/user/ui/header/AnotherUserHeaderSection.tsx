@@ -23,7 +23,7 @@ const AnotherUserHeaderSection = ({ profile, navigation, feedCount }: Props) => 
     setIsFollowing(nextFollowState); // 낙관적 업데이트 (즉시 반응)
 
     followMutation.mutate(
-      { targetUserId: profile.id, isFollowed: nextFollowState },
+      { targetUserId: profile.id, isFollowed: isFollowing },
       {
         onError: () => {
           // 실패 시 상태 되돌림

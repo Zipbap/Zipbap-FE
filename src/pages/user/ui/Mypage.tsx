@@ -18,12 +18,12 @@ const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
   const { bottomSheetVisible, bottomSheetClose } = useSettingBottomSheetStore();
   const { user } = useUserStore();
 
-  const { profile, feeds, isLoading: isLoadingFeed } = useFeedQuery(user!.id);
+  const { profile, feeds, isLoading: isLoadingFeed } = useFeedQuery(user?.id ?? '0');
   const {
     bookmarks,
     isStale: isStaleBookmark,
     refetch: refetchBookmarks,
-  } = useBookmarkQuery(user!.id, false);
+  } = useBookmarkQuery(user?.id ?? '0', false);
 
   // NOTE: 탭 전환 시 북마크 데이터 로드
   useEffect(() => {

@@ -203,7 +203,7 @@ const RecipeCreateForm = () => {
           buttonText="영상 업로드"
           uploadType="video"
           value={recipe.video}
-          onUpload={uri => updateField('video', uri)}
+          onUpload={uri => handleUpload(uri, 'video')}
         />
 
         {/* 순서 */}

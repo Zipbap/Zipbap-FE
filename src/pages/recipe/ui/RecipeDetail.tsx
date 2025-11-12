@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { apiInstance } from '@/src/shared/config/api-instance';
+import VideoPlayer from '@/src/shared/ui/VideoPlayer';
 import {
   RecipeDetailSection,
   RecipeStepsArticleViewType,
@@ -15,7 +16,6 @@ import { useTwoViewTypeStore } from '@shared/store';
 import { RecipeDetailProps } from '@shared/types';
 import {
   FullWidthButton,
-  WebViewVideo,
   defaultShadow,
   ModalContentSection,
   ModalCategoriesSection,
@@ -114,7 +114,12 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
               {/* 레시피 영상 */}
               <ModalContentSection
                 subTitle="레시피 영상"
-                content={<WebViewVideo videoUrl={detailRecipe?.video || ''} />}
+                content={
+                  <VideoPlayer
+                    videoSource={detailRecipe?.video || ''}
+                    style={{ width: '100%', height: 200, borderRadius: 16 }}
+                  />
+                }
               />
             </View>
             {/* 레시피 순서 */}

@@ -4,14 +4,15 @@ import { StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { useCheckAuth } from '@/src/features/auth';
-import { useReactQuerySetup } from '@shared/config';
+import { useAppInit } from '../shared/lib';
 import { Navigation } from './Navigation';
+import SplashScreen from './SplashScreen';
 
+const queryClient = new QueryClient();
 const App = () => {
-  const queryClient = new QueryClient();
-  useReactQuerySetup();
-  useCheckAuth();
+  const isReady = useAppInit();
+
+  if (!isReady) return <SplashScreen />;
 
   return (
     <QueryClientProvider client={queryClient}>

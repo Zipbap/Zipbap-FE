@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Platform } from 'react-native';
 import { useAuthStore } from '@shared/store/useAuthStore';
 import useReactQuerySetup from '../config/useReactQuerySetup';
 
@@ -16,8 +17,9 @@ const useAppInit = () => {
         // NOTE: Auth 체크
         await checkAuth();
 
-        // NOTE: 최소 1초 스플래시 유지
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        if (Platform.OS === 'android') {
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
 
         setIsReady(true);
       } catch (e) {

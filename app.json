@@ -10,7 +10,7 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/img/app-icon.png",
+      "image": "./assets/splash-large.png",
       "resizeMode": "contain",
       "backgroundColor": "#DC6E3F"
     },

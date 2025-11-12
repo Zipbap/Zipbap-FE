@@ -26,15 +26,17 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="zipbap"/>
-        <data android:scheme="exp+zipbap"/>
       </intent-filter>
     </activity>
     <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity" android:exported="true">
       <intent-filter>
-        <action android:name="android.intent.action.VIEW"/>
-        <category android:name="android.intent.category.DEFAULT"/>
-        <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:host="oauth" android:scheme="kakao9957eb80ae4feba2d9efdb29d787275a"/>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+        <data android:host="oauth"
+          android:scheme="kakao9957eb80ae4feba2d9efdb29d787275a" />
       </intent-filter>
     </activity>
   </application>

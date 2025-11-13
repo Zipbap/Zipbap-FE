@@ -54,7 +54,7 @@ const FeedChatBottomSheet = ({ feedId, bottomSheetVisible, bottomSheetClose }: P
 
   return (
     <BottomSheetModal visible={bottomSheetVisible} onClose={bottomSheetClose}>
-      <View className="h-[570px] bg-primary">
+      <View className="h-[570px]">
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? undefined : 'padding'}
           keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 160}

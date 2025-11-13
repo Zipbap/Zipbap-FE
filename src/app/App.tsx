@@ -1,18 +1,18 @@
 import '@/global.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { StatusBar } from 'react-native';
+import { StatusBar, Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useAppInit } from '../shared/lib';
+import AndroidSplashScreen from './AndroidSplashScreen';
 import { Navigation } from './Navigation';
-import SplashScreen from './SplashScreen';
 
 const queryClient = new QueryClient();
 const App = () => {
   const isReady = useAppInit();
 
-  if (!isReady) return <SplashScreen />;
+  if (!isReady && Platform.OS === 'android') return <AndroidSplashScreen />;
 
   return (
     <QueryClientProvider client={queryClient}>

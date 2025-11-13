@@ -29,11 +29,13 @@ const SearchBox = ({ searchTitle }: Props) => {
       duration: 300,
       easing: Easing.out(Easing.ease),
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSearchBarOn]);
 
   useEffect(() => {
     setCondition(searchText);
     setText(searchText);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
 
   const handleOutsidePress = () => Keyboard.dismiss();

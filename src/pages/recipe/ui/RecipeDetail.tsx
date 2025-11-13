@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import VideoPlayer from '@/src/shared/ui/VideoPlayer';
 import {
   RecipeDetailSection,
   RecipeStepsArticleViewType,
@@ -24,6 +23,7 @@ import {
 } from '@shared/ui';
 
 import Shared from '@shared/ui/Shared';
+import VideoPlayer from '@shared/ui/VideoPlayer';
 
 const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
   const insets = useSafeAreaInsets();

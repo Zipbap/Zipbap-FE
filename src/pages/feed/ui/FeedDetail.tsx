@@ -6,7 +6,6 @@ import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 import NoneUserSvg from '@/assets/img/none-profile-img.svg';
-import VideoPlayer from '@/src/shared/ui/VideoPlayer';
 import {
   useFeedDetailQuery,
   FeedBottomTab,
@@ -27,6 +26,7 @@ import {
   ModalHeader,
   TwoViewTypeSwitcher,
 } from '@shared/ui';
+import VideoPlayer from '@shared/ui/VideoPlayer';
 
 const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
   const { viewType, setViewType } = useTwoViewTypeStore();

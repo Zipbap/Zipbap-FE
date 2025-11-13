@@ -2,7 +2,7 @@ import React, { forwardRef, useState } from 'react';
 import { View, TextInput, Pressable, Image, Text, TouchableWithoutFeedback } from 'react-native';
 import NoneProfileImgSvg from '@/assets/img/none-profile-img.svg';
 import SendButtonIconSvg from '@/assets/img/send-button-icon.svg';
-import { useUserStore } from '@/src/shared/store';
+import { useUserStore } from '@shared/store';
 
 interface Props {
   replyTo?: string | null;

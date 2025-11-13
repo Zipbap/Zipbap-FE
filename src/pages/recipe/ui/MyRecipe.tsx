@@ -3,7 +3,6 @@ import React from 'react';
 import { View, FlatList } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
-import { useMyRecipeFilterStore } from '@/src/shared/store/useMyRecipeFilterStore';
 import { RecipeItemSkeleton } from '@features/recipe';
 import { EmptyStateUsingVideo } from '@features/user';
 import { useCategories } from '@entities/category';
@@ -11,6 +10,7 @@ import { ArticleView, Recipe, FeedView, ImageView } from '@entities/recipe';
 import { queryKeys } from '@shared/config';
 import { apiInstance } from '@shared/config/api-instance';
 import { useViewTypeStore, useCategoryBottomSheetStore } from '@shared/store';
+import { useMyRecipeFilterStore } from '@shared/store/useMyRecipeFilterStore';
 import { RootNavigationProp } from '@shared/types';
 
 import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
@@ -91,7 +91,7 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
                 title={'첫번째 레시피를 기록해 보세요'}
                 subtitle={'내가 기억하고 싶은 레시피를 작성해 보세요'}
                 buttonText={'레시피 작성하기'}
-                onPress={() => navigation.navigate('RecipeCreateForm', {})}
+                onPress={() => navigation.navigate('RecipeCreateForm', { from: 'RecipeCreate' })}
               />
             </View>
           )}

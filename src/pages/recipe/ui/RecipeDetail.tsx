@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { apiInstance } from '@/src/shared/config/api-instance';
 import VideoPlayer from '@/src/shared/ui/VideoPlayer';
 import {
   RecipeDetailSection,

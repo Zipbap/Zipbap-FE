@@ -16,7 +16,6 @@ import {
   RecipeStepsFeedViewType,
   FeedDetailSkeleton,
 } from '@features/feed';
-import { useFeedDetailQuery } from '@features/feed/api/useFeedDetialQuery';
 import { useFollowUserQuery } from '@shared/api';
 import { cn } from '@shared/lib';
 import { useTwoViewTypeStore } from '@shared/store';

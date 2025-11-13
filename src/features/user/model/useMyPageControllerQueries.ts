@@ -8,7 +8,7 @@ import { myPageApi } from '../api/myPageApi';
 export const useFeedQuery = (userId: string) => {
   const { user: myUser } = useUserStore();
   const queryClient = useQueryClient();
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: queryKeys.feed.list(userId),
     queryFn: () => {
       return myPageApi.getAllFeeds(userId);
@@ -16,6 +16,14 @@ export const useFeedQuery = (userId: string) => {
     enabled: !!userId,
     staleTime: 5 * 60 * 1000,
   });
+
+  // NOTE: focus 됐을 때 확인 함수
+  const ensure = async () => {
+    await queryClient.ensureQueryData({
+      queryKey: queryKeys.feed.list(userId),
+      queryFn: () => myPageApi.getAllFeeds(userId),
+    });
+  };
 
   if (!myUser && userId === myUser) {
     // NOTE: 북마크 데이터 프리패치를 통해 미리 가져옴
@@ -58,18 +66,29 @@ export const useFeedQuery = (userId: string) => {
     feeds,
     isLoading,
     isError,
+    ensure,
+    refetch,
   };
 };
 
-export const useBookmarkQuery = (userId: string, enabledCondition?: boolean) => {
+export const useBookmarkQuery = (userId: string) => {
+  const queryClient = useQueryClient();
   const query = useQuery({
     queryKey: queryKeys.bookmark.list(userId),
     queryFn: () => {
       return myPageApi.getAllBookmarks(userId);
     },
-    enabled: !!userId && !!enabledCondition,
+    enabled: !!userId,
     staleTime: 5 * 60 * 1000,
   });
+
+  // NOTE: focus 됐을 때 확인 함수
+  const ensure = async () => {
+    await queryClient.ensureQueryData({
+      queryKey: queryKeys.bookmark.list(userId),
+      queryFn: () => myPageApi.getAllBookmarks(userId),
+    });
+  };
 
   const bookmarks = useMemo(() => {
     const result = query.data?.result as UserBookmarks | undefined;
@@ -100,6 +119,7 @@ export const useBookmarkQuery = (userId: string, enabledCondition?: boolean) => 
     isError: query.isError,
     refetch: query.refetch,
     isStale: query.isStale,
+    ensure,
   };
 };
 

@@ -11,6 +11,7 @@ interface Props {
   isThumbnail?: boolean;
   value?: string | null;
   onUpload: (uri: string) => void;
+  isLoading?: boolean;
 }
 
 const FormMediaUpload = ({
@@ -20,6 +21,7 @@ const FormMediaUpload = ({
   uploadType,
   value,
   onUpload,
+  isLoading,
 }: Props) => {
   const { upload } = useMediaUpload(onUpload);
   const handleUpload = () => upload(uploadType);
@@ -39,38 +41,44 @@ const FormMediaUpload = ({
       className="my-[16px] flex h-[232px] w-[326px] flex-col items-center justify-center gap-6 self-center rounded-xl border-2 border-[#E5DEDB] px-6 py-14"
       style={{ borderStyle: 'dashed' }}
     >
-      <View className="flex flex-col items-center justify-center">
-        {isValidSource ? (
-          uploadType === 'image' ? (
-            <Image
-              source={{ uri: value }}
-              className="h-[232px] w-[326px] rounded-lg"
-              resizeMode="cover"
-            />
+      {!isLoading ? (
+        <View className="flex flex-col items-center justify-center">
+          {isValidSource ? (
+            uploadType === 'image' ? (
+              <Image
+                source={{ uri: value }}
+                className="h-[232px] w-[326px] rounded-lg"
+                resizeMode="cover"
+              />
+            ) : (
+              <VideoPlayer
+                videoSource={videoSource}
+                style={{ width: 327, height: 232, borderRadius: 16 }}
+              />
+            )
           ) : (
-            <VideoPlayer
-              videoSource={videoSource}
-              style={{ width: 327, height: 232, borderRadius: 16 }}
-            />
-          )
-        ) : (
-          <>
-            <Text className="text-center text-[18px] font-bold text-[#171212]">{title}</Text>
-            <Text className="mt-[8px] text-center text-[14px] font-normal text-[#171212]">
-              {description}
-            </Text>
-          </>
-        )}
+            <>
+              <Text className="text-center text-[18px] font-bold text-[#171212]">{title}</Text>
+              <Text className="mt-[8px] text-center text-[14px] font-normal text-[#171212]">
+                {description}
+              </Text>
+            </>
+          )}
 
-        {!isValidSource && (
-          <TouchableOpacity
-            className="mt-[24px] h-10 min-w-20 max-w-[480px] items-center justify-center rounded-xl bg-[#F5F2F0] px-4"
-            onPress={handleUpload}
-          >
-            <Text className="text-center font-bold text-[#171212]">{buttonText}</Text>
-          </TouchableOpacity>
-        )}
-      </View>
+          {!isValidSource && (
+            <TouchableOpacity
+              className="mt-[24px] h-10 min-w-20 max-w-[480px] items-center justify-center rounded-xl bg-[#F5F2F0] px-4"
+              onPress={handleUpload}
+            >
+              <Text className="text-center font-bold text-[#171212]">{buttonText}</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      ) : (
+        <View className="flex flex-col items-center justify-center">
+          <Text>사진/영상을 업로드중입니다...</Text>
+        </View>
+      )}
     </View>
   );
 };

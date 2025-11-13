@@ -4,7 +4,7 @@ import SplashImg from '@/assets/splash-large.png';
 
 const { width } = Dimensions.get('window');
 
-const SplashScreen = () => {
+const AndroidSplashScreen = () => {
   return (
     <View className="flex-1 flex-col items-center justify-center bg-sub1">
       <Image
@@ -21,4 +21,4 @@ const SplashScreen = () => {
   );
 };
 
-export default SplashScreen;
+export default AndroidSplashScreen;

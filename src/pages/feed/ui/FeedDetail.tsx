@@ -246,15 +246,17 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                 }
               />
               {/* 레시피 영상 */}
-              <ModalContentSection
-                subTitle="레시피 영상"
-                content={
-                  <VideoPlayer
-                    videoSource={feedDetail.video}
-                    style={{ width: '100%', height: 201, borderRadius: 12 }}
-                  />
-                }
-              />
+              {feedDetail.video && (
+                <ModalContentSection
+                  subTitle="레시피 영상"
+                  content={
+                    <VideoPlayer
+                      videoSource={feedDetail.video}
+                      style={{ width: '100%', height: 201, borderRadius: 12 }}
+                    />
+                  }
+                />
+              )}
             </View>
             {/* 레시피 순서 */}
             <View className="mt-12 w-full">

@@ -51,6 +51,13 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
     apiInstance.delete(`/recipes/${recipeId}`);
   };
 
+  const navigateToRecipeCreateForm = async () => {
+    await navigation.goBack();
+    await navigation.navigate('RecipeCreateForm', {
+      recipeId: detailRecipe.id,
+      from: 'RecipeDetail',
+    });
+  };
   return (
     <View className="flex-1 bg-white" style={{ paddingTop: insets.top }}>
       {/* 헤더 */}
@@ -139,7 +146,12 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
                 subTitle="레시피 Kick"
               />
               <View className="h-6" />
-
+              <FullWidthButton
+                buttonText="수정하기"
+                onPress={() => navigateToRecipeCreateForm()}
+                backgroundColor="#F0EDE6"
+                textColor="#60594E"
+              />
               {/* 삭제하기 버튼 */}
               <FullWidthButton
                 buttonText="삭제하기"

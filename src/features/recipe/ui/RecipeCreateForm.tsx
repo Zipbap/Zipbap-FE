@@ -25,18 +25,22 @@ const RecipeCreateForm = () => {
   const route = useRoute<RecipeCreateFormRouteProp>();
 
   // create utils
-  const recipeId = route.params.recipeId;
+  /** from: 'RecipeCreate' | 'RecipeDetail' */
+  const { recipeId, from } = route.params;
+
+  console.log('🐱', from); //FIXME:
+
   const {
     recipe,
     updateField,
     updateCookingOrder,
     addCookingOrder,
-    useLoadTempRecipe,
+    useLoadRecipe,
     recipeMutation,
   } = useRecipeCreateForm();
 
   // load temp recipe
-  useLoadTempRecipe(recipeId);
+  useLoadRecipe(recipeId, from);
 
   const handleTempRecipeSave = () => {
     if (!recipe.thumbnail) {

@@ -1,9 +1,11 @@
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 
+export type RecipeCreateFormFrom = 'RecipeCreate' | 'RecipeDetail';
+
 export type RootStackParamList = {
   Login: undefined;
   Main: { screen?: keyof MainTabParamList } | undefined;
-  RecipeCreateForm: { recipeId?: string };
+  RecipeCreateForm: { recipeId?: string; from: RecipeCreateFormFrom };
   AnotherUserPage: { userId: string };
   RecipeDetail: { recipeId: string };
   FeedDetail: { feedId: string };

@@ -23,12 +23,13 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
 
   // navigate
   const navigateToRecipeCreateForm = () => {
-    navigation.navigate('RecipeCreateForm', { recipeId: '' });
+    navigation.navigate('RecipeCreateForm', { recipeId: '', from: 'RecipeCreate' });
   };
 
+  // FIXME:
   const navigateToTempRecipeCreateForm = (targetId: string) => {
     if (recipeType === 'temp') {
-      navigation.navigate('RecipeCreateForm', { recipeId: targetId });
+      navigation.navigate('RecipeCreateForm', { recipeId: targetId, from: 'RecipeCreate' });
     }
     if (recipeType === 'final') {
       navigation.navigate('RecipeDetail', { recipeId: targetId });

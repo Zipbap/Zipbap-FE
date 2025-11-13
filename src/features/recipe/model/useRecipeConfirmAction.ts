@@ -1,10 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import { useQueryClient } from '@tanstack/react-query';
-import { validateRecipeForm } from '@/src/features/recipe/lib/validateRecipeForm';
-import { validateTempRecipeForm } from '@/src/features/recipe/lib/validateTempRecipeForm';
-import { useRecipeCreateForm } from '@features/recipe/model/useRecipeCreateForm';
 import { RecipeDetail } from '@entities/recipe';
 import { RootNavigationProp } from '@shared/types';
+import { validateRecipeForm } from '../lib/validateRecipeForm';
+import { validateTempRecipeForm } from '../lib/validateTempRecipeForm';
+import { useRecipeCreateForm } from './useRecipeCreateForm';
 
 export const useRecipeConfirmAction = (setModalVisible: (visible: boolean) => void) => {
   const navigation = useNavigation<RootNavigationProp<'Main'>>();

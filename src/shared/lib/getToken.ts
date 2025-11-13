@@ -1,4 +1,4 @@
-import { getTokens } from '@/src/shared/store/token';
+import { getTokens } from '@shared/store';
 
 export const getToken = {
   accessToken: async () => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Platform, Text, TextInput, View, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CheckSvgIcon from '@/assets/img/check.svg';
-import { handleUserDelete } from '@features/auth/api/unlink';
+import { handleUserDelete } from '@features/auth';
 import { useDeleteUserQuery } from '@features/user';
 import { SecessionProps } from '@shared/types';
 import { defaultShadow, ModalHeader } from '@shared/ui';

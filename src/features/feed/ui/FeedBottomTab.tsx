@@ -8,9 +8,9 @@ import ChatOnSvg from '@/assets/img/feed/chat-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 
-import { useToggleLikeMutation } from '@/src/features/feed/api/useToggleLikeMutation';
-import { useToggleBookmarkMutation } from '@features/feed/api/useToggleBookmarkMutation';
 import { useFeedChatBottomSheetStore } from '@shared/store';
+import { useToggleBookmarkMutation } from '../api/useToggleBookmarkMutation';
+import { useToggleLikeMutation } from '../api/useToggleLikeMutation';
 
 interface Props {
   initialLikes?: number;

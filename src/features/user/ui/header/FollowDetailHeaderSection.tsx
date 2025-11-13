@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import { UserTabs } from '@features/user';
 import { FollowTabType, FollowingAndFollowerCount } from '@entities/user';
 import { RootNavigationProp } from '@shared/types';
 import { defaultShadow, ModalHeader } from '@shared/ui';
+import UserTabs from '../UserTabs';
 
 export interface Props {
   navigation: RootNavigationProp<'FollowDetail'>;

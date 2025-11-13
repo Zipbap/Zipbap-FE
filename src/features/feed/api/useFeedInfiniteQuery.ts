@@ -1,9 +1,8 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useCallback } from 'react';
-import { FeedListParams, FeedPage } from '@/src/entities/feed/model';
-import { queryKeys } from '@/src/shared/config';
-import { apiInstance } from '@/src/shared/config/api-instance';
-import { ApiResponse } from '@/src/shared/types/api';
+import { FeedListParams, FeedPage } from '@entities/feed';
+import { queryKeys, apiInstance } from '@shared/config';
+import { ApiResponse } from '@shared/types';
 
 const fetchFeedList = async ({
   pageParam = 0,

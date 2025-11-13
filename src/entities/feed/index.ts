@@ -1,1 +1,1 @@
-export { Feed, FeedDetail } from './model/index';
+export { Feed, FeedDetail, FeedListParams, FeedPage, Pageable, Sort } from './model/index';

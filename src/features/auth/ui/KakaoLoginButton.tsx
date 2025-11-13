@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native';
 import KakaoSvg from '@/assets/img/auth/kakao.svg';
-import { storeTokens } from '@/src/shared/store/token';
-import { useAuthStore } from '@/src/shared/store/useAuthStore';
 import { Button } from '@entities/user';
+import { storeTokens, useAuthStore } from '@shared/store';
 import { kakaoLogin } from '../api/login';
 
 const KakaoLoginButton = () => {

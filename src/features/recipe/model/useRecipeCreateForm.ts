@@ -126,11 +126,36 @@ export const useRecipeCreateForm = () => {
     createTempRecipe() {
       tempRecipeMutation.mutate();
     },
+    // tempSave(recipe: RecipeDetail) {
+    //   tempSaveMutation.mutate(recipe);
+    // },
     tempSave(recipe: RecipeDetail) {
-      tempSaveMutation.mutate(recipe);
+      return new Promise((resolve, reject) => {
+        tempSaveMutation.mutate(recipe, {
+          onSuccess: data => {
+            invalidateAll();
+            resolve(data);
+          },
+          onError: error => {
+            console.error('임시저장 실패:', error);
+            reject(error);
+          },
+        });
+      });
     },
     finalizeSave(recipe: RecipeDetail) {
-      finalizeMutation.mutate(recipe);
+      return new Promise((resolve, reject) => {
+        finalizeMutation.mutate(recipe, {
+          onSuccess: data => {
+            invalidateAll();
+            resolve(data);
+          },
+          onError: error => {
+            console.error('최종 저장 실패:', error);
+            reject(error);
+          },
+        });
+      });
     },
     delete(recipeId: string) {
       deleteMutation.mutate(recipeId);

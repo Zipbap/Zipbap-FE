@@ -1,10 +1,11 @@
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { ArrowUpDown } from 'lucide-react-native';
 import React from 'react';
 import { View, Text, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { useCategories } from '@entities/category';
 import { RootStackParamList } from '@shared/types';
+import { RecipeCreateFormFrom, RootNavigationProp } from '@shared/types/navigation';
 import { FullWidthButton } from '@shared/ui';
 import { useRecipeUploader } from '../lib/useRecipeUpload';
 import { validateRecipeForm } from '../lib/validateRecipeForm';
@@ -21,14 +22,16 @@ import RecipeCreateHeader from './RecipeCreateHeader';
 type RecipeCreateFormRouteProp = RouteProp<RootStackParamList, 'RecipeCreateForm'>;
 
 const RecipeCreateForm = () => {
+  const navigation = useNavigation<RootNavigationProp<'Main'>>();
+
   // route
   const route = useRoute<RecipeCreateFormRouteProp>();
 
   // create utils
-  /** from: 'RecipeCreate' | 'RecipeDetail' */
-  const { recipeId, from } = route.params;
-
-  console.log('🐱', from); //FIXME:
+  const { recipeId, from } = route.params as {
+    recipeId?: string;
+    from: RecipeCreateFormFrom;
+  };
 
   const {
     recipe,
@@ -51,16 +54,21 @@ const RecipeCreateForm = () => {
     Alert.alert('임시 저장 안내', '임시 저장된 레시피는 30일 이후 자동으로 삭제됩니다.', [
       {
         text: '확인',
-        onPress: () => recipeMutation.tempSave(recipe),
+        onPress: () => {
+          recipeMutation.tempSave(recipe).then(() => {
+            navigation.goBack();
+          });
+        },
       },
       { text: '취소', style: 'cancel' },
     ]);
   };
 
-  const handleFinalizeRecipeSave = () => {
-    if (validateRecipeForm(recipe)) {
-      recipeMutation.finalizeSave(recipe);
-    }
+  const handleFinalizeRecipeSave = async () => {
+    if (!validateRecipeForm(recipe)) return;
+
+    await recipeMutation.finalizeSave(recipe);
+    navigation.goBack();
   };
 
   // upload logic
@@ -261,15 +269,17 @@ const RecipeCreateForm = () => {
         </View>
 
         {/* 버튼 */}
-        <FullWidthButton
-          buttonText="임시저장"
-          onPress={() => handleTempRecipeSave()}
-          backgroundColor="#F0EDE6"
-          textColor="#60594E"
-        />
+        {from === 'RecipeCreate' && (
+          <FullWidthButton
+            buttonText="임시저장"
+            onPress={() => handleTempRecipeSave()}
+            backgroundColor="#F0EDE6"
+            textColor="#60594E"
+          />
+        )}
 
         <FullWidthButton
-          buttonText="추가하기"
+          buttonText={from === 'RecipeCreate' ? '추가하기' : '수정하기'}
           onPress={() => handleFinalizeRecipeSave()}
           backgroundColor="#DC6E3F"
           textColor="white"

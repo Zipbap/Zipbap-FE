@@ -51,10 +51,6 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
     apiInstance.delete(`/recipes/${recipeId}`);
   };
 
-  const navigateToRecipeCreateForm = () => {
-    navigation.navigate('RecipeCreateForm', { recipeId: detailRecipe.id });
-  };
-
   return (
     <View className="flex-1 bg-white" style={{ paddingTop: insets.top }}>
       {/* 헤더 */}
@@ -147,7 +143,10 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
               {/* 삭제하기 버튼 */}
               <FullWidthButton
                 buttonText="삭제하기"
-                onPress={() => deleteRecipe(detailRecipe.id)}
+                onPress={() => {
+                  deleteRecipe(detailRecipe.id);
+                  navigation.goBack();
+                }}
                 backgroundColor="#DC6E3F"
                 textColor="white"
               />

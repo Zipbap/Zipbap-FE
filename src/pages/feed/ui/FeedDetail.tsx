@@ -6,8 +6,8 @@ import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 import NoneUserSvg from '@/assets/img/none-profile-img.svg';
-import { useFeedDetailQuery } from '@/src/features/feed/api/useFeedDetialQuery';
 import {
+  useFeedDetailQuery,
   FeedBottomTab,
   RecipeDetailSection,
   RecipeStepsArticleViewType,

@@ -1,5 +1,8 @@
-// feed model
+// feed api
 export { useFeedInfiniteQuery } from './api/useFeedInfiniteQuery';
+export { useFeedDetailQuery } from './api/useFeedDetailQuery';
+export { useToggleBookmarkMutation } from './api/useToggleBookmarkMutation';
+export { useToggleLikeMutation } from './api/useToggleLikeMutation';
 
 // feed UI
 export { default as FeedBottomTab } from './ui/FeedBottomTab';

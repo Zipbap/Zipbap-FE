@@ -1,5 +1,11 @@
 // NOTE: chat API
-export { createCommentApi, fetchCommentsApi } from './api/comments';
+export {
+  useCommentsQuery,
+  useCreateCommentMutation,
+  useDeleteCommentMutation,
+  useUpdateCommentMutation,
+} from './api/useCommnetsQuery';
+
 // NOTE: chat UI
 export { default as ChatInput } from './ui/ChatInput';
 export { default as CommentItem } from './ui/CommentItem';

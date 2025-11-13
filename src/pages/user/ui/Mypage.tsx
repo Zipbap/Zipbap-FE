@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 
 import { Portal } from 'react-native-portalize';
@@ -18,22 +19,24 @@ const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
   const { bottomSheetVisible, bottomSheetClose } = useSettingBottomSheetStore();
   const { user } = useUserStore();
 
-  const { profile, feeds, isLoading: isLoadingFeed } = useFeedQuery(user?.id ?? '0');
+  const {
+    profile,
+    feeds,
+    isLoading: isLoadingFeed,
+    ensure: feedEnsure,
+  } = useFeedQuery(user?.id ?? '0');
   const {
     bookmarks,
     isStale: isStaleBookmark,
-    refetch: refetchBookmarks,
-  } = useBookmarkQuery(user?.id ?? '0', false);
+    ensure: bookmarkEnsure,
+  } = useBookmarkQuery(user?.id ?? '0');
 
-  // NOTE: 탭 전환 시 북마크 데이터 로드
-  useEffect(() => {
-    if (tab === 'bookmarks') {
-      if (!bookmarks || isStaleBookmark) {
-        refetchBookmarks();
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tab, isStaleBookmark]);
+  useFocusEffect(
+    useCallback(() => {
+      bookmarkEnsure();
+      feedEnsure();
+    }, [bookmarkEnsure, feedEnsure]),
+  );
 
   if (isLoadingFeed || isStaleBookmark || !profile) {
     return (

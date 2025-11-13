@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, TextInput, FlatList, RefreshControl, Platform } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
-import { ChatInput, CommentItem } from '@features/chat';
-import { useCommentsQuery, useCreateCommentMutation } from '@features/chat/api/useCommnetsQuery';
+import { ChatInput, CommentItem, useCommentsQuery, useCreateCommentMutation } from '@features/chat';
 import { Comment } from '@entities/comment';
 import { BottomSheetModal } from '@shared/ui';
 

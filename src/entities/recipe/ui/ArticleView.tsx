@@ -1,4 +1,4 @@
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, Pressable } from 'react-native';
 
 import TimerIcon from '@/assets/img/recipe/timeer.svg';
 
@@ -7,13 +7,17 @@ import { Recipe } from '../model';
 
 interface Props {
   item: Recipe;
+  navigate: (id: string) => void;
 }
 
-const ArticleView = ({ item }: Props) => {
+const ArticleView = ({ item, navigate }: Props) => {
   const { categoryValue } = useCategories();
 
   return (
-    <View className="mb-[33px] flex-row gap-4 rounded-xl bg-white">
+    <Pressable
+      onPress={() => navigate(item.id)}
+      className="mb-[33px] flex-row gap-4 rounded-xl bg-white"
+    >
       <Image className="h-[90px] w-[94px] rounded-xl" source={{ uri: item.thumbnail }} />
       <View className="flex-1">
         {/* 서브타이틀, 요리시간 */}
@@ -28,15 +32,10 @@ const ArticleView = ({ item }: Props) => {
         </View>
 
         {/* 제목 */}
-        {item.title ? (
-          <Text className="mt-[2px] text-[14px] font-bold leading-tight text-black">
-            {item.title}
-          </Text>
-        ) : (
-          <Text className="mt-[2px] text-[14px] font-bold leading-tight text-g2">
-            제목을 입력해주세요.
-          </Text>
-        )}
+        <Text className="mt-[2px] text-[14px] font-bold leading-tight text-black">
+          {item.title || '제목을 입력해주세요.'}
+        </Text>
+
         {/* 소개 */}
         {item.introduction ? (
           <Text className="mt-[8px] text-[12px] font-normal text-[#827066]">
@@ -48,7 +47,7 @@ const ArticleView = ({ item }: Props) => {
           </Text>
         )}
       </View>
-    </View>
+    </Pressable>
   );
 };
 

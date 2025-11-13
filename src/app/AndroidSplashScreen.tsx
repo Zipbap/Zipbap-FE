@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, Dimensions } from 'react-native';
-import SplashImg from '@/assets/splash-large.png';
+import SplashImg from '@/assets/img/splash-large.png';
 
 const { width } = Dimensions.get('window');
 

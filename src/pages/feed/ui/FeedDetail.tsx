@@ -15,18 +15,18 @@ import {
   RecipeStepsFeedViewType,
   FeedDetailSkeleton,
 } from '@features/feed';
-
+import { useFollowUserQuery } from '@shared/api';
 import { cn } from '@shared/lib';
 import { useTwoViewTypeStore } from '@shared/store';
 import { FeedDetailProps } from '@shared/types';
 import {
-  WebViewVideo,
   defaultShadow,
   ModalContentSection,
   ModalCategoriesSection,
   ModalHeader,
   TwoViewTypeSwitcher,
 } from '@shared/ui';
+import VideoPlayer from '@shared/ui/VideoPlayer';
 
 const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
   const { viewType, setViewType } = useTwoViewTypeStore();
@@ -42,6 +42,35 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
   const [bookmarkCount, setBookmarkCount] = useState<number | undefined>(feedDetail?.bookmarkCount);
   const [follow, setFollow] = useState<boolean | undefined>(feedDetail?.isFollowing);
 
+  const followMutation = useFollowUserQuery();
+
+  const handleFollow = () => {
+    if (follow === true) {
+      followMutation.mutate(
+        {
+          targetUserId: feedDetail?.userId.toString() || '',
+          isFollowed: follow as boolean,
+        },
+        {
+          onSuccess: () => {
+            setFollow(!follow);
+          },
+        },
+      );
+    } else {
+      followMutation.mutate(
+        {
+          targetUserId: feedDetail?.userId.toString() || '',
+          isFollowed: follow as boolean,
+        },
+        {
+          onSuccess: () => {
+            setFollow(!follow);
+          },
+        },
+      );
+    }
+  };
   useEffect(() => {
     if (feedDetail) {
       setBookmarked(feedDetail.isBookmarked);
@@ -123,7 +152,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                   <View />
                 ) : (
                   <Pressable
-                    onPress={() => setFollow(!follow)}
+                    onPress={() => handleFollow()}
                     className={cn(
                       'flex h-[37px] w-[77px] items-center justify-center rounded-full px-3 py-1',
                       follow ? 'bg-g3' : 'bg-sub2',
@@ -217,10 +246,17 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                 }
               />
               {/* 레시피 영상 */}
-              <ModalContentSection
-                subTitle="레시피 영상"
-                content={<WebViewVideo videoUrl={feedDetail.video} />}
-              />
+              {feedDetail.video && (
+                <ModalContentSection
+                  subTitle="레시피 영상"
+                  content={
+                    <VideoPlayer
+                      videoSource={feedDetail.video}
+                      style={{ width: '100%', height: 201, borderRadius: 12 }}
+                    />
+                  }
+                />
+              )}
             </View>
             {/* 레시피 순서 */}
             <View className="mt-12 w-full">

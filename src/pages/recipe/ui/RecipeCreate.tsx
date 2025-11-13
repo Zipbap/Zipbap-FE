@@ -48,9 +48,7 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
               numColumns={1}
               renderItem={({ item }) => (
                 <Swipeable renderRightActions={() => <DetailDeleteComponent targetId={item.id} />}>
-                  <TouchableOpacity onPress={() => navigateToTempRecipeCreateForm(item.id)}>
-                    <ArticleView item={item} />
-                  </TouchableOpacity>
+                  <ArticleView item={item} navigate={navigateToTempRecipeCreateForm} />
                 </Swipeable>
               )}
             />

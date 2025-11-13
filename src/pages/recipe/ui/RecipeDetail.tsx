@@ -15,7 +15,6 @@ import { useTwoViewTypeStore } from '@shared/store';
 import { RecipeDetailProps } from '@shared/types';
 import {
   FullWidthButton,
-  WebViewVideo,
   defaultShadow,
   ModalContentSection,
   ModalCategoriesSection,
@@ -24,6 +23,7 @@ import {
 } from '@shared/ui';
 
 import Shared from '@shared/ui/Shared';
+import VideoPlayer from '@shared/ui/VideoPlayer';
 
 const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
   const insets = useSafeAreaInsets();
@@ -49,10 +49,6 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
 
   const deleteRecipe = (recipeId: string) => {
     apiInstance.delete(`/recipes/${recipeId}`);
-  };
-
-  const navigateToRecipeCreateForm = () => {
-    navigation.navigate('RecipeCreateForm', { recipeId: detailRecipe.id });
   };
 
   return (
@@ -114,7 +110,12 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
               {/* 레시피 영상 */}
               <ModalContentSection
                 subTitle="레시피 영상"
-                content={<WebViewVideo videoUrl={detailRecipe?.video || ''} />}
+                content={
+                  <VideoPlayer
+                    videoSource={detailRecipe?.video || ''}
+                    style={{ width: '100%', height: 200, borderRadius: 16 }}
+                  />
+                }
               />
             </View>
             {/* 레시피 순서 */}
@@ -138,17 +139,14 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
                 subTitle="레시피 Kick"
               />
               <View className="h-6" />
-              {/* 수정하기 버튼 */}
-              <FullWidthButton
-                buttonText="수정하기"
-                onPress={() => navigateToRecipeCreateForm()}
-                backgroundColor="#F0EDE6"
-                textColor="#60594E"
-              />
+
               {/* 삭제하기 버튼 */}
               <FullWidthButton
                 buttonText="삭제하기"
-                onPress={() => deleteRecipe(detailRecipe.id)}
+                onPress={() => {
+                  deleteRecipe(detailRecipe.id);
+                  navigation.goBack();
+                }}
                 backgroundColor="#DC6E3F"
                 textColor="white"
               />

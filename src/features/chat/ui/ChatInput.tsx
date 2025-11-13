@@ -1,6 +1,8 @@
 import React, { forwardRef, useState } from 'react';
 import { View, TextInput, Pressable, Image, Text, TouchableWithoutFeedback } from 'react-native';
+import NoneProfileImgSvg from '@/assets/img/none-profile-img.svg';
 import SendButtonIconSvg from '@/assets/img/send-button-icon.svg';
+import { useUserStore } from '@shared/store';
 
 interface Props {
   replyTo?: string | null;
@@ -11,26 +13,17 @@ interface Props {
 
 const ChatInput = forwardRef<TextInput, Props>(
   ({ replyTo, inputValue, setInputValue, handleSubmit }, ref) => {
-    // const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
     const [inputHeight, setInputHeight] = useState(40);
-
-    // useEffect(() => {
-    //   const showSub = Keyboard.addListener('keyboardDidShow', () => setIsKeyboardVisible(true));
-    //   const hideSub = Keyboard.addListener('keyboardDidHide', () => setIsKeyboardVisible(false));
-
-    //   return () => {
-    //     showSub.remove();
-    //     hideSub.remove();
-    //   };
-    // }, []);
-
+    const { user } = useUserStore();
+    const userProfile = user?.profileImage;
     return (
       <TouchableWithoutFeedback>
         <View className="min-h-[80px] flex-row items-center gap-[16px] rounded-tl-3xl rounded-tr-3xl bg-g4 px-[16px] py-[12px]">
-          <Image
-            source={{ uri: 'https://i.pravatar.cc/100?img=5' }}
-            className="h-[40px] w-[40px] rounded-full"
-          />
+          {userProfile ? (
+            <Image source={{ uri: userProfile }} className="h-[40px] w-[40px] rounded-full" />
+          ) : (
+            <NoneProfileImgSvg width={40} height={40} />
+          )}
           <View
             className="relative flex-1 justify-center rounded-2xl bg-white px-4"
             style={{ height: inputHeight }}

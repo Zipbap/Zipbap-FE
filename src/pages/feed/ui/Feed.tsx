@@ -17,9 +17,10 @@ const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
   const { filter, condition } = useFeedFilterStore();
 
   const { bottomSheetVisible, bottomSheetClose, feedId } = useFeedChatBottomSheetStore();
+
   const { dataList, onEndReached, onRefresh, isRefreshing, isInitialLoading, refetch } =
     useFeedInfiniteQuery({ filter, condition });
-  console.log(filter, condition);
+
   useFocusEffect(
     useCallback(() => {
       refetch();

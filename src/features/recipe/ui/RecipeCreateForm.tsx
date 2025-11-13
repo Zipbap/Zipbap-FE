@@ -60,7 +60,7 @@ const RecipeCreateForm = () => {
   };
 
   // upload logic
-  const { handleUpload } = useRecipeUploader({
+  const { handleUpload, isLoading: uploadIsLoading } = useRecipeUploader({
     updateField,
     updateCookingOrder,
   });
@@ -203,7 +203,8 @@ const RecipeCreateForm = () => {
           buttonText="영상 업로드"
           uploadType="video"
           value={recipe.video}
-          onUpload={uri => updateField('video', uri)}
+          onUpload={uri => handleUpload(uri, 'video')}
+          isLoading={uploadIsLoading}
         />
 
         {/* 순서 */}

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { View, FlatList, Pressable } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
 import { RecipeItemSkeleton } from '@features/recipe';
@@ -37,6 +37,10 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
     return <RecipeItemSkeleton />;
   }
 
+  const navigateToRecipeDetail = (id: string) => {
+    navigation.navigate('RecipeDetail', { recipeId: id });
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View className="h-full w-full flex-1 items-center justify-start bg-white">
@@ -51,24 +55,15 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
               columnWrapperStyle={viewType === 'image' ? { gap: 16 } : undefined}
               renderItem={({ item }) => {
                 if (viewType === 'article') {
-                  return (
-                    // 레시피 각 요소
-                    <Pressable
-                      onPress={() => {
-                        navigation.navigate('RecipeDetail', { recipeId: item.id });
-                      }}
-                    >
-                      <ArticleView item={item} />
-                    </Pressable>
-                  );
+                  return <ArticleView item={item} navigate={navigateToRecipeDetail} />;
                 }
                 if (viewType === 'feed') {
-                  return <FeedView item={item} />;
+                  return <FeedView item={item} navigate={navigateToRecipeDetail} />;
                 }
                 if (viewType === 'image') {
-                  return <ImageView item={item} />;
+                  return <ImageView item={item} navigate={navigateToRecipeDetail} />;
                 }
-                return <ArticleView item={item} />;
+                return <ArticleView item={item} navigate={navigateToRecipeDetail} />;
               }}
             />
           ) : (

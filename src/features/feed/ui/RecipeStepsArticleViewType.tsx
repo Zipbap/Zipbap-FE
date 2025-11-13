@@ -30,7 +30,6 @@ const RecipeStepsArticleViewType = ({ steps }: Props) => {
           <Text className="mb-1 text-sm font-bold color-sub1">
             step {item.turn.toString().padStart(2, '0')}
           </Text>
-          <Text className="mb-2 text-base font-semibold color-black">{item.description}</Text>
           <View className="w-full flex-row justify-between gap-5">
             <Pressable onPress={() => openModal(item)} className="active:opacity-80">
               <Image

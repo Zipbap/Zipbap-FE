@@ -1,14 +1,16 @@
 import React from 'react';
 import { Text, TouchableOpacity, Alert } from 'react-native';
+import { RecipeCreateFormFrom } from '@shared/types/navigation';
 import { ConfirmModal } from '@shared/ui';
 import { useRecipeConfirmAction } from '../model/useRecipeConfirmAction';
 
 interface Props {
+  from?: RecipeCreateFormFrom;
   modalVisible: boolean;
   setModalVisible: (visible: boolean) => void;
 }
 
-const RecipeCreateConfirmModal = ({ modalVisible, setModalVisible }: Props) => {
+const RecipeCreateConfirmModal = ({ from, modalVisible, setModalVisible }: Props) => {
   const { handleAction: handleConfirmAction } = useRecipeConfirmAction(setModalVisible);
 
   const handleTempRecipeSave = () => {
@@ -37,30 +39,34 @@ const RecipeCreateConfirmModal = ({ modalVisible, setModalVisible }: Props) => {
       }
       buttonsSection={
         <>
+          {from === 'RecipeCreate' && (
+            <TouchableOpacity
+              className="inline-flex h-11 flex-col items-center justify-center gap-2 self-stretch border-b-[0.50px] border-g6"
+              onPress={handleTempRecipeSave}
+            >
+              <Text className="justify-center text-center font-['Pretendard'] text-base font-medium leading-snug text-g2">
+                임시저장
+              </Text>
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
-            className="inline-flex h-11 flex-col items-center justify-center gap-2 self-stretch border-b-[0.50px] border-g6"
-            onPress={handleTempRecipeSave}
-          >
-            <Text className="justify-center text-center font-['Pretendard'] text-base font-medium leading-snug text-g2">
-              임시저장
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="inline-flex h-11 flex-col items-center justify-center gap-2 self-stretch border-b-[0.50px] border-g6"
+            className={`inline-flex h-11 flex-col items-center justify-center gap-2 self-stretch ${from !== 'RecipeDetail' ? 'border-b-[0.50px] border-g6' : ''}`}
             onPress={() => handleConfirmAction('save')}
           >
             <Text className="justify-center text-center font-['Pretendard'] text-base font-medium leading-snug text-g2">
-              저장
+              {from === 'RecipeCreate' ? '저장' : '수정하기'}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            className="inline-flex h-11 flex-col items-center justify-center gap-2 self-stretch"
-            onPress={() => handleConfirmAction('delete')}
-          >
-            <Text className="justify-center text-center font-['Pretendard'] text-base font-medium leading-snug text-g2">
-              삭제
-            </Text>
-          </TouchableOpacity>
+          {from === 'RecipeCreate' && (
+            <TouchableOpacity
+              className="inline-flex h-11 flex-col items-center justify-center gap-2 self-stretch"
+              onPress={() => handleConfirmAction('delete')}
+            >
+              <Text className="justify-center text-center font-['Pretendard'] text-base font-medium leading-snug text-g2">
+                삭제
+              </Text>
+            </TouchableOpacity>
+          )}
         </>
       }
     />

@@ -94,7 +94,7 @@ const RecipeCreateForm = () => {
 
   return (
     <View style={{ flex: 1 }} className="bg-white">
-      <RecipeCreateHeader />
+      <RecipeCreateHeader from={from} />
       <View className="h-[70px]" />
       <KeyboardAwareScrollView className="h-[100%] px-[16px] pt-2" bottomOffset={80}>
         {/* 썸네일 업로드 */}

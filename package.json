@@ -18,7 +18,8 @@
     "fsd": "node __tools__/fsd-check/index.js src",
     "fsd:watch": "node __tools__/fsd-check/index.js src --watch",
     "expo:ios:production": "eas build -p ios --profile production",
-    "expo:ios:submit": "eas submit --platform ios --profile production"
+    "expo:ios:submit": "eas submit --platform ios --profile production",
+    "pre-ci-check": "tsc --noEmit && eslint . --ext .ts,.tsx,.js,.jsx && prettier --check . && node __tools__/fsd-check/index.js src"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md,css,scss}": "prettier --write"

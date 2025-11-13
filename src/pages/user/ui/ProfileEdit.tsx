@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Text, TextInput, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import { useEditProfileQuery } from '@/src/features/user';
-import { useUserStore } from '@/src/shared/store';
-import { pickImageFromLibrary } from '@shared/lib';
-import { useUploadToS3 } from '@shared/lib/uploadToS3';
-import { usePresignedUrl } from '@shared/lib/usePresendUrl';
+import { useEditProfileQuery } from '@features/user';
+import { pickImageFromLibrary, useUploadToS3, usePresignedUrl } from '@shared/lib';
+import { useUserStore } from '@shared/store';
 import { ProfileEditProps } from '@shared/types';
 import {
   FullWidthButton,

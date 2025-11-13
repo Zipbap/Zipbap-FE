@@ -8,6 +8,7 @@ import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 import NoneUserSvg from '@/assets/img/none-profile-img.svg';
 import VideoPlayer from '@/src/shared/ui/VideoPlayer';
 import {
+  useFeedDetailQuery,
   FeedBottomTab,
   RecipeDetailSection,
   RecipeStepsArticleViewType,

@@ -1,6 +1,6 @@
 // import { CookingOrder } from '@entities/recipe';
 
-import { CookingOrder } from '@/src/entities/recipe';
+import { CookingOrder } from '@entities/recipe';
 
 export interface Sort {
   empty: boolean;

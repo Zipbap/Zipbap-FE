@@ -10,8 +10,9 @@ import {
   FeedDetailSkeleton,
 } from '@features/feed';
 import { useCategories } from '@entities/category';
-import { useRecipeDetailQuery } from '@entities/recipe/api/useRecipeDetialQuery';
-import { isValidString } from '@shared/lib/isValidString';
+import { useRecipeDetailQuery } from '@entities/recipe';
+import { apiInstance } from '@shared/config';
+import { isValidString } from '@shared/lib';
 import { useTwoViewTypeStore } from '@shared/store';
 import { RecipeDetailProps } from '@shared/types';
 import {

@@ -143,13 +143,7 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
                 subTitle="레시피 Kick"
               />
               <View className="h-6" />
-              {/* 수정하기 버튼 */}
-              <FullWidthButton
-                buttonText="수정하기"
-                onPress={() => navigateToRecipeCreateForm()}
-                backgroundColor="#F0EDE6"
-                textColor="#60594E"
-              />
+
               {/* 삭제하기 버튼 */}
               <FullWidthButton
                 buttonText="삭제하기"

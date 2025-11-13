@@ -9,6 +9,7 @@ import {
 import { useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 import SearchIcon from '@/assets/img/search-icon.svg';
 import { useFeedFilterStore } from '@shared/store/useFeedFilterStore';
+import { useMyRecipeFilterStore } from '@shared/store/useMyRecipeFilterStore';
 
 interface Props {
   searchTitle: string;
@@ -21,6 +22,7 @@ const SearchBox = ({ searchTitle }: Props) => {
   const panelHeight = useSharedValue(0);
 
   const setCondition = useFeedFilterStore(state => state.setCondition);
+  const setText = useMyRecipeFilterStore(state => state.setText);
 
   useEffect(() => {
     panelHeight.value = withTiming(isSearchBarOn ? 144 : 0, {
@@ -31,7 +33,9 @@ const SearchBox = ({ searchTitle }: Props) => {
 
   useEffect(() => {
     setCondition(searchText);
+    setText(searchText);
   }, [searchText]);
+
   const handleOutsidePress = () => Keyboard.dismiss();
 
   return (

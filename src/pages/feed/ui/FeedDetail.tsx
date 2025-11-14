@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, Pressable, ScrollView } from 'react-native';
+import { Text, View, Pressable, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
 import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
@@ -71,6 +72,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
       );
     }
   };
+
   useEffect(() => {
     if (feedDetail) {
       setBookmarked(feedDetail.isBookmarked);
@@ -79,6 +81,23 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
       setBookmarkCount(feedDetail.bookmarkCount);
       setFollow(feedDetail.isFollowing);
     }
+  }, [feedDetail]);
+
+  // prefetch recipe orders image
+  useEffect(() => {
+    if (!feedDetail) return;
+
+    const prefetchStepImages = async () => {
+      for (const order of feedDetail.cookingOrders) {
+        if (order.image) {
+          const cachePath = await Image.getCachePathAsync(order.image);
+
+          if (!cachePath) await Image.prefetch(order.image);
+        }
+      }
+    };
+
+    prefetchStepImages();
   }, [feedDetail]);
 
   if (!feedId) return null;
@@ -100,10 +119,15 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
         onBackPress={navigation.goBack}
         rightContent={<HeaderRightContent bookmarked={bookmarked} setBookmarked={setBookmarked} />}
       />
-
+      {/*  TODO: image prefetch*/}
       {/* 스크롤 영역 */}
       <ScrollView>
-        <Image source={{ uri: feedDetail.thumbnail }} className="h-[300px] w-full bg-sub1" />
+        {/* TODO: 스켈레톤 */}
+        <Image
+          source={{ uri: feedDetail.thumbnail }}
+          style={{ height: 300, width: '100%' }}
+          cachePolicy={'memory-disk'}
+        />
 
         <View
           className="-mt-6 rounded-t-3xl bg-white px-[16px] pb-6 pt-10"
@@ -122,7 +146,8 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                 {feedDetail.profileImage ? (
                   <Image
                     source={{ uri: feedDetail.profileImage }}
-                    className="mr-[12px] h-[48px] w-[48px] rounded-2xl"
+                    style={{ height: 48, width: 48, marginRight: 12, borderRadius: 16 }}
+                    cachePolicy={'memory-disk'}
                   />
                 ) : (
                   <NoneUserSvg width={48} height={48} style={{ marginRight: 12 }} />

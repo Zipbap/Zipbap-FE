@@ -145,15 +145,17 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
                 subTitle="레시피 소개"
               />
               {/* 레시피 영상 */}
-              <ModalContentSection
-                subTitle="레시피 영상"
-                content={
-                  <VideoPlayer
-                    videoSource={detailRecipe?.video || ''}
-                    style={{ width: '100%', height: 200, borderRadius: 16 }}
-                  />
-                }
-              />
+              {detailRecipe?.video && (
+                <ModalContentSection
+                  subTitle="레시피 영상"
+                  content={
+                    <VideoPlayer
+                      videoSource={detailRecipe?.video || ''}
+                      style={{ width: '100%', height: 200, borderRadius: 16 }}
+                    />
+                  }
+                />
+              )}
             </View>
             {/* 레시피 순서 */}
             <View className="mt-12 w-full">

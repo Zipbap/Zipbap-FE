@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React, { useState } from 'react';
-import { View, Text, Image, Pressable } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { CookingOrder } from '@entities/recipe';
 import FeedModalImageViewer from './FeedModalImageViewer';
 
@@ -34,8 +35,9 @@ const RecipeStepsArticleViewType = ({ steps }: Props) => {
             <Pressable onPress={() => openModal(item)} className="active:opacity-80">
               <Image
                 source={{ uri: item.image || '' }}
-                className="mb-2 h-[100px] w-[100px] rounded-xl bg-g2"
-                resizeMode="cover"
+                style={{ marginBottom: 8, height: 100, width: 100, borderRadius: 12 }}
+                contentFit="cover"
+                cachePolicy={'memory-disk'}
               />
             </Pressable>
             <Text className="flex-1 text-sm leading-5 color-g1">{item.description}</Text>

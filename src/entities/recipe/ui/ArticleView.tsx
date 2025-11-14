@@ -1,4 +1,5 @@
-import { View, Image, Text, Pressable } from 'react-native';
+import { Image } from 'expo-image';
+import { View, Text, Pressable } from 'react-native';
 
 import TimerIcon from '@/assets/img/recipe/timeer.svg';
 
@@ -18,7 +19,11 @@ const ArticleView = ({ item, navigate }: Props) => {
       onPress={() => navigate(item.id)}
       className="mb-[33px] flex-row gap-4 rounded-xl bg-white"
     >
-      <Image className="h-[90px] w-[94px] rounded-xl" source={{ uri: item.thumbnail }} />
+      <Image
+        source={{ uri: item.thumbnail }}
+        style={{ height: 90, width: 94, borderRadius: 12 }}
+        cachePolicy={'memory-disk'}
+      />
       <View className="flex-1">
         {/* 서브타이틀, 요리시간 */}
         <View className="flex-row items-center">

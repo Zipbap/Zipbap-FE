@@ -1,5 +1,6 @@
-import React from 'react';
-import { Text, View, Image, ScrollView } from 'react-native';
+import { Image } from 'expo-image';
+import React, { useEffect } from 'react';
+import { Text, View, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   RecipeDetailSection,
@@ -25,9 +26,11 @@ import Shared from '@shared/ui/Shared';
 import VideoPlayer from '@shared/ui/VideoPlayer';
 
 const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
+  // ui settings
   const insets = useSafeAreaInsets();
   const { viewType, setViewType } = useTwoViewTypeStore();
 
+  // params
   const { recipeId } = route.params;
 
   // delete recipe
@@ -39,9 +42,28 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
 
   // recipe list
   const { data: detailRecipe, isLoading } = useRecipeDetailQuery(recipeId);
-  const isRecipeDetail = detailRecipe !== null;
+
+  // prefetch: recipe orders image
+  useEffect(() => {
+    if (!detailRecipe) return;
+
+    const prefetchStepImages = async () => {
+      for (const order of detailRecipe.cookingOrders) {
+        if (order.image) {
+          const cachePath = await Image.getCachePathAsync(order.image);
+
+          if (!cachePath) await Image.prefetch(order.image);
+        }
+      }
+    };
+
+    prefetchStepImages();
+  }, [detailRecipe]);
+
+  // category
   const { categoryValue } = useCategories();
   if (!recipeId) return null;
+  const isRecipeDetail = detailRecipe !== null;
   if (isLoading || !isRecipeDetail) return <FeedDetailSkeleton />;
 
   if (!recipeId || !detailRecipe) return null;
@@ -53,6 +75,7 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
     categoryValue?.getMethod(detailRecipe),
   ].filter(isValidString);
 
+  // navigation
   const navigateToRecipeCreateForm = async () => {
     await navigation.goBack();
     await navigation.navigate('RecipeCreateForm', {
@@ -60,6 +83,7 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
       from: 'RecipeDetail',
     });
   };
+
   return (
     <View className="flex-1 bg-white" style={{ paddingTop: insets.top }}>
       {/* 헤더 */}
@@ -67,7 +91,11 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
 
       {/* 스크롤 영역 */}
       <ScrollView>
-        <Image source={{ uri: detailRecipe?.thumbnail }} className="h-[300px] w-full" />
+        <Image
+          source={{ uri: detailRecipe?.thumbnail }}
+          style={{ height: 300, width: '100%' }}
+          cachePolicy={'memory-disk'}
+        />
 
         <View
           className="-mt-6 rounded-t-3xl bg-white px-4 pb-6 pt-10"

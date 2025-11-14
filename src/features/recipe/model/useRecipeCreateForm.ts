@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { CookingOrder, RecipeDetail } from '@entities/recipe';
+import { CookingOrder, recipeApi, RecipeDetail } from '@entities/recipe';
 import { queryKeys, apiInstance } from '@shared/config';
 
 export const useRecipeCreateForm = () => {
@@ -126,11 +126,36 @@ export const useRecipeCreateForm = () => {
     createTempRecipe() {
       tempRecipeMutation.mutate();
     },
+    // tempSave(recipe: RecipeDetail) {
+    //   tempSaveMutation.mutate(recipe);
+    // },
     tempSave(recipe: RecipeDetail) {
-      tempSaveMutation.mutate(recipe);
+      return new Promise((resolve, reject) => {
+        tempSaveMutation.mutate(recipe, {
+          onSuccess: data => {
+            invalidateAll();
+            resolve(data);
+          },
+          onError: error => {
+            console.error('임시저장 실패:', error);
+            reject(error);
+          },
+        });
+      });
     },
     finalizeSave(recipe: RecipeDetail) {
-      finalizeMutation.mutate(recipe);
+      return new Promise((resolve, reject) => {
+        finalizeMutation.mutate(recipe, {
+          onSuccess: data => {
+            invalidateAll();
+            resolve(data);
+          },
+          onError: error => {
+            console.error('최종 저장 실패:', error);
+            reject(error);
+          },
+        });
+      });
     },
     delete(recipeId: string) {
       deleteMutation.mutate(recipeId);
@@ -169,22 +194,48 @@ export const useRecipeCreateForm = () => {
     }
   };
 
-  // load temp recipe
-  const useLoadTempRecipe = (recipeId: string | undefined) => {
+  const loadFinalRecipe = async (id: string) => {
+    try {
+      const res = await recipeApi.getRecipeDetial(id);
+      const data = res.result; // ApiResponse 구조
+
+      if (data) {
+        setRecipe(prev => ({
+          ...prev,
+          ...data,
+          cookingOrders:
+            data.cookingOrders?.length > 0
+              ? data.cookingOrders
+              : [{ turn: 1, image: null, description: '' }],
+        }));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('최종 레시피 불러오기 실패:', error);
+      return false;
+    }
+  };
+
+  const useLoadRecipe = (recipeId: string | undefined, from?: string) => {
     useEffect(() => {
       const loadRecipe = async () => {
         if (recipeId) {
-          const loaded = await loadTempRecipe(recipeId);
-          if (!loaded) {
-            recipeMutation.createTempRecipe();
+          if (from === 'RecipeDetail') {
+            const loaded = await loadFinalRecipe(recipeId);
+            if (!loaded) console.log('최종 레시피 불러오기 실패');
+            return;
           }
+
+          const loaded = await loadTempRecipe(recipeId);
+          if (!loaded) recipeMutation.createTempRecipe();
         } else {
           recipeMutation.createTempRecipe();
         }
       };
 
       loadRecipe();
-    }, [recipeId]);
+    }, [recipeId, from]);
   };
 
   return {
@@ -193,6 +244,6 @@ export const useRecipeCreateForm = () => {
     updateCookingOrder,
     addCookingOrder,
     recipeMutation,
-    useLoadTempRecipe,
+    useLoadRecipe,
   };
 };

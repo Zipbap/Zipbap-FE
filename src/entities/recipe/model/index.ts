@@ -13,6 +13,8 @@ export interface Recipe {
   cookingTimeId: number;
   /** 올린 사람 이름 */
   author: string;
+  /** 카테고리 ID */
+  myCategoryId: string;
 }
 
 export interface RecipeDetail {

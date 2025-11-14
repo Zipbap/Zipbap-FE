@@ -21,7 +21,10 @@ interface Props {
 const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: Props) => {
   const [newCategory, setNewCategory] = useState('');
 
+  const [editId, setEditId] = useState<string | null>(null);
+
   const { data, isLoading } = useCategoriesQuery(bottomSheetVisible);
+
   const createCategory = useCreateCategory();
   const updateCategory = useUpdateCategory();
   const deleteCategory = useDeleteCategory();
@@ -33,6 +36,24 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
     createCategory.mutate(newCategory, {
       onSuccess: () => setNewCategory(''),
     });
+  };
+
+  const handleEdit = (id: string, name: string) => {
+    setEditId(id);
+    setNewCategory(name);
+  };
+
+  const handleEditSave = () => {
+    if (!newCategory.trim()) return;
+    updateCategory.mutate(
+      { id: editId!, name: newCategory },
+      {
+        onSuccess: () => {
+          setEditId(null);
+          setNewCategory('');
+        },
+      },
+    );
   };
 
   if (isLoading)
@@ -64,16 +85,11 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
                     >
                       <Text>{category.name}</Text>
                       <View className="flex-row gap-[14px]">
-                        <TouchableOpacity
-                          onPress={() => {
-                            if (newCategory.trim()) {
-                              updateCategory.mutate({ id: category.id, name: newCategory });
-                              setNewCategory('');
-                            }
-                          }}
-                        >
+                        {/* 수정하기 */}
+                        <TouchableOpacity onPress={() => handleEdit(category.id, category.name)}>
                           <EditIcon width={16} height={16} />
                         </TouchableOpacity>
+                        {/* 삭제하기 */}
                         <TouchableOpacity
                           onPress={() => {
                             deleteCategory.mutate(category.id);
@@ -104,8 +120,8 @@ const MyRecipeCatagoryBottomSheet = ({ bottomSheetVisible, bottomSheetClose }: P
 
           <View className="mt-12 flex-col items-center">
             <FullWidthButton
-              buttonText="추가하기"
-              onPress={handleAdd}
+              buttonText={editId ? '수정하기' : '추가하기'}
+              onPress={editId ? handleEditSave : handleAdd}
               backgroundColor="#AEA79C"
               textColor="white"
             />

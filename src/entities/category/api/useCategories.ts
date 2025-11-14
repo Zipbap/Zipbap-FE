@@ -63,7 +63,7 @@ export const useCategories = (enabled = true) => {
       getSituation(recipe: RecipeDetail) {
         return this.situation(recipe.situationId)?.name ?? null;
       },
-      getMyCategory(recipe: RecipeDetail) {
+      getMyCategory(recipe: Recipe | RecipeDetail) {
         return this.myCategory(recipe.myCategoryId)?.name ?? null;
       },
     };

@@ -5,10 +5,12 @@ import { Portal } from 'react-native-portalize';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
 import { RecipeItemSkeleton } from '@features/recipe';
 import { EmptyStateUsingVideo } from '@features/user';
+import { useCategories } from '@entities/category';
 import { ArticleView, Recipe, FeedView, ImageView } from '@entities/recipe';
 import { queryKeys } from '@shared/config';
 import { apiInstance } from '@shared/config/api-instance';
 import { useViewTypeStore, useCategoryBottomSheetStore } from '@shared/store';
+import { useMyRecipeFilterStore } from '@shared/store/useMyRecipeFilterStore';
 import { RootNavigationProp } from '@shared/types';
 
 import MyRecipeCatagoryBottomSheet from './MyRecipeCatagoryBottomSheet';
@@ -20,6 +22,8 @@ interface RecipePageProps {
 const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
   const { viewType } = useViewTypeStore();
   const { bottomSheetVisible, bottomSheetClose } = useCategoryBottomSheetStore();
+  const { text, category } = useMyRecipeFilterStore();
+  const { categoryValue } = useCategories();
 
   const { data: recipes, isLoading } = useQuery({
     queryKey: queryKeys.recipes.all,
@@ -31,7 +35,18 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
 
   const recipeList: Recipe[] = recipes?.result || [];
 
-  const isRecipeListEmpty = recipeList.length === 0;
+  const filteredRecipes = recipeList.filter(recipe => {
+    const matchText =
+      text.trim().length === 0 || recipe.title.toLowerCase().includes(text.toLowerCase());
+    const recipeCategoryName = categoryValue?.getMyCategory(recipe);
+
+    const matchCategory =
+      category === '전체' || category.trim().length === 0 || recipeCategoryName === category;
+
+    return matchText && matchCategory;
+  });
+
+  const isEmpty = filteredRecipes.length === 0;
 
   if (isLoading) {
     return <RecipeItemSkeleton />;
@@ -45,10 +60,10 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
     <View style={{ flex: 1 }}>
       <View className="h-full w-full flex-1 items-center justify-start bg-white">
         <View className="h-full w-full px-6 py-4">
-          {!isRecipeListEmpty ? (
+          {!isEmpty ? (
             <FlatList
               key={viewType}
-              data={recipeList}
+              data={filteredRecipes}
               keyExtractor={item => item.id}
               contentContainerStyle={{ paddingTop: 12 }}
               numColumns={viewType === 'image' ? 2 : 1}
@@ -76,7 +91,7 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
                 title={'첫번째 레시피를 기록해 보세요'}
                 subtitle={'내가 기억하고 싶은 레시피를 작성해 보세요'}
                 buttonText={'레시피 작성하기'}
-                onPress={() => navigation.navigate('RecipeCreateForm', {})}
+                onPress={() => navigation.navigate('RecipeCreateForm', { from: 'RecipeCreate' })}
               />
             </View>
           )}

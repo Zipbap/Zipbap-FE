@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, ScrollView } from 'react-native';
 
 import PlusIcon from '@/assets/img/plus.svg';
 import { ViewTypeSwitcher } from '@features/recipe';
 import { useCategoriesQuery } from '@entities/category';
 import { useCategoryBottomSheetStore, useViewTypeStore } from '@shared/store';
+import { useMyRecipeFilterStore } from '@shared/store/useMyRecipeFilterStore';
 
 import { CategoryChipButton } from '@shared/ui';
 
@@ -17,6 +18,11 @@ const MyRecipeCatagory = () => {
   const categories = data?.result || [];
 
   const [selected, setSelected] = useState<string>('전체');
+  const setCategory = useMyRecipeFilterStore(state => state.setCategory);
+
+  useEffect(() => {
+    setCategory(selected);
+  }, [selected, setCategory]);
 
   return (
     <>

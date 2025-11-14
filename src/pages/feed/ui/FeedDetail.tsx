@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, Pressable, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, View, Pressable, ScrollView, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
 import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
@@ -154,7 +154,8 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
                   {feedDetail.profileImage ? (
                     <Image
                       source={{ uri: feedDetail.profileImage }}
-                      className="mr-[12px] h-[48px] w-[48px] rounded-2xl"
+                      style={{ marginRight: 12, width: 48, height: 48, borderRadius: 16 }}
+                      cachePolicy={'memory-disk'}
                     />
                   ) : (
                     <NoneUserSvg width={48} height={48} style={{ marginRight: 12 }} />

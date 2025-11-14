@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, TextInput, FlatList, RefreshControl, Platform } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  FlatList,
+  RefreshControl,
+  Platform,
+  Dimensions,
+} from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { ChatInput, CommentItem, useCommentsQuery, useCreateCommentMutation } from '@features/chat';
 import { Comment } from '@entities/comment';
@@ -10,6 +18,8 @@ interface Props {
   bottomSheetVisible: boolean;
   bottomSheetClose: () => void;
 }
+
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const FeedChatBottomSheet = ({ feedId, bottomSheetVisible, bottomSheetClose }: Props) => {
   const inputRef = useRef<TextInput>(null);
@@ -36,11 +46,12 @@ const FeedChatBottomSheet = ({ feedId, bottomSheetVisible, bottomSheetClose }: P
       content: inputValue,
       parentId: replyTo ? Number(replyTo.id) : undefined,
     });
+    setInputValue('');
 
-    // 자동 스크롤
+    // NOTE: 충분히 자동 스크롤 200ms
     setTimeout(() => {
       flatListRef.current?.scrollToEnd({ animated: true });
-    }, 100);
+    }, 200);
   };
 
   const handleReplyPress = (comment: Comment) => {
@@ -54,9 +65,9 @@ const FeedChatBottomSheet = ({ feedId, bottomSheetVisible, bottomSheetClose }: P
 
   return (
     <BottomSheetModal visible={bottomSheetVisible} onClose={bottomSheetClose}>
-      <View className="h-[570px]">
+      <View style={{ height: SCREEN_HEIGHT * 0.8 }}>
         <KeyboardAvoidingView
-          behavior="translate-with-padding"
+          behavior={Platform.OS === 'ios' ? undefined : 'padding'}
           keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 160}
           style={{ flex: 1 }}
         >

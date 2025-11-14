@@ -33,6 +33,9 @@ const BottomSheetModal = ({ visible, onClose, children }: Props) => {
       handlePosition="inside"
       handleStyle={{ width: 50, backgroundColor: '#ccc' }}
       modalStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+      scrollViewProps={{
+        keyboardShouldPersistTaps: 'handled',
+      }}
     >
       {children}
     </Modalize>

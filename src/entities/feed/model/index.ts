@@ -45,6 +45,7 @@ export interface Feed extends FeedBase {
   bookmarkCount: number;
   commentCount: number;
   viewCount: number;
+  userId: string;
 }
 
 export interface FeedDetail extends FeedBase {
@@ -73,7 +74,7 @@ export interface FeedDetail extends FeedBase {
   viewCount: number;
   followerCount: number;
   isOwner: boolean;
-  userId: number;
+  userId: string;
 }
 
 export interface FeedPage {

@@ -34,7 +34,7 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
   const insets = useSafeAreaInsets();
 
   const { feedId } = route.params;
-  const { data: feedDetail } = useFeedDetailQuery(feedId);
+  const { data: feedDetail, isLoading } = useFeedDetailQuery(feedId);
 
   // TODO: refactoring
   const [bookmarked, setBookmarked] = useState<boolean | undefined>(feedDetail?.isBookmarked);
@@ -100,9 +100,10 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
     prefetchStepImages();
   }, [feedDetail]);
 
-  if (!feedId) return null;
-  if (!feedDetail) return <FeedDetailSkeleton />;
+  // Skeleton ui
+  if (!feedDetail || !feedId || isLoading) return <FeedDetailSkeleton />;
 
+  // categories
   const categories = [
     feedDetail.myCategory,
     feedDetail.cookingType,

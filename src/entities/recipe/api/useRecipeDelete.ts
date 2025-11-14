@@ -9,6 +9,7 @@ export const useRecipeDelete = () => {
     queryClient.invalidateQueries({ queryKey: queryKeys.recipeTemp.all });
     queryClient.invalidateQueries({ queryKey: queryKeys.recipeFinal.all });
     queryClient.invalidateQueries({ queryKey: queryKeys.recipes.all });
+    queryClient.invalidateQueries({ queryKey: queryKeys.feed.all });
   };
   return useMutation({
     mutationFn: async (recipeId: string) => {

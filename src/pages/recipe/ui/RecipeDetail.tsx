@@ -1,17 +1,14 @@
 import React from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRecipeDelete } from '@/src/entities/recipe/api/useRecipeDelete';
 import {
   RecipeDetailSection,
   RecipeStepsArticleViewType,
   RecipeStepsFeedViewType,
   FeedDetailSkeleton,
 } from '@features/feed';
-import { useRecipeCreateForm } from '@features/recipe';
 import { useCategories } from '@entities/category';
-import { useRecipeDetailQuery } from '@entities/recipe';
-import { apiInstance } from '@shared/config';
+import { useRecipeDelete, useRecipeDetailQuery } from '@entities/recipe';
 import { isValidString } from '@shared/lib';
 import { useTwoViewTypeStore } from '@shared/store';
 import { RecipeDetailProps } from '@shared/types';

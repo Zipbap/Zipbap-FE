@@ -1,7 +1,7 @@
 import { Pressable } from 'react-native';
 
 import TrashIcon from '@/assets/img/recipe/trash-slide.svg';
-import { useRecipeDelete } from '@entities/recipe/api/useRecipeDelete';
+import { useRecipeDelete } from '@entities/recipe';
 
 const DetailDeleteComponent = ({ targetId }: { targetId: string }) => {
   const { mutate: deleteRecipe } = useRecipeDelete();

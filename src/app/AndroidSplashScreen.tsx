@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React from 'react';
-import { View, Image, Dimensions } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import SplashImg from '@/assets/img/splash-large.png';
 
 const { width } = Dimensions.get('window');
@@ -15,7 +16,8 @@ const AndroidSplashScreen = () => {
           position: 'relative',
           top: -20,
         }}
-        resizeMode="contain"
+        contentFit="contain"
+        cachePolicy="memory-disk"
       />
     </View>
   );

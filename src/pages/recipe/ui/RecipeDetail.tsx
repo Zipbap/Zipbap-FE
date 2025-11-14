@@ -1,12 +1,14 @@
 import React from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useRecipeDelete } from '@/src/entities/recipe/api/useRecipeDelete';
 import {
   RecipeDetailSection,
   RecipeStepsArticleViewType,
   RecipeStepsFeedViewType,
   FeedDetailSkeleton,
 } from '@features/feed';
+import { useRecipeCreateForm } from '@features/recipe';
 import { useCategories } from '@entities/category';
 import { useRecipeDetailQuery } from '@entities/recipe';
 import { apiInstance } from '@shared/config';
@@ -31,6 +33,13 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
 
   const { recipeId } = route.params;
 
+  // delete recipe
+  const { mutate: deleteRecipe } = useRecipeDelete();
+  const handleDelete = () => {
+    deleteRecipe(recipeId);
+    navigation.goBack();
+  };
+
   // recipe list
   const { data: detailRecipe, isLoading } = useRecipeDetailQuery(recipeId);
   const isRecipeDetail = detailRecipe !== null;
@@ -46,10 +55,6 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
     categoryValue?.getMainIngredient(detailRecipe),
     categoryValue?.getMethod(detailRecipe),
   ].filter(isValidString);
-
-  const deleteRecipe = (recipeId: string) => {
-    apiInstance.delete(`/recipes/${recipeId}`);
-  };
 
   const navigateToRecipeCreateForm = async () => {
     await navigation.goBack();
@@ -155,10 +160,7 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
               {/* 삭제하기 버튼 */}
               <FullWidthButton
                 buttonText="삭제하기"
-                onPress={() => {
-                  deleteRecipe(detailRecipe.id);
-                  navigation.goBack();
-                }}
+                onPress={handleDelete}
                 backgroundColor="#DC6E3F"
                 textColor="white"
               />

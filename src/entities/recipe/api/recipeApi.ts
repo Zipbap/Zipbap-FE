@@ -16,4 +16,8 @@ export const recipeApi = {
     const res = await apiInstance.get(`/recipes/${id}`);
     return res.data;
   },
+  deleteRecipe: async (id: string): Promise<ApiResponse<string>> => {
+    const res = await apiInstance.delete(`/recipes/${id}`);
+    return res.data;
+  },
 };

@@ -8,8 +8,7 @@ import {
   FeedDetailSkeleton,
 } from '@features/feed';
 import { useCategories } from '@entities/category';
-import { useRecipeDetailQuery } from '@entities/recipe';
-import { apiInstance } from '@shared/config';
+import { useRecipeDelete, useRecipeDetailQuery } from '@entities/recipe';
 import { isValidString } from '@shared/lib';
 import { useTwoViewTypeStore } from '@shared/store';
 import { RecipeDetailProps } from '@shared/types';
@@ -31,6 +30,13 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
 
   const { recipeId } = route.params;
 
+  // delete recipe
+  const { mutate: deleteRecipe } = useRecipeDelete();
+  const handleDelete = () => {
+    deleteRecipe(recipeId);
+    navigation.goBack();
+  };
+
   // recipe list
   const { data: detailRecipe, isLoading } = useRecipeDetailQuery(recipeId);
   const isRecipeDetail = detailRecipe !== null;
@@ -46,10 +52,6 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
     categoryValue?.getMainIngredient(detailRecipe),
     categoryValue?.getMethod(detailRecipe),
   ].filter(isValidString);
-
-  const deleteRecipe = (recipeId: string) => {
-    apiInstance.delete(`/recipes/${recipeId}`);
-  };
 
   const navigateToRecipeCreateForm = async () => {
     await navigation.goBack();
@@ -155,10 +157,7 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
               {/* 삭제하기 버튼 */}
               <FullWidthButton
                 buttonText="삭제하기"
-                onPress={() => {
-                  deleteRecipe(detailRecipe.id);
-                  navigation.goBack();
-                }}
+                onPress={handleDelete}
                 backgroundColor="#DC6E3F"
                 textColor="white"
               />

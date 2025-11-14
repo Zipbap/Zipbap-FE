@@ -11,3 +11,4 @@ export { default as ImageView } from './ui/ImageView';
 export { recipeApi } from './api/recipeApi';
 export { useRecipeListQuery } from './api/useRecipeListQuery';
 export { useRecipeDetailQuery } from './api/useRecipeDetialQuery';
+export { useRecipeDelete } from './api/useRecipeDelete';

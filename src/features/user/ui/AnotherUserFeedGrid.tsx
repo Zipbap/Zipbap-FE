@@ -1,6 +1,6 @@
+import { Image } from 'expo-image';
 import React from 'react';
-import { FlatList, Image, View, TouchableOpacity } from 'react-native';
-
+import { FlatList, View, TouchableOpacity } from 'react-native';
 import FeedsSvg from '@/assets/img/feeds-icon.svg';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
 import { RecipeCard } from '@entities/user';
@@ -40,7 +40,11 @@ const AnotherUserFeedGrid = ({ data, navigation }: Props) => {
             <View className="absolute right-2 top-2 z-10">
               <FeedsSvg />
             </View>
-            <Image source={{ uri: item.thumbnail }} className="h-[150px] w-[130px] bg-g5" />
+            <Image
+              source={{ uri: item.thumbnail }}
+              style={{ height: 150, width: 130 }}
+              cachePolicy={'memory-disk'}
+            />
           </TouchableOpacity>
         )}
         keyExtractor={item => item.id}

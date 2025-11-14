@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React from 'react';
-import { View, Image, Text, Pressable } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CloseIconSvg from '@/assets/img/close-icon.svg';
 import { CookingOrder } from '@entities/recipe';
@@ -21,7 +22,12 @@ const FeedModalImageViewer = ({ visible, onClose, item }: Props) => {
 
         {/* 이미지 */}
         {item?.image && (
-          <Image source={{ uri: item.image }} className="flex-1" resizeMode="contain" />
+          <Image
+            source={{ uri: item.image }}
+            style={{ flex: 1 }}
+            contentFit="contain"
+            cachePolicy={'memory-disk'}
+          />
         )}
 
         {/* 하단 설명 바 */}

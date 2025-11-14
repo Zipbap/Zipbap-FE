@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View, Image } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import VideoPlayer from '@shared/ui/VideoPlayer';
 import { useMediaUpload } from '../lib/useMediaUpload';
 
@@ -47,8 +48,9 @@ const FormMediaUpload = ({
             uploadType === 'image' ? (
               <Image
                 source={{ uri: value }}
-                className="h-[232px] w-[326px] rounded-lg"
-                resizeMode="cover"
+                style={{ height: 232, width: 326, borderRadius: 8 }}
+                contentFit="cover"
+                cachePolicy={'memory-disk'}
               />
             ) : (
               <VideoPlayer

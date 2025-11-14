@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React, { forwardRef, useState } from 'react';
-import { View, TextInput, Pressable, Image, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, TextInput, Pressable, Text, TouchableWithoutFeedback } from 'react-native';
 import NoneProfileImgSvg from '@/assets/img/none-profile-img.svg';
 import SendButtonIconSvg from '@/assets/img/send-button-icon.svg';
 import { useUserStore } from '@shared/store';
@@ -20,7 +21,11 @@ const ChatInput = forwardRef<TextInput, Props>(
       <TouchableWithoutFeedback>
         <View className="min-h-[80px] flex-row items-center gap-[16px] rounded-tl-3xl rounded-tr-3xl bg-g4 px-[16px] py-[12px]">
           {userProfile ? (
-            <Image source={{ uri: userProfile }} className="h-[40px] w-[40px] rounded-full" />
+            <Image
+              source={{ uri: userProfile }}
+              style={{ width: 40, height: 40, borderRadius: '100%' }}
+              cachePolicy={'memory-disk'}
+            />
           ) : (
             <NoneProfileImgSvg width={40} height={40} />
           )}

@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Image, Pressable } from 'react-native';
 import ClockSvg from '@/assets/img/feed/clock-icon.svg';
 import StarSvg from '@/assets/img/feed/star-icon.svg';
 import NoneUserSvg from '@/assets/img/none-profile-img.svg';
@@ -24,15 +24,22 @@ const FeedCard = ({ feed, navigation }: Props) => {
         >
           {/* 프로필 섹션 */}
           <View className="mb-6 flex-row items-center">
-            {feed.profileImage ? (
-              <Image
-                source={{ uri: feed.profileImage }}
-                style={{ marginRight: 12, width: 55, height: 55, borderRadius: '100%' }}
-                cachePolicy={'memory-disk'}
-              />
-            ) : (
-              <NoneUserSvg width={55} height={55} style={{ marginRight: 12 }} />
-            )}
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('AnotherUserPage', {
+                  userId: feed.userId ?? '0',
+                })
+              }
+            >
+              {feed.profileImage ? (
+                <Image
+                  source={{ uri: feed.profileImage }}
+                  className="mr-3 h-[55px] w-[55px] rounded-full bg-g2"
+                />
+              ) : (
+                <NoneUserSvg width={55} height={55} style={{ marginRight: 12 }} />
+              )}
+            </TouchableOpacity>
             <View>
               <Text className="mb-1 text-[16px] font-bold">{feed.title}</Text>
               <Text className="text-[14px] font-semibold color-g2">

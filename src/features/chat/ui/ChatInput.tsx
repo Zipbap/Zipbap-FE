@@ -49,9 +49,9 @@ const ChatInput = forwardRef<TextInput, Props>(
               ref={ref}
               value={inputValue}
               onChangeText={setInputValue}
-              // multiline={true}
+              multiline={true}
               onSubmitEditing={handleSubmit}
-              submitBehavior="submit"
+              submitBehavior="newline"
               onContentSizeChange={e => {
                 const newHeight = e.nativeEvent.contentSize.height;
                 setInputHeight(Math.max(40, Math.min(newHeight, 140)));

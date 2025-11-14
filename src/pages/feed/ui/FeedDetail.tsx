@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import React, { useState, useEffect } from 'react';
-import { Text, View, Pressable, ScrollView } from 'react-native';
+import { Text, View, Image, Pressable, ScrollView, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
 import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
@@ -144,15 +144,22 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
             {/* 작성자, 팔로워, subtitle */}
             <View className="mb-4 w-full flex-row items-center justify-between gap-[8px]">
               <View className="flex-1 flex-row items-start">
-                {feedDetail.profileImage ? (
-                  <Image
-                    source={{ uri: feedDetail.profileImage }}
-                    style={{ height: 48, width: 48, marginRight: 12, borderRadius: 16 }}
-                    cachePolicy={'memory-disk'}
-                  />
-                ) : (
-                  <NoneUserSvg width={48} height={48} style={{ marginRight: 12 }} />
-                )}
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('AnotherUserPage', {
+                      userId: feedDetail.userId ?? '0',
+                    })
+                  }
+                >
+                  {feedDetail.profileImage ? (
+                    <Image
+                      source={{ uri: feedDetail.profileImage }}
+                      className="mr-[12px] h-[48px] w-[48px] rounded-2xl"
+                    />
+                  ) : (
+                    <NoneUserSvg width={48} height={48} style={{ marginRight: 12 }} />
+                  )}
+                </TouchableOpacity>
                 <View className="flex-1">
                   <Text className="mb-2 text-[12px] font-medium">
                     <Text className="text-[18px] font-bold">{feedDetail.nickname}</Text>

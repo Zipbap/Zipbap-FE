@@ -43,11 +43,7 @@ export function Navigation() {
             component={RecipeCreateForm}
             options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="AnotherUserPage"
-            component={AnotherUserPage}
-            options={{ header: () => <AnotherUserHeader /> }}
-          />
+
           {/* NOTE: 모달 페이지 관리 */}
           <Stack.Group
             screenOptions={{
@@ -62,6 +58,11 @@ export function Navigation() {
             <Stack.Screen name="ProfileEdit" component={ProfileEdit} />
             <Stack.Screen name="FollowDetail" component={FollowDetail} />
             <Stack.Screen name="Secession" component={Secession} />
+            <Stack.Screen
+              name="AnotherUserPage"
+              component={AnotherUserPage}
+              options={{ header: () => <AnotherUserHeader /> }}
+            />
           </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>

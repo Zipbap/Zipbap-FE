@@ -1,6 +1,7 @@
 import { useFocusEffect } from '@react-navigation/native';
-import React, { useCallback } from 'react';
-import { View, FlatList, RefreshControl } from 'react-native';
+import { Image } from 'expo-image';
+import React, { useCallback, useRef } from 'react';
+import { View, FlatList, RefreshControl, ViewToken } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import { FeedCard, useFeedInfiniteQuery, FeedCardSkeleton } from '@features/feed';
 import { Feed as FeedItem } from '@entities/feed';
@@ -12,6 +13,10 @@ import FeedChatBottomSheet from './FeedChatBottomSheet';
 interface FeedPageProps {
   navigation: RootNavigationProp<'Main'>;
 }
+
+const viewabilityConfig = {
+  itemVisiblePercentThreshold: 1,
+};
 
 const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
   const { filter, condition } = useFeedFilterStore();
@@ -31,6 +36,31 @@ const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
     <FeedCard feed={item} navigation={navigation} />
   );
 
+  const onViewableItemsChanged = useRef(
+    async ({ viewableItems }: { viewableItems: Array<ViewToken<FeedItem>> }) => {
+      for (const viewToken of viewableItems) {
+        const { item } = viewToken;
+        const { thumbnail, profileImage } = item;
+
+        if (thumbnail) {
+          const cachePath = await Image.getCachePathAsync(thumbnail);
+
+          if (!cachePath) {
+            await Image.prefetch(thumbnail);
+          }
+        }
+
+        if (profileImage) {
+          const cachePath = await Image.getCachePathAsync(profileImage);
+
+          if (!cachePath) {
+            await Image.prefetch(profileImage);
+          }
+        }
+      }
+    },
+  ).current;
+
   if (isInitialLoading) {
     return <FeedCardSkeleton />;
   }
@@ -46,6 +76,8 @@ const Feed: React.FC<FeedPageProps> = ({ navigation }) => {
             onEndReached={onEndReached}
             onEndReachedThreshold={0.6}
             refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
+            viewabilityConfig={viewabilityConfig}
+            onViewableItemsChanged={onViewableItemsChanged}
           />
         </View>
       </View>

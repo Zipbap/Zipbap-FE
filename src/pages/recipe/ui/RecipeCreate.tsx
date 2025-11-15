@@ -1,4 +1,5 @@
-import React from 'react';
+import { Image } from 'expo-image';
+import React, { useEffect, useMemo } from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
@@ -18,8 +19,25 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
 
   // recipe list
   const { data } = useRecipeListQuery(recipeType);
-  const recipeList = (data || []) as Recipe[];
+  const recipeList = useMemo(() => (data || []) as Recipe[], [data]);
   const isRecipeListEmpty = recipeList.length === 0;
+
+  // prefetch image
+  useEffect(() => {
+    if (isRecipeListEmpty) return;
+    const perfetchImage = async () => {
+      for (const recipe of recipeList) {
+        if (!recipe.thumbnail) return;
+
+        const cachePath = await Image.getCachePathAsync(recipe.thumbnail);
+
+        if (!cachePath) {
+          await Image.prefetch(recipe.thumbnail);
+        }
+      }
+    };
+    perfetchImage();
+  }, [isRecipeListEmpty, recipeList]);
 
   // navigate
   const navigateToRecipeCreateForm = () => {

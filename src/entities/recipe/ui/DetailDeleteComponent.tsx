@@ -1,12 +1,27 @@
-import { Pressable } from 'react-native';
-
+import { Pressable, Alert } from 'react-native';
 import TrashIcon from '@/assets/img/recipe/trash-slide.svg';
 import { useRecipeDelete } from '@entities/recipe';
 
 const DetailDeleteComponent = ({ targetId }: { targetId: string }) => {
   const { mutate: deleteRecipe } = useRecipeDelete();
+
   const handleDelete = () => {
-    deleteRecipe(targetId);
+    Alert.alert(
+      '레시피 삭제',
+      '정말 삭제하시겠습니까?',
+      [
+        {
+          text: '취소',
+          style: 'cancel',
+        },
+        {
+          text: '삭제',
+          style: 'destructive',
+          onPress: () => deleteRecipe(targetId),
+        },
+      ],
+      { cancelable: true },
+    );
   };
 
   return (

@@ -7,8 +7,9 @@ const FeedDetailSkeleton = () => {
     <View style={[styles.container]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* 대표 이미지 */}
-        <View style={styles.mainImage} />
-
+        <SkeletonLayout>
+          <View style={styles.mainImage} />
+        </SkeletonLayout>
         {/* 본문 영역 */}
         <View style={styles.bodyContainer}>
           <SkeletonLayout>

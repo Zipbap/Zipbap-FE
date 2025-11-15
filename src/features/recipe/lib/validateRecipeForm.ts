@@ -9,7 +9,7 @@ export const validateRecipeForm = (recipe: RecipeDetail): boolean => {
   if (!recipe.subtitle?.trim()) missingFields.push('레시피 소제목');
   if (!recipe.introduction?.trim()) missingFields.push('레시피 소개');
 
-  if (!recipe.myCategoryId) missingFields.push('내 카테고리');
+  // if (!recipe.myCategoryId) missingFields.push('내 카테고리');
   if (!recipe.cookingTypeId) missingFields.push('종류');
   if (!recipe.situationId) missingFields.push('상황');
   if (!recipe.mainIngredientId) missingFields.push('주재료');

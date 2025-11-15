@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React, { useState } from 'react';
-import { View, Text, Image, Pressable } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import NoneProfileImgSvg from '@/assets/img/none-profile-img.svg';
 import { Comment } from '@entities/comment';
 import { getTimeAgo } from '@shared/lib/getTimeAgo';
@@ -19,7 +20,8 @@ const CommentItem = ({ comment, onReplyPress, depth = 1 }: Props) => {
         {comment.profileImage ? (
           <Image
             source={{ uri: comment.profileImage }}
-            className="mr-[12px] h-[40px] w-[40px] rounded-full"
+            style={{ marginRight: 12, height: 40, width: 40, borderRadius: '100%' }}
+            cachePolicy={'memory-disk'}
           />
         ) : (
           <NoneProfileImgSvg width={40} height={40} style={{ marginRight: 12 }} />

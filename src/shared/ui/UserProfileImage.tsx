@@ -1,5 +1,5 @@
+import { Image } from 'expo-image';
 import React from 'react';
-import { Image } from 'react-native';
 import NoneProfileImgSvg from '@/assets/img/none-profile-img.svg';
 
 interface Props {
@@ -9,7 +9,11 @@ interface Props {
 
 const UserProfileImage: React.FC<Props> = ({ uri, size = 110 }) => {
   return uri ? (
-    <Image source={{ uri }} className="rounded-full" style={{ width: size, height: size }} />
+    <Image
+      source={{ uri }}
+      style={{ width: size, height: size, borderRadius: '100%' }}
+      cachePolicy={'memory-disk'}
+    />
   ) : (
     <NoneProfileImgSvg width={size} height={size} />
   );

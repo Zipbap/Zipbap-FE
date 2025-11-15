@@ -1,4 +1,5 @@
-import { Image, Text, Pressable } from 'react-native';
+import { Image } from 'expo-image';
+import { Text, Pressable } from 'react-native';
 
 import { Recipe } from '../model';
 
@@ -10,7 +11,11 @@ interface Props {
 const FeedView = ({ item, navigate }: Props) => {
   return (
     <Pressable onPress={() => navigate(item.id)} className="mb-[33px] flex-col">
-      <Image className="relative h-52 self-stretch rounded-3xl" source={{ uri: item.thumbnail }} />
+      <Image
+        source={{ uri: item.thumbnail }}
+        style={{ height: 208, borderRadius: 24, position: 'relative', alignSelf: 'stretch' }}
+        cachePolicy={'memory-disk'}
+      />
       <Text className="mt-[16px] justify-start self-stretch font-['Pretendard'] text-lg font-bold leading-snug text-black">
         {item.title}
       </Text>

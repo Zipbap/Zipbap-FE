@@ -110,7 +110,10 @@ export const useRecipeCreateForm = () => {
     mutationFn: async (recipe: RecipeDetail) => {
       return await apiInstance.put(`/recipes/${recipe.id}/finalize`, recipe);
     },
-    onSuccess: () => invalidateAll(),
+    onSuccess: () => {
+      invalidateAll();
+      queryClient.invalidateQueries({ queryKey: queryKeys.feed.all });
+    },
     onError: error => console.error('❌ 최종 저장 실패:', error),
   });
   // 레시피 삭제
@@ -118,7 +121,10 @@ export const useRecipeCreateForm = () => {
     mutationFn: async (recipeId: string) => {
       return await apiInstance.delete(`/recipes/${recipeId}`);
     },
-    onSuccess: () => invalidateAll(),
+    onSuccess: () => {
+      invalidateAll();
+      queryClient.invalidateQueries({ queryKey: queryKeys.feed.all });
+    },
     onError: error => console.error('❌ 삭제 실패:', error),
   });
 

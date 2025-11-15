@@ -39,7 +39,7 @@ const FollowItem = ({ user, navigation }: Props) => {
       className="flex-row items-center justify-between bg-white px-4 py-3"
       onPress={() =>
         navigation.navigate('AnotherUserPage', {
-          userId: user.userId ?? '0',
+          userId: user.userId,
         })
       }
     >

@@ -1,14 +1,13 @@
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
+import { AnotherUserHeader } from '@/src/entities/user';
 import { AnotherUserHeaderSection, AnotherUserFeedGrid, useFeedQuery } from '@features/user';
 import { AnotherUserPageProps } from '@shared/types';
 
 const AnotherUserPage = ({ navigation, route }: AnotherUserPageProps) => {
   const { userId } = route.params;
-  console.log(userId);
 
   const { profile, feeds, isLoading: isLoadingRecipe } = useFeedQuery(userId!);
-
   if (!userId) return null;
   else if (isLoadingRecipe || !profile) {
     return (
@@ -19,6 +18,7 @@ const AnotherUserPage = ({ navigation, route }: AnotherUserPageProps) => {
   }
   return (
     <View style={{ flex: 1 }}>
+      <AnotherUserHeader />
       <View className="relative flex-1 bg-white">
         {/*유저 헤더 섹션*/}
         <AnotherUserHeaderSection

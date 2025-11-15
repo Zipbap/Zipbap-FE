@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React from 'react';
-import { View, Text, Image, Pressable, TouchableOpacity } from 'react-native';
+import { View, Text, Pressable, TouchableOpacity } from 'react-native';
 import ClockSvg from '@/assets/img/feed/clock-icon.svg';
 import StarSvg from '@/assets/img/feed/star-icon.svg';
 import NoneUserSvg from '@/assets/img/none-profile-img.svg';
@@ -33,7 +34,8 @@ const FeedCard = ({ feed, navigation }: Props) => {
               {feed.profileImage ? (
                 <Image
                   source={{ uri: feed.profileImage }}
-                  className="mr-3 h-[55px] w-[55px] rounded-full bg-g2"
+                  cachePolicy={'memory-disk'}
+                  style={{ marginRight: 12, width: 55, height: 55, borderRadius: '100%' }}
                 />
               ) : (
                 <NoneUserSvg width={55} height={55} style={{ marginRight: 12 }} />
@@ -50,7 +52,8 @@ const FeedCard = ({ feed, navigation }: Props) => {
           {/* 대표 사진 */}
           <Image
             source={{ uri: feed.thumbnail }}
-            className="mb-6 h-[200px] w-full rounded-2xl bg-g3"
+            style={{ marginBottom: 24, height: 200, width: '100%', borderRadius: 16 }}
+            cachePolicy={'memory-disk'}
           />
 
           {/* 요리 소개 */}

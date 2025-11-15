@@ -26,7 +26,6 @@ const UserSettingBottomSheet = ({
   const handleCategorySecession = () => {
     bottomSheetClose();
     navigation.navigate('Secession', { userId: userId ?? '1' });
-    console.log(1);
   };
 
   const handleCatagorySave = () => {

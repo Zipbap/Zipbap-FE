@@ -4,6 +4,7 @@ import React from 'react';
 import { View, Text, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { useCategories } from '@entities/category';
+import { useRecipeTypeStore } from '@shared/store';
 import { RootStackParamList } from '@shared/types';
 import { RecipeCreateFormFrom, RootNavigationProp } from '@shared/types/navigation';
 import { FullWidthButton } from '@shared/ui';
@@ -32,6 +33,7 @@ const RecipeCreateForm = () => {
     recipeId?: string;
     from: RecipeCreateFormFrom;
   };
+  const { setRecipeTypeFinal } = useRecipeTypeStore();
 
   const {
     recipe,
@@ -68,6 +70,7 @@ const RecipeCreateForm = () => {
     if (!validateRecipeForm(recipe)) return;
 
     await recipeMutation.finalizeSave(recipe);
+    setRecipeTypeFinal();
     navigation.goBack();
   };
 

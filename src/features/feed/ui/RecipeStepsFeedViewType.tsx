@@ -1,8 +1,8 @@
+import { Image } from 'expo-image';
 import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
-  Image,
   FlatList,
   Dimensions,
   NativeScrollEvent,
@@ -42,7 +42,9 @@ const RecipeStepsFeedViewType = ({ steps }: Props) => {
             <Image
               source={{ uri: item.image }}
               className="mb-3 h-[201px] w-full rounded-xl bg-g2"
-              resizeMode="cover"
+              style={{ marginBlock: 12, height: 201, width: '100%', borderRadius: 12 }}
+              contentFit="cover"
+              cachePolicy={'memory-disk'}
             />
             <Text className="mb-0.5 text-[14px] font-semibold color-sub1">
               step {item.turn.toString().padStart(2, '0')}

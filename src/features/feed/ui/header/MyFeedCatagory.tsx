@@ -7,7 +7,6 @@ const MyFeedCategory = () => {
 
   const categories = [
     { label: '전체', value: 'ALL' },
-    { label: '오늘', value: 'TODAY' },
     { label: '인기', value: 'HOT' },
     { label: '추천', value: 'RECOMMEND' },
     { label: '팔로잉', value: 'FOLLOWING' },

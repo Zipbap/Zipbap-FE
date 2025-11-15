@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import { Image } from 'expo-image';
+import React, { useEffect, useMemo } from 'react';
 import { View, FlatList } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
@@ -33,8 +34,29 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
     },
   });
 
-  const recipeList: Recipe[] = recipes?.result || [];
+  // recipes
+  const recipeList: Recipe[] = useMemo(() => recipes?.result || [], [recipes]);
 
+  // prefetch image
+  useEffect(() => {
+    if (!recipeList) return;
+    const prefetchMyrecipeImage = async () => {
+      for (const recipe of recipeList) {
+        if (!recipe.thumbnail) return;
+
+        const cachePath = await Image.getCachePathAsync(recipe.thumbnail);
+
+        // cache miss
+        if (!cachePath) {
+          await Image.prefetch(recipe.thumbnail);
+        }
+      }
+    };
+
+    prefetchMyrecipeImage();
+  }, [recipeList]);
+
+  // filtered recipes
   const filteredRecipes = recipeList.filter(recipe => {
     const matchText =
       text.trim().length === 0 || recipe.title.toLowerCase().includes(text.toLowerCase());

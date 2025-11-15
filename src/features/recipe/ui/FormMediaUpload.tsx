@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import VideoPlayer from '@shared/ui/VideoPlayer';
 import { useMediaUpload } from '../lib/useMediaUpload';
 
@@ -35,6 +35,20 @@ const FormMediaUpload = ({
     }
   }, [value]);
 
+  const handleClickImage = () => {
+    Alert.alert('이미지 옵션', '선택해주세요.', [
+      {
+        text: '수정하기',
+        onPress: () => handleUpload(),
+      },
+
+      {
+        text: '취소',
+        style: 'cancel',
+      },
+    ]);
+  };
+
   const isValidSource = value && value !== null;
 
   return (
@@ -46,12 +60,14 @@ const FormMediaUpload = ({
         <View className="flex flex-col items-center justify-center">
           {isValidSource ? (
             uploadType === 'image' ? (
-              <Image
-                source={{ uri: value }}
-                style={{ height: 232, width: 326, borderRadius: 8 }}
-                contentFit="cover"
-                cachePolicy={'memory-disk'}
-              />
+              <TouchableOpacity onPress={handleClickImage}>
+                <Image
+                  source={{ uri: value }}
+                  style={{ height: 232, width: 326, borderRadius: 8 }}
+                  contentFit="cover"
+                  cachePolicy={'memory-disk'}
+                />
+              </TouchableOpacity>
             ) : (
               <VideoPlayer
                 videoSource={videoSource}

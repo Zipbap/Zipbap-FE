@@ -118,8 +118,9 @@ android {
         }
     }
     packagingOptions {
+        // NOTE: 16KB 페이지 크기 지원을 위해 레거시 패키징 사용을 비활성
         jniLibs {
-            useLegacyPackaging (findProperty('expo.useLegacyPackaging')?.toBoolean() ?: false)
+            useLegacyPackaging (false)
         }
     }
     androidResources {

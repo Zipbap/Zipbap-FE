@@ -8,12 +8,17 @@ import EmptyFollowList from './EmptyFollowList';
 import FollowItem from './FollowItem';
 
 interface Props {
-  users: FollowingAndFollowerList[] | undefined;
+  followerList: FollowingAndFollowerList[] | undefined;
+  followingList: FollowingAndFollowerList[] | undefined;
   navigation: RootNavigationProp<'FollowDetail'>;
+  tab: string;
 }
 
-const FollowList = ({ users, navigation }: Props) => {
+const FollowList = ({ followerList, followingList, navigation, tab }: Props) => {
   const { height } = Dimensions.get('window');
+  console.log(tab);
+  const users = tab === 'follower' ? followerList : followingList;
+
   return (
     <View className="mt-[12px] flex-1">
       <FlatList
@@ -39,7 +44,9 @@ const FollowList = ({ users, navigation }: Props) => {
             />
           </View>
         }
-        renderItem={({ item }) => <FollowItem user={item} navigation={navigation} />}
+        renderItem={({ item }) => (
+          <FollowItem user={item} navigation={navigation} followingList={followingList} />
+        )}
       />
     </View>
   );

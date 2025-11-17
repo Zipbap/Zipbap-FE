@@ -65,11 +65,14 @@ const FollowDetail = ({ navigation, route }: FollowDetailProps) => {
       <View className="flex w-full flex-1 flex-col px-[8px]">
         <View className={cn(Platform.OS === 'ios' ? 'h-[180px]' : 'h-[150px]')} />
         <SearchBox searchTitle="검색" />
-        {tab === 'follower' ? (
-          <FollowList users={FollowerListData} navigation={navigation} />
-        ) : tab === 'following' ? (
-          <FollowList users={FollowingListData} navigation={navigation} />
-        ) : null}
+        {tab && (
+          <FollowList
+            followerList={FollowerListData}
+            navigation={navigation}
+            followingList={FollowingListData}
+            tab={tab}
+          />
+        )}
       </View>
     </View>
   );

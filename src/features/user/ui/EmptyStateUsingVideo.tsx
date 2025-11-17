@@ -23,6 +23,7 @@ const EmptyStateUsingVideo = ({
 }: Props) => {
   const player = useVideoPlayer(video, player => {
     player.loop = true;
+    player.muted = true;
     player.play();
   });
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Pressable, TouchableOpacity } from 'react-native';
 
 import { FollowingAndFollowerList } from '@entities/user';
@@ -9,11 +9,18 @@ import { UserProfileImage } from '@shared/ui';
 interface Props {
   user: FollowingAndFollowerList;
   navigation: RootNavigationProp<'FollowDetail'>;
+  followingList: FollowingAndFollowerList[] | undefined;
 }
 
-const FollowItem = ({ user, navigation }: Props) => {
-  // NOTE: 팔로우 기능 해야딤
-  const [isFollowing, setIsFollowing] = useState(true);
+const FollowItem = ({ user, navigation, followingList }: Props) => {
+  const [isFollowing, setIsFollowing] = useState(false);
+  useEffect(() => {
+    if (!followingList) return;
+
+    const found = followingList.some(item => item.userId === user.userId);
+    console.log(found);
+    setIsFollowing(found);
+  }, [followingList, user]);
 
   // 팔로우/언팔로우 mutation 훅
   const followMutation = useFollowUserQuery();

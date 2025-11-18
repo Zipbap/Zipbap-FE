@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
+import { handleUserDelete } from '@/src/features/auth';
 import { SettingItem } from '@features/user';
 import { RootNavigationProp } from '@shared/types';
 import { FullWidthButton, ModalContentSection, BottomSheetModal } from '@shared/ui';
@@ -23,16 +24,22 @@ const UserSettingBottomSheet = ({
   const [appUpdates, setAppUpdates] = useState(false);
   const [nightMode, setNightMode] = useState(false);
 
-  const handleCategorySecession = () => {
+  const handleSecession = () => {
     bottomSheetClose();
     navigation.navigate('Secession', { userId: userId ?? '1' });
   };
 
-  const handleCatagorySave = () => {
+  const handleAlertSave = () => {
     // 카테고리 저장 로직
     bottomSheetClose();
     console.log(2);
   };
+
+  const handleLogout = async () => {
+    await handleUserDelete();
+    navigation.replace('Login');
+  };
+
   console.log(pushAll);
 
   return (
@@ -70,13 +77,19 @@ const UserSettingBottomSheet = ({
         <View className="mb-4 mt-12 flex-col items-center">
           <FullWidthButton
             buttonText="저장하기"
-            onPress={handleCatagorySave}
+            onPress={handleAlertSave}
             backgroundColor="#DC6E3F"
             textColor="white"
           />
           <FullWidthButton
+            buttonText="로그아웃하기"
+            onPress={handleLogout}
+            backgroundColor="#F0EDE6"
+            textColor="#847C70"
+          />
+          <FullWidthButton
             buttonText="회원 탈퇴하기"
-            onPress={handleCategorySecession}
+            onPress={handleSecession}
             backgroundColor="#F0EDE6"
             textColor="#847C70"
           />

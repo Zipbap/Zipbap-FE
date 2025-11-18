@@ -23,7 +23,7 @@ const ChatInput = forwardRef<TextInput, Props>(
           {userProfile ? (
             <Image
               source={{ uri: userProfile }}
-              style={{ width: 40, height: 40, borderRadius: '100%' }}
+              style={{ width: 40, height: 40, borderRadius: 20 }}
               cachePolicy={'memory-disk'}
             />
           ) : (

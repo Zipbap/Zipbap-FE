@@ -8,7 +8,7 @@ import { myPageApi } from '../api/myPageApi';
 export const useFeedQuery = (userId: string) => {
   const { user: myUser } = useUserStore();
   const queryClient = useQueryClient();
-  const { data, isLoading, isError, refetch } = useQuery({
+  const { data, isError, refetch } = useQuery({
     queryKey: queryKeys.feed.list(userId),
     queryFn: () => {
       return myPageApi.getAllFeeds(userId);
@@ -64,7 +64,6 @@ export const useFeedQuery = (userId: string) => {
   return {
     profile,
     feeds,
-    isLoading,
     isError,
     ensure,
     refetch,

@@ -11,7 +11,7 @@ const UserProfileImage: React.FC<Props> = ({ uri, size = 110 }) => {
   return uri ? (
     <Image
       source={{ uri }}
-      style={{ width: size, height: size, borderRadius: '100%' }}
+      style={{ width: size, height: size, borderRadius: size / 2 }}
       cachePolicy={'memory-disk'}
     />
   ) : (

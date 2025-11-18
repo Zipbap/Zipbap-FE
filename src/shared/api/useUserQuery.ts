@@ -28,6 +28,7 @@ export const useUserQuery = () => {
 
   useEffect(() => {
     if (query.isSuccess && query.data.result) {
+      console.log(query.data.result);
       setUser(query.data.result);
     }
   }, [query.isSuccess, query.data, setUser]);

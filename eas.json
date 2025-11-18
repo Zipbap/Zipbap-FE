@@ -28,7 +28,11 @@
     "production": {
       "autoIncrement": true,
       "android": {
-        "buildType": "app-bundle"
+        //"buildType": "apk"
+        "buildType": "app-bundle",
+        // NOTE: 16KB를 지원하기 위한 ndk 설정
+        "ndk": "29.0.14206865",
+        "image": "latest"
       },
       "ios": {
         "autoIncrement": "buildNumber",

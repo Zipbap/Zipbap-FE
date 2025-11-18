@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, Pressable } from 'react-native';
 
 import { UserFeeds } from '@entities/user';
@@ -10,11 +10,17 @@ type Props = {
   navigation: RootNavigationProp<'AnotherUserPage'>;
   profile: UserFeeds['profileBlockDto'];
   feedCount: number | undefined;
+  isFollowing: boolean;
+  setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const AnotherUserHeaderSection = ({ profile, navigation, feedCount }: Props) => {
-  const [isFollowing, setIsFollowing] = useState(true);
-
+const AnotherUserHeaderSection = ({
+  profile,
+  navigation,
+  feedCount,
+  isFollowing,
+  setIsFollowing,
+}: Props) => {
   // 팔로우/언팔로우 mutation 훅
   const followMutation = useFollowUserQuery();
 
@@ -32,6 +38,7 @@ const AnotherUserHeaderSection = ({ profile, navigation, feedCount }: Props) => 
       },
     );
   };
+
   return (
     <View
       style={[defaultShadow.roundedContainer]}

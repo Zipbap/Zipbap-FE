@@ -19,12 +19,7 @@ const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
   const { bottomSheetVisible, bottomSheetClose } = useSettingBottomSheetStore();
   const { user } = useUserStore();
 
-  const {
-    profile,
-    feeds,
-    isLoading: isLoadingFeed,
-    ensure: feedEnsure,
-  } = useFeedQuery(user?.id ?? '0');
+  const { profile, feeds, ensure: feedEnsure } = useFeedQuery(user?.id ?? '0');
   const {
     bookmarks,
     isStale: isStaleBookmark,
@@ -38,7 +33,7 @@ const Mypage: React.FC<MyPageProps> = ({ navigation }) => {
     }, [bookmarkEnsure, feedEnsure]),
   );
 
-  if (isLoadingFeed || isStaleBookmark || !profile) {
+  if (isStaleBookmark || !profile) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
         <ActivityIndicator size="large" color="#DC6E3F" />

@@ -20,7 +20,7 @@ const CommentItem = ({ comment, onReplyPress, depth = 1 }: Props) => {
         {comment.profileImage ? (
           <Image
             source={{ uri: comment.profileImage }}
-            style={{ marginRight: 12, height: 40, width: 40, borderRadius: '100%' }}
+            style={{ marginRight: 12, height: 40, width: 40, borderRadius: 20 }}
             cachePolicy={'memory-disk'}
           />
         ) : (

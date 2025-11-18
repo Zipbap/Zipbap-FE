@@ -35,7 +35,7 @@ const FeedCard = ({ feed, navigation }: Props) => {
                 <Image
                   source={{ uri: feed.profileImage }}
                   cachePolicy={'memory-disk'}
-                  style={{ marginRight: 12, width: 55, height: 55, borderRadius: '100%' }}
+                  style={{ marginRight: 12, width: 55, height: 55, borderRadius: 55 / 2 }}
                 />
               ) : (
                 <NoneUserSvg width={55} height={55} style={{ marginRight: 12 }} />

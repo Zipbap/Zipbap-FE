@@ -4,6 +4,7 @@ import { View, FlatList, TouchableOpacity } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
+import { usePrefetchImages } from '@/src/shared/lib/usePrefetchImages';
 import { EmptyStateUsingVideo } from '@features/user';
 import { useRecipeListQuery, ArticleView, DetailDeleteComponent, Recipe } from '@entities/recipe';
 import { useRecipeTypeStore } from '@shared/store';
@@ -22,22 +23,9 @@ const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
   const recipeList = useMemo(() => (data || []) as Recipe[], [data]);
   const isRecipeListEmpty = recipeList.length === 0;
 
-  // prefetch image
-  useEffect(() => {
-    if (isRecipeListEmpty) return;
-    const perfetchImage = async () => {
-      for (const recipe of recipeList) {
-        if (!recipe.thumbnail) return;
-
-        const cachePath = await Image.getCachePathAsync(recipe.thumbnail);
-
-        if (!cachePath) {
-          await Image.prefetch(recipe.thumbnail);
-        }
-      }
-    };
-    perfetchImage();
-  }, [isRecipeListEmpty, recipeList]);
+  // prefetch thumbnail
+  const thumbnailUrls = useMemo(() => recipeList.map(recipe => recipe.thumbnail), [recipeList]);
+  usePrefetchImages(thumbnailUrls);
 
   // navigate
   const navigateToRecipeCreateForm = () => {

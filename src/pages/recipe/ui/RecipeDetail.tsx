@@ -1,7 +1,8 @@
 import { Image } from 'expo-image';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { usePrefetchImages } from '@/src/shared/lib/usePrefetchImages';
 import {
   RecipeDetailSection,
   RecipeStepsArticleViewType,
@@ -43,22 +44,11 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
   // recipe list
   const { data: detailRecipe, isLoading } = useRecipeDetailQuery(recipeId);
 
-  // prefetch: recipe orders image
-  useEffect(() => {
-    if (!detailRecipe) return;
-
-    const prefetchStepImages = async () => {
-      for (const order of detailRecipe.cookingOrders) {
-        if (order.image) {
-          const cachePath = await Image.getCachePathAsync(order.image);
-
-          if (!cachePath) await Image.prefetch(order.image);
-        }
-      }
-    };
-
-    prefetchStepImages();
-  }, [detailRecipe]);
+  const thumbnailUrls = useMemo(
+    () => detailRecipe?.cookingOrders.map(order => order.image) || [],
+    [detailRecipe],
+  );
+  usePrefetchImages(thumbnailUrls);
 
   // category
   const { categoryValue } = useCategories();

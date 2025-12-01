@@ -4,6 +4,7 @@ import React, { useEffect, useMemo } from 'react';
 import { View, FlatList } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';
+import { usePrefetchImages } from '@/src/shared/lib/usePrefetchImages';
 import { RecipeItemSkeleton } from '@features/recipe';
 import { EmptyStateUsingVideo } from '@features/user';
 import { useCategories } from '@entities/category';
@@ -37,24 +38,9 @@ const MyRecipe: React.FC<RecipePageProps> = ({ navigation }) => {
   // recipes
   const recipeList: Recipe[] = useMemo(() => recipes?.result || [], [recipes]);
 
-  // prefetch image
-  useEffect(() => {
-    if (!recipeList) return;
-    const prefetchMyrecipeImage = async () => {
-      for (const recipe of recipeList) {
-        if (!recipe.thumbnail) return;
-
-        const cachePath = await Image.getCachePathAsync(recipe.thumbnail);
-
-        // cache miss
-        if (!cachePath) {
-          await Image.prefetch(recipe.thumbnail);
-        }
-      }
-    };
-
-    prefetchMyrecipeImage();
-  }, [recipeList]);
+  // prefetch recipe thumbnail
+  const thumbnailUrls = useMemo(() => recipeList.map(recipe => recipe.thumbnail), [recipeList]);
+  usePrefetchImages(thumbnailUrls);
 
   // filtered recipes
   const filteredRecipes = recipeList.filter(recipe => {

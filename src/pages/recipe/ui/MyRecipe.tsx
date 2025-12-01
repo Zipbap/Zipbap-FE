@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Image } from 'expo-image';
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { View, FlatList } from 'react-native';
 import { Portal } from 'react-native-portalize';
 import loginVideo from '@/assets/video/emptyScreenVideo.mp4';

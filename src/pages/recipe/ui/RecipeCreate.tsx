@@ -1,5 +1,4 @@
-import { Image } from 'expo-image';
-import React, { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import PlusIcon from '@/assets/img/recipe/plus-float.svg';
@@ -14,7 +13,7 @@ interface MainPageProps {
   navigation: RootNavigationProp<'Main'>;
 }
 
-const RecipeCreate: React.FC<MainPageProps> = ({ navigation }) => {
+const RecipeCreate = ({ navigation }: MainPageProps) => {
   // recipe type
   const { recipeType } = useRecipeTypeStore();
 

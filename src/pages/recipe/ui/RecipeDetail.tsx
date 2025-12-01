@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { usePrefetchImages } from '@/src/shared/lib/usePrefetchImages';

@@ -31,7 +31,6 @@ const UserSettingBottomSheet = ({
   const handleCatagorySave = () => {
     // 카테고리 저장 로직
     bottomSheetClose();
-    console.log(2);
   };
   console.log(pushAll);
 

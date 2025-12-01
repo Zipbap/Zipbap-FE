@@ -37,7 +37,6 @@ const FeedModalImageViewer = ({ visible, onClose, item }: Props) => {
               <Text className="mb-1 text-[14px] font-semibold color-sub1">
                 step {item.turn.toString().padStart(2, '0')}
               </Text>
-              <Text className="mb-4 text-[18px] font-bold color-black">{item.description}</Text>
               <View className="w-full flex-row justify-between gap-5">
                 <Text className="flex-1 text-[16px] font-medium leading-5 color-g1">
                   {item.description}

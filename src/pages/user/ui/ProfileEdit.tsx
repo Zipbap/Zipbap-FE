@@ -16,7 +16,6 @@ import {
 
 const ProfileEdit = ({ navigation, route }: ProfileEditProps) => {
   const { userId } = route.params;
-  console.log(userId);
 
   const { user } = useUserStore();
 

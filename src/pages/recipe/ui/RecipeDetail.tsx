@@ -142,7 +142,7 @@ const RecipeDetail = ({ navigation, route }: RecipeDetailProps) => {
                     {detailRecipe?.ingredientInfo}
                   </Text>
                 }
-                subTitle="레시피 소개"
+                subTitle="재료 소개"
               />
               {/* 레시피 영상 */}
               {detailRecipe?.video && (

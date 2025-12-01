@@ -33,7 +33,6 @@ const FollowItem = ({ user, navigation }: Props) => {
     );
   };
 
-  console.log(isFollowing);
   return (
     <TouchableOpacity
       className="flex-row items-center justify-between bg-white px-4 py-3"

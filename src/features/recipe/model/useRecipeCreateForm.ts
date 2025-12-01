@@ -96,7 +96,6 @@ export const useRecipeCreateForm = () => {
   // 임시 저장
   const tempSaveMutation = useMutation({
     mutationFn: async (recipe: RecipeDetail) => {
-      console.log(recipe.id);
       const res = await apiInstance.put(`/recipes/${recipe.id}/temp`, recipe);
       return res.data;
     },

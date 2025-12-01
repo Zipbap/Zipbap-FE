@@ -9,7 +9,6 @@ import { defaultShadow, ModalHeader } from '@shared/ui';
 
 const Secession = ({ navigation, route }: SecessionProps) => {
   const { userId } = route.params;
-  console.log(userId);
   const insets = useSafeAreaInsets();
   const [confirmText, setConfirmText] = useState('');
   const [isChecked, setIsChecked] = useState(false);

@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Text, View, Pressable, ScrollView, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BookmarkOffSvg from '@/assets/img/feed/bookmark-off-icon.svg';
@@ -7,6 +7,7 @@ import BookmarkOnSvg from '@/assets/img/feed/bookmark-on-icon.svg';
 import HeartOffSvg from '@/assets/img/feed/heart-off-icon.svg';
 import HeartOnSvg from '@/assets/img/feed/heart-on-icon.svg';
 import NoneUserSvg from '@/assets/img/none-profile-img.svg';
+import { usePrefetchImages } from '@/src/shared/lib/usePrefetchImages';
 import {
   useFeedDetailQuery,
   FeedBottomTab,
@@ -83,22 +84,18 @@ const FeedDetail = ({ navigation, route }: FeedDetailProps) => {
     }
   }, [feedDetail]);
 
-  // prefetch recipe orders image
-  useEffect(() => {
-    if (!feedDetail) return;
+  // prefetch image
+  const imagesToPrefetch = useMemo(() => {
+    if (!feedDetail) return [];
 
-    const prefetchStepImages = async () => {
-      for (const order of feedDetail.cookingOrders) {
-        if (order.image) {
-          const cachePath = await Image.getCachePathAsync(order.image);
-
-          if (!cachePath) await Image.prefetch(order.image);
-        }
-      }
-    };
-
-    prefetchStepImages();
+    return [
+      feedDetail.thumbnail,
+      feedDetail.profileImage,
+      ...feedDetail.cookingOrders.map(order => order.image),
+    ];
   }, [feedDetail]);
+
+  usePrefetchImages(imagesToPrefetch);
 
   // Skeleton ui
   if (!feedDetail || !feedId || isLoading) return <FeedDetailSkeleton />;
